@@ -18,9 +18,11 @@ markmap:
     - Observability
       - Log
         - Loki
+        - LogQL
       - Metrics
         - Developer Console
         - Custom Metrics Autoscaler
+        - Grafana Dashboard (SLI/SLO concept)
       - Trace with OpenTelemetry
         - Auto-instrument
           - Java
