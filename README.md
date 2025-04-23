@@ -1,3 +1,3 @@
 # Developer Advocacy 2025
 ## Planning
-- [Initial Idea](docs/PLAN.mm.html)
+- [Initial Idea](https://yourusername.github.io/repository-name/)
