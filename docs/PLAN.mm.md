@@ -27,5 +27,6 @@ markmap:
     - Brand new features
       - OpenShift Lightspeed?
       - [Incident Dectection](https://developers.redhat.com/articles/2025/04/15/incident-detection-openshift-tech-preview-here?sc_cid=RHCTG0250000446542#)
+      - [Observability Signal Correlation](https://developers.redhat.com/articles/2024/09/19/observability-signal-correlation-red-hat-openshift-technology-preview)
   - Developer Hub
     - Golden Path
