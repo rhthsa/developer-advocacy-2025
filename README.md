@@ -1,3 +1,3 @@
 # Developer Advocacy 2025
 ## Planning
-- [Initial Idea](PLAN.mm.html)
+- [Initial Idea](docs/PLAN.mm.html)
