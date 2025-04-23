@@ -24,7 +24,7 @@ markmap:
         - Custom Metrics Autoscaler
         - Grafana Dashboard (SLI/SLO concept)
       - Trace with OpenTelemetry
-        - Auto-instrument
+        - [Auto-instrument](https://github.com/voraviz/quarkus-todo-app/tree/otel?tab=readme-ov-file#auto-instrumentation)
           - Java
           - Node
           - Go
