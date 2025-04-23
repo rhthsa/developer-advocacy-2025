@@ -10,7 +10,8 @@ markmap:
   - [CNCF White Paper](https://tag-app-delivery.cncf.io/whitepapers/platforms/)
   - OpenShift Container "PLATFORM"
     - Inner Loop
-      - Build with Buildpack?
+      - Build with Buildpack
+        - Shipwright
       - Log with Loki
       - Metrics
         - Developer Console
