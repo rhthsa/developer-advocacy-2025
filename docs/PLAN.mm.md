@@ -1,7 +1,7 @@
 ---
 title: Tech Talk - Developer Series 2025
 markmap:
-  colorFreezeLevel: 2
+  colorFreezeLevel: 4
 ---
 
 ## Developer Series 2025
