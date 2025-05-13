@@ -1,0 +1,21 @@
+apiVersion: pfe.rhpds.com/v1
+kind: Gitea
+metadata:
+  name: gitea
+spec:
+  giteaImageTag: latest
+  giteaVolumeSize: 8Gi
+  giteaSsl: true
+  postgresqlVolumeSize: 8Gi
+  giteaAdminUser: admin
+  giteaAdminEmail: admin@redhat.com
+  giteaAdminPassword: openshift
+  giteaCreateUsers: true
+  giteaGenerateUserFormat: "user%d"
+  giteaUserNumber: TOTAL_USER
+  giteaUserPassword: openshift
+  giteaMigrateRepositories: true
+  giteaRepositoriesList:
+  - repo: https://github.com/rhthsa/devhub2025.git
+    name: devhub2025
+    private: false
