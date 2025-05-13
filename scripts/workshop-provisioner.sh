@@ -49,6 +49,17 @@ install_operator() {
     echo "$operatorDescParam is now available!"
 }
 
+install_build() {
+
+    operatorName=openshift-builds-operator
+    operatorDesc="Builds for Red Hat OpenShift Operator"
+    ymlFilePath=../manifests/build-operator.yml
+    project=openshift-builds
+
+    install_operator $operatorName "$operatorDesc" $ymlFilePath $project
+
+}
+
 install_developer_hub() {
     operatorName=rhdh
     operatorDesc="Red Hat Developer Hub"
@@ -74,6 +85,7 @@ install_web_terminal() {
     project=openshift-operators
 
     install_operator $operatorName "$operatorDesc" $ymlFilePath $project
+
 }
 
 install_loki() {
@@ -145,9 +157,6 @@ repeat '-'
 
 oc project default
 
-#install_web_terminal
-#repeat '-'
-
 #enable_user_workload_monitoring
 #repeat '-'
 
@@ -157,11 +166,17 @@ oc project default
 #install_tempo
 #repeat '-'
 
-#install_developer_hub
+#install_gitea
 #repeat '-'
 
-install_gitea
-repeat '-'
+#install_web_terminal
+#repeat '-'
+
+#install_build
+#repeat '-'
+
+#install_developer_hub
+#repeat '-'
 
 oc project default
 
