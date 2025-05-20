@@ -18,34 +18,6 @@
   - [Next Step](#next-step)
 
 <!-- /TOC -->
-<!-- /TOC -->
-<!-- /TOC -->
-<!-- /TOC -->
-<!-- /TOC -->
-<!-- /TOC -->
-<!-- /TOC -->
-
-<!-- /TOC -->
-    - [Set Default OpenShift Console!!!](#set-default-openshift-console)
-    - [Deploy Container Image](#deploy-container-image)
-    - [We can deploy container image in OpenShift Console but What 's happen? if you don't have container image!!!](#we-can-deploy-container-image-in-openshift-console-but-what-s-happen-if-you-dont-have-container-image)
-- [Builds for Red Hat OpenShift](#builds-for-red-hat-openshift)
-  - [Deploy Container Application on OpenShift with Container Image](#deploy-container-application-on-openshift-with-container-image)
-    - [open browser to OpenShift Console](#open-browser-to-openshift-console)
-    - [Set Default OpenShift Console!!!](#set-default-openshift-console)
-    - [Deploy Container Image](#deploy-container-image)
-    - [We can deploy container image in OpenShift Console but What 's happen? if you don't have container image!!!](#we-can-deploy-container-image-in-openshift-console-but-what-s-happen-if-you-dont-have-container-image)
-  - [The future of Red Hat OpenShift builds](#the-future-of-red-hat-openshift-builds)
-  - [Deploy Application with Shipwright Buildah (Build from Container File/Docker File)](#deploy-application-with-shipwright-buildah-build-from-container-filedocker-file)
-    - [Review Container File from Git Repository](#review-container-file-from-git-repository)
-    - [Build Container with Shipwright-Buildah and Deploy to OpenShift](#build-container-with-shipwright-buildah-and-deploy-to-openshift)
-  - [Deploy Application with Shipwright S2I (Build from Source Code with Source-to-Image)](#deploy-application-with-shipwright-s2i-build-from-source-code-with-source-to-image)
-    - [Review Source from Git Repository](#review-source-from-git-repository)
-    - [Build Container with Shipwright-S2I and Deploy to OpenShift](#build-container-with-shipwright-s2i-and-deploy-to-openshift)
-  - [Summary](#summary)
-  - [Next Step](#next-step)
-
-<!-- /TOC -->
 
 ## Deploy Container Application on OpenShift with Container Image
 
