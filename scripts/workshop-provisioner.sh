@@ -121,7 +121,7 @@ install_loki() {
 
 install_gitea() {
 
-echo
+    echo
     echo "Installing Gitea to gitea project..."
     echo
 
@@ -145,6 +145,8 @@ echo
     oc new-project gitea
     cat ../manifests/gitea/gitea-instance.yml | sed "s#TOTAL_USER#$totalUsers#g" | oc apply -n gitea -f -
     
+
+
     echo "Gitea Instance is now available!"
 }
 
@@ -156,6 +158,9 @@ echo "Red Hat Developer Workshop Provisioner"
 repeat '-'
 
 oc project default
+
+#install_web_terminal
+#repeat '-'
 
 #enable_user_workload_monitoring
 #repeat '-'
@@ -169,11 +174,8 @@ oc project default
 #install_gitea
 #repeat '-'
 
-#install_web_terminal
-#repeat '-'
-
-#install_build
-#repeat '-'
+install_build
+repeat '-'
 
 #install_developer_hub
 #repeat '-'

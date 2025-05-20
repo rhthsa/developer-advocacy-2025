@@ -1,26 +1,9 @@
 # Workshop Setup Guide
+<!-- TOC -->
 
-1. Request OpenShift cluster e.g. **OpenShift Cluster Workshop** with a number of users as needed from RHPDS.
+- [Workshop Setup Guide](#workshop-setup-guide)
 
-2. Open a terminal on your computer then login to cluster with cluster admin user i.e. **admin** user.
-
-3. Clone this repository to your computer then go to [script](scripts/) directory.
-
-4. Run [workshop-provisioner.sh](scripts/workshop-provisioner.sh) script to setup all required operators and software instances.
-
-   ```sh
-    ./workshop-provisioner.sh
-   ```
-
-5. X
-
-6. Manual add account to argocd (in ACD CRD) before run update_argocd_password in lab-user-provisioner.sh
-   
-   ```
-   extraConfig:
-     accounts.user1: apiKey, login
-     accounts.user2: apiKey, login
-     accounts.user3: apiKey, login
+<!-- /TOC -->
      accounts.user4: apiKey, login
      accounts.user5: apiKey, login
      accounts.user6: apiKey, login
@@ -82,9 +65,31 @@
    For example, provisioning 5 lab users:
 
    ```sh
-   export USER_PASSWORD=N44PdL9hZ4LrzJaY
-   export ADMIN_PASSWORD=FuOPVkXuQYLwD8G9
+   export USER_PASSWORD=EIWYrtSXyZDs8SJZ
+   export ADMIN_PASSWORD=wiJMQcrHkBzKZC9P
    export totalUsers=3
    ./lab-user-provisioner.sh 3
    ```
 
+8. Check imagestream in openshift projecct, Add name tag in imagestream java
+
+  ```yaml
+    - name: openjdk-21-ubi9
+      annotations:
+        description: Build and run Java applications using Maven and OpenJDK 21.
+        iconClass: icon-rh-openjdk
+        openshift.io/display-name: Red Hat OpenJDK 21 (UBI 9)
+        sampleContextDir: undertow-servlet
+        sampleRepo: 'https://github.com/jboss-openshift/openshift-quickstarts'
+        supports: 'java:21,java'
+        tags: 'builder,java,openjdk'
+        version: '21'
+      from:
+        kind: DockerImage
+        name: 'registry.redhat.io/ubi9/openjdk-21:latest'
+      generation: 2
+      importPolicy:
+        importMode: Legacy
+      referencePolicy:
+        type: Local
+  ```

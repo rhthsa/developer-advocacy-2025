@@ -21,9 +21,8 @@ create_projects() {
         echo
 
         oc login -u user$i -p $USER_PASSWORD --insecure-skip-tls-verify
-        oc new-project user$i-dev
-        oc new-project user$i-sit
-        oc new-project user$i-prod
+        oc new-project user$i-shipwright
+        oc adm policy add-role-to-user view user$i -n gitea
         repeat '-'
     done
 }
@@ -114,12 +113,15 @@ totalUsers=$1
 
 create_projects
 repeat '-'
-add_monitoring_edit_role_to_user
-repeat '-'
-add_ui_serviceaccount
-repeat '-'
-add_logging_view_role_to_user
-repeat '-'
+
+#add_monitoring_edit_role_to_user
+#repeat '-'
+
+#add_ui_serviceaccount
+#repeat '-'
+
+#add_logging_view_role_to_user
+#repeat '-'
 
 #update_argocd_password
 #repeat '-'
