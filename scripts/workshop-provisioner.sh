@@ -159,6 +159,9 @@ repeat '-'
 
 oc project default
 
+install_build
+repeat '-'
+
 #install_web_terminal
 #repeat '-'
 
@@ -171,14 +174,16 @@ oc project default
 #install_tempo
 #repeat '-'
 
-#install_gitea
-#repeat '-'
 
-install_build
-repeat '-'
 
 #install_developer_hub
 #repeat '-'
+
+
+#last install only
+#install_gitea
+#repeat '-'
+
 
 oc project default
 

@@ -22,7 +22,13 @@ create_projects() {
 
         oc login -u user$i -p $USER_PASSWORD --insecure-skip-tls-verify
         oc new-project user$i-shipwright
+        oc new-project user$i-tekton
+        oc new-project user$i-gitops-dev
+        oc new-project user$i-gitops-prod
+
         oc adm policy add-role-to-user view user$i -n gitea
+        oc adm policy add-role-to-user view user$i -n openshift-pipelines
+        oc adm policy add-role-to-user shpiwright-build-aggregate-view user$i -n user$i-shipwright
         repeat '-'
     done
 }

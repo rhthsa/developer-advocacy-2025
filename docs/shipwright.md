@@ -17,6 +17,12 @@
   - [Summary](#summary)
   - [Next Step](#next-step)
 
+<!-- /TOC --> from Source Code with Source-to-Image)](#deploy-application-with-shipwright-s2i-build-from-source-code-with-source-to-image)
+    - [Review Source from Git Repository](#review-source-from-git-repository)
+    - [Build Container with Shipwright-S2I and Deploy to OpenShift](#build-container-with-shipwright-s2i-and-deploy-to-openshift)
+  - [Summary](#summary)
+  - [Next Step](#next-step)
+
 <!-- /TOC -->
 
 ## Deploy Container Application on OpenShift with Container Image
@@ -336,6 +342,7 @@ Shipwright supports any tool that can build container images in Kubernetes clust
 
 
 ## Next Step
+
 - [Continuous Integration (CI) with OpenShift Pipelines (Tekton)](tekton.md)
 
 

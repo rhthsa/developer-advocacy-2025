@@ -1,9 +1,10 @@
-# Workshop Setup Guide
-<!-- TOC -->
-
-- [Workshop Setup Guide](#workshop-setup-guide)
-
-<!-- /TOC -->
+6. Manual add account to argocd (in ACD CRD) before run update_argocd_password in lab-user-provisioner.sh
+   
+   ```
+   extraConfig:
+     accounts.user1: apiKey, login
+     accounts.user2: apiKey, login
+     accounts.user3: apiKey, login
      accounts.user4: apiKey, login
      accounts.user5: apiKey, login
      accounts.user6: apiKey, login
@@ -65,8 +66,8 @@
    For example, provisioning 5 lab users:
 
    ```sh
-   export USER_PASSWORD=EIWYrtSXyZDs8SJZ
-   export ADMIN_PASSWORD=wiJMQcrHkBzKZC9P
+   export USER_PASSWORD=lzTGhfDLHifMVkfs
+   export ADMIN_PASSWORD=KKnpB87F68F3PLiy
    export totalUsers=3
    ./lab-user-provisioner.sh 3
    ```
@@ -93,3 +94,27 @@
       referencePolicy:
         type: Local
   ```
+
+if not found crd, restart operator
+create rolebinding for shipwright-build-aggregate-edit to userx  
+
+
+
+argocd
+
+ARGOCD=$(oc get route/openshift-gitops-server -n openshift-gitops -o jsonpath='{.spec.host}')
+echo https://$ARGOCD
+
+PASSWORD=$(oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-) 2>/dev/null
+echo $PASSWORD
+
+argocd login $ARGOCD  --insecure \
+--username admin \
+--password $PASSWORD
+
+oc config rename-context $(oc config current-context) dev-cluster
+
+
+argocd cluster add dev-cluster
+
+oc adm policy add-cluster-role-to-user cluster-admin -z openshift-gitops-argocd-application-controller -n openshift-gitops
