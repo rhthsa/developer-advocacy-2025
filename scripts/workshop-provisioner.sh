@@ -89,9 +89,9 @@ install_web_terminal() {
 }
 
 install_loki() {
-    
-    oc create -f ../manifests/logging-operator.yaml
-    oc create -f ../manifests/loki-operator.yaml
+    #https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/logging/logging-6-2
+    oc create -f ../manifests/logging-operator.yml
+    oc create -f ../manifests/loki-operator.yml
     sleep 60
     oc wait --for condition=established --timeout=180s \
     crd/lokistacks.loki.grafana.com \

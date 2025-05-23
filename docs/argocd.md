@@ -281,6 +281,6 @@ OpenShift and OpenShift GitOps:
 - Support advanced deployment strategies, including blue green and canary, using automated traffic management and testing capabilities with [Argo Rollouts](https://argoproj.github.io/rollouts/).
 
 ## Next Step
-- [OpenShift Observability - Logging](logging.md)
+- [OpenShift Observability - Logging](observe-logging.md)
 
 

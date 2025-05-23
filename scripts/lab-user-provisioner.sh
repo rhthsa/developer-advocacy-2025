@@ -25,6 +25,7 @@ create_projects() {
         oc new-project user$i-tekton
         oc new-project user$i-gitops-dev
         oc new-project user$i-gitops-prod
+        oc new-project user$i-observe
 
         oc adm policy add-role-to-user view user$i -n gitea
         oc adm policy add-role-to-user view user$i -n openshift-pipelines
@@ -66,9 +67,11 @@ add_logging_view_role_to_user()
         echo "Add cluster-logging-application-view to project $i ..."
         echo
 
-        cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i-dev#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i-dev -f -
-        cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i-sit#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i-sit -f -
-        cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i-prod#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i-prod -f -
+        cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i-observe#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i-observe -f -
+
+        # cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i-dev#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i-dev -f -
+        # cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i-sit#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i-sit -f -
+        # cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i-prod#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i-prod -f -
         
         # fi
     done

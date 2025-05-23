@@ -118,3 +118,14 @@ oc config rename-context $(oc config current-context) dev-cluster
 argocd cluster add dev-cluster
 
 oc adm policy add-cluster-role-to-user cluster-admin -z openshift-gitops-argocd-application-controller -n openshift-gitops
+
+
+deploy https://github.com/chatapazar/openshift-workshop.git
+folder sample for replace https://httpbin.org/status/200
+
+route=$(oc get route -l app.kubernetes.io/component=lokistack-gateway -n openshift-logging -o jsonpath={.items[0].spec.host})
+echo $route
+curl -vvv -k -G -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs/v1/application/loki/api/v1/label" | jq
+curl -k -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs/v1/application/loki/api/v1/query" 
+
+curl -G -s -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs/v1/application/loki/api/v1/query_range" --data-urlencode 'query={ log_type="application", kubernetes_namespace_name="user1-observe",  kubernetes_container_name="backend" } ' | jq
