@@ -129,3 +129,6 @@ curl -vvv -k -G -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api
 curl -k -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs/v1/application/loki/api/v1/query" 
 
 curl -G -s -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs/v1/application/loki/api/v1/query_range" --data-urlencode 'query={ log_type="application", kubernetes_namespace_name="user1-observe",  kubernetes_container_name="backend" } ' | jq
+
+
+
