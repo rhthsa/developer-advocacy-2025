@@ -66,8 +66,8 @@
    For example, provisioning 5 lab users:
 
    ```sh
-   export USER_PASSWORD=lzTGhfDLHifMVkfs
-   export ADMIN_PASSWORD=KKnpB87F68F3PLiy
+   export USER_PASSWORD=tze2BjjwGs5ArKBd
+   export ADMIN_PASSWORD=cclEUVM9KioglrzT
    export totalUsers=3
    ./lab-user-provisioner.sh 3
    ```

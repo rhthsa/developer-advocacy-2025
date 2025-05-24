@@ -30,6 +30,11 @@ create_projects() {
         oc adm policy add-role-to-user view user$i -n gitea
         oc adm policy add-role-to-user view user$i -n openshift-pipelines
         oc adm policy add-role-to-user shpiwright-build-aggregate-view user$i -n user$i-shipwright
+        
+        oc adm policy add-role-to-user monitoring-edit user1 -n user1-observe
+        oc adm policy add-role-to-user monitoring-rules-edit user1 -n user1-observe
+        
+        # create crb user-cluster-monitoring-view for cluster-monitoring-view add user to this crb
         repeat '-'
     done
 }
@@ -44,6 +49,7 @@ add_monitoring_edit_role_to_user()
 
     for i in $( seq 1 $totalUsers )
     do
+        oc adm policy add-role-to-user monitoring-edit user$i -n user$i-observe
         oc adm policy add-role-to-user monitoring-edit user$i -n user$i-dev
         oc adm policy add-role-to-user monitoring-edit user$i -n user$i-sit
         oc adm policy add-role-to-user monitoring-edit user$i -n user$i-prod
