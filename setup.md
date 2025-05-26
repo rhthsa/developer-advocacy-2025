@@ -133,4 +133,7 @@ curl -G -s -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs
 
 install tempo operator
 install clsuter observability
+install build of opentelemetry
 run tempo-pre.yaml
+run tempo-sa.yaml
+

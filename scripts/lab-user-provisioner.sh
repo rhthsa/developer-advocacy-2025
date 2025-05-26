@@ -35,6 +35,7 @@ create_projects() {
         oc adm policy add-role-to-user monitoring-edit user1 -n user1-observe
         oc adm policy add-role-to-user monitoring-rules-edit user1 -n user1-observe
 
+        oc adm policy add-cluster-role-to-user system:auth-delegator user1 -n user1-otel
         cat ../config/otel/tempo-sa.yaml | sed "s#PROJECT#user$i-otel#g" | oc apply -n user$i-otel -f -
         
         # create crb user-cluster-monitoring-view for cluster-monitoring-view add user to this crb
