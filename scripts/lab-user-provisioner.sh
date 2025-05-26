@@ -26,6 +26,7 @@ create_projects() {
         oc new-project user$i-gitops-dev
         oc new-project user$i-gitops-prod
         oc new-project user$i-observe
+        oc new-project user$i-otel
 
         oc adm policy add-role-to-user view user$i -n gitea
         oc adm policy add-role-to-user view user$i -n openshift-pipelines
@@ -33,6 +34,8 @@ create_projects() {
         
         oc adm policy add-role-to-user monitoring-edit user1 -n user1-observe
         oc adm policy add-role-to-user monitoring-rules-edit user1 -n user1-observe
+
+        cat ../config/otel/tempo-sa.yaml | sed "s#PROJECT#user$i-otel#g" | oc apply -n user$i-otel -f -
         
         # create crb user-cluster-monitoring-view for cluster-monitoring-view add user to this crb
         repeat '-'

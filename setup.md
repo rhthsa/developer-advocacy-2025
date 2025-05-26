@@ -131,4 +131,6 @@ curl -k -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs/v1
 curl -G -s -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs/v1/application/loki/api/v1/query_range" --data-urlencode 'query={ log_type="application", kubernetes_namespace_name="user1-observe",  kubernetes_container_name="backend" } ' | jq
 
 
-
+install tempo operator
+install clsuter observability
+run tempo-pre.yaml
