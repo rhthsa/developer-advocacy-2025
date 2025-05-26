@@ -11,7 +11,13 @@
 ## What is Distributed Tracing?
 
 https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/tempoMonolithic.yaml
-  
+
+git clone https://github.com/voraviz/openshift-otel.git
+
+oc create -k todo-kustomize/overlays/otel -n $PROJECT
+oc wait --for condition=ready --timeout=180s pod -l app=todo-db  -n $PROJECT 
+oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT
+
 ## Summary
 
 
