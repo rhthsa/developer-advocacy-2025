@@ -38,6 +38,10 @@ create_projects() {
         oc adm policy add-cluster-role-to-user system:auth-delegator user1 -n user1-otel
         cat ../config/otel/tempo-sa.yaml | sed "s#PROJECT#user$i-otel#g" | oc apply -n user$i-otel -f -
         
+        # user add scc for simple-go run otel-go-istrument-scc.yaml
+        oc create sa go-lang-runner
+        oc adm policy add-scc-to-user otel-go-instrumentation-scc -z go-lang-runner
+
         # create crb user-cluster-monitoring-view for cluster-monitoring-view add user to this crb
         repeat '-'
     done
