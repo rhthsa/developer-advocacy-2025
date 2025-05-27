@@ -43,6 +43,7 @@ create_projects() {
         oc adm policy add-scc-to-user otel-go-instrumentation-scc -z go-lang-runner
 
         # create crb user-cluster-monitoring-view for cluster-monitoring-view add user to this crb
+        create rolebinding for shipwright-build-aggregate-edit to userx  
         repeat '-'
     done
 }

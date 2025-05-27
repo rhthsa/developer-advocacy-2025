@@ -60,15 +60,6 @@ install_build() {
 
 }
 
-install_developer_hub() {
-    operatorName=rhdh
-    operatorDesc="Red Hat Developer Hub"
-    ymlFilePath=../manifests/developerhub-operator.yml
-    project=rhdh-operator
-
-    install_operator $operatorName "$operatorDesc" $ymlFilePath $project
-}
-
 install_tempo() {
     project=openshift-operators
     operatorName=tempo-product
@@ -159,8 +150,8 @@ repeat '-'
 
 oc project default
 
-install_build
-repeat '-'
+#install_build
+#repeat '-'
 
 #install_web_terminal
 #repeat '-'
@@ -173,8 +164,6 @@ repeat '-'
 
 #install_tempo
 #repeat '-'
-
-
 
 #install_developer_hub
 #repeat '-'

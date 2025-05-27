@@ -1,6 +1,6 @@
-6. Manual add account to argocd (in ACD CRD) before run update_argocd_password in lab-user-provisioner.sh
+- Manual add account to argocd (in ACD CRD) before run update_argocd_password in lab-user-provisioner.sh
    
-   ```
+   ```yaml
    extraConfig:
      accounts.user1: apiKey, login
      accounts.user2: apiKey, login
@@ -56,12 +56,12 @@
    
    and add defaultpolicy to role:admin 
 
-   ```
+   ```yaml
    rbac:
      defaultPolicy: 'role:admin'
    ```
 
-7. Export lab user password and cluster admin password (the passwords should be there in the mail sent from RHDP). Then run [lab-user-provisioner.sh](scripts/lab-user-provisioner.sh) script with number of lab users as the script argument.
+  - Export lab user password and cluster admin password (the passwords should be there in the mail sent from RHDP). Then run [lab-user-provisioner.sh](scripts/lab-user-provisioner.sh) script with number of lab users as the script argument.
 
    For example, provisioning 5 lab users:
 
@@ -72,7 +72,7 @@
    ./lab-user-provisioner.sh 3
    ```
 
-8. Check imagestream in openshift projecct, Add name tag in imagestream java
+- Check imagestream in openshift projecct, Add name tag in imagestream java
 
   ```yaml
     - name: openjdk-21-ubi9
@@ -95,45 +95,52 @@
         type: Local
   ```
 
-if not found crd, restart operator
-create rolebinding for shipwright-build-aggregate-edit to userx  
+- For build of openshift if not found crd, restart operator
+
+- ArgoCD
+
+  ```ssh
+  ARGOCD=$(oc get route/openshift-gitops-server -n openshift-gitops -o jsonpath='{.spec.host}')
+  echo https://$ARGOCD
+
+  PASSWORD=$(oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-) 2>/dev/null
+  echo $PASSWORD
+
+  argocd login $ARGOCD  --insecure \
+  --username admin \
+  --password $PASSWORD
+
+  oc config rename-context $(oc config current-context) dev-cluster
+  argocd cluster add dev-cluster
+  oc adm policy add-cluster-role-to-user cluster-admin -z openshift-gitops-argocd-application-controller -n openshift-gitops
+  ```
+
+- (Option!) Deploy https://github.com/chatapazar/openshift-workshop.git folder sample for replace https://httpbin.org/status/200
+
+- OTEL
+
+  install tempo operator
+  install clsuter observability
+  install build of opentelemetry
+  run tempo-pre.yaml
+  run tempo-sa.yaml
+
+- DeveloperHub
+  
+  git clone software-templates repository
+  software-templates/scaffolder-templates/quarkus-web-template/
+  
+  remove src/test/java/${{values.java_package_name}}/*
+  remove src/main/java/${{values.java_package_name}}/*
+  remove src/main/resources/META-INF
+  
+  copy 
+  manifests/helm/build/templates/pipeline-build.yaml
+  skeleton/src/main/docker/Dockerfile.jvm
+  skeleton/src/main/java/${{values.java_package_name}}/*.java
+  skeleton/src/main/resources/*
+  skeleton/pom.xml
+  skeleton/Dockerfile
 
 
-
-argocd
-
-ARGOCD=$(oc get route/openshift-gitops-server -n openshift-gitops -o jsonpath='{.spec.host}')
-echo https://$ARGOCD
-
-PASSWORD=$(oc extract secret/openshift-gitops-cluster -n openshift-gitops --to=-) 2>/dev/null
-echo $PASSWORD
-
-argocd login $ARGOCD  --insecure \
---username admin \
---password $PASSWORD
-
-oc config rename-context $(oc config current-context) dev-cluster
-
-
-argocd cluster add dev-cluster
-
-oc adm policy add-cluster-role-to-user cluster-admin -z openshift-gitops-argocd-application-controller -n openshift-gitops
-
-
-deploy https://github.com/chatapazar/openshift-workshop.git
-folder sample for replace https://httpbin.org/status/200
-
-route=$(oc get route -l app.kubernetes.io/component=lokistack-gateway -n openshift-logging -o jsonpath={.items[0].spec.host})
-echo $route
-curl -vvv -k -G -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs/v1/application/loki/api/v1/label" | jq
-curl -k -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs/v1/application/loki/api/v1/query" 
-
-curl -G -s -H "Authorization: Bearer $(oc whoami -t)" "https://${route}/api/logs/v1/application/loki/api/v1/query_range" --data-urlencode 'query={ log_type="application", kubernetes_namespace_name="user1-observe",  kubernetes_container_name="backend" } ' | jq
-
-
-install tempo operator
-install clsuter observability
-install build of opentelemetry
-run tempo-pre.yaml
-run tempo-sa.yaml
-
+  
