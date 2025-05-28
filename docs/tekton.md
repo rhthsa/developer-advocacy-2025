@@ -12,14 +12,7 @@
   - [Next Step](#next-step)
 
 <!-- /TOC -->
-  - [Add Web Hook for Trigger Pipeline (Optional!)](#add-web-hook-for-trigger-pipeline-optional)
-  - [Next Step](#next-step)
 
-<!-- /TOC -->LI (Optional!)](#tekton-cli-optional)
-  - [Add Web Hook for Trigger Pipeline (Optional!)](#add-web-hook-for-trigger-pipeline-optional)
-  - [Next Step](#next-step)
-
-<!-- /TOC -->
 
 ## Welcome to the OpenShift Pipelines!
 

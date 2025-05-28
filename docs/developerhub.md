@@ -15,10 +15,6 @@
   - [Summary](#summary)
 
 <!-- /TOC -->
-<!-- /TOC -->
-<!-- /TOC -->
-<!-- /TOC -->
-<!-- /TOC -->
 
 
 ## Red Hat Developer Hub

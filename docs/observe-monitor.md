@@ -12,11 +12,7 @@
   - [Next Step](#next-step)
 
 <!-- /TOC -->
-<!-- /TOC -->
-  - [Summary](#summary)
-  - [Next Step](#next-step)
 
-<!-- /TOC -->
 
 ## What is OpenShift Monitoring?
 

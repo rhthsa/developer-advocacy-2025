@@ -12,7 +12,7 @@
   - [Next Step](#next-step)
 
 <!-- /TOC -->
-<!-- /TOC -->
+
 
 ## What is GitOps?
 
