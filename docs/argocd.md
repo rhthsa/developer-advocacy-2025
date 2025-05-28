@@ -1,7 +1,7 @@
-# Continuous Delivery (CD) with OpenShift GitOps (ArgoCD)
+# Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD - Part II
 <!-- TOC -->
 
-- [Continuous Delivery (CD) with OpenShift GitOps (ArgoCD)](#continuous-delivery-cd-with-openshift-gitops-argocd)
+- [Ship faster, safer, smarter. GitOps CI/CD with Tekton \& ArgoCD - Part II](#ship-faster-safer-smarter-gitops-cicd-with-tekton--argocd---part-ii)
   - [What is GitOps?](#what-is-gitops)
   - [About GitOps](#about-gitops)
   - [About Red Hat OpenShift GitOps](#about-red-hat-openshift-gitops)
@@ -281,6 +281,6 @@ OpenShift and OpenShift GitOps:
 - Support advanced deployment strategies, including blue green and canary, using automated traffic management and testing capabilities with [Argo Rollouts](https://argoproj.github.io/rollouts/).
 
 ## Next Step
-- [OpenShift Observability - Logging](observe-logging.md)
+- [Observability through logs: Centralized logging with Loki & querying via LogQL](observe-logging.md)
 
 

@@ -1,7 +1,7 @@
-# OpenShift Observability - Monitoring
+# Metrics-driven mastery: How to monitor, alert & scale like a pro
 <!-- TOC -->
 
-- [OpenShift Observability - Monitoring](#openshift-observability---monitoring)
+- [Metrics-driven mastery: How to monitor, alert \& scale like a pro](#metrics-driven-mastery-how-to-monitor-alert--scale-like-a-pro)
   - [What is OpenShift Monitoring?](#what-is-openshift-monitoring)
   - [Monitoring stack architecture](#monitoring-stack-architecture)
   - [OpenShift Default Monitoring](#openshift-default-monitoring)
@@ -275,4 +275,4 @@ Developer can enable monitoring for user-defined projects in addition to the def
 OpenShift Monitoring provides real-time visibility into cluster health and performance using integrated tools like Prometheus, AlertManager, etc. It helps detect issues early, ensuring high availability and reliability of applications. The built-in alerting system enables proactive response and efficient resource management.
 
 ## Next Step
-- [OpenShift Observability - Tracing](observe-otel.md)
+- [Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation](observe-otel.md)

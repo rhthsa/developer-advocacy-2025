@@ -1,7 +1,7 @@
-# Builds for Red Hat OpenShift
+# Build your application containers the right way with Shipwright
 <!-- TOC -->
 
-- [Builds for Red Hat OpenShift](#builds-for-red-hat-openshift)
+- [Build your application containers the right way with Shipwright](#build-your-application-containers-the-right-way-with-shipwright)
   - [Deploy Container Application on OpenShift with Container Image](#deploy-container-application-on-openshift-with-container-image)
     - [open browser to OpenShift Console](#open-browser-to-openshift-console)
     - [Set Default OpenShift Console!!!](#set-default-openshift-console)
@@ -17,13 +17,9 @@
   - [Summary](#summary)
   - [Next Step](#next-step)
 
-<!-- /TOC --> from Source Code with Source-to-Image)](#deploy-application-with-shipwright-s2i-build-from-source-code-with-source-to-image)
-    - [Review Source from Git Repository](#review-source-from-git-repository)
-    - [Build Container with Shipwright-S2I and Deploy to OpenShift](#build-container-with-shipwright-s2i-and-deploy-to-openshift)
-  - [Summary](#summary)
-  - [Next Step](#next-step)
-
 <!-- /TOC -->
+
+
 
 ## Deploy Container Application on OpenShift with Container Image
 
@@ -342,7 +338,4 @@ Shipwright supports any tool that can build container images in Kubernetes clust
 
 
 ## Next Step
-
-- [Continuous Integration (CI) with OpenShift Pipelines (Tekton)](tekton.md)
-
-
+- [Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD - Part I](tekton.md)

@@ -1,7 +1,7 @@
-# Continuous Integration (CI) with OpenShift Pipelines (Tekton)
+# Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD - Part I
 <!-- TOC -->
 
-- [Continuous Integration (CI) with OpenShift Pipelines (Tekton)](#continuous-integration-ci-with-openshift-pipelines-tekton)
+- [Ship faster, safer, smarter. GitOps CI/CD with Tekton \& ArgoCD - Part I](#ship-faster-safer-smarter-gitops-cicd-with-tekton--argocd---part-i)
   - [Welcome to the OpenShift Pipelines!](#welcome-to-the-openshift-pipelines)
   - [Concepts](#concepts)
   - [Deploy Sample Application with OpenShift Pipelines](#deploy-sample-application-with-openshift-pipelines)
@@ -413,6 +413,6 @@ tkn pipeline start build-and-deploy --last
 
 ## Next Step
 
-- [Continuous Delivery (CD) with OpenShift GitOps (ArgoCD)](argocd.md)
+- [Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD - Part II](argocd.md)
 
 

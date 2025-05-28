@@ -1,7 +1,7 @@
-# OpenShift Observability - Logging
+# Observability through logs: Centralized logging with Loki & querying via LogQL
 <!-- TOC -->
 
-- [OpenShift Observability - Logging](#openshift-observability---logging)
+- [Observability through logs: Centralized logging with Loki \& querying via LogQL](#observability-through-logs-centralized-logging-with-loki--querying-via-logql)
   - [What is OpenShift Observability?](#what-is-openshift-observability)
   - [OpenShift Logging](#openshift-logging)
   - [Logging resources](#logging-resources)
@@ -12,6 +12,7 @@
   - [Summary](#summary)
   - [Next Step](#next-step)
 
+<!-- /TOC -->
 <!-- /TOC -->
 <!-- /TOC -->
 
@@ -259,4 +260,4 @@ Need more details about OpenShift Logging --> [Link](https://docs.redhat.com/en/
 OpenShift's logging capabilities offer significant benefits for containerized applications and overall platform management. These benefits include centralized log collection, enhanced security and compliance, and streamlined troubleshooting and debugging. OpenShift's logging features streamline the development process by providing a consistent and standardized approach to logging. 
 
 ## Next Step
-- [OpenShift Observability - Monitoring](observe-monitor.md)
+- [Metrics-driven mastery: How to monitor, alert & scale like a pro](observe-monitor.md)

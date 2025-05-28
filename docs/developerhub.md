@@ -1,7 +1,7 @@
-# Boost developer Productivity with Developer Hub
+# Accelerating software development with Red Hat Developer Hub
 <!-- TOC -->
 
-- [Boost developer Productivity with Developer Hub](#boost-developer-productivity-with-developer-hub)
+- [Accelerating software development with Red Hat Developer Hub](#accelerating-software-development-with-red-hat-developer-hub)
   - [Red Hat Developer Hub](#red-hat-developer-hub)
   - [RHDH Demo Components](#rhdh-demo-components)
   - [Access Red Hat Developer Hub](#access-red-hat-developer-hub)

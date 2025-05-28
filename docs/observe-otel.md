@@ -1,7 +1,7 @@
-# OpenShift Observability - Distributed Tracing 
+# Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation
 <!-- TOC -->
 
-- [OpenShift Observability - Distributed Tracing](#openshift-observability---distributed-tracing)
+- [Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation](#trace-without-pain-tracing-transactions-with-opentelemetry-auto-instrumentation)
   - [What is Distributed Tracing?](#what-is-distributed-tracing)
   - [Red Hat OpenShift distributed tracing platform features](#red-hat-openshift-distributed-tracing-platform-features)
   - [Red Hat OpenShift distributed tracing platform architecture](#red-hat-openshift-distributed-tracing-platform-architecture)
@@ -15,6 +15,8 @@
   - [Test RESTful App](#test-restful-app)
   - [Summary](#summary)
   - [Next Step](#next-step)
+
+<!-- /TOC -->
 
 <!-- /TOC -->
 
@@ -454,4 +456,4 @@ OpenShift's distributed tracing provides a major benefit: it allows for tracing 
 With distributed tracing, software teams can monitor data that passes through complex paths connecting various microservices and data storage. Using distributed tracing tools, software teams track requests and visualize data propagation paths with precision.
 
 ## Next Step
-- [Boost developer Productivity with Developer Hub](developerhub.md)
+- [Accelerating software development with Red Hat Developer Hub](developerhub.md)
