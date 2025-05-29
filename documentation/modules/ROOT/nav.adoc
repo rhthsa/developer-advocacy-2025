@@ -1,12 +1,9 @@
 * 1. Build your application containers the right way with Shipwright
 ** xref:01-shipwright.adoc#setup[1. Setup]
 ** xref:01-shipwright.adoc#deploycontainerimage[2. Deploy Container Image]
-** xref:01-shipwright.adoc#minikube[Setup Minikube]
+** xref:01-shipwright.adoc#accessthewebapplication[3. Access To Application]
 
 * 2. Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD
-* xref:02-deploy.adoc[2. Deploy Service]
-** xref:02-deploy.adoc#package[Build Service]
-** xref:02-deploy.adoc#deploy[Deploy Dervice]
 
 * 3. Observability through logs: Centralized logging with Loki & querying via LogQL
 

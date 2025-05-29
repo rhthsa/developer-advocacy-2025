@@ -1,7 +1,7 @@
-[#setup]
 = Setup
 include::_attributes.adoc[]
 
+[#setup]
 == Register to access the lab
 
 * Get the lab registration URL and password from instructor.
@@ -40,36 +40,41 @@ image::shipwright/shp-5.png[]
 [#deploycontainerimage]
 == Deploy Container Image
 
-* click `+Add` in left menu, in Add page, select Container images
+Click `+Add` menu on the left, the *Add* page will show up then select *Container images* tile.
 +
 image::shipwright/shp-6.png[]
 
-* select `image name from external registry`
-* input `quay.io/voravitl/frontend-js:latest` in text box, and wait until openshift validate complete!
-* change Runtime icon to `nodejs`
-* set Application name to `frontend-js`
-* set Name to `frontend-js`
+* Select *Image name from external registry* option.
+* Enter `quay.io/voravitl/frontend-js:latest` then wait for OpenShift validates the container image registry.
+* Change *Runtime icon* to `nodejs`.
+* Set *Application name* to `frontend-js`.
+* Set *Name* to `frontend-js`.
 +
 image::shipwright/shp-7.png[]
 
-* set Resource type to `Deployment`
-* leave default Target port, Create Route and other, click Create
+* Set *Resource type* to `Deployment`.
+* Leave the *Target port* as default (`8080`)
+* Make sure the *Create a route* checkbox is selected.
+* Finally, click on the *Create* button. at the bottom.
 +
 image::shipwright/shp-8.png[]
 
-* wait until Pods change to `Running`
+* You will be redirected back to the *Topology* view. Wait until the Pod change to `Running`.
 +
 image::shipwright/shp-9.png[]
 
-* Click on `frontend-js` Deployment icon click on Open URL
+[accessthewebapplication]
+== Access The Application
+
+* Click on `frontend-js` Deployment icon then click on the arrow to open the web application.
 +
 image::shipwright/shp-10.png[]
 
-* Review Application `frontend-js`
+* Make sure you can see the response from the  `frontend-js` application similar to the screenshot.
 +
 image::shipwright/shp-11.png[]
 
-=== We can deploy container image in OpenShift Console but What 's happen? if you don't have container image!!!
+== We can deploy container image in OpenShift Console but What 's happen? if you don't have container image!!!
 
 * How to build container from your source code!
 * How to build container from your container file!
