@@ -1,4 +1,4 @@
-= Setup
+= Build your application containers the right way with Shipwright
 include::_attributes.adoc[]
 
 [#setup]

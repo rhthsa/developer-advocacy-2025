@@ -1,4 +1,4 @@
-* 1. Build your application containers the right way with Shipwright
+* xref:01-shipwright.adoc[1. Build your application containers the right way with Shipwright]
 ** xref:01-shipwright.adoc#setup[1. Setup]
 ** xref:01-shipwright.adoc#deploycontainerimage[2. Deploy Container Image]
 ** xref:01-shipwright.adoc#accesstheapplication[3. Access To Application]
