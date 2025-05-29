@@ -25,11 +25,17 @@
 
 ### open browser to OpenShift Console
 
-- confirm URL from instructor
+- Open Link workshop form Instructor, login with your email and password `openshift`
 
-- login to openshift with your username/password
+  ![](../images/shipwright/shp-reg-1.png)
+
+- After Login, Workshop will show username, password and URL for this lab.
+
+  ![](../images/shipwright/shp-reg-2.png)
+
+- Open Console URL, login to openshift with your username/password
   
-  - username: `xxx` --> get from register page
+  - username: `userX` --> get from register page
   - password: `xxx` --> get from register page
   
   ![](../images/shipwright/shp-1.png)
