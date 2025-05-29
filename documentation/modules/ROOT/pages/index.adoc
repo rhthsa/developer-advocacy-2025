@@ -1,4 +1,4 @@
-= Welcome to Template Tutorial
+= Welcome to Red Hat OpenShift Developer Workshop 2025
 :page-layout: home
 :!sectids:
 

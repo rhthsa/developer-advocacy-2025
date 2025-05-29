@@ -1,0 +1,318 @@
+= Setup
+include::_attributes.adoc[]
+
+[#setup]
+== Login to OpenShift web console
+
+* Get the URL from instructor
+* login with your username and password get from the lab user registration page.
++
+image::shipwright/shp-1.png[]
+* if login first time, dev console will launch developer quick tour, click Skip tour
++
+image::../images/shipwright/shp-2.png[]
+
+* select Developer Perspective from left menu (if openshift don't default page for you)
++
+image::../images/shipwright/shp-3.png[]
+
+* select 'userX-shipwright' project `change userX to your username such as user1`
+
+=== Set Default OpenShift Console!!!
+
+* click user at top-right of OpenShift Console, select User References
++
+image::../images/shipwright/shp-4.png[]
+
+* In General Section, you can change theme from dark mode (default) to light mode
++
+image::../images/shipwright/shp-5.png[]
+
+=== Deploy Container Image
+
+* click `+Add` in left menu, in Add page, select Container images
++
+image::../images/shipwright/shp-6.png[]
+
+* select `image name from external registry`
+* input `quay.io/voravitl/frontend-js:latest` in text box, and wait until openshift validate complete!
+* change Runtime icon to `nodejs`
+* set Application name to `frontend-js`
+* set Name to `frontend-js`
++
+image::../images/shipwright/shp-7.png[]
+
+* set Resource type to `Deployment`
+* leave default Target port, Create Route and other, click Create
++
+image::../images/shipwright/shp-8.png[]
+
+* wait until Pods change to `Running`
++
+image::../images/shipwright/shp-9.png[]
+
+* Click on `frontend-js` Deployment icon click on Open URL
++
+image::../images/shipwright/shp-10.png[]
+
+* Review Application `frontend-js`
++
+image::../images/shipwright/shp-11.png[]
+
+=== We can deploy container image in OpenShift Console but What 's happen? if you don't have container image!!!
+
+* How to build container from your source code!
+* How to build container from your container file!
+* How to prepare tools, environment, etc. to build container!
+
+== The future of Red Hat OpenShift builds
+
+image::../images/shipwright/shipwright-logo.png[]
+
+Builds is an extensible build framework based on the Shipwright project, which you can use to build container images on an OpenShift Container Platform cluster. You can build container images from source code and Dockerfiles by using image build tools, such as Source-to-Image (S2I) and Buildah. You can create and apply build resources, view logs of build runs, and manage builds in your OpenShift Container Platform namespaces.
+
+Builds includes the following capabilities:
+
+* Standard Kubernetes-native API for building container images from source code and Dockerfiles
+* Support for Source-to-Image (S2I), Buildah, Buildpacks, etc.
+* Extensibility with your own custom build strategies
+* Execution of builds from source code in a local directory
+* Shipwright CLI for creating and viewing logs, and managing builds on the cluster
+* Integrated user experience with the Developer perspective of the OpenShift Container Platform web console
+
+Builds consists of the following custom resources (CRs):
+
+* Build
+* BuildStrategy and ClusterBuildStrategy
+* BuildRun
+
+Get More information
+
+* https://docs.redhat.com/en/documentation/builds_for_red_hat_openshift/1.4/[Builds for Red Hat OpenShift 1.4]
+* https://github.com/shipwright-io/build[Shipwright]
+* https://developers.redhat.com/articles/2021/06/14/project-shipwright-and-future-red-hat-openshift-builds#[Project Shipwright and the future of Red Hat OpenShift builds]
+
+== Deploy Application with Shipwright Buildah (Build from Container File/Docker File)
+
+=== Review Container File from Git Repository
+
+* Get Git Url from Command Line, click web terminal link at top right of developer console.
++
+image::../images/shipwright/shp-12.png[]
+
+* for first time. select `userX-shipwright` (change X to your username) project and click start.
++
+image::../images/shipwright/shp-13.png[]
+
+* wait until terminal ready and show command line prompt!
++
+image::../images/shipwright/shp-14.png[]
+
+* run command to get gitea url.
++
+[,ssh]
+----
+oc get route gitea -n gitea
+----
++
+example result
++
+[,ssh]
+----
+NAME    HOST/PORT                                                      PATH   SERVICES   PORT    TERMINATION     WILDCARD
+gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gitea      <all>   edge/Redirect   None
+----
+
+* copy host of gitea to new tab browser
++
+image::../images/shipwright/shp-15.png[]
+
+* login with your username, but password is `openshift`
++
+image::../images/shipwright/shp-16.png[]
+
+* click `simple-rest-go` repository
++
+image::../images/shipwright/shp-17.png[]
+
+* select `Dockerfile`, review build step in Dockerfile
++
+image::../images/shipwright/shp-18.png[]
++
+image::../images/shipwright/shp-19.png[]
+
+* back to `simple-rest-go` repository, get git URL from code button and select copy url
++
+image::../images/shipwright/shp-20.png[]
+
+=== Build Container with Shipwright-Buildah and Deploy to OpenShift
+
+* click `+Add` in left menu, and select `Git Repository - Import from Git`
++
+image::../images/shipwright/shp-21.png[]
+
+* Import from Git page,
+* Input git URL (from previous copy) in Git Repo URL, such as `+https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git+`
+* Wizard will detect Dockerfile automatic
+* set Application to `Create Application`
+* set Application name to `simple-rest-go`
+* set Name to `simple-rest-go`
++
+image::../images/shipwright/shp-22.png[]
+
+* set Build option to `Builds for OpenShift (Shipwright)
+* set Cluster Build Strategy to `Buildah`
+* leave other default, click Create
++
+image::../images/shipwright/shp-23.png[]
+
+* After back to Topology page, select `simple-rest-go` deployment, go to BuildRuns, click View logs
++
+image::../images/shipwright/shp-24.png[]
+
+* In BuildRuns, view logs from Buildah
++
+image::../images/shipwright/shp-25.png[]
+
+* wait until it change from Running to Succeded.
++
+image::../images/shipwright/shp-26.png[]
+
+* Click Builds, Shipwright Builds, To view previous `Build`
++
+image::../images/shipwright/shp-27.png[]
+
+* Back to Topology, view deployment, pod after build complete.
++
+image::../images/shipwright/shp-28.png[]
+
+* Click Open URL to test call container application
++
+image::../images/shipwright/shp-29.png[]
+
+* Example Result from `simple-rest-go`
++
+image::../images/shipwright/shp-30.png[]
+
+== Deploy Application with Shipwright S2I (Build from Source Code with Source-to-Image)
+
+=== Review Source from Git Repository
+
+* Back to Git, go to `backend_quarkus` Repository
++
+image::../images/shipwright/shp-31.png[]
+
+* Review Project Structure of `backend_quarkus`
++
+image::../images/shipwright/shp-32.png[]
+
+* Copy git URL of `backend_quarkus` by click Code Button and click copy URL
++
+image::../images/shipwright/shp-33.png[]
+
+* click on code folder (source code of this project)
++
+image::../images/shipwright/shp-34.png[]
+
+* review `BackendResource.java` under `code/src/main/java/com/example/quarkus`
++
+image::../images/shipwright/shp-35.png[]
+
+=== Build Container with Shipwright-S2I and Deploy to OpenShift
+
+* Back to OpenShift Developer Console, click `+Add` in left menu and select Git Repository - Import from Git
+* In Import from Git,
+* Input git URL (from previous copy) to Git Repo URL such as `+https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/backend_quarkus.git+`
+* Input `/code` in Context dir
++
+image::../images/shipwright/shp-36.png[]
+
+* Wizard will auto detect Builder image, click Edit Import Strategy
++
+image::../images/shipwright/shp-37.png[]
+
+* In Import Strategy, select Builder Image, Java and openjdk-21-ubi9
++
+image::../images/shipwright/shp-38.png[]
+
+* In Application, select Create application
+* Input `backend-quarkus` in Application name
+* Input `backend-quarkus` in Name
+* select `Builds for OpenShift (Shipwright)` in Build Option
+* select `Source-to-image` in Cluster Build Strategy
++
+image::../images/shipwright/shp-39.png[]
+
+* leave other default value, click Create Button
++
+image::../images/shipwright/shp-40.png[]
+
+* Back to Topology page, `backend-quarkus` Deployment, click view logs in BuildRuns
++
+image::../images/shipwright/shp-41.png[]
+
+* Wait Build Running change to Success
++
+image::../images/shipwright/shp-42.png[]
++
+image::../images/shipwright/shp-43.png[]
+
+* Click `Builds` in left menu, In Shipwright Builds Tab, view latest Build
++
+image::../images/shipwright/shp-44.png[]
+
+* Test Application by back to Topology, view `backend-quarkus` Deployment,
++
+image::../images/shipwright/shp-45.png[]
+
+* Click view URL, view output in new Browser Tab (Message will start with `+Backend version...+`)
++
+image::../images/shipwright/shp-46.png[]
+
+* Try to change source code in Git, back to Git, Back to `BackendResource.java`
++
+image::../images/shipwright/shp-47.png[]
+
+* Click Edit File
++
+image::../images/shipwright/shp-48.png[]
+
+* go to line number `201`, change from `+Backend version...+` to `+Backend OpenShift version...+`
++
+image::../images/shipwright/shp-49.png[]
+
+* Commit Changes, click Commit Changes
++
+image::../images/shipwright/shp-50.png[]
+
+* Back to Builds, Shipwright Builds, click action menu of `backend-quarkus` Build, select `Start`
++
+image::../images/shipwright/shp-51.png[]
+
+* Wait until status change to succeeded
++
+image::../images/shipwright/shp-52.png[]
++
+image::../images/shipwright/shp-53.png[]
++
+image::../images/shipwright/shp-54.png[]
+
+* Test Application Again, message will change to `+Backend OpenShift version...+`
++
+image::../images/shipwright/shp-55.png[]
+
+== Summary
+
+With Shipwright, developers get a simplified approach for building container images, by defining a minimal YAML that does not require any previous knowledge of containers or container tooling. All you need is your source code in git and access to a container registry.
+
+Shipwright supports any tool that can build container images in Kubernetes clusters, such as:
+
+* https://github.com/GoogleContainerTools/kaniko[Kaniko]
+* https://buildpacks.io/[Cloud Native Buildpacks]
+* https://github.com/moby/buildkit[BuildKit]
+* https://buildah.io/[Buildah]
+* https://github.com/openshift/source-to-image[S2I]
+
+== Next Step
+
+* xref:tekton.adoc[Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD - Part I]

@@ -1,5 +1,5 @@
 * Build your application containers the right way with Shipwright
-** xref:01-setup.adoc[1. Setup]
+** xref:01-shipwright.adoc#setup[1. Setup]
 ** xref:01-setup.adoc#prerequisite[Prerequisites]
 ** xref:01-setup.adoc#minikube[Setup Minikube]
 
