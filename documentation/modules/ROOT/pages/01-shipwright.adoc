@@ -40,7 +40,7 @@ image::shipwright/shp-5.png[]
 [#deploycontainerimage]
 == Deploy Container Image
 
-Click `+Add` menu on the left, the *Add* page will show up then select *Container images* tile.
+* Click `+Add` menu on the left, the *Add* page will show up then select *Container images* tile.
 +
 image::shipwright/shp-6.png[]
 
@@ -74,11 +74,12 @@ image::shipwright/shp-10.png[]
 +
 image::shipwright/shp-11.png[]
 
-== We can deploy container image in OpenShift Console but What 's happen? if you don't have container image!!!
 
-* How to build container from your source code!
-* How to build container from your container file!
-* How to prepare tools, environment, etc. to build container!
+Now you can see that We can deploy container images via OpenShift console. It's easy!, right? But what if you don't have container image?
+
+* How to build container image if you only have source code?
+* How to build container image from your Dockerfile or Containerfile you've written?
+* How to prepare tools, environment, etc. to build container image?
 
 == The future of Red Hat OpenShift builds
 
