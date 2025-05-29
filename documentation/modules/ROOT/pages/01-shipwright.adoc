@@ -40,7 +40,7 @@ image::shipwright/shp-5.png[]
 [#deploycontainerimage]
 == Deploy Container Image
 
-* Click `+Add` menu on the left, the *Add* page will show up then select *Container images* tile.
+* Click *+Add* menu on the left, the *Add* page will show up then select *Container images* tile.
 +
 image::shipwright/shp-6.png[]
 
@@ -81,6 +81,7 @@ Now you can see that We can deploy container images via OpenShift console. It's 
 * How to build container image from your Dockerfile or Containerfile you've written?
 * How to prepare tools, environment, etc. to build container image?
 
+[#shipwright]
 == Red Hat OpenShift Builds
 
 image::shipwright/shipwright-logo.png[]
@@ -108,7 +109,8 @@ Get More information
 * https://github.com/shipwright-io/build[Shipwright]
 * https://developers.redhat.com/articles/2021/06/14/project-shipwright-and-future-red-hat-openshift-builds#[Project Shipwright and the future of Red Hat OpenShift builds]
 
-== Build and Deploy Application using Shipwright
+[#shipwrightbuidah]
+== Build and Deploy Application using Shipwright and Buildah
 
 === Access To Git Repository
 
@@ -140,14 +142,14 @@ sample output.
 [source,adoc]
 ----
 NAME    HOST/PORT                                                      PATH   SERVICES   PORT    TERMINATION     WILDCARD
-gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com #<.>     gitea      <all>   edge/Redirect   None
+gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gitea      <all>   edge/Redirect   None
 ----
 
-* <.> Open the gitea DNS hostname with a web browser.
+* Copy the gitea DNS hostname and open it with a web browser.
 +
 image::shipwright/shp-15.png[]
 
-* Login with your username, and use `openshift` as password.
+* Log in with your username, and use `openshift` as password.
 +
 image::shipwright/shp-16.png[]
 
@@ -155,163 +157,175 @@ image::shipwright/shp-16.png[]
 +
 image::shipwright/shp-17.png[]
 
-=== Review Container File from Git Repository
+=== Review the Container Image Build Instruction
 
-* Open the `Dockerfile`, then review build step in the `Dockerfile` file.
+* Open the `Dockerfile`, then review build steps in the `Dockerfile` file.
 +
 image::shipwright/shp-18.png[]
 +
 image::shipwright/shp-19.png[]
 
-=== Build Container with Shipwright and Deploy to OpenShift
+=== Build and Deploy Container
 
-* In gitea, back to the main `simple-rest-go` repository page, click on *Code* button then click copy button to copy the repository URL.
+* In gitea, back to the main `simple-rest-go` repository page, click on *<> Code* button then click copy button to copy the repository URL.
 +
 image::shipwright/shp-20.png[]
 
-* Go to OpenShift web console then click `+Add` menu on the left. Select `Git Repository - Import from Git` tile.
+* Go to OpenShift web console then click *+Add* menu on the left. Select *Git Repository - Import from Git* tile.
 +
 image::shipwright/shp-21.png[]
 
-On the *Import from Git* page follow these steps:
-* Input git URL (from previous copy) in Git Repo URL, such as `+https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git+`
-* Wizard will detect Dockerfile automatic
-* set Application to `Create Application`
-* set Application name to `simple-rest-go`
-* set Name to `simple-rest-go`
+On the *Import from Git* form, follow these steps:
+
+* Enter the Git repo URL you've copied to *Git Repo URL* input.
+* The wizard will detect `Dockerfile`` automatically.
+* Select `Create Application` for the  *Application* drop-down list.
+* Set *Application name* to `simple-rest-go`.
+* Set *Name* to `simple-rest-go`.
 +
 image::shipwright/shp-22.png[]
 
-* set Build option to `Builds for OpenShift (Shipwright)
-* set Cluster Build Strategy to `Buildah`
-* leave other default, click Create
+* Select `Builds for OpenShift (Shipwright)` for *Build option*.
+* Select `Buildah` for *Cluster Build Strategy*.
+* Leave other configurations as default, then click *Create* button.
 +
 image::shipwright/shp-23.png[]
 
-* After back to Topology page, select `simple-rest-go` deployment, go to BuildRuns, click View logs
+=== View Build Configuration and Build Logs
+
+* In the Topology view, select `simple-rest-go` Deployment, go to *BuildRuns* section, then click *View logs* link.
 +
 image::shipwright/shp-24.png[]
 
-* In BuildRuns, view logs from Buildah
+* You should be able to see container image builds logs similar to the screenshot.
 +
 image::shipwright/shp-25.png[]
 
-* wait until it change from Running to Succeded.
+* Wait until the build status changes from Running to Succeded.
 +
 image::shipwright/shp-26.png[]
 
-* Click Builds, Shipwright Builds, To view previous `Build`
+* Select *Builds* menu on the left, then click on *Shipwright Builds* tab to view Shipwright Build configuration.
 +
 image::shipwright/shp-27.png[]
 
-* Back to Topology, view deployment, pod after build complete.
+* Select *Topology* menu on the left, select `simple-rest-go` Deployment, go to *BuildRuns* section again you'll see the build status shown as `Succeeded`.
 +
 image::shipwright/shp-28.png[]
 
-* Click Open URL to test call container application
+=== Access To Application
+
+* Click on the arrow icon to open the application URL.
 +
 image::shipwright/shp-29.png[]
 
-* Example Result from `simple-rest-go`
+* Ensure you can see the response from the application.
 +
 image::shipwright/shp-30.png[]
 
-== Deploy Application with Shipwright S2I (Build from Source Code with Source-to-Image)
+[#shipwrights2i]
+== Build and Deploy Application with Shipwright and Source-to-Image (S2I)
 
-=== Review Source from Git Repository
+=== Review Application Source Code.
 
-* Back to Git, go to `backend_quarkus` Repository
+* Go to *gitea* web console then open the `backend_quarkus` repository.
 +
 image::shipwright/shp-31.png[]
-
-* Review Project Structure of `backend_quarkus`
-+
 image::shipwright/shp-32.png[]
 
-* Copy git URL of `backend_quarkus` by click Code Button and click copy URL
+* Open the `code` folder to view the application source code. It's a Java application based on Quarkus framework. The APIs that application exposes are in `src/main/java/com/example/quarkus/BackendResource.java` file.
++
+image::shipwright/shp-34.png[]
+image::shipwright/shp-35.png[]
+
+=== Build and Deploy Container
+
+* In gitea, back to the main `backend_quarkus` repository page, click on *<> Code* button then click copy button to copy the repository URL.
 +
 image::shipwright/shp-33.png[]
 
-* click on code folder (source code of this project)
+* Go to OpenShift console, click `+Add` menu on the left, then select *Git Repository - Import from Git* tile.
 +
-image::shipwright/shp-34.png[]
+image::shipwright/shp-21.png[]
 
-* review `BackendResource.java` under `code/src/main/java/com/example/quarkus`
-+
-image::shipwright/shp-35.png[]
+On the *Import from Git* form, follow these steps:
 
-=== Build Container with Shipwright-S2I and Deploy to OpenShift
-
-* Back to OpenShift Developer Console, click `+Add` in left menu and select Git Repository - Import from Git
-* In Import from Git,
-* Input git URL (from previous copy) to Git Repo URL such as `+https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/backend_quarkus.git+`
-* Input `/code` in Context dir
+* Enter the `backend_quarkus` Git repository URL you've copied to *Git Repo URL* input.
+* Enter `/code` in *Context dir* input.
 +
 image::shipwright/shp-36.png[]
 
-* Wizard will auto detect Builder image, click Edit Import Strategy
+* The wizard will automatically detect Builder image for Java application. Click *Edit Import Strategy* link to choose Builder Image.
 +
 image::shipwright/shp-37.png[]
 
-* In Import Strategy, select Builder Image, Java and openjdk-21-ubi9
+* Click on *Java* tile and select *openjdk-21-ubi9* for the Builder Image version.
 +
 image::shipwright/shp-38.png[]
 
-* In Application, select Create application
-* Input `backend-quarkus` in Application name
-* Input `backend-quarkus` in Name
-* select `Builds for OpenShift (Shipwright)` in Build Option
-* select `Source-to-image` in Cluster Build Strategy
+* Select `Create Application` for the  *Application* drop-down list.
+* Enter `backend-quarkus` for *Application name*.
+* Enter `backend-quarkus` for *Name*.
+* Select `Builds for OpenShift (Shipwright)` for *Build Option*.
+* Select `Source-to-Image` for *Cluster Build Strategy*.
 +
 image::shipwright/shp-39.png[]
 
-* leave other default value, click Create Button
+* Leave other configurations as default, then click *Create* button.
 +
 image::shipwright/shp-40.png[]
 
-* Back to Topology page, `backend-quarkus` Deployment, click view logs in BuildRuns
+=== View Build Configuration and Build Logs
+
+* On the Topology page, select `backend-quarkus` Deployment, go to *BuildRuns* section, then click *View logs* link.
 +
 image::shipwright/shp-41.png[]
 
-* Wait Build Running change to Success
+* You should be able to see builds logs. Wait for the build status changes to `Successed`.
 +
 image::shipwright/shp-42.png[]
 +
 image::shipwright/shp-43.png[]
 
-* Click `Builds` in left menu, In Shipwright Builds Tab, view latest Build
+* Select *Builds* menu on the left, then click on *Shipwright Builds* tab to view Shipwrite Build configuration.
 +
 image::shipwright/shp-44.png[]
 
-* Test Application by back to Topology, view `backend-quarkus` Deployment,
+* Select *Topology* menu on the left, then select `backend-quarkus` Deployment, go to *BuildRuns* section again you'll see the build status shown as `Succeeded`.
+
+=== Access To Application
+
+* Click on the arrow icon of `backend-quarkus` Deployment to open the application URL.
 +
 image::shipwright/shp-45.png[]
 
-* Click view URL, view output in new Browser Tab (Message will start with `+Backend version...+`)
+* Ensure you can see response from the application similar to the screenshot.
 +
 image::shipwright/shp-46.png[]
 
-* Try to change source code in Git, back to Git, Back to `BackendResource.java`
+=== Re-build and Re-deploy Application when Code Changes
+
+* Go back to the *gitea* web console. In the `backend_quarkus` repository, open the `BackendResource.java` file in `code/src/main/java/com/example/quarkus` directory.
 +
 image::shipwright/shp-47.png[]
 
-* Click Edit File
+* Click on the pencil icon to edit file.
 +
 image::shipwright/shp-48.png[]
 
-* go to line number `201`, change from `+Backend version...+` to `+Backend OpenShift version...+`
+* Go to line number `201`, change the `+Backend version...+` to `+Backend OpenShift version...+`
 +
 image::shipwright/shp-49.png[]
 
-* Commit Changes, click Commit Changes
+* Enter the commit message then click *Commit Changes* button.
 +
 image::shipwright/shp-50.png[]
 
-* Back to Builds, Shipwright Builds, click action menu of `backend-quarkus` Build, select `Start`
+* Go back to OpenShift console. Select *Builds* menu on the left then click on *Shipwright Builds* tab. Click on action menu of `backend-quarkus` build configuration then select *Start*.
 +
 image::shipwright/shp-51.png[]
 
-* Wait until status change to succeeded
+* The build process will be started. Wait until the build status changes to `Succeeded`.
 +
 image::shipwright/shp-52.png[]
 +
@@ -319,10 +333,11 @@ image::shipwright/shp-53.png[]
 +
 image::shipwright/shp-54.png[]
 
-* Test Application Again, message will change to `+Backend OpenShift version...+`
+* Open the application URL again, you should see the response message from the application change to `+Backend OpenShift version...+`
 +
 image::shipwright/shp-55.png[]
 
+[#summary]
 == Summary
 
 With Shipwright, developers get a simplified approach for building container images, by defining a minimal YAML that does not require any previous knowledge of containers or container tooling. All you need is your source code in git and access to a container registry.
@@ -334,7 +349,3 @@ Shipwright supports any tool that can build container images in Kubernetes clust
 * https://github.com/moby/buildkit[BuildKit]
 * https://buildah.io/[Buildah]
 * https://github.com/openshift/source-to-image[S2I]
-
-== Next Step
-
-* xref:tekton.adoc[Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD - Part I]
