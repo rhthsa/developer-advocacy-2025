@@ -6,7 +6,6 @@
     <title>Setup :: OpenShift Developer Workshop 2025</title>
     <link rel="canonical" href="https://rhthsa.github.io/developer-advocacy-2025/openshift-developer-workshop-2025/01-shipwright.html">
     <link rel="prev" href="index.html">
-    <link rel="next" href="02-deploy.html">
     <meta name="generator" content="Antora 3.0.0">
     <link rel="stylesheet" href="../_/css/site.css">
   </head>
@@ -62,24 +61,12 @@
     <a class="nav-link" href="#deploycontainerimage">2. Deploy Container Image</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#minikube">Setup Minikube</a>
+    <a class="nav-link" href="#accessthewebapplication">3. Access To Application</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
     <span class="nav-text">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD</span>
-  </li>
-  <li class="nav-item" data-depth="1">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="02-deploy.html">2. Deploy Service</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-deploy.html#package">Build Service</a>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="02-deploy.html#deploy">Deploy Dervice</a>
-  </li>
-</ul>
   </li>
   <li class="nav-item" data-depth="1">
     <span class="nav-text">3. Observability through logs: Centralized logging with Loki &amp; querying via LogQL</span>
@@ -118,7 +105,7 @@
 <article class="doc">
 <h1 class="page">Setup</h1>
 <div class="sect1">
-<h2 id="_register_to_access_the_lab"><a class="anchor" href="#_register_to_access_the_lab"></a>Register to access the lab</h2>
+<h2 id="setup"><a class="anchor" href="#setup"></a>Register to access the lab</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -206,30 +193,29 @@
 <div class="sect1">
 <h2 id="deploycontainerimage"><a class="anchor" href="#deploycontainerimage"></a>Deploy Container Image</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Click <code>+Add</code> menu on the left, the <strong>Add</strong> page will show up then select <strong>Container images</strong> tile.</p>
+</div>
+<div class="paragraph">
+<p>+
+image::shipwright/shp-6.png[]</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>click <code>+Add</code> in left menu, in Add page, select Container images</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-6.png" alt="shp 6">
-</div>
-</div>
+<p>Select <strong>Image name from external registry</strong> option.</p>
 </li>
 <li>
-<p>select <code>image name from external registry</code></p>
+<p>Enter <code>quay.io/voravitl/frontend-js:latest</code> then wait for OpenShift validates the container image registry.</p>
 </li>
 <li>
-<p>input <code>quay.io/voravitl/frontend-js:latest</code> in text box, and wait until openshift validate complete!</p>
+<p>Change <strong>Runtime icon</strong> to <code>nodejs</code>.</p>
 </li>
 <li>
-<p>change Runtime icon to <code>nodejs</code></p>
+<p>Set <strong>Application name</strong> to <code>frontend-js</code>.</p>
 </li>
 <li>
-<p>set Application name to <code>frontend-js</code></p>
-</li>
-<li>
-<p>set Name to <code>frontend-js</code></p>
+<p>Set <strong>Name</strong> to <code>frontend-js</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-7.png" alt="shp 7">
@@ -237,10 +223,16 @@
 </div>
 </li>
 <li>
-<p>set Resource type to <code>Deployment</code></p>
+<p>Set <strong>Resource type</strong> to <code>Deployment</code>.</p>
 </li>
 <li>
-<p>leave default Target port, Create Route and other, click Create</p>
+<p>Leave the <strong>Target port</strong> as default (<code>8080</code>)</p>
+</li>
+<li>
+<p>Make sure the <strong>Create a route</strong> checkbox is selected.</p>
+</li>
+<li>
+<p>Finally, click on the <strong>Create</strong> button. at the bottom.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-8.png" alt="shp 8">
@@ -248,15 +240,24 @@
 </div>
 </li>
 <li>
-<p>wait until Pods change to <code>Running</code></p>
+<p>You will be redirected back to the <strong>Topology</strong> view. Wait until the Pod change to <code>Running</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-9.png" alt="shp 9">
 </div>
 </div>
 </li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_the_application"><a class="anchor" href="#_access_the_application"></a>Access The Application</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
 <li>
-<p>Click on <code>frontend-js</code> Deployment icon click on Open URL</p>
+<p>Click on <code>frontend-js</code> Deployment icon then click on the arrow to open the web application.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-10.png" alt="shp 10">
@@ -264,7 +265,7 @@
 </div>
 </li>
 <li>
-<p>Review Application <code>frontend-js</code></p>
+<p>Make sure you can see the response from the  <code>frontend-js</code> application similar to the screenshot.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-11.png" alt="shp 11">
@@ -273,8 +274,11 @@
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_we_can_deploy_container_image_in_openshift_console_but_what_s_happen_if_you_dont_have_container_image"><a class="anchor" href="#_we_can_deploy_container_image_in_openshift_console_but_what_s_happen_if_you_dont_have_container_image"></a>We can deploy container image in OpenShift Console but What 's happen? if you don&#8217;t have container image!!!</h3>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_we_can_deploy_container_image_in_openshift_console_but_what_s_happen_if_you_dont_have_container_image"><a class="anchor" href="#_we_can_deploy_container_image_in_openshift_console_but_what_s_happen_if_you_dont_have_container_image"></a>We can deploy container image in OpenShift Console but What 's happen? if you don&#8217;t have container image!!!</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
@@ -287,7 +291,6 @@
 <p>How to prepare tools, environment, etc. to build container!</p>
 </li>
 </ul>
-</div>
 </div>
 </div>
 </div>
@@ -842,7 +845,6 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 </div>
 <nav class="pagination">
   <span class="prev"><a href="index.html">OpenShift Developer Workshop 2025</a></span>
-  <span class="next"><a href="02-deploy.html">2. Deploy Service</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
