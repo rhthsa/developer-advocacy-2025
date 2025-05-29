@@ -2,19 +2,10 @@
 :page-layout: home
 :!sectids:
 
-[.text-center.strong]
-== Publish Services to Kubernetes
+Welcome to the Red Hat OpenShift Developer Workshop 2025 where you'll learn how to elevate your containerized applications development, deploment, and monitoring work with OpenShift Container Platform - The appliation platform for cloud-native applications development.
 
-A Kubernetes tutorial to show how you can deploy a Java service to a Kubernetes cluster as it was a child game.
+We're glad to have you here with us! Today, we'll explore the features and benefits of OpenShift Container Platform for streamlining your application development workflows. Build, manage, deploy, and monitor your application with one single platform.
 
-[.tiles.browse]
-== Browse modules
+Last but not least, you will see how to standardize your application development using the *Golden Path* and Software Templates Library in the Red Hat Developer Hub - an enterprise-grade internal developer portal based on Spotify's Backstage project.
 
-[.tile]
-.xref:01-setup.adoc[Get Started]
-* xref:01-setup.adoc#minikube[Minikube]
-
-[.tile]
-.xref:02-deploy.adoc[Deploying]
-* xref:02-deploy.adoc#package[Package the Application]
-* xref:02-deploy.adoc#deploy[Deploy the Application]
+image::logo.png[]

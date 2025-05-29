@@ -1,17 +1,17 @@
-* Build your application containers the right way with Shipwright
+* 1. Build your application containers the right way with Shipwright
 ** xref:01-shipwright.adoc#setup[1. Setup]
-** xref:01-setup.adoc#prerequisite[Prerequisites]
-** xref:01-setup.adoc#minikube[Setup Minikube]
+** xref:01-shipwright.adoc#deploycontainerimage[2. Deploy Container Image]
+** xref:01-shipwright.adoc#minikube[Setup Minikube]
 
-* Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD
+* 2. Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD
 * xref:02-deploy.adoc[2. Deploy Service]
 ** xref:02-deploy.adoc#package[Build Service]
 ** xref:02-deploy.adoc#deploy[Deploy Dervice]
 
-* Observability through logs: Centralized logging with Loki & querying via LogQL
+* 3. Observability through logs: Centralized logging with Loki & querying via LogQL
 
-* Metrics-driven mastery: How to monitor, alert & scale like a Pro
+* 4. Metrics-driven mastery: How to monitor, alert & scale like a Pro
 
-* Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation
+* 5. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation
 
-* Accelerating software development with Red Hat Developer Hub
+* 6. Accelerating software development with Red Hat Developer Hub

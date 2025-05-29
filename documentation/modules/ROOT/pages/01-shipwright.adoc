@@ -37,6 +37,7 @@ image::shipwright/shp-4.png[]
 +
 image::shipwright/shp-5.png[]
 
+[#deploycontainerimage]
 == Deploy Container Image
 
 * click `+Add` in left menu, in Add page, select Container images
