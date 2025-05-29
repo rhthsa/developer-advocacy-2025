@@ -138,7 +138,7 @@ oc get route gitea -n gitea
 +
 sample output.
 +
-[.console-input]
+[.console-output]
 [source,adoc]
 ----
 NAME    HOST/PORT                                                      PATH   SERVICES   PORT    TERMINATION     WILDCARD
