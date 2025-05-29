@@ -63,7 +63,7 @@ image::shipwright/shp-8.png[]
 +
 image::shipwright/shp-9.png[]
 
-[accessthewebapplication]
+[#accesstheapplication]
 == Access The Application
 
 * Click on `frontend-js` Deployment icon then click on the arrow to open the web application.
