@@ -81,13 +81,13 @@ Now you can see that We can deploy container images via OpenShift console. It's 
 * How to build container image from your Dockerfile or Containerfile you've written?
 * How to prepare tools, environment, etc. to build container image?
 
-== The future of Red Hat OpenShift builds
+== Red Hat OpenShift Builds
 
 image::shipwright/shipwright-logo.png[]
 
-Builds is an extensible build framework based on the Shipwright project, which you can use to build container images on an OpenShift Container Platform cluster. You can build container images from source code and Dockerfiles by using image build tools, such as Source-to-Image (S2I) and Buildah. You can create and apply build resources, view logs of build runs, and manage builds in your OpenShift Container Platform namespaces.
+OpenShift Builds is an extensible build framework based on the https://shipwright.io/[Shipwright] project, which you can use to build container images on an OpenShift Container Platform cluster. You can build container images from source code and Dockerfiles by using image build tools, such as https://github.com/openshift/source-to-image[Source-to-Image (S2I)] and https://buildah.io/[Buildah]. You can create and apply build resources, view logs of build runs, and manage builds in your OpenShift Container Platform.
 
-Builds includes the following capabilities:
+OpenShift Builds includes the following capabilities:
 
 * Standard Kubernetes-native API for building container images from source code and Dockerfiles
 * Support for Source-to-Image (S2I), Buildah, Buildpacks, etc.
@@ -96,7 +96,7 @@ Builds includes the following capabilities:
 * Shipwright CLI for creating and viewing logs, and managing builds on the cluster
 * Integrated user experience with the Developer perspective of the OpenShift Container Platform web console
 
-Builds consists of the following custom resources (CRs):
+OpenShift Builds consists of the following custom resources (CRs):
 
 * Build
 * BuildStrategy and ClusterBuildStrategy
@@ -108,66 +108,72 @@ Get More information
 * https://github.com/shipwright-io/build[Shipwright]
 * https://developers.redhat.com/articles/2021/06/14/project-shipwright-and-future-red-hat-openshift-builds#[Project Shipwright and the future of Red Hat OpenShift builds]
 
-== Deploy Application with Shipwright Buildah (Build from Container File/Docker File)
+== Build and Deploy Application using Shipwright
 
-=== Review Container File from Git Repository
+=== Access To Git Repository
 
-* Get Git Url from Command Line, click web terminal link at top right of developer console.
+In this lab, our application is hosted on a private Git repository. Follow these step to get access to the *gitea* Git repository server.
+
+* Click on the command prompt icon at the top right corner of OpenShift web console to open the web terminal.
 +
 image::shipwright/shp-12.png[]
 
-* for first time. select `userX-shipwright` (change X to your username) project and click start.
+* If you open the web terminal first time, it'll ask for the project used to initialize the terminal. Select the `userX-shipwright` project where `userX` is your username, and then click *Start* button.
 +
 image::shipwright/shp-13.png[]
 
-* wait until terminal ready and show command line prompt!
+* Wait until the terminal is ready and command line prompt is shown.
 +
 image::shipwright/shp-14.png[]
 
-* run command to get gitea url.
+* Run this command to get *gitea* URL.
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 oc get route gitea -n gitea
 ----
 +
-example result
+sample output.
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 NAME    HOST/PORT                                                      PATH   SERVICES   PORT    TERMINATION     WILDCARD
-gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gitea      <all>   edge/Redirect   None
+gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com #<.>     gitea      <all>   edge/Redirect   None
 ----
 
-* copy host of gitea to new tab browser
+* <.> Open the gitea DNS hostname with a web browser.
 +
 image::shipwright/shp-15.png[]
 
-* login with your username, but password is `openshift`
+* Login with your username, and use `openshift` as password.
 +
 image::shipwright/shp-16.png[]
 
-* click `simple-rest-go` repository
+* Select `simple-rest-go` repository.
 +
 image::shipwright/shp-17.png[]
 
-* select `Dockerfile`, review build step in Dockerfile
+=== Review Container File from Git Repository
+
+* Open the `Dockerfile`, then review build step in the `Dockerfile` file.
 +
 image::shipwright/shp-18.png[]
 +
 image::shipwright/shp-19.png[]
 
-* back to `simple-rest-go` repository, get git URL from code button and select copy url
+=== Build Container with Shipwright and Deploy to OpenShift
+
+* In gitea, back to the main `simple-rest-go` repository page, click on *Code* button then click copy button to copy the repository URL.
 +
 image::shipwright/shp-20.png[]
 
-=== Build Container with Shipwright-Buildah and Deploy to OpenShift
-
-* click `+Add` in left menu, and select `Git Repository - Import from Git`
+* Go to OpenShift web console then click `+Add` menu on the left. Select `Git Repository - Import from Git` tile.
 +
 image::shipwright/shp-21.png[]
 
-* Import from Git page,
+On the *Import from Git* page follow these steps:
 * Input git URL (from previous copy) in Git Repo URL, such as `+https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git+`
 * Wizard will detect Dockerfile automatic
 * set Application to `Create Application`
