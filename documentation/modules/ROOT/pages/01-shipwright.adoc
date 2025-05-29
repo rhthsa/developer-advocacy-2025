@@ -75,7 +75,7 @@ image::shipwright/shp-10.png[]
 image::shipwright/shp-11.png[]
 
 
-Now you can see that We can deploy container images via OpenShift console. It's easy!, right? But what if you don't have container image?
+Now you can see that we can deploy container images via OpenShift console. It's easy!, right? But what if you don't have container image?
 
 * How to build container image if you only have source code?
 * How to build container image from your Dockerfile or Containerfile you've written?
@@ -114,7 +114,7 @@ Get More information
 
 === Access To Git Repository
 
-In this lab, our application is hosted on a private Git repository. Follow these step to get access to the *gitea* Git repository server.
+In this lab, our applications are hosted on a private Git repository. Follow these steps to get access to the *gitea* Git repository server.
 
 * Click on the command prompt icon at the top right corner of OpenShift web console to open the web terminal.
 +
@@ -124,7 +124,7 @@ image::shipwright/shp-12.png[]
 +
 image::shipwright/shp-13.png[]
 
-* Wait until the terminal is ready and command line prompt is shown.
+* Wait until the terminal is ready and command prompt is shown.
 +
 image::shipwright/shp-14.png[]
 
@@ -177,8 +177,8 @@ image::shipwright/shp-21.png[]
 
 On the *Import from Git* form, follow these steps:
 
-* Enter the Git repo URL you've copied to *Git Repo URL* input.
-* The wizard will detect `Dockerfile`` automatically.
+* Enter the Git repository URL you've copied to *Git Repo URL* input.
+* The wizard will detect the `Dockerfile` in the repository automatically.
 * Select `Create Application` for the  *Application* drop-down list.
 * Set *Application name* to `simple-rest-go`.
 * Set *Name* to `simple-rest-go`.
@@ -233,7 +233,7 @@ image::shipwright/shp-30.png[]
 image::shipwright/shp-31.png[]
 image::shipwright/shp-32.png[]
 
-* Open the `code` folder to view the application source code. It's a Java application based on Quarkus framework. The APIs that application exposes are in `src/main/java/com/example/quarkus/BackendResource.java` file.
+* Open the `code` directory to view the application source code. It's a Java application based on Quarkus framework. The APIs that application exposes are in `src/main/java/com/example/quarkus/BackendResource.java` file.
 +
 image::shipwright/shp-34.png[]
 image::shipwright/shp-35.png[]
@@ -303,7 +303,7 @@ image::shipwright/shp-45.png[]
 +
 image::shipwright/shp-46.png[]
 
-=== Re-build and Re-deploy Application when Code Changes
+=== Re-Build and Re-Deploy Application when Code Changes
 
 * Go back to the *gitea* web console. In the `backend_quarkus` repository, open the `BackendResource.java` file in `code/src/main/java/com/example/quarkus` directory.
 +
@@ -325,7 +325,7 @@ image::shipwright/shp-50.png[]
 +
 image::shipwright/shp-51.png[]
 
-* The build process will be started. Wait until the build status changes to `Succeeded`.
+* The build process should be started. Wait until the build status changes to `Succeeded`.
 +
 image::shipwright/shp-52.png[]
 +
