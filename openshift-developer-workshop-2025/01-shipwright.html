@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Setup :: OpenShift Developer Workshop 2025</title>
+    <link rel="canonical" href="https://rhthsa.github.io/developer-advocacy-2025/openshift-developer-workshop-2025/01-shipwright.html">
+    <link rel="prev" href="index.html">
+    <link rel="next" href="01-setup.html#prerequisite">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://rhthsa.github.io/developer-advocacy-2025">OpenShift Developer Workshop 2025</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="openshift-developer-workshop-2025" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Build your application containers the right way with Shipwright</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#setup">1. Setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-setup.html#prerequisite">Prerequisites</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-setup.html#minikube">Setup Minikube</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-deploy.html">2. Deploy Service</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-deploy.html#package">Build Service</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-deploy.html#deploy">Deploy Dervice</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">Observability through logs: Centralized logging with Loki &amp; querying via LogQL</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">Accelerating software development with Red Hat Developer Hub</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Developer Workshop 2025</a></li>
+    <li>Build your application containers the right way with Shipwright</li>
+    <li><a href="#setup">1. Setup</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/rhthsa/developer-advocacy-2025/edit/master/documentation/modules/ROOT/pages/01-shipwright.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Setup</h1>
+<div class="sect1">
+<h2 id="_register_to_access_the_lab"><a class="anchor" href="#_register_to_access_the_lab"></a>Register to access the lab</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Get the lab registration URL and password from instructor.</p>
+</li>
+<li>
+<p>Register with your email address and the given password to access the lab.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/register-01.png" alt="register 01">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_log_in_to_openshift_web_console"><a class="anchor" href="#_log_in_to_openshift_web_console"></a>Log in to OpenShift web console</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Open the OpenShift web console URL from the registration page in a web browser.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/setup/register-02.png" alt="register 02">
+</div>
+</div>
+</li>
+<li>
+<p>Log in with username and password get from the registration page.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-1.png" alt="shp 1">
+</div>
+</div>
+</li>
+<li>
+<p>If it&#8217;s the first time you log in to web console, the quick tour dialog will show up, just click Skip tour or close the dialog.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-2.png" alt="shp 2">
+</div>
+</div>
+</li>
+<li>
+<p>Switch to <strong>Developer</strong> perspective (if it&#8217;s not) from the drop-down list near the hamburger menu. Then click on <strong>userX-shipwright</strong> project where <strong>userX</strong> is your username such as <code>user1</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-3.png" alt="shp 3">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_optional_set_theme_color_for_console"><a class="anchor" href="#_optional_set_theme_color_for_console"></a>[Optional] Set theme color for console</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Click on your user name at the top right of OpenShift web console, then select <strong>User References</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-4.png" alt="shp 4">
+</div>
+</div>
+</li>
+<li>
+<p>In the <strong>General</strong> section, you can change theme from Dark mode (default) to Light mode.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-5.png" alt="shp 5">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_container_image"><a class="anchor" href="#_deploy_container_image"></a>Deploy Container Image</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>click <code>+Add</code> in left menu, in Add page, select Container images</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-6.png" alt="shp 6">
+</div>
+</div>
+</li>
+<li>
+<p>select <code>image name from external registry</code></p>
+</li>
+<li>
+<p>input <code>quay.io/voravitl/frontend-js:latest</code> in text box, and wait until openshift validate complete!</p>
+</li>
+<li>
+<p>change Runtime icon to <code>nodejs</code></p>
+</li>
+<li>
+<p>set Application name to <code>frontend-js</code></p>
+</li>
+<li>
+<p>set Name to <code>frontend-js</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-7.png" alt="shp 7">
+</div>
+</div>
+</li>
+<li>
+<p>set Resource type to <code>Deployment</code></p>
+</li>
+<li>
+<p>leave default Target port, Create Route and other, click Create</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-8.png" alt="shp 8">
+</div>
+</div>
+</li>
+<li>
+<p>wait until Pods change to <code>Running</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-9.png" alt="shp 9">
+</div>
+</div>
+</li>
+<li>
+<p>Click on <code>frontend-js</code> Deployment icon click on Open URL</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-10.png" alt="shp 10">
+</div>
+</div>
+</li>
+<li>
+<p>Review Application <code>frontend-js</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-11.png" alt="shp 11">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_we_can_deploy_container_image_in_openshift_console_but_what_s_happen_if_you_dont_have_container_image"><a class="anchor" href="#_we_can_deploy_container_image_in_openshift_console_but_what_s_happen_if_you_dont_have_container_image"></a>We can deploy container image in OpenShift Console but What 's happen? if you don&#8217;t have container image!!!</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>How to build container from your source code!</p>
+</li>
+<li>
+<p>How to build container from your container file!</p>
+</li>
+<li>
+<p>How to prepare tools, environment, etc. to build container!</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_the_future_of_red_hat_openshift_builds"><a class="anchor" href="#_the_future_of_red_hat_openshift_builds"></a>The future of Red Hat OpenShift builds</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shipwright-logo.png" alt="shipwright logo">
+</div>
+</div>
+<div class="paragraph">
+<p>Builds is an extensible build framework based on the Shipwright project, which you can use to build container images on an OpenShift Container Platform cluster. You can build container images from source code and Dockerfiles by using image build tools, such as Source-to-Image (S2I) and Buildah. You can create and apply build resources, view logs of build runs, and manage builds in your OpenShift Container Platform namespaces.</p>
+</div>
+<div class="paragraph">
+<p>Builds includes the following capabilities:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Standard Kubernetes-native API for building container images from source code and Dockerfiles</p>
+</li>
+<li>
+<p>Support for Source-to-Image (S2I), Buildah, Buildpacks, etc.</p>
+</li>
+<li>
+<p>Extensibility with your own custom build strategies</p>
+</li>
+<li>
+<p>Execution of builds from source code in a local directory</p>
+</li>
+<li>
+<p>Shipwright CLI for creating and viewing logs, and managing builds on the cluster</p>
+</li>
+<li>
+<p>Integrated user experience with the Developer perspective of the OpenShift Container Platform web console</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Builds consists of the following custom resources (CRs):</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Build</p>
+</li>
+<li>
+<p>BuildStrategy and ClusterBuildStrategy</p>
+</li>
+<li>
+<p>BuildRun</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Get More information</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.redhat.com/en/documentation/builds_for_red_hat_openshift/1.4/">Builds for Red Hat OpenShift 1.4</a></p>
+</li>
+<li>
+<p><a href="https://github.com/shipwright-io/build">Shipwright</a></p>
+</li>
+<li>
+<p><a href="https://developers.redhat.com/articles/2021/06/14/project-shipwright-and-future-red-hat-openshift-builds#">Project Shipwright and the future of Red Hat OpenShift builds</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_application_with_shipwright_buildah_build_from_container_filedocker_file"><a class="anchor" href="#_deploy_application_with_shipwright_buildah_build_from_container_filedocker_file"></a>Deploy Application with Shipwright Buildah (Build from Container File/Docker File)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_review_container_file_from_git_repository"><a class="anchor" href="#_review_container_file_from_git_repository"></a>Review Container File from Git Repository</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Get Git Url from Command Line, click web terminal link at top right of developer console.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-12.png" alt="shp 12">
+</div>
+</div>
+</li>
+<li>
+<p>for first time. select <code>userX-shipwright</code> (change X to your username) project and click start.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-13.png" alt="shp 13">
+</div>
+</div>
+</li>
+<li>
+<p>wait until terminal ready and show command line prompt!</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-14.png" alt="shp 14">
+</div>
+</div>
+</li>
+<li>
+<p>run command to get gitea url.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc get route gitea -n gitea</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>example result</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">NAME    HOST/PORT                                                      PATH   SERVICES   PORT    TERMINATION     WILDCARD
+gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gitea      &lt;all&gt;   edge/Redirect   None</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>copy host of gitea to new tab browser</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-15.png" alt="shp 15">
+</div>
+</div>
+</li>
+<li>
+<p>login with your username, but password is <code>openshift</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-16.png" alt="shp 16">
+</div>
+</div>
+</li>
+<li>
+<p>click <code>simple-rest-go</code> repository</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-17.png" alt="shp 17">
+</div>
+</div>
+</li>
+<li>
+<p>select <code>Dockerfile</code>, review build step in Dockerfile</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-18.png" alt="shp 18">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-19.png" alt="shp 19">
+</div>
+</div>
+</li>
+<li>
+<p>back to <code>simple-rest-go</code> repository, get git URL from code button and select copy url</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-20.png" alt="shp 20">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_build_container_with_shipwright_buildah_and_deploy_to_openshift"><a class="anchor" href="#_build_container_with_shipwright_buildah_and_deploy_to_openshift"></a>Build Container with Shipwright-Buildah and Deploy to OpenShift</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>click <code>+Add</code> in left menu, and select <code>Git Repository - Import from Git</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-21.png" alt="shp 21">
+</div>
+</div>
+</li>
+<li>
+<p>Import from Git page,</p>
+</li>
+<li>
+<p>Input git URL (from previous copy) in Git Repo URL, such as <code>https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git</code></p>
+</li>
+<li>
+<p>Wizard will detect Dockerfile automatic</p>
+</li>
+<li>
+<p>set Application to <code>Create Application</code></p>
+</li>
+<li>
+<p>set Application name to <code>simple-rest-go</code></p>
+</li>
+<li>
+<p>set Name to <code>simple-rest-go</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-22.png" alt="shp 22">
+</div>
+</div>
+</li>
+<li>
+<p>set Build option to `Builds for OpenShift (Shipwright)</p>
+</li>
+<li>
+<p>set Cluster Build Strategy to <code>Buildah</code></p>
+</li>
+<li>
+<p>leave other default, click Create</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-23.png" alt="shp 23">
+</div>
+</div>
+</li>
+<li>
+<p>After back to Topology page, select <code>simple-rest-go</code> deployment, go to BuildRuns, click View logs</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-24.png" alt="shp 24">
+</div>
+</div>
+</li>
+<li>
+<p>In BuildRuns, view logs from Buildah</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-25.png" alt="shp 25">
+</div>
+</div>
+</li>
+<li>
+<p>wait until it change from Running to Succeded.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-26.png" alt="shp 26">
+</div>
+</div>
+</li>
+<li>
+<p>Click Builds, Shipwright Builds, To view previous <code>Build</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-27.png" alt="shp 27">
+</div>
+</div>
+</li>
+<li>
+<p>Back to Topology, view deployment, pod after build complete.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-28.png" alt="shp 28">
+</div>
+</div>
+</li>
+<li>
+<p>Click Open URL to test call container application</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-29.png" alt="shp 29">
+</div>
+</div>
+</li>
+<li>
+<p>Example Result from <code>simple-rest-go</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-30.png" alt="shp 30">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_application_with_shipwright_s2i_build_from_source_code_with_source_to_image"><a class="anchor" href="#_deploy_application_with_shipwright_s2i_build_from_source_code_with_source_to_image"></a>Deploy Application with Shipwright S2I (Build from Source Code with Source-to-Image)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_review_source_from_git_repository"><a class="anchor" href="#_review_source_from_git_repository"></a>Review Source from Git Repository</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Back to Git, go to <code>backend_quarkus</code> Repository</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-31.png" alt="shp 31">
+</div>
+</div>
+</li>
+<li>
+<p>Review Project Structure of <code>backend_quarkus</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-32.png" alt="shp 32">
+</div>
+</div>
+</li>
+<li>
+<p>Copy git URL of <code>backend_quarkus</code> by click Code Button and click copy URL</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-33.png" alt="shp 33">
+</div>
+</div>
+</li>
+<li>
+<p>click on code folder (source code of this project)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-34.png" alt="shp 34">
+</div>
+</div>
+</li>
+<li>
+<p>review <code>BackendResource.java</code> under <code>code/src/main/java/com/example/quarkus</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-35.png" alt="shp 35">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_build_container_with_shipwright_s2i_and_deploy_to_openshift"><a class="anchor" href="#_build_container_with_shipwright_s2i_and_deploy_to_openshift"></a>Build Container with Shipwright-S2I and Deploy to OpenShift</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Back to OpenShift Developer Console, click <code>+Add</code> in left menu and select Git Repository - Import from Git</p>
+</li>
+<li>
+<p>In Import from Git,</p>
+</li>
+<li>
+<p>Input git URL (from previous copy) to Git Repo URL such as <code>https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/backend_quarkus.git</code></p>
+</li>
+<li>
+<p>Input <code>/code</code> in Context dir</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-36.png" alt="shp 36">
+</div>
+</div>
+</li>
+<li>
+<p>Wizard will auto detect Builder image, click Edit Import Strategy</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-37.png" alt="shp 37">
+</div>
+</div>
+</li>
+<li>
+<p>In Import Strategy, select Builder Image, Java and openjdk-21-ubi9</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-38.png" alt="shp 38">
+</div>
+</div>
+</li>
+<li>
+<p>In Application, select Create application</p>
+</li>
+<li>
+<p>Input <code>backend-quarkus</code> in Application name</p>
+</li>
+<li>
+<p>Input <code>backend-quarkus</code> in Name</p>
+</li>
+<li>
+<p>select <code>Builds for OpenShift (Shipwright)</code> in Build Option</p>
+</li>
+<li>
+<p>select <code>Source-to-image</code> in Cluster Build Strategy</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-39.png" alt="shp 39">
+</div>
+</div>
+</li>
+<li>
+<p>leave other default value, click Create Button</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-40.png" alt="shp 40">
+</div>
+</div>
+</li>
+<li>
+<p>Back to Topology page, <code>backend-quarkus</code> Deployment, click view logs in BuildRuns</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-41.png" alt="shp 41">
+</div>
+</div>
+</li>
+<li>
+<p>Wait Build Running change to Success</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-42.png" alt="shp 42">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-43.png" alt="shp 43">
+</div>
+</div>
+</li>
+<li>
+<p>Click <code>Builds</code> in left menu, In Shipwright Builds Tab, view latest Build</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-44.png" alt="shp 44">
+</div>
+</div>
+</li>
+<li>
+<p>Test Application by back to Topology, view <code>backend-quarkus</code> Deployment,</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-45.png" alt="shp 45">
+</div>
+</div>
+</li>
+<li>
+<p>Click view URL, view output in new Browser Tab (Message will start with <code>Backend version...</code>)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-46.png" alt="shp 46">
+</div>
+</div>
+</li>
+<li>
+<p>Try to change source code in Git, back to Git, Back to <code>BackendResource.java</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-47.png" alt="shp 47">
+</div>
+</div>
+</li>
+<li>
+<p>Click Edit File</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-48.png" alt="shp 48">
+</div>
+</div>
+</li>
+<li>
+<p>go to line number <code>201</code>, change from <code>Backend version...</code> to <code>Backend OpenShift version...</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-49.png" alt="shp 49">
+</div>
+</div>
+</li>
+<li>
+<p>Commit Changes, click Commit Changes</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-50.png" alt="shp 50">
+</div>
+</div>
+</li>
+<li>
+<p>Back to Builds, Shipwright Builds, click action menu of <code>backend-quarkus</code> Build, select <code>Start</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-51.png" alt="shp 51">
+</div>
+</div>
+</li>
+<li>
+<p>Wait until status change to succeeded</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-52.png" alt="shp 52">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-53.png" alt="shp 53">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-54.png" alt="shp 54">
+</div>
+</div>
+</li>
+<li>
+<p>Test Application Again, message will change to <code>Backend OpenShift version...</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-55.png" alt="shp 55">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>With Shipwright, developers get a simplified approach for building container images, by defining a minimal YAML that does not require any previous knowledge of containers or container tooling. All you need is your source code in git and access to a container registry.</p>
+</div>
+<div class="paragraph">
+<p>Shipwright supports any tool that can build container images in Kubernetes clusters, such as:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/GoogleContainerTools/kaniko">Kaniko</a></p>
+</li>
+<li>
+<p><a href="https://buildpacks.io/">Cloud Native Buildpacks</a></p>
+</li>
+<li>
+<p><a href="https://github.com/moby/buildkit">BuildKit</a></p>
+</li>
+<li>
+<p><a href="https://buildah.io/">Buildah</a></p>
+</li>
+<li>
+<p><a href="https://github.com/openshift/source-to-image">S2I</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_step"><a class="anchor" href="#_next_step"></a>Next Step</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#tekton.adoc" class="xref unresolved">Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part I</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="index.html">OpenShift Developer Workshop 2025</a></span>
+  <span class="next"><a href="01-setup.html#prerequisite">Prerequisites</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
