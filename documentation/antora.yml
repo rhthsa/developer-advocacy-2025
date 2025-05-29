@@ -1,7 +1,14 @@
-name: template-tutorial
-title: Template Tutorial
+name: openshift-developer-workshop-2025
+title: OpenShift Developer Workshop 2025
 version: master
 nav:
   - modules/ROOT/nav.adoc
 
 start_page: ROOT:index.adoc
+
+asciidoc:
+  attributes:
+    experimental: true
+    icons: font
+    page-pagination: true
+    lab_name: OpenShift Developer Workshop 2025
