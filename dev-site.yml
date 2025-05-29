@@ -4,7 +4,7 @@ runtime:
 site:
   title: OpenShift Developer Workshop 2025(Dev Mode)
   url: http://localhost:3000/rhs-build-course/index.html
-  start_page: content::index.adoc
+  start_page: openshift-developer-workshop-2025::index.adoc
 
 content:
   sources:
