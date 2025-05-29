@@ -294,7 +294,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_the_future_of_red_hat_openshift_builds"><a class="anchor" href="#_the_future_of_red_hat_openshift_builds"></a>The future of Red Hat OpenShift builds</h2>
+<h2 id="_red_hat_openshift_builds"><a class="anchor" href="#_red_hat_openshift_builds"></a>Red Hat OpenShift Builds</h2>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
@@ -302,10 +302,10 @@
 </div>
 </div>
 <div class="paragraph">
-<p>Builds is an extensible build framework based on the Shipwright project, which you can use to build container images on an OpenShift Container Platform cluster. You can build container images from source code and Dockerfiles by using image build tools, such as Source-to-Image (S2I) and Buildah. You can create and apply build resources, view logs of build runs, and manage builds in your OpenShift Container Platform namespaces.</p>
+<p>OpenShift Builds is an extensible build framework based on the <a href="https://shipwright.io/">Shipwright</a> project, which you can use to build container images on an OpenShift Container Platform cluster. You can build container images from source code and Dockerfiles by using image build tools, such as <a href="https://github.com/openshift/source-to-image">Source-to-Image (S2I)</a> and <a href="https://buildah.io/">Buildah</a>. You can create and apply build resources, view logs of build runs, and manage builds in your OpenShift Container Platform.</p>
 </div>
 <div class="paragraph">
-<p>Builds includes the following capabilities:</p>
+<p>OpenShift Builds includes the following capabilities:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -330,7 +330,7 @@
 </ul>
 </div>
 <div class="paragraph">
-<p>Builds consists of the following custom resources (CRs):</p>
+<p>OpenShift Builds consists of the following custom resources (CRs):</p>
 </div>
 <div class="ulist">
 <ul>
@@ -364,14 +364,17 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_deploy_application_with_shipwright_buildah_build_from_container_filedocker_file"><a class="anchor" href="#_deploy_application_with_shipwright_buildah_build_from_container_filedocker_file"></a>Deploy Application with Shipwright Buildah (Build from Container File/Docker File)</h2>
+<h2 id="_build_and_deploy_application_using_shipwright"><a class="anchor" href="#_build_and_deploy_application_using_shipwright"></a>Build and Deploy Application using Shipwright</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_review_container_file_from_git_repository"><a class="anchor" href="#_review_container_file_from_git_repository"></a>Review Container File from Git Repository</h3>
+<h3 id="_access_to_git_repository"><a class="anchor" href="#_access_to_git_repository"></a>Access To Git Repository</h3>
+<div class="paragraph">
+<p>In this lab, our application is hosted on a private Git repository. Follow these step to get access to the <strong>gitea</strong> Git repository server.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Get Git Url from Command Line, click web terminal link at top right of developer console.</p>
+<p>Click on the command prompt icon at the top right corner of OpenShift web console to open the web terminal.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-12.png" alt="shp 12">
@@ -379,7 +382,7 @@
 </div>
 </li>
 <li>
-<p>for first time. select <code>userX-shipwright</code> (change X to your username) project and click start.</p>
+<p>If you open the web terminal first time, it&#8217;ll ask for the project used to initialize the terminal. Select the <code>userX-shipwright</code> project where <code>userX</code> is your username, and then click <strong>Start</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-13.png" alt="shp 13">
@@ -387,7 +390,7 @@
 </div>
 </li>
 <li>
-<p>wait until terminal ready and show command line prompt!</p>
+<p>Wait until the terminal is ready and command line prompt is shown.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-14.png" alt="shp 14">
@@ -395,24 +398,24 @@
 </div>
 </li>
 <li>
-<p>run command to get gitea url.</p>
-<div class="listingblock">
+<p>Run this command to get <strong>gitea</strong> URL.</p>
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc get route gitea -n gitea</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc get route gitea -n gitea</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>example result</p>
+<p>sample output.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">NAME    HOST/PORT                                                      PATH   SERVICES   PORT    TERMINATION     WILDCARD
-gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gitea      &lt;all&gt;   edge/Redirect   None</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">NAME    HOST/PORT                                                      PATH   SERVICES   PORT    TERMINATION     WILDCARD
+gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com #&lt;.&gt;     gitea      &lt;all&gt;   edge/Redirect   None</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>copy host of gitea to new tab browser</p>
+<p>&lt;.&gt; Open the gitea DNS hostname with a web browser.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-15.png" alt="shp 15">
@@ -420,7 +423,7 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 </div>
 </li>
 <li>
-<p>login with your username, but password is <code>openshift</code></p>
+<p>Login with your username, and use <code>openshift</code> as password.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-16.png" alt="shp 16">
@@ -428,15 +431,22 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 </div>
 </li>
 <li>
-<p>click <code>simple-rest-go</code> repository</p>
+<p>Select <code>simple-rest-go</code> repository.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-17.png" alt="shp 17">
 </div>
 </div>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_review_container_file_from_git_repository"><a class="anchor" href="#_review_container_file_from_git_repository"></a>Review Container File from Git Repository</h3>
+<div class="ulist">
+<ul>
 <li>
-<p>select <code>Dockerfile</code>, review build step in Dockerfile</p>
+<p>Open the <code>Dockerfile</code>, then review build step in the <code>Dockerfile</code> file.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-18.png" alt="shp 18">
@@ -448,52 +458,45 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 </div>
 </div>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_build_container_with_shipwright_and_deploy_to_openshift"><a class="anchor" href="#_build_container_with_shipwright_and_deploy_to_openshift"></a>Build Container with Shipwright and Deploy to OpenShift</h3>
+<div class="ulist">
+<ul>
 <li>
-<p>back to <code>simple-rest-go</code> repository, get git URL from code button and select copy url</p>
+<p>In gitea, back to the main <code>simple-rest-go</code> repository page, click on <strong>Code</strong> button then click copy button to copy the repository URL.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-20.png" alt="shp 20">
 </div>
 </div>
 </li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_build_container_with_shipwright_buildah_and_deploy_to_openshift"><a class="anchor" href="#_build_container_with_shipwright_buildah_and_deploy_to_openshift"></a>Build Container with Shipwright-Buildah and Deploy to OpenShift</h3>
-<div class="ulist">
-<ul>
 <li>
-<p>click <code>+Add</code> in left menu, and select <code>Git Repository - Import from Git</code></p>
+<p>Go to OpenShift web console then click <code>+Add</code> menu on the left. Select <code>Git Repository - Import from Git</code> tile.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-21.png" alt="shp 21">
 </div>
 </div>
 </li>
-<li>
-<p>Import from Git page,</p>
-</li>
-<li>
-<p>Input git URL (from previous copy) in Git Repo URL, such as <code>https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git</code></p>
-</li>
-<li>
-<p>Wizard will detect Dockerfile automatic</p>
-</li>
-<li>
-<p>set Application to <code>Create Application</code></p>
-</li>
-<li>
-<p>set Application name to <code>simple-rest-go</code></p>
-</li>
-<li>
-<p>set Name to <code>simple-rest-go</code></p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-22.png" alt="shp 22">
+</ul>
 </div>
+<div class="paragraph">
+<p>On the <strong>Import from Git</strong> page follow these steps:
+* Input git URL (from previous copy) in Git Repo URL, such as <code>https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git</code>
+* Wizard will detect Dockerfile automatic
+* set Application to <code>Create Application</code>
+* set Application name to <code>simple-rest-go</code>
+* set Name to <code>simple-rest-go</code></p>
 </div>
-</li>
+<div class="paragraph">
+<p>+
+image::shipwright/shp-22.png[]</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>set Build option to `Builds for OpenShift (Shipwright)</p>
 </li>
