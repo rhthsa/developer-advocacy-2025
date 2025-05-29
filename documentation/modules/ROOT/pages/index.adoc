@@ -9,3 +9,7 @@ We're glad to have you here with us! Today, we'll explore the features and benef
 Last but not least, you will see how to standardize your application development using the *Golden Path* and Software Templates Library in the Red Hat Developer Hub - an enterprise-grade internal developer portal based on Spotify's Backstage project.
 
 image::logo.png[]
+
+## Next Steps
+
+Ready to get started with the workshop? Let's begin, firstly, register for the lab to get OpenShift environment you'll be using today.
