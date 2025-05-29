@@ -3,8 +3,8 @@
 ** xref:01-shipwright.adoc#deploycontainerimage[1.2 Deploy Container Image]
 ** xref:01-shipwright.adoc#accesstheapplication[1.3 Access To Application]
 ** xref:01-shipwright.adoc#shipwright[1.4 OpenShift Builds]
-** xref:01-shipwright.adoc#shipwrightbuidah [1.5 Build and Deploy Application using Shipwright and Buildah]
-** xref:01-shipwright.adoc#shipwrights2i [1.6 Build and Deploy Application using Shipwright and Source-to-Image (S2I)]
+** xref:01-shipwright.adoc#shipwrightbuidah[1.5 Build and Deploy Application using Shipwright and Buildah]
+** xref:01-shipwright.adoc#shipwrights2i[1.6 Build and Deploy Application using Shipwright and Source-to-Image (S2I)]
 ** xref:01-shipwright.adoc#summary[1.7 Summary]
 
 * 2. Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD
