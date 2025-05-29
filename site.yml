@@ -4,7 +4,7 @@ runtime:
 site:
   title: OpenShift Developer Workshop 2025
   url: https://rhthsa.github.io/developer-advocacy-2025/
-  start_page: content::index.adoc
+  start_page: developer-advocacy-2025::index.adoc
 
 content:
   sources:
