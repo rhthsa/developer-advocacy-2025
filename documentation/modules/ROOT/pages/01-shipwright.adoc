@@ -2,10 +2,22 @@
 include::_attributes.adoc[]
 
 [#setup]
+
+== Register to access the lab
+
+* Get the lab registration URL and password from instructor.
+
+* Register with your email address and the given password to access the lab.
+
+image::setup/register-01.png[]
+
 == Login to OpenShift web console
 
-* Get the URL from instructor
-* login with your username and password get from the lab user registration page.
+* Open the OpenShift web console URL from the registration page.
+
+image::setup/registration-02.png[]
+
+* login with your username and password get from the registration page.
 +
 image::shipwright/shp-1.png[]
 * if login first time, dev console will launch developer quick tour, click Skip tour
