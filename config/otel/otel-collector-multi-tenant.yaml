@@ -46,7 +46,7 @@ spec:
           insecure: true
           insecure_skip_verify: true
           ca_file: "/var/run/secrets/kubernetes.io/serviceaccount/service-ca.crt"   
-          server_name_override: "tempo-sample-gateway.PROJECT.svc.cluster.local"
+          server_name_override: "tempo-sample-gateway.userX-otel.svc.cluster.local"
         auth:
           authenticator: bearertokenauth
         headers:

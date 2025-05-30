@@ -40,3 +40,8 @@ subjects:
     apiGroup: rbac.authorization.k8s.io
     name: system:authenticated
 ---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: otel-collector
+---

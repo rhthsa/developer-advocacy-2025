@@ -67,7 +67,7 @@
 
    ```sh
    export USER_PASSWORD=XVziuhmw9ivsPVIm
-   export ADMIN_PASSWORD=adm
+   export ADMIN_PASSWORD=NPFS2vMGnhOFSzLe
    export totalUsers=10
    ./lab-user-provisioner.sh 3
    ```
@@ -95,7 +95,7 @@
         type: Local
   ```
 
-- For build of openshift if not found crd, restart operator, not enable pipeline console plugin
+- For build of openshift if not found crd, restart operator, not enable pipeline plugin
 
 - ArgoCD
 
@@ -134,7 +134,6 @@
   run config/otel/tempo-pre.yaml
   run config/otel/ui-plugin.yaml
   run config/otel/otel-go-instrument-scc.yaml
-  run tempo-sa.yaml --> per user
 
 
 - DeveloperHub

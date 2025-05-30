@@ -17,14 +17,8 @@
   - [Next Step](#next-step)
 
 <!-- /TOC -->
-  - [Test RESTful App](#test-restful-app)
-  - [Summary](#summary)
-  - [Next Step](#next-step)
-
 <!-- /TOC -->
-
 <!-- /TOC -->
-
 
 ## What is Distributed Tracing?
 
@@ -98,6 +92,20 @@ The Monolithic mode is ideal for small deployments, demo and test setups, and is
 
   ![](../images/otel/otel-4.png)
 
+- Check TempoMonolithic operator status, open web terminal and run command line
+
+  ```ssh
+  PROJECT=userX-otel
+  oc wait --for condition=ready --timeout=300s pod -l app.kubernetes.io/name=tempo-monolithic -n $PROJECT
+  oc get po -l app.kubernetes.io/component=tempo -n $PROJECT
+  ```
+
+- Check PVC created by Tempo Operator
+
+  ```ssh
+  oc get pvc -n $PROJECT
+  ```
+
 - Check `tempo-sample` in Topology view
 
   ![](../images/otel/otel-5.png)
@@ -108,13 +116,21 @@ The Monolithic mode is ideal for small deployments, demo and test setups, and is
 
 ![](../images/otel/otel-7.png)
 
-- copy `otel-collector-multi-tenant.yaml.yaml` and past in import URL. Review and Click Create.
+- copy `otel-collector-multi-tenant.yaml.yaml` and past in import YAML. 
+- change value of `server_name_override` to your username such as user1-otel, click Create
 
 ![](../images/otel/otel-6.png)
 
 - Review `otel` OpenTelemetryCollectors
 
 ![](../images/otel/otel-8.png)
+
+- Check OTEL Collector with command line
+  
+  ```ssh
+  oc wait --for condition=ready --timeout=180s pod -l app.kubernetes.io/name=otel-collector  -n $PROJECT
+  oc get po -l  app.kubernetes.io/managed-by=opentelemetry-operator -n $PROJECT
+  ```
 
 - Check `otel-collector` in Topology view
 

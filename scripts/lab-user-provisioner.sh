@@ -30,7 +30,7 @@ create_projects() {
     # done
 
     oc login -u admin -p $ADMIN_PASSWORD --insecure-skip-tls-verify
-    
+
     for i in $( seq 1 $totalUsers )
     do    
         #oc adm policy add-role-to-user view user$i -n gitea
@@ -41,15 +41,15 @@ create_projects() {
         oc adm policy add-role-to-user monitoring-rules-edit user$i -n user$i-observe
         oc adm policy add-cluster-role-to-user system:auth-delegator user$i -n user$i-otel
         oc create sa go-lang-runner -n user$i-otel
+        oc create sa otel-collector -n user$i-otel
         oc adm policy add-scc-to-user otel-go-instrumentation-scc -z go-lang-runner -n user$i-otel
         oc adm policy add-role-to-user cluster-monitoring-view user$i -n user$i-observe
         oc adm policy add-role-to-user cluster-monitoring-view user$i -n openshift-monitoring
         #oc adm policy add-cluster-role-to-user cluster-monitoring-view user$i
         #cat ../manifests/shipwright-edit.yaml | sed "s#USERNAME#user$i#g" | oc apply -f -
         oc adm policy add-cluster-role-to-user shipwright-build-aggregate-edit user$i
-        cat ../config/otel/tempo-sa.yaml | sed "s#PROJECT#user$i-otel#g" | oc apply -n user$i-otel -f -
         cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i-observe#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i-observe -f -
-
+        cat ../config/otel/tempo-sa.yaml | sed "s#PROJECT#user$i-otel#g" | oc apply -n user$i-otel -f -
     
         # add cluster-reader to user
         
