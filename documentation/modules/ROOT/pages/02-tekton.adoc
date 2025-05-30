@@ -153,13 +153,11 @@ In this tutorial, you will create a pipeline that takes the source code of the a
 +
 image::tekton/tk-5.png[]
 
-* Once you deploy the pipelines, you should be able to visualize pipeline flow in the OpenShift Web Console by switching over to the Developer perspective of the OpenShift Web Console. In Pipeline builder, you can create pipeline with GUI or YAML, for this lab switch to YAML view
+* In Pipeline builder, you can create pipeline with GUI or YAML editor. Luckily, we already have the completed YAML for creating a pipeline for this lab. So, let's switch to *YAML view* to open YAML editor.
 +
 image::tekton/tk-6.png[]
 
-* In YAML view, paste previous YAML to this editor, review and click create
-
-* Here is the YAML file that represents the above pipeline:
+* Delete all YAML in the editor. Copy the YAML in this code snippet and paste to the YAML editor, then click *Create* button.
 +
 [source,yaml,subs="+macros,attributes+"]
 ----
@@ -248,41 +246,44 @@ spec:
 +
 image::tekton/tk-7.png[]
 
-* `build-and-deploy` Pipeline will be created,
+* The `build-and-deploy` Pipeline should be created.
 +
 image::tekton/tk-8.png[]
 
-* view Pipeline Parameter in Parameters tab,
+* View Pipeline parameter in *Parameters* tab,
 +
 image::tekton/tk-9.png[]
 
-* In Metrics tab, Pipelines Metrics will help you to monitor performance and status.
+* In *Metrics* tab, Pipelines Metrics will help you to monitor performance and status.
 +
 image::tekton/tk-10.png[]
 
 * This pipeline helps you to build and deploy sample application, by configuring right resources to pipeline.
 +
-Pipeline Steps:
 
- .. Clones the source code of the application from a git repository by referring (git-url and git-revision param)
- .. Builds the container image of application using the buildah task that uses Buildah to build the image
- .. The application image is pushed to an image registry by refering (image param)
- .. The new application image is deployed on OpenShift using the apply-manifests and update-deployment tasks.
+*Here is a summary of Pipeline Steps (what the pipeline does):*
+
+ .. Clones the source code of the application from a Git repository by referring to `git-url` and `git-revision` parammeters.
+ .. Builds the container image of application using the `Buildah` task that uses Buildah to build the image
+ .. The application image is pushed to an image registry based on the `IMAGE` parameter.
+ .. The new application image is deployed on OpenShift using the `apply-manifests` and `update-deployment` tasks we've created earlier.
 
 +
-You might have noticed that there are no references to the git repository or the image registry it will be pushed to in pipeline. That's because pipeline in Tekton are designed to be generic and re-usable across environments and stages through the application's lifecycle. Pipelines abstract away the specifics of the git source repository and image to be produced as PipelineResources or Params. When triggering a pipeline, you can provide different git repositories and image registries to be used during pipeline execution. Be patient! You will do that in a little bit in the next section.
+You might have noticed that there are no references to the Git repository or the image registry it will be pushed to in pipeline. That's because pipeline in Tekton are designed to be generic and re-usable across environments and stages through the application's lifecycle.
 +
-The execution order of tasks is determined by dependencies that are defined between the tasks via inputs and outputs as well as explicit orders that are defined via runAfter.
+Pipelines abstract away the specifics of the git source repository and image to be produced as PipelineResources or Params. When triggering a pipeline, you can provide different git repositories and image registries to be used during pipeline execution. Be patient! You will do that in a little bit in the next section.
 +
-workspaces field allows you to specify one or more volumes that each Task in the Pipeline requires during execution. You specify one or more Workspaces in the workspaces field.
+The execution order of tasks is determined by dependencies that are defined between the tasks via inputs and outputs as well as explicit orders that are defined via `runAfter`.
++
+The `workspaces` field allows you to specify one or more volumes that each `Task` in the Pipeline requires during execution. You specify one or more Workspaces in the `workspaces` field.
 
-* Create PersistentVolumeClaim for share workspace in Pipeline, Click Import YAML from Top Right of Developer Console
+* Create `PersistentVolumeClaim` for share workspace in `Pipeline`. Click on the *+* button at the top right corner of OpenShift console, then select *Import YAML*.
 +
 image::tekton/tk-11.png[]
 
-* Paste PersistentVolumeClaim YAML in Editor, click Create
+* Copy this YAML and paste to the editor, then click *Create* button.
 +
-[,yaml]
+[source,yaml,subs="+macros,attributes+"]
 ----
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -296,11 +297,7 @@ spec:
       storage: 500Mi
 ----
 +
-Example
-+
-image::tekton/tk-12.png[]
-+
-PVC after Created
+PersistentVolumeClaim should be created successfully.
 +
 image::tekton/tk-13.png[]
 
