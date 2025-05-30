@@ -195,7 +195,7 @@ Developer can enable monitoring for user-defined projects in addition to the def
 
   ```bash
   oc project userX-observe
-  curl http://backend:8080
+  curl http://backend.userX-observe.svc.cluster.local:8080
   ```
 
   such as
