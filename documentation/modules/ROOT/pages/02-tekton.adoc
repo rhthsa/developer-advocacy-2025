@@ -268,13 +268,13 @@ image::tekton/tk-10.png[]
  .. The application image is pushed to an image registry based on the `IMAGE` parameter.
  .. The new application image is deployed on OpenShift using the `apply-manifests` and `update-deployment` tasks we've created earlier.
 
-+
+
 You might have noticed that there are no references to the Git repository or the image registry it will be pushed to in pipeline. That's because pipeline in Tekton are designed to be generic and re-usable across environments and stages through the application's lifecycle.
-+
+
 Pipelines abstract away the specifics of the git source repository and image to be produced as PipelineResources or Params. When triggering a pipeline, you can provide different git repositories and image registries to be used during pipeline execution. Be patient! You will do that in a little bit in the next section.
-+
+
 The execution order of tasks is determined by dependencies that are defined between the tasks via inputs and outputs as well as explicit orders that are defined via `runAfter`.
-+
+
 The `workspaces` field allows you to specify one or more volumes that each `Task` in the Pipeline requires during execution. You specify one or more Workspaces in the `workspaces` field.
 
 * Create `PersistentVolumeClaim` for share workspace in `Pipeline`. Click on the *+* button at the top right corner of OpenShift console, then select *Import YAML*.
@@ -301,136 +301,181 @@ PersistentVolumeClaim should be created successfully.
 +
 image::tekton/tk-13.png[]
 
-== Trigger Pipeline
+[#triggerpipeline]
+=== Trigger Pipeline
 
-=== Concept
-Triggers extend the Tekton architecture with the following CRDs:
+Now that the pipeline is created, you can trigger it to execute the tasks specified in the pipeline. Triggers extend the Tekton architecture with the following CRDs:
 
-* https://github.com/tektoncd/triggers/blob/master/docs/triggertemplates.md[TriggerTemplate] - Templates resources to be created (e.g. Create PipelineResources and PipelineRun that uses them)
+* https://github.com/tektoncd/triggers/blob/master/docs/triggertemplates.md[TriggerTemplate] - Templates resources to be created (e.g. Create `PipelineResources` and `PipelineRun` that uses them)
 * https://github.com/tektoncd/triggers/blob/master/docs/triggerbindings.md[TriggerBinding] - Validates events and extracts payload fields
-* https://github.com/tektoncd/triggers/blob/master/docs/triggers.md[Trigger] - combines TriggerTemplate, TriggerBindings and interceptors.
-* https://github.com/tektoncd/triggers/blob/master/docs/eventlisteners.md[EventListener] - provides an addressable endpoint (the event sink). Trigger is referenced inside the EventListener Spec. It uses the extracted event parameters from each TriggerBinding (and any supplied static parameters) to create the resources specified in the corresponding TriggerTemplate. It also optionally allows an external service to pre-process the event payload via the interceptor field.
+* https://github.com/tektoncd/triggers/blob/master/docs/triggers.md[Trigger] - combines `TriggerTemplate`, `TriggerBindings` and interceptors.
+* https://github.com/tektoncd/triggers/blob/master/docs/eventlisteners.md[EventListener] - provides an addressable endpoint (the event sink). Trigger is referenced inside the EventListener Spec. It uses the extracted event parameters from each `TriggerBinding` (and any supplied static parameters) to create the resources specified in the corresponding `TriggerTemplate`. It also optionally allows an external service to pre-process the event payload via the interceptor field.
 * https://github.com/tektoncd/triggers/blob/master/docs/clustertriggerbindings.md[ClusterTriggerBinding] - A cluster-scoped TriggerBinding
 
-Using tektoncd/triggers in conjunction with tektoncd/pipeline enables you to easily create full-fledged CI/CD systems where the execution is defined entirely through Kubernetes resources.
+Using `tektoncd/triggers` in conjunction with `tektoncd/pipeline` enables you to easily create full-fledged CI/CD systems where the execution is defined entirely through Kubernetes resources.
 
-You can learn more about triggers by checking out the https://github.com/tektoncd/triggers/blob/master/docs/README.md[docs]
+NOTE: You can learn more about triggers by checking out the https://github.com/tektoncd/triggers/blob/master/docs/README.md[docs]
 
 In the following sections, you will go through each of the above steps to define and invoke a pipeline.
 
+A `PipelineRun` is how you can start a pipeline and tie it to the `persistentVolumeClaim` and params that should be used for this specific invocation.
 
-Now that the pipeline is created, you can trigger it to execute the tasks specified in the pipeline.
+* Go to *gitea* web console and copy Git repository URL of the `simple-rest-go` repository.
++
+image::shipwright/shp-20.png[]
 
-A PipelineRun is how you can start a pipeline and tie it to the persistentVolumeClaim and params that should be used for this specific invocation.
-
-* copy git URL of `simple-rest-go` repository from previous lab (Shipwright) such as  `+https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git+`
-* Go to Pipelines menu, Pipelines tab, select actio menu for `build-to-deploy` pipeline, select `start`
+* Go to *Pipelines* menu, select *Pipelines* tab, then click on action menu of `build-to-deploy` pipeline, then select *start*.
 +
 image::tekton/tk-14.png[]
 
-* In Start Pipeline, input `simple-rest-go` in deployment-name parameter,
-* Input previous copy git url `simple-rest-go` in git-url parameter, (Don't copy from picture!!!)
-* Input `main` in git revision  parameter
-* Input `image-registry.openshift-image-registry.svc:5000/<project>/simple-rest-go:latest` in Image parameter, change +++<project>+++to your username such as user1-tekton+++</project>+++
-* Leave default timeout
+In the *Parameter* section, enter following parameters:
+* Enter `simple-rest-go` to *deployment-name* parameter.
+* Paste the `simple-rest-go` Git reposity URL you've copied to *git-url* parameter. (Don't use the URL in the screenshot!)
+* Enter `main` to *git revision* parameter.
+* Enter `image-registry.openshift-image-registry.svc:5000/*<project>*/simple-rest-go:latest` to *IMAGE* parameter.
+[IMPORTANT]
+====
+Change the *<project>* that matches to your username i.e. user1-tekton
+====
+* Leave *Timeouts* as default.
 +
 image::tekton/tk-15.png[]
 
-* In Workspaces, select `PersistentVolumeClaim - source-pvc` for shared-workspace parameter, click start
+* In the *Workspaces* section, select `PersistentVolumeClaim` and `source-pvc` for *shared-workspace* parameter, then click *Start* button.
 +
 image::tekton/tk-16.png[]
 
-* After click start, PipelineRun will be create. you can view detail by click task in PipelineRun details
+* The `PipelineRun` will be created. you can view details by click on each task in `PipelineRun` to see the details.
 +
 image::tekton/tk-17.png[]
 
-* view logs from each task and wait until status change to Succeeded!
+* Go to *Logs* tab to view logs from each task.
 +
 image::tekton/tk-18.png[]
+
+* Wait until the pipeline status changes to `Succeeded`!
 +
 image::tekton/tk-19.png[]
 
-* Back to Pipeline to view detail of lastest PipelineRun
+* Back to *Pipeline* menu to view the status of `Pipeline` and `PipelineRun`.
 +
 image::tekton/tk-20.png[]
 
-* Back to Topology view, view `simple-rest-go` deployment, service and route, click Open URL to test application
+* Click *Topology* menu on the left to open Topology view. Select `simple-rest-go` Deployment, then go to *Resource* tab on the right panel, then open the application URL in the *Routes* section.
 +
 image::tekton/tk-21.png[]
 +
+* You should be able to see a response from the application we've deployed via OpenShift Pipelines!.
 image::tekton/tk-22.png[]
 
-== Tekton CLI (Optional!)
+=== [Optional] Trigger Pipeline with Tekton CLI
 
-* Start a pipeline to build and deploy the application using tkn:
+* Start a pipeline to build and deploy the application using `tkn` command line.
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
-  tkn pipeline start <pipelinename> \
-      --prefix-name <prefixname> \
-      -w <share_storage> \
-      -p <param=value> \
-      --use-param-defaults
-
-
-  Pipelinerun started: <prefixname>-xxxxx
-
-  In order to track the pipelinerun progress run:
-  tkn pipelinerun logs <prefixname>-xxxxx -f -n <project>
+tkn pipeline start <pipelinename> \
+    --prefix-name <prefixname> \
+    -w <share_storage> \
+    -p <param=value> \
+    --use-param-defaults
 ----
-
-* As soon as you start pipeline, a pipelinerun will be instantiated and pods will be created to execute the tasks that are defined in the pipeline.
 +
-[,ssh]
+Sample output.
++
+[.console-output]
+[source,adoc]
 ----
-  tkn pipeline list
-  NAME               AGE              LAST RUN        STARTED          DURATION   STATUS
-  build-and-deploy   10 minutes ago   vote-ui-9tb2q   47 seconds ago   ---        Running
+Pipelinerun started: <prefixname>-xxxxx
+
+In order to track the pipelinerun progress run:
+tkn pipelinerun logs <prefixname>-xxxxx -f -n <project>
 ----
 
-* Above we have started build-and-deploy pipeline, with relevant pipeline resources to deploy the backend/frontend applications using single pipeline
+* As soon as you start pipeline, a `PipelineRun` will be instantiated and pods will be created to execute the tasks that are defined in the pipeline.
 +
-[,ssh]
+* Run this command to view all pipelines and statuses.
++
+[.console-input]
+[source,adoc]
 ----
-  tkn pipelinerun ls
-  NAME             STARTED         DURATION   STATUS
-  vote-ui-9tb2q    1 minute ago    ---        Running
-  vote-api-t9tpq   1 minute ago    ---        Running
+tkn pipeline list
+----
++
+Sample output.
++
+[.console-output]
+[source,adoc]
+----
+NAME               AGE              LAST RUN                 STARTED          DURATION   STATUS
+build-and-deploy   10 minutes ago   build-and-deploy-9tb2q   47 seconds ago   ---        Running
 ----
 
-* Check out the logs of the pipelinerun as it runs using the tkn pipeline logs command which interactively allows you to pick the pipelinerun of your interest and inspect the logs:
+* Above we have started `build-and-deploy` pipeline, with relevant pipeline resources to deploy the application. Run this command to view `PipelineRun` status.
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
-  tkn pipeline logs -f
-  ? Select pipelinerun:  [Use arrows to move, type to filter]
-  > vote-ui-9tb2q started 3 minutes ago
-  vote-api-t9tpq started 7 minutes ago
+tkn pipelinerun ls
+----
++
+Sample output.
++
+[.console-output]
+[source,adoc]
+----
+NAME                      STARTED         DURATION   STATUS
+build-and-deploy-9tb2q    1 minute ago    ---        Running
+build-and-deploy-t9tpq    1 minute ago    ---        Running
 ----
 
-* After a few minutes, the pipeline should finish successfully.
+* Check out the logs of the pipelinerun as it runs using the `tkn pipeline logs` command which interactively allows you to pick the pipelinerun of your interest and inspect the logs:
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
-  $ tkn pipelinerun list
-  NAME             STARTED         DURATION   STATUS
-  vote-ui-9tb2q    1 minute ago    1m23s      Succeeded
-  vote-api-t9tpq   5 minutes ago   1m31s      Succeeded
+tkn pipeline logs -f
+----
++
+Sample output.
++
+[.console-output]
+[source,adoc]
+----
+? Select pipelinerun:  [Use arrows to move, type to filter]
+> build-and-deploy-9tb2q started 3 minutes ago
+build-and-deploy-t9tpq started 7 minutes ago
+----
+
+* After a few minutes, the pipeline should finish successfully. Run this command to view `PipelineRun` status.
++
+[.console-input]
+[source,adoc]
+----
+tkn pipelinerun list
+----
++
+Sample output.
++
+[.console-output]
+[source,adoc]
+----
+NAME                      STARTED         DURATION   STATUS
+build-and-deploy-9tb2q    1 minute ago    1m23s      Succeeded
+build-and-deploy-t9tpq    5 minutes ago   1m31s      Succeeded
 ----
 
 * If you want to re-run the pipeline again, you can use the following short-hand command to rerun the last pipelinerun again that uses the same workspaces, params and service account used in the previous pipeline run:
-
-[,ssh]
++
+[.console-input]
+[source,adoc]
 ----
 tkn pipeline start build-and-deploy --last
 ----
++
+Whenever there is any change to your repository we need to start the pipeline explicitly to see new changes take effect.
 
-* Whenever there is any change to your repository we need to start the pipeline explicitly to see new changes take effect.
+=== [Bonus!] Add Web Hook for Trigger Pipeline
 
-== Add Web Hook for Trigger Pipeline (Optional!)
-
-* Triggers in conjunction with pipelines enable us to hook our Pipelines to respond to external Git events (push events, pull requests etc). get more information and example https://github.com/openshift/pipelines-tutorial?tab=readme-ov-file#triggers[Link]
-
-== Next Step
-
-* xref:argocd.adoc[Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD - Part II]
+Triggers in conjunction with pipelines enable us to hook our Pipelines to respond to external Git events (push events, pull requests etc). get more information and example from this https://github.com/openshift/pipelines-tutorial?tab=readme-ov-file#triggers[tutorial].

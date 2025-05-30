@@ -11,6 +11,8 @@
 ** xref:02-tekton.adoc#openshiftpipelines[2.1 OpenShift Pipelines]
 ** xref:02-tekton.adoc#createtask[2.2 Create Task]
 ** xref:02-tekton.adoc#createpipeline[2.3 Create Pipeline]
+** xref:02-tekton.adoc#triggerpipeline[2.4 Trigger Pipeline]
+
 
 * 3. Observability through logs: Centralized logging with Loki & querying via LogQL
 
