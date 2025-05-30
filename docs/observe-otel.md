@@ -17,6 +17,11 @@
   - [Next Step](#next-step)
 
 <!-- /TOC -->
+  - [Test RESTful App](#test-restful-app)
+  - [Summary](#summary)
+  - [Next Step](#next-step)
+
+<!-- /TOC -->
 
 <!-- /TOC -->
 
@@ -152,7 +157,7 @@ The Monolithic mode is ideal for small deployments, demo and test setups, and is
   oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT
   ```  
 
-- review deployment in topology view 
+- review deployment in topology view, wait until all pod deploy complete! (Pod change to Dark Blue!)
 
   ![](../images/otel/otel-32.png)
 
