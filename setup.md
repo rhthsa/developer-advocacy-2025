@@ -66,9 +66,9 @@
    For example, provisioning 5 lab users:
 
    ```sh
-   export USER_PASSWORD=tze2BjjwGs5ArKBd
-   export ADMIN_PASSWORD=cclEUVM9KioglrzT
-   export totalUsers=3
+   export USER_PASSWORD=XVziuhmw9ivsPVIm
+   export ADMIN_PASSWORD=adm
+   export totalUsers=10
    ./lab-user-provisioner.sh 3
    ```
 
@@ -113,17 +113,29 @@
   oc config rename-context $(oc config current-context) dev-cluster
   argocd cluster add dev-cluster
   oc adm policy add-cluster-role-to-user cluster-admin -z openshift-gitops-argocd-application-controller -n openshift-gitops
+  
+  for i in $( seq 1 $totalUsers )
+    do
+        username=user$i
+        argocd account update-password --account $username --new-password $USER_PASSWORD --current-password $PASSWORD
+    done
   ```
 
-- (Option!) Deploy https://github.com/chatapazar/openshift-workshop.git folder sample for replace https://httpbin.org/status/200
+
+- Deploy https://github.com/chatapazar/openshift-workshop.git folder sample for replace https://httpbin.org/status/200, project test, add view to all user, http://test.test.svc.cluster.local:8080/status/200
+  
+  
 
 - OTEL
 
   install tempo operator
   install clsuter observability
   install build of opentelemetry
-  run tempo-pre.yaml
-  run tempo-sa.yaml
+  run config/otel/tempo-pre.yaml
+  run config/otel/ui-plugin.yaml
+  run config/otel/otel-go-instrument-scc.yaml
+  run tempo-sa.yaml --> per user
+
 
 - DeveloperHub
   

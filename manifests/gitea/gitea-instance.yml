@@ -16,12 +16,12 @@ spec:
   giteaUserPassword: openshift
   giteaMigrateRepositories: true
   giteaRepositoriesList:
-  - repo: https://gitlab.com/ocp-demo/frontend-js.git
+  - repo: https://github.com/chatapazar/frontend-js.git
     name: frontend-js
     private: false
-  - repo: https://github.com/rhthsa/simple-rest-go.git
+  - repo: https://github.com/chatapazar/simple-rest-go.git
     name: simple-rest-go
     private: false
-  - repo: https://gitlab.com/ocp-demo/backend_quarkus.git
+  - repo: https://github.com/chatapazar/backend_quarkus.git
     name: backend_quarkus
     private: false        

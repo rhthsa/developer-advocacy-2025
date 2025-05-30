@@ -80,15 +80,10 @@ install_web_terminal() {
 }
 
 install_loki() {
-    #https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/logging/logging-6-2
-    oc create -f ../manifests/logging-operator.yml
-    oc create -f ../manifests/loki-operator.yml
-    sleep 60
-    oc wait --for condition=established --timeout=180s \
-    crd/lokistacks.loki.grafana.com \
-    crd/clusterloggings.logging.openshift.io
-    oc get csv -n openshift-logging
-    
+
+    #install loki operator
+    #install logging
+
     S3_BUCKET=$(oc get configs.imageregistry.operator.openshift.io/cluster -o jsonpath='{.spec.storage.s3.bucket}' -n openshift-image-registry)
     REGION=$(oc get configs.imageregistry.operator.openshift.io/cluster -o jsonpath='{.spec.storage.s3.region}' -n openshift-image-registry)
     ACCESS_KEY_ID=$(oc get secret image-registry-private-configuration -o jsonpath='{.data.credentials}' -n openshift-image-registry|base64 -d|grep aws_access_key_id|awk -F'=' '{print $2}'|sed 's/^[ ]*//')
@@ -104,10 +99,38 @@ install_loki() {
     |sed 's|ENDPOINT|'$ENDPOINT'|'\
     |sed 's|DEFAULT_STORAGE_CLASS|'$DEFAULT_STORAGE_CLASS'|' \
     |oc apply -f -
+
+    #start with https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/logging/logging-6-2#quick-start-viaq_logging-6x-6.2
+
+
+    #below script not support logging 6.2
+    # oc create -f ../manifests/logging-operator.yml
+    # oc create -f ../manifests/loki-operator.yml
+    # sleep 60
+    # oc wait --for condition=established --timeout=180s \
+    # crd/lokistacks.loki.grafana.com \
+    # crd/clusterloggings.logging.openshift.io
+    # oc get csv -n openshift-logging
     
-    sleep 60
+    # S3_BUCKET=$(oc get configs.imageregistry.operator.openshift.io/cluster -o jsonpath='{.spec.storage.s3.bucket}' -n openshift-image-registry)
+    # REGION=$(oc get configs.imageregistry.operator.openshift.io/cluster -o jsonpath='{.spec.storage.s3.region}' -n openshift-image-registry)
+    # ACCESS_KEY_ID=$(oc get secret image-registry-private-configuration -o jsonpath='{.data.credentials}' -n openshift-image-registry|base64 -d|grep aws_access_key_id|awk -F'=' '{print $2}'|sed 's/^[ ]*//')
+    # SECRET_ACCESS_KEY=$(oc get secret image-registry-private-configuration -o jsonpath='{.data.credentials}' -n openshift-image-registry|base64 -d|grep aws_secret_access_key|awk -F'=' '{print $2}'|sed 's/^[ ]*//')
+    # ENDPOINT=$(echo "https://s3.$REGION.amazonaws.com")
+    # DEFAULT_STORAGE_CLASS=$(oc get sc -A -o jsonpath='{.items[?(@.metadata.annotations.storageclass\.kubernetes\.io/is-default-class=="true")].metadata.name}')
+
+    # cat ../manifests/logging-loki-instance.yaml \
+    # |sed 's/S3_BUCKET/'$S3_BUCKET'/' \
+    # |sed 's/REGION/'$REGION'/' \
+    # |sed 's|ACCESS_KEY_ID|'$ACCESS_KEY_ID'|' \
+    # |sed 's|SECRET_ACCESS_KEY|'$SECRET_ACCESS_KEY'|' \
+    # |sed 's|ENDPOINT|'$ENDPOINT'|'\
+    # |sed 's|DEFAULT_STORAGE_CLASS|'$DEFAULT_STORAGE_CLASS'|' \
+    # |oc apply -f -
     
-    oc get po -n openshift-logging
+    # sleep 60
+    
+    # oc get po -n openshift-logging
 }
 
 install_gitea() {
@@ -149,6 +172,7 @@ echo "Red Hat Developer Workshop Provisioner"
 repeat '-'
 
 oc project default
+# web terminal, build of openshift,observability, loki logging, pipeline, gtiops, tempo, build of telemetry,
 
 #install_build
 #repeat '-'
@@ -165,8 +189,6 @@ oc project default
 #install_tempo
 #repeat '-'
 
-#install_developer_hub
-#repeat '-'
 
 
 #last install only

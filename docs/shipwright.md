@@ -127,48 +127,13 @@ Get More information
 
 ### Review Container File from Git Repository
   
-- Get Git Url from Command Line, click web terminal link at top right of developer console.
-  
-  ![](../images/shipwright/shp-12.png)
-  
-- for first time. select `userX-shipwright` (change X to your username) project and click start.
-
-  ![](../images/shipwright/shp-13.png)
-
-- wait until terminal ready and show command line prompt!
-  
-  ![](../images/shipwright/shp-14.png)
-
-- run command to get gitea url.
-
-  ```ssh
-  oc get route gitea -n gitea
-  ```
-
-  example result
-
-  ```ssh
-  NAME    HOST/PORT                                                      PATH   SERVICES   PORT    TERMINATION     WILDCARD
-  gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gitea      <all>   edge/Redirect   None
-  ```
-
-- copy host of gitea to new tab browser 
+- New Browser tab, open `https://gitlab.com/chatapazar/simple-rest-go`
   
   ![](../images/shipwright/shp-15.png)
-
-- login with your username, but password is `openshift`
-
-  ![](../images/shipwright/shp-16.png) 
-
-- click `simple-rest-go` repository
-  
-  ![](../images/shipwright/shp-17.png) 
 
 - select `Dockerfile`, review build step in Dockerfile
 
   ![](../images/shipwright/shp-18.png) 
-  
-  ![](../images/shipwright/shp-19.png) 
 
 - back to `simple-rest-go` repository, get git URL from code button and select copy url
 
@@ -181,7 +146,7 @@ Get More information
   ![](../images/shipwright/shp-21.png) 
 
 - Import from Git page, 
-- Input git URL (from previous copy) in Git Repo URL, such as `https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git`
+- Input git URL (from previous copy) in Git Repo URL, `https://gitlab.com/chatapazar/simple-rest-go.git`
 - Wizard will detect Dockerfile automatic
 - set Application to `Create Application`
 - set Application name to `simple-rest-go`
@@ -227,10 +192,7 @@ Get More information
 
 ### Review Source from Git Repository
 
-- Back to Git, go to `backend_quarkus` Repository
-
-  ![](../images/shipwright/shp-31.png)   
-  
+- Back to Git, go to `backend_quarkus` Repository, open `https://gitlab.com/chatapazar/backend_quarkus`
 - Review Project Structure of `backend_quarkus`
   
   ![](../images/shipwright/shp-32.png)   
@@ -251,7 +213,7 @@ Get More information
 
 - Back to OpenShift Developer Console, click `+Add` in left menu and select Git Repository - Import from Git
 - In Import from Git, 
-- Input git URL (from previous copy) to Git Repo URL such as `https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/backend_quarkus.git`
+- Input git URL (from previous copy) to Git Repo URL such as `https://gitlab.com/chatapazar/backend_quarkus.git`
 - Input `/code` in Context dir
   
   ![](../images/shipwright/shp-36.png)   
@@ -298,37 +260,10 @@ Get More information
   
   ![](../images/shipwright/shp-46.png)   
 
-- Try to change source code in Git, back to Git, Back to `BackendResource.java`
-  
-  ![](../images/shipwright/shp-47.png)     
-
-- Click Edit File
-  
-  ![](../images/shipwright/shp-48.png)
-
-- go to line number `201`, change from `Backend version...` to `Backend OpenShift version...`
-  
-  ![](../images/shipwright/shp-49.png)     
-
-- Commit Changes, click Commit Changes
-  
-  ![](../images/shipwright/shp-50.png)  
-
-- Back to Builds, Shipwright Builds, click action menu of `backend-quarkus` Build, select `Start` 
+- Back to Builds, Shipwright Builds, you can rerun Build from this page when you have change in your code
   
   ![](../images/shipwright/shp-51.png)   
 
-- Wait until status change to succeeded
-  
-  ![](../images/shipwright/shp-52.png) 
-    
-  ![](../images/shipwright/shp-53.png)     
-  
-  ![](../images/shipwright/shp-54.png)   
-
-- Test Application Again, message will change to `Backend OpenShift version...`
-
-  ![](../images/shipwright/shp-55.png)      
     
 ## Summary
 

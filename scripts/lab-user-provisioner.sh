@@ -14,36 +14,44 @@ repeat() {
 create_projects() {
     echo
 
+    # for i in $( seq 1 $totalUsers )
+    # do
+    #     echo ""
+    #     echo "Logging in as user$i user to create projects..."
+    #     echo
+
+    #     oc login -u user$i -p $USER_PASSWORD --insecure-skip-tls-verify
+    #     oc new-project user$i-shipwright
+    #     oc new-project user$i-tekton
+    #     oc new-project user$i-gitops-dev
+    #     oc new-project user$i-gitops-prod
+    #     oc new-project user$i-observe
+    #     oc new-project user$i-otel
+    # done
+
+    oc login -u admin -p $ADMIN_PASSWORD --insecure-skip-tls-verify
+    
     for i in $( seq 1 $totalUsers )
-    do
-        echo ""
-        echo "Logging in as user$i user to create projects..."
-        echo
-
-        oc login -u user$i -p $USER_PASSWORD --insecure-skip-tls-verify
-        oc new-project user$i-shipwright
-        oc new-project user$i-tekton
-        oc new-project user$i-gitops-dev
-        oc new-project user$i-gitops-prod
-        oc new-project user$i-observe
-        oc new-project user$i-otel
-
+    do    
         oc adm policy add-role-to-user view user$i -n gitea
+        oc adm policy add-role-to-user view user$i -n test
         oc adm policy add-role-to-user view user$i -n openshift-pipelines
-        oc adm policy add-role-to-user shpiwright-build-aggregate-view user$i -n user$i-shipwright
-        
-        oc adm policy add-role-to-user monitoring-edit user1 -n user1-observe
-        oc adm policy add-role-to-user monitoring-rules-edit user1 -n user1-observe
+        oc adm policy add-role-to-user shipwright-build-aggregate-edit user$i
+        oc adm policy add-role-to-user monitoring-edit user$i -n user$i-observe
+        oc adm policy add-role-to-user monitoring-rules-edit user$i -n user$i-observe
+        oc adm policy add-cluster-role-to-user system:auth-delegator user$i -n user$i-otel
+        oc create sa go-lang-runner -n user$i-otel
+        oc adm policy add-scc-to-user otel-go-instrumentation-scc -z go-lang-runner -n user$i-otel
+        oc adm policy add-role-to-user cluster-monitoring-view user$i -n user$i-observe
 
-        oc adm policy add-cluster-role-to-user system:auth-delegator user1 -n user1-otel
+        #cat ../manifests/shipwright-edit.yaml | sed "s#USERNAME#user$i#g" | oc apply -f -
+        oc adm policy add-cluster-role-to-user shipwright-build-aggregate-edit user$i
         cat ../config/otel/tempo-sa.yaml | sed "s#PROJECT#user$i-otel#g" | oc apply -n user$i-otel -f -
-        
-        # user add scc for simple-go run otel-go-istrument-scc.yaml
-        oc create sa go-lang-runner
-        oc adm policy add-scc-to-user otel-go-instrumentation-scc -z go-lang-runner
+        cat ../manifests/logging-view.yaml | sed "s#NAMESPACE#user$i-observe#g" | sed "s#USERNAME#user$i#g" | oc apply -n user$i-observe -f -
 
-        # create crb user-cluster-monitoring-view for cluster-monitoring-view add user to this crb
-        create rolebinding for shipwright-build-aggregate-edit to userx  
+    
+        # add cluster-reader to user
+        
         repeat '-'
     done
 }
@@ -111,9 +119,6 @@ add_ui_serviceaccount() {
     done
 }
 
-create_argocd_user() {
-
-}
 
 update_argocd_password(){
 
@@ -150,6 +155,7 @@ repeat '-'
 #update_argocd_password
 #repeat '-'
 
+oc login -u admin -p $ADMIN_PASSWORD --insecure-skip-tls-verify
 oc project default
 
 echo "Done!!!"
