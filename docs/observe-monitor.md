@@ -13,7 +13,6 @@
 
 <!-- /TOC -->
 
-
 ## What is OpenShift Monitoring?
 
 OpenShift Container Platform includes a preconfigured, preinstalled, and self-updating monitoring stack that provides monitoring for core platform components. You also have the option to enable monitoring for user-defined projects.
@@ -132,7 +131,7 @@ Developer can enable monitoring for user-defined projects in addition to the def
 - select terminal tab, try to run curl command
 
   ```ssh
-  curl -s http://localhsot:8080/q/metrics
+  curl -s http://localhost:8080/q/metrics
   ```
   ![](../images/monitors/mon-10.png)
 

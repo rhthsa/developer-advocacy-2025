@@ -43,7 +43,8 @@ create_projects() {
         oc create sa go-lang-runner -n user$i-otel
         oc adm policy add-scc-to-user otel-go-instrumentation-scc -z go-lang-runner -n user$i-otel
         oc adm policy add-role-to-user cluster-monitoring-view user$i -n user$i-observe
-
+        oc adm policy add-role-to-user cluster-monitoring-view user$i -n openshift-monitoring
+        #oc adm policy add-cluster-role-to-user cluster-monitoring-view user$i
         #cat ../manifests/shipwright-edit.yaml | sed "s#USERNAME#user$i#g" | oc apply -f -
         oc adm policy add-cluster-role-to-user shipwright-build-aggregate-edit user$i
         cat ../config/otel/tempo-sa.yaml | sed "s#PROJECT#user$i-otel#g" | oc apply -n user$i-otel -f -
