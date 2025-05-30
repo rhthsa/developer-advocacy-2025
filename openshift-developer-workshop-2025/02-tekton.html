@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD :: OpenShift Developer Workshop 2025</title>
+    <link rel="canonical" href="https://rhthsa.github.io/developer-advocacy-2025/openshift-developer-workshop-2025/02-tekton.html">
+    <link rel="prev" href="01-shipwright.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://rhthsa.github.io/developer-advocacy-2025">OpenShift Developer Workshop 2025</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="openshift-developer-workshop-2025" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-shipwright.html">1. Build your application containers the right way with Shipwright</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#setup">1.1 Setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#deploycontainerimage">1.2 Deploy Container Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#accesstheapplication">1.3 Access To Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwright">1.4 OpenShift Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwrightbuidah">1.5 Build and Deploy Application using Shipwright and Buildah</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwrights2i">1.6 Build and Deploy Application using Shipwright and Source-to-Image (S2I)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#summary">1.7 Summary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#openshiftpipelines">2.1 OpenShift Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#createtask">2.2 Create Task</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#createpipeline">2.3 Create Pipeline</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">3. Observability through logs: Centralized logging with Loki &amp; querying via LogQL</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">4. Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">5. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">6. Accelerating software development with Red Hat Developer Hub</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Developer Workshop 2025</a></li>
+    <li><a href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/rhthsa/developer-advocacy-2025/edit/master/documentation/modules/ROOT/pages/02-tekton.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD</h1>
+<div class="sect1">
+<h2 id="openshiftpipelines"><a class="anchor" href="#openshiftpipelines"></a>OpenShift Pipelines</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>OpenShift Pipelines</strong> is a cloud-native, continuous integration and delivery (CI/CD) solution for building pipelines using <a href="https://tekton.dev/">Tekton</a>. <strong>Tekton</strong> is a flexible, Kubernetes-native, open-source CI/CD framework that enables automating deployments across multiple platforms (Kubernetes, serverless, VMs, etc) by abstracting away the underlying details.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift Pipelines features:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Standard CI/CD pipeline definition based on Tekton</p>
+</li>
+<li>
+<p>Build images with Kubernetes tools such as S2I, Buildah, Buildpacks, Kaniko, etc</p>
+</li>
+<li>
+<p>Deploy applications to multiple platforms such as Kubernetes, serverless and VMs</p>
+</li>
+<li>
+<p>Easy to extend and integrate with existing tools</p>
+</li>
+<li>
+<p>Scale pipelines on-demand</p>
+</li>
+<li>
+<p>Portable across any Kubernetes platform</p>
+</li>
+<li>
+<p>Designed for microservices and decentralized teams</p>
+</li>
+<li>
+<p>Integrated with the OpenShift Developer Console</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This tutorial walks you through pipeline concepts and how to create and run a simple pipeline for building and deploying a containerized app on OpenShift</p>
+</div>
+<div class="sect2">
+<h3 id="_concepts"><a class="anchor" href="#_concepts"></a>Concepts</h3>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tekton-logo.png" alt="tekton logo">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Tekton</strong> defines a number of <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">Kubernetes custom resources</a> as building blocks in order to standardize pipeline concepts and provide a terminology that is consistent across CI/CD solutions. These custom resources are an extension of the Kubernetes API that let users create and interact with these objects using kubectl and other Kubernetes tools.</p>
+</div>
+<div class="paragraph">
+<p>The custom resources needed to define a pipeline are listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Task</strong>: a reusable, loosely coupled number of steps that perform a specific task (e.g. building a container image)</p>
+</li>
+<li>
+<p><strong>Pipeline</strong>: the definition of the pipeline and the Tasks that it should perform</p>
+</li>
+<li>
+<p><strong>TaskRun</strong>: the execution and result of running an instance of task</p>
+</li>
+<li>
+<p><strong>PipelineRun</strong>: the execution and result of running an instance of pipeline, which includes a number of TaskRuns</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tekton-architecture.svg" alt="tekton architecture">
+</div>
+</div>
+<div class="paragraph">
+<p>In short, in order to create a pipeline, one does the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create custom or install <a href="https://github.com/tektoncd/catalog">existing</a> reusable <code>Tasks</code></p>
+</li>
+<li>
+<p>Create a <code>Pipeline</code> and <code>PipelineResources</code> to define your application&#8217;s delivery pipeline</p>
+</li>
+<li>
+<p>Create a <code>PersistentVolumeClaim</code> to provide the volume/filesystem for pipeline execution or provide a <code>VolumeClaimTemplate</code> which creates a <code>PersistentVolumeClaim</code></p>
+</li>
+<li>
+<p>Create a <code>PipelineRun</code> to instantiate and invoke the pipeline</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>For further details on pipeline concepts, refer to the <a href="https://github.com/tektoncd/pipeline/tree/master/docs#learn-more">Tekton documentation</a> that provides an excellent guide for understanding various parameters and attributes available for defining pipelines.</p>
+</div>
+<div class="paragraph">
+<p>The Tekton API enables functionality to be separated from configuration (e.g. <a href="https://github.com/tektoncd/pipeline/blob/master/docs/pipelines.md">Pipelines</a> vs <a href="https://github.com/tektoncd/pipeline/blob/master/docs/pipelineruns.md">PipelineRuns</a>) such that steps can be reusable.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_application_with_openshift_pipelines"><a class="anchor" href="#_deploy_application_with_openshift_pipelines"></a>Deploy Application with OpenShift Pipelines</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <code>userX-tekton</code> Project where <code>userX</code> is your username.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-1.png" alt="tk 1">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+OpenShift Pipelines automatically adds and configures a <code>ServiceAccount</code> named <code>pipeline</code> that has sufficient permissions to build and push an image. This service account will be used later in the tutorial.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open Web Terminal then run following commands to see the pipeline service account. (Change <code>userX</code> in the command to your username)</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc project userX-tekton
+oc get serviceaccount pipeline</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-4.png" alt="tk 4">
+</div>
+</div>
+</li>
+<li>
+<p>Try to run Tekton command line (<code>tkn</code>). For the first time, it&#8217;ll ask you to download the <code>tkn</code> binary file, just type <code>y</code> then press <code>Enter</code>.</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">tkn</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-2.png" alt="tk 2">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-3.png" alt="tk 3">
+</div>
+</div>
+</li>
+<li>
+<p>OpenShift Pipelines Operator installs few tasks in namespace <code>openshift-pipelines</code>. Run this command in web terminal to see the installed tasks.</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">tkn tasks ls -n openshift-pipelines</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output:</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">NAME                      DESCRIPTION              AGE
+buildah                   Buildah task builds...   1 day ago
+git-cli                   This task can be us...   1 day ago
+git-clone                 This object represe...   1 day ago
+maven                     This Task can be us...   1 day ago
+...</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="createtask"><a class="anchor" href="#createtask"></a>Create User-defined Tekton Tasks</h3>
+<div class="paragraph">
+<p><code>Tasks</code> consist of a number of <code>Steps</code> that are executed sequentially. <code>Tasks</code> are executed/run by creating <code>TaskRuns</code>. A <code>TaskRun</code> will schedule a Pod. Each step is executed in a separate container within the same pod. They can also have inputs and outputs in order to interact with other tasks in the pipeline.</p>
+</div>
+<div class="paragraph">
+<p>When a task starts running, it starts a pod and runs each step sequentially in a separate container on the same pod. This task happens to have a single step, but tasks can have multiple steps, and, since they run within the same pod, they have access to the same <code>Volumes</code> in order to cache files, access <code>ConfigMaps</code>, <code>Secrets</code>, etc. You can specify <code>Volume</code> using <code>Workspace</code>. It is recommended that <code>Tasks</code> uses at most one writeable <code>Workspace</code>. <code>Workspace</code> can be <code>Secret</code>, <code>PVC</code>, <code>ConfigMap</code> or <code>emptyDir</code>.</p>
+</div>
+<div class="paragraph">
+<p>Note that only the requirement for a git repository is declared on the task and not a specific git repository to be used. That allows tasks to be reusable for multiple pipelines and purposes. You can find more examples of reusable tasks in the <a href="https://github.com/tektoncd/catalog">Tekton Catalog</a> and <a href="https://github.com/openshift/pipelines-catalog">OpenShift Catalog</a> repositories.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Create the <code>apply-manifests</code> and <code>update-deployment</code> <code>Tasks</code> from the repository using <code>oc</code> or <code>kubectl</code> command.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These 2 tasks you will need for creating a <code>Pipeline</code> in the next section. Review <a href="https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/01_apply_manifest_task.yaml">apply-manifests</a> and <a href="https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/02_update_deployment_task.yaml">update-deployment</a> tasks definition if you need.
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Run these commands to create <code>Tasks</code>.</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/01_apply_manifest_task.yaml
+
+oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/02_update_deployment_task.yaml</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>You can take a look at the tasks you created using the Tekton CLI (change <code>userX</code> in the command to your username).</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc project userX-tekton
+tkn task ls</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output.</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">NAME                AGE
+apply-manifests     10 seconds ago
+update-deployment   4 seconds ago</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="createpipeline"><a class="anchor" href="#createpipeline"></a>Create Tekton Pipelines</h3>
+<div class="paragraph">
+<p>A pipeline defines a number of tasks that should be executed and how they interact with each other via their inputs and outputs.</p>
+</div>
+<div class="paragraph">
+<p>In this tutorial, you will create a pipeline that takes the source code of the application from Git and then builds and deploys it on OpenShift.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Pipelines</strong> Menu, select <strong>Pipelines</strong> tab, then click <strong>Create</strong> button and select <strong>Pipeline</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-5.png" alt="tk 5">
+</div>
+</div>
+</li>
+<li>
+<p>Once you deploy the pipelines, you should be able to visualize pipeline flow in the OpenShift Web Console by switching over to the Developer perspective of the OpenShift Web Console. In Pipeline builder, you can create pipeline with GUI or YAML, for this lab switch to YAML view</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-6.png" alt="tk 6">
+</div>
+</div>
+</li>
+<li>
+<p>In YAML view, paste previous YAML to this editor, review and click create</p>
+</li>
+<li>
+<p>Here is the YAML file that represents the above pipeline:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: build-and-deploy
+spec:
+  workspaces:
+  - name: shared-workspace
+  params:
+  - name: deployment-name
+    type: string
+    description: name of the deployment to be patched
+  - name: git-url
+    type: string
+    description: url of the git repo for the code of deployment
+  - name: git-revision
+    type: string
+    description: revision to be used from repo of the code for deployment
+    default: master
+  - name: IMAGE
+    type: string
+    description: image to be build from the code
+  tasks:
+  - name: fetch-repository
+    taskRef:
+      resolver: cluster
+      params:
+      - name: kind
+        value: task
+      - name: name
+        value: git-clone
+      - name: namespace
+        value: openshift-pipelines
+    workspaces:
+    - name: output
+      workspace: shared-workspace
+    params:
+    - name: URL
+      value: $(params.git-url)
+    - name: SUBDIRECTORY
+      value: ""
+    - name: DELETE_EXISTING
+      value: "true"
+    - name: REVISION
+      value: $(params.git-revision)
+  - name: build-image
+    taskRef:
+      resolver: cluster
+      params:
+      - name: kind
+        value: task
+      - name: name
+        value: buildah
+      - name: namespace
+        value: openshift-pipelines
+    params:
+    - name: IMAGE
+      value: $(params.IMAGE)
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    runAfter:
+    - fetch-repository
+  - name: apply-manifests
+    taskRef:
+      name: apply-manifests
+    workspaces:
+    - name: source
+      workspace: shared-workspace
+    runAfter:
+    - build-image
+  - name: update-deployment
+    taskRef:
+      name: update-deployment
+    params:
+    - name: deployment
+      value: $(params.deployment-name)
+    - name: IMAGE
+      value: $(params.IMAGE)
+    runAfter:
+    - apply-manifests</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-7.png" alt="tk 7">
+</div>
+</div>
+</li>
+<li>
+<p><code>build-and-deploy</code> Pipeline will be created,</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-8.png" alt="tk 8">
+</div>
+</div>
+</li>
+<li>
+<p>view Pipeline Parameter in Parameters tab,</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-9.png" alt="tk 9">
+</div>
+</div>
+</li>
+<li>
+<p>In Metrics tab, Pipelines Metrics will help you to monitor performance and status.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-10.png" alt="tk 10">
+</div>
+</div>
+</li>
+<li>
+<p>This pipeline helps you to build and deploy sample application, by configuring right resources to pipeline.</p>
+<div class="paragraph">
+<p>Pipeline Steps:</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Clones the source code of the application from a git repository by referring (git-url and git-revision param)</p>
+</li>
+<li>
+<p>Builds the container image of application using the buildah task that uses Buildah to build the image</p>
+</li>
+<li>
+<p>The application image is pushed to an image registry by refering (image param)</p>
+</li>
+<li>
+<p>The new application image is deployed on OpenShift using the apply-manifests and update-deployment tasks.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>You might have noticed that there are no references to the git repository or the image registry it will be pushed to in pipeline. That&#8217;s because pipeline in Tekton are designed to be generic and re-usable across environments and stages through the application&#8217;s lifecycle. Pipelines abstract away the specifics of the git source repository and image to be produced as PipelineResources or Params. When triggering a pipeline, you can provide different git repositories and image registries to be used during pipeline execution. Be patient! You will do that in a little bit in the next section.</p>
+</div>
+<div class="paragraph">
+<p>+
+The execution order of tasks is determined by dependencies that are defined between the tasks via inputs and outputs as well as explicit orders that are defined via runAfter.</p>
+</div>
+<div class="paragraph">
+<p>+
+workspaces field allows you to specify one or more volumes that each Task in the Pipeline requires during execution. You specify one or more Workspaces in the workspaces field.</p>
+</div>
+</li>
+<li>
+<p>Create PersistentVolumeClaim for share workspace in Pipeline, Click Import YAML from Top Right of Developer Console</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-11.png" alt="tk 11">
+</div>
+</div>
+</li>
+<li>
+<p>Paste PersistentVolumeClaim YAML in Editor, click Create</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: source-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Example</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-12.png" alt="tk 12">
+</div>
+</div>
+<div class="paragraph">
+<p>PVC after Created</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-13.png" alt="tk 13">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_trigger_pipeline"><a class="anchor" href="#_trigger_pipeline"></a>Trigger Pipeline</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_concept"><a class="anchor" href="#_concept"></a>Concept</h3>
+<div class="paragraph">
+<p>Triggers extend the Tekton architecture with the following CRDs:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/triggertemplates.md">TriggerTemplate</a> - Templates resources to be created (e.g. Create PipelineResources and PipelineRun that uses them)</p>
+</li>
+<li>
+<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/triggerbindings.md">TriggerBinding</a> - Validates events and extracts payload fields</p>
+</li>
+<li>
+<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/triggers.md">Trigger</a> - combines TriggerTemplate, TriggerBindings and interceptors.</p>
+</li>
+<li>
+<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/eventlisteners.md">EventListener</a> - provides an addressable endpoint (the event sink). Trigger is referenced inside the EventListener Spec. It uses the extracted event parameters from each TriggerBinding (and any supplied static parameters) to create the resources specified in the corresponding TriggerTemplate. It also optionally allows an external service to pre-process the event payload via the interceptor field.</p>
+</li>
+<li>
+<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/clustertriggerbindings.md">ClusterTriggerBinding</a> - A cluster-scoped TriggerBinding</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Using tektoncd/triggers in conjunction with tektoncd/pipeline enables you to easily create full-fledged CI/CD systems where the execution is defined entirely through Kubernetes resources.</p>
+</div>
+<div class="paragraph">
+<p>You can learn more about triggers by checking out the <a href="https://github.com/tektoncd/triggers/blob/master/docs/README.md">docs</a></p>
+</div>
+<div class="paragraph">
+<p>In the following sections, you will go through each of the above steps to define and invoke a pipeline.</p>
+</div>
+<div class="paragraph">
+<p>Now that the pipeline is created, you can trigger it to execute the tasks specified in the pipeline.</p>
+</div>
+<div class="paragraph">
+<p>A PipelineRun is how you can start a pipeline and tie it to the persistentVolumeClaim and params that should be used for this specific invocation.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>copy git URL of <code>simple-rest-go</code> repository from previous lab (Shipwright) such as  <code>https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git</code></p>
+</li>
+<li>
+<p>Go to Pipelines menu, Pipelines tab, select actio menu for <code>build-to-deploy</code> pipeline, select <code>start</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-14.png" alt="tk 14">
+</div>
+</div>
+</li>
+<li>
+<p>In Start Pipeline, input <code>simple-rest-go</code> in deployment-name parameter,</p>
+</li>
+<li>
+<p>Input previous copy git url <code>simple-rest-go</code> in git-url parameter, (Don&#8217;t copy from picture!!!)</p>
+</li>
+<li>
+<p>Input <code>main</code> in git revision  parameter</p>
+</li>
+<li>
+<p>Input <code>image-registry.openshift-image-registry.svc:5000/&lt;project&gt;/simple-rest-go:latest</code> in Image parameter, change <project>to your username such as user1-tekton</project></p>
+</li>
+<li>
+<p>Leave default timeout</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-15.png" alt="tk 15">
+</div>
+</div>
+</li>
+<li>
+<p>In Workspaces, select <code>PersistentVolumeClaim - source-pvc</code> for shared-workspace parameter, click start</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-16.png" alt="tk 16">
+</div>
+</div>
+</li>
+<li>
+<p>After click start, PipelineRun will be create. you can view detail by click task in PipelineRun details</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-17.png" alt="tk 17">
+</div>
+</div>
+</li>
+<li>
+<p>view logs from each task and wait until status change to Succeeded!</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-18.png" alt="tk 18">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-19.png" alt="tk 19">
+</div>
+</div>
+</li>
+<li>
+<p>Back to Pipeline to view detail of lastest PipelineRun</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-20.png" alt="tk 20">
+</div>
+</div>
+</li>
+<li>
+<p>Back to Topology view, view <code>simple-rest-go</code> deployment, service and route, click Open URL to test application</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-21.png" alt="tk 21">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/tekton/tk-22.png" alt="tk 22">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tekton_cli_optional"><a class="anchor" href="#_tekton_cli_optional"></a>Tekton CLI (Optional!)</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Start a pipeline to build and deploy the application using tkn:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">  tkn pipeline start &lt;pipelinename&gt; \
+      --prefix-name &lt;prefixname&gt; \
+      -w &lt;share_storage&gt; \
+      -p &lt;param=value&gt; \
+      --use-param-defaults
+
+
+  Pipelinerun started: &lt;prefixname&gt;-xxxxx
+
+  In order to track the pipelinerun progress run:
+  tkn pipelinerun logs &lt;prefixname&gt;-xxxxx -f -n &lt;project&gt;</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>As soon as you start pipeline, a pipelinerun will be instantiated and pods will be created to execute the tasks that are defined in the pipeline.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">  tkn pipeline list
+  NAME               AGE              LAST RUN        STARTED          DURATION   STATUS
+  build-and-deploy   10 minutes ago   vote-ui-9tb2q   47 seconds ago   ---        Running</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Above we have started build-and-deploy pipeline, with relevant pipeline resources to deploy the backend/frontend applications using single pipeline</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">  tkn pipelinerun ls
+  NAME             STARTED         DURATION   STATUS
+  vote-ui-9tb2q    1 minute ago    ---        Running
+  vote-api-t9tpq   1 minute ago    ---        Running</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check out the logs of the pipelinerun as it runs using the tkn pipeline logs command which interactively allows you to pick the pipelinerun of your interest and inspect the logs:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">  tkn pipeline logs -f
+  ? Select pipelinerun:  [Use arrows to move, type to filter]
+  &gt; vote-ui-9tb2q started 3 minutes ago
+  vote-api-t9tpq started 7 minutes ago</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>After a few minutes, the pipeline should finish successfully.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">  $ tkn pipelinerun list
+  NAME             STARTED         DURATION   STATUS
+  vote-ui-9tb2q    1 minute ago    1m23s      Succeeded
+  vote-api-t9tpq   5 minutes ago   1m31s      Succeeded</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>If you want to re-run the pipeline again, you can use the following short-hand command to rerun the last pipelinerun again that uses the same workspaces, params and service account used in the previous pipeline run:</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">tkn pipeline start build-and-deploy --last</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Whenever there is any change to your repository we need to start the pipeline explicitly to see new changes take effect.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_web_hook_for_trigger_pipeline_optional"><a class="anchor" href="#_add_web_hook_for_trigger_pipeline_optional"></a>Add Web Hook for Trigger Pipeline (Optional!)</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Triggers in conjunction with pipelines enable us to hook our Pipelines to respond to external Git events (push events, pull requests etc). get more information and example <a href="https://github.com/openshift/pipelines-tutorial?tab=readme-ov-file#triggers">Link</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_step"><a class="anchor" href="#_next_step"></a>Next Step</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#argocd.adoc" class="xref unresolved">Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="01-shipwright.html">1. Build your application containers the right way with Shipwright</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

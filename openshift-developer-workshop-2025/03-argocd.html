@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II :: OpenShift Developer Workshop 2025</title>
+    <link rel="canonical" href="https://rhthsa.github.io/developer-advocacy-2025/openshift-developer-workshop-2025/03-argocd.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://rhthsa.github.io/developer-advocacy-2025">OpenShift Developer Workshop 2025</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="openshift-developer-workshop-2025" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-shipwright.html">1. Build your application containers the right way with Shipwright</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#setup">1.1 Setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#deploycontainerimage">1.2 Deploy Container Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#accesstheapplication">1.3 Access To Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwright">1.4 OpenShift Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwrightbuidah">1.5 Build and Deploy Application using Shipwright and Buildah</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwrights2i">1.6 Build and Deploy Application using Shipwright and Source-to-Image (S2I)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#summary">1.7 Summary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#openshiftpipelines">2.1 OpenShift Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#createtask">2.2 Create Task</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#createpipeline">2.3 Create Pipeline</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">3. Observability through logs: Centralized logging with Loki &amp; querying via LogQL</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">4. Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">5. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">6. Accelerating software development with Red Hat Developer Hub</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Developer Workshop 2025</a></li>
+    <li><a href="03-argocd.html">Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/rhthsa/developer-advocacy-2025/edit/master/documentation/modules/ROOT/pages/03-argocd.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_what_is_gitops">What is GitOps?</a></li>
+<li><a href="#_about_gitops">About GitOps</a></li>
+<li><a href="#_about_red_hat_openshift_gitops">About Red Hat OpenShift GitOps</a></li>
+<li><a href="#_review_deployment_configuration_in_git_repository_kustomized_configuration_management">Review Deployment Configuration in Git Repository &amp; Kustomized Configuration Management</a></li>
+<li><a href="#_review_kustomize_resource_in_git_repository">Review Kustomize Resource in Git Repository</a></li>
+<li><a href="#_create_applicaiton_in_openshift_gitops">Create Applicaiton in OpenShift GitOps</a></li>
+<li><a href="#_summary">Summary</a></li>
+<li><a href="#_next_step">Next Step</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_what_is_gitops"><a class="anchor" href="#_what_is_gitops"></a>What is GitOps?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>GitOps uses Git repositories as a single source of truth to deliver infrastructure as code. Submitted code checks the CI process, while the CD process checks and applies requirements for things like security, infrastructure as code, or any other boundaries set for the application framework. All changes to code are tracked, making updates easy while also providing version control should a rollback be needed.</p>
+</div>
+<div class="paragraph">
+<p>GitOps delivers:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A standard workflow for application development</p>
+</li>
+<li>
+<p>Increased security for setting application requirements upfront</p>
+</li>
+<li>
+<p>Improved reliability with visibility and version control through Git</p>
+</li>
+<li>
+<p>Consistency across any cluster, any cloud, and any on-premise environment
+Many other tools can be used together to build a GitOps framework. For example, git repositories, Kubernetes, continuous integration/continuous delivery (CI/CD) tools, and configuration management tools.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about_gitops"><a class="anchor" href="#_about_gitops"></a>About GitOps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>GitOps is a declarative way to implement continuous deployment for cloud native applications. You can use GitOps to create repeatable processes for managing OpenShift Container Platform clusters and applications across multi-cluster Kubernetes environments. GitOps handles and automates complex deployments at a fast pace, saving time during deployment and release cycles.</p>
+</div>
+<div class="paragraph">
+<p>The GitOps workflow pushes an application through development, testing, staging, and production. GitOps either deploys a new application or updates an existing one, so you only need to update the repository; GitOps automates everything else.</p>
+</div>
+<div class="paragraph">
+<p>GitOps is a set of practices that use Git pull requests to manage infrastructure and application configurations. In GitOps, the Git repository is the only source of truth for system and application configuration. This Git repository contains a declarative description of the infrastructure you need in your specified environment and contains an automated process to make your environment match the described state. Also, it contains the entire state of the system so that the trail of changes to the system state are visible and auditable. By using GitOps, you resolve the issues of infrastructure and application configuration sprawl.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/gitops-in-a-nutshell.png" alt="GitOps in a nutshell">
+</div>
+</div>
+<div class="paragraph">
+<p>GitOps defines infrastructure and application definitions as code. Then, it uses this code to manage multiple workspaces and clusters to simplify the creation of infrastructure and application configurations. By following the principles of the code, you can store the configuration of clusters and applications in Git repositories, and then follow the Git workflow to apply these repositories to your chosen clusters. You can apply the core principles of developing and maintaining software in a Git repository to the creation and management of your cluster and application configuration files.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_about_red_hat_openshift_gitops"><a class="anchor" href="#_about_red_hat_openshift_gitops"></a>About Red Hat OpenShift GitOps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps ensures consistency in applications when you deploy them to different clusters in different environments, such as: development, staging, and production. Red Hat OpenShift GitOps organizes the deployment process around the configuration repositories and makes them the central element. It always has at least two repositories:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Application repository with the source code</p>
+</li>
+<li>
+<p>Environment configuration repository that defines the desired state of the application</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>These repositories contain a declarative description of the infrastructure you need in your specified environment. They also contain an automated process to make your environment match the described state.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argocd.png" alt="GitOps wtih ArgoCD">
+</div>
+</div>
+<div class="paragraph">
+<p>Red Hat OpenShift GitOps uses Argo CD to maintain cluster resources. Argo CD is an open-source declarative tool for the continuous integration and continuous deployment (CI/CD) of applications. Red Hat OpenShift GitOps implements Argo CD as a controller so that it continuously monitors application definitions and configurations defined in a Git repository. Then, Argo CD compares the specified state of these configurations with their live state on the cluster.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argocd-push-pull-model.png" alt="ArgoCD Push and Pull model">
+</div>
+</div>
+<div class="paragraph">
+<p>Argo CD reports any configurations that deviate from their specified state. These reports allow administrators to automatically or manually resync configurations to the defined state. Therefore, Argo CD enables you to deliver global custom resources, like the resources that are used to configure OpenShift Container Platform clusters.</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/ocp-pipeline-and-gitops.webp" alt="OpenShift Pipelines &amp; GitOps">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_review_deployment_configuration_in_git_repository_kustomized_configuration_management"><a class="anchor" href="#_review_deployment_configuration_in_git_repository_kustomized_configuration_management"></a>Review Deployment Configuration in Git Repository &amp; Kustomized Configuration Management</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Start with <a href="https://kustomize.io">Kustomized</a></p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/kustomize-1.png" alt="kustomize 1">
+</div>
+</div>
+<div class="paragraph">
+<p>Kustomize provides a solution for customizing Kubernetes resource   configuration free from templates and DSLs.</p>
+</div>
+<div class="paragraph">
+<p>Kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as is.</p>
+</div>
+<div class="paragraph">
+<p>Kustomize targets kubernetes; it understands and can patch kubernetes style API objects. It&#8217;s like make, in that what it does is declared in a file, and it&#8217;s like sed, in that it emits edited text.</p>
+</div>
+<div class="paragraph">
+<p>With kustomize, your team can ingest any base file updates for your underlying components while keeping use-case specific customization overrides intact. Another benefit of utilizing patch overlays is that they add dimensionality to your configuration settings, which can be isolated for troubleshooting misconfigurations or layered to create a framework of most-broad to most-specific configuration specifications.</p>
+</div>
+<div class="paragraph">
+<p>To recap, Kustomize relies on the following system of configuration management layering to achieve reusability:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Base Layer - Specifies the most common resources</p>
+</li>
+<li>
+<p>Patch Layers - Specifies use case specific resources</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/kustomize-2.png" alt="kustomize 2">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_review_kustomize_resource_in_git_repository"><a class="anchor" href="#_review_kustomize_resource_in_git_repository"></a>Review Kustomize Resource in Git Repository</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>For this workshop, we will deploy <code>simple-rest-go</code> application agian by Red Hat OpenShift GitOps</p>
+</li>
+<li>
+<p>open browser to <a href="https://github.com/rhthsa/simple-rest-go.git" class="bare">https://github.com/rhthsa/simple-rest-go.git</a></p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-30.png" alt="argo 30">
+</div>
+</div>
+</li>
+<li>
+<p>go to /apps-kustomize</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-31.png" alt="argo 31">
+</div>
+</div>
+</li>
+<li>
+<p>go to base folder</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-40.png" alt="argo 40">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>review following file:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>kustomization.yaml</p>
+</li>
+<li>
+<p>rolebinding.yaml</p>
+</li>
+<li>
+<p>deployment.yaml</p>
+</li>
+<li>
+<p>service.yaml</p>
+</li>
+<li>
+<p>route.yaml</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>go to overlays/dev folder</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-32.png" alt="argo 32">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>review following file:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>kustomization.yaml</p>
+</li>
+<li>
+<p>deployment.yaml</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>content of deployment.yaml in overlays/dev/kustomization.yml</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-34.png" alt="argo 34">
+</div>
+</div>
+</li>
+<li>
+<p>compare content of deployment.yaml between base folder and overlays/dev folder (about replica)</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-35.png" alt="argo 35">
+</div>
+</div>
+</li>
+<li>
+<p>go to overlays/prod folder</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-33.png" alt="argo 33">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>review following file:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>kustomization.yaml</p>
+</li>
+<li>
+<p>deployment.yaml</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>compare content of deployment.yaml between base folder and overlays/dev folder (about replica)</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-36.png" alt="argo 36">
+</div>
+</div>
+</li>
+<li>
+<p>summary kustomize structure of this workshop</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-37.png" alt="argo 37">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_applicaiton_in_openshift_gitops"><a class="anchor" href="#_create_applicaiton_in_openshift_gitops"></a>Create Applicaiton in OpenShift GitOps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Open your developer console, go to your project 'userX-gitops-dev' (replace X with your username)</p>
+</li>
+<li>
+<p>Go to top right of developer console, Navigate to the table menu (It&#8217;s to the left of the plus sign menu.) -&#8594; OpenShift GitOps -&#8594; Cluster Argo CD.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-38.png" alt="argo 38">
+</div>
+</div>
+</li>
+<li>
+<p>Use local user for login, type your username and password (same with your openshift login), click <code>SIGN IN</code></p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-2.png" alt="argo 2">
+</div>
+</div>
+</li>
+<li>
+<p>Review Argo CD Console, Click <code>+ New App</code></p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-3.png" alt="argo 3">
+</div>
+</div>
+</li>
+<li>
+<p>In create application, Input <code>userX-go-dev</code> to Application Name (change X to your username)</p>
+</li>
+<li>
+<p>set <code>default</code> to Project Name</p>
+</li>
+<li>
+<p>set <code>Manual</code> to SYNC POLICY</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-4.png" alt="argo 4">
+</div>
+</div>
+</li>
+<li>
+<p>In SOURCE section, input <code>https://github.com/rhthsa/simple-rest-go.git</code> to Repository URL</p>
+</li>
+<li>
+<p>set Revision to <code>HEAD</code></p>
+</li>
+<li>
+<p>set Path to <code>apps-kustomize/overlays/dev</code></p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-5.png" alt="argo 5">
+</div>
+</div>
+</li>
+<li>
+<p>In Destination section, select first cluster (from dropdownlist) to Cluster URL</p>
+</li>
+<li>
+<p>set Namespace to <code>userX-gitops-dev</code> (change X to your username)</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-6.png" alt="argo 6">
+</div>
+</div>
+</li>
+<li>
+<p>leave default last part, click Create</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-7.png" alt="argo 7">
+</div>
+</div>
+</li>
+<li>
+<p>Back to Main page, set filter in namespace to <code>userX*</code> (change X to your username), this help filter your app in page.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-8.png" alt="argo 8">
+</div>
+</div>
+</li>
+<li>
+<p>Review application in Applications page</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-9.png" alt="argo 9">
+</div>
+</div>
+</li>
+<li>
+<p>Click <code>userX-go-dev</code> to view details of application</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-10.png" alt="argo 10">
+</div>
+</div>
+</li>
+<li>
+<p>click <code>sync</code> to synchronize application to cluster</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-11.png" alt="argo 11">
+</div>
+</div>
+</li>
+<li>
+<p>wait until App Health change to <code>Healthy</code>, Sync status to <code>Synced</code>, Last sync to <code>Sync OK</code>, check number of pod in this deployment (2 Pods)</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-12.png" alt="argo 12">
+</div>
+</div>
+</li>
+<li>
+<p>Change from Tree view to Pods view, to Network view and List view to see kubernetes object in each view.</p>
+<div class="paragraph">
+<p>Pods view</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-13.png" alt="argo 13">
+</div>
+</div>
+<div class="paragraph">
+<p>Network view</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-14.png" alt="argo 14">
+</div>
+</div>
+<div class="paragraph">
+<p>List view</p>
+</div>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-15.png" alt="argo 15">
+</div>
+</div>
+</li>
+<li>
+<p>Create Application for Production, back to Applications, click <code>+ NEW APP</code></p>
+</li>
+<li>
+<p>set Application Name to <code>userX-go-prod</code> (change X to your username)</p>
+</li>
+<li>
+<p>set Project Name to <code>default</code></p>
+</li>
+<li>
+<p>set SYNC POLICY to <code>Manual</code></p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-16.png" alt="argo 16">
+</div>
+</div>
+</li>
+<li>
+<p>In SOURCE section, input <code>https://github.com/rhthsa/simple-rest-go.git</code> to Repository URL</p>
+</li>
+<li>
+<p>set Revision to <code>HEAD</code></p>
+</li>
+<li>
+<p>set Path to <code>apps-kustomize/overlays/prod</code></p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-17.png" alt="argo 17">
+</div>
+</div>
+</li>
+<li>
+<p>In Destination section, select first cluster (from dropdownlist) to Cluster URL</p>
+</li>
+<li>
+<p>set Namespace to <code>userX-gitops-prod</code> (change X to your username)</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-18.png" alt="argo 18">
+</div>
+</div>
+</li>
+<li>
+<p>leave default last part, click Create</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-19.png" alt="argo 19">
+</div>
+</div>
+</li>
+<li>
+<p>View new applicaiton in applications view, click <code>userX-go-prod</code> (change x to your username)</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-20.png" alt="argo 20">
+</div>
+</div>
+</li>
+<li>
+<p>Click Sync and wait until sync complete, check number of Pods (3 Pods)</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-21.png" alt="argo 21">
+</div>
+</div>
+</li>
+<li>
+<p>back to OpenShift Console, view topology in <code>userX-gitops-dev</code> project (change X to your username), check number of pods.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-22.png" alt="argo 22">
+</div>
+</div>
+</li>
+<li>
+<p>view topology in <code>userX-gitops-prod</code> project (change X to your username), check number of pods.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-23.png" alt="argo 23">
+</div>
+</div>
+</li>
+<li>
+<p>In <code>userX-gitops-prod</code> project, try to reduce replica of deployment by, click in Details tab of <code>simple-rest-go</code> deployment, and click scale down from 3 to 2</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-24.png" alt="argo 24">
+</div>
+</div>
+</li>
+<li>
+<p>Back to ArgoCD, view <code>userX-go-prod</code> application, Status change to <code>OutOfSync</code>, Click to view Detail</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-25.png" alt="argo 25">
+</div>
+</div>
+</li>
+<li>
+<p>In applicaiton detail, click diff button</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-26.png" alt="argo 26">
+</div>
+</div>
+</li>
+<li>
+<p>check <code>compact diff</code> and <code>inline diff</code> to view diff between current state on Cluster and yaml file on Git</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-27.png" alt="argo 27">
+</div>
+</div>
+</li>
+<li>
+<p>Click Sync button, Click Synchronize to update deployment to value from Git.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-28.png" alt="argo 28">
+</div>
+</div>
+</li>
+<li>
+<p>Back to OpenShift Developer Console, Review number of replica again.</p>
+<div class="imageblock unresolved">
+<div class="content">
+<img src="../images/argocd/argo-29.png" alt="argo 29">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift GitOps takes advantage of Argo CD and integrates it into Red Hat OpenShift to deliver a consistent, fully supported, declarative Kubernetes platform to configure and use with GitOps principles.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift and OpenShift GitOps:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Apply consistency across cluster and deployment lifecycles</p>
+</li>
+<li>
+<p>Consolidate administration and management of applications across on-premises and cloud environments</p>
+</li>
+<li>
+<p>Check the state of clusters making application constraints known early</p>
+</li>
+<li>
+<p>Rollback code changes across clusters</p>
+</li>
+<li>
+<p>Roll out new changes submitted via Git</p>
+</li>
+<li>
+<p>Support advanced deployment strategies, including blue green and canary, using automated traffic management and testing capabilities with <a href="https://argoproj.github.io/rollouts/">Argo Rollouts</a>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_step"><a class="anchor" href="#_next_step"></a>Next Step</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#observe-logging.adoc" class="xref unresolved">Observability through logs: Centralized logging with Loki &amp; querying via LogQL</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
