@@ -7,7 +7,10 @@
 ** xref:01-shipwright.adoc#shipwrights2i[1.6 Build and Deploy Application using Shipwright and Source-to-Image (S2I)]
 ** xref:01-shipwright.adoc#summary[1.7 Summary]
 
-* 2. Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD
+* xref:02-tekton.adoc[2. Ship faster, safer, smarter. GitOps CI/CD with Tekton & Argo CD]
+** xref:02-tekton.adoc#openshiftpipelines[2.1 OpenShift Pipelines]
+** xref:02-tekton.adoc#createtask[2.2 Create Task]
+** xref:02-tekton.adoc#createpipeline[2.3 Create Pipeline]
 
 * 3. Observability through logs: Centralized logging with Loki & querying via LogQL
 
