@@ -402,7 +402,7 @@ update-deployment   4 seconds ago</code></pre>
 </div>
 </li>
 <li>
-<p>Once you deploy the pipelines, you should be able to visualize pipeline flow in the OpenShift Web Console by switching over to the Developer perspective of the OpenShift Web Console. In Pipeline builder, you can create pipeline with GUI or YAML, for this lab switch to YAML view</p>
+<p>In Pipeline builder, you can create pipeline with GUI or YAML editor. Luckily, we already have the completed YAML for creating a pipeline for this lab. So, let&#8217;s switch to <strong>YAML view</strong> to open YAML editor.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-6.png" alt="tk 6">
@@ -410,10 +410,7 @@ update-deployment   4 seconds ago</code></pre>
 </div>
 </li>
 <li>
-<p>In YAML view, paste previous YAML to this editor, review and click create</p>
-</li>
-<li>
-<p>Here is the YAML file that represents the above pipeline:</p>
+<p>Delete all YAML in the editor. Copy the YAML in this code snippet and paste to the YAML editor, then click <strong>Create</strong> button.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: tekton.dev/v1
@@ -505,7 +502,7 @@ spec:
 </div>
 </li>
 <li>
-<p><code>build-and-deploy</code> Pipeline will be created,</p>
+<p>The <code>build-and-deploy</code> Pipeline should be created.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-8.png" alt="tk 8">
@@ -513,7 +510,7 @@ spec:
 </div>
 </li>
 <li>
-<p>view Pipeline Parameter in Parameters tab,</p>
+<p>View Pipeline parameter in <strong>Parameters</strong> tab,</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-9.png" alt="tk 9">
@@ -521,7 +518,7 @@ spec:
 </div>
 </li>
 <li>
-<p>In Metrics tab, Pipelines Metrics will help you to monitor performance and status.</p>
+<p>In <strong>Metrics</strong> tab, Pipelines Metrics will help you to monitor performance and status.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-10.png" alt="tk 10">
@@ -531,38 +528,42 @@ spec:
 <li>
 <p>This pipeline helps you to build and deploy sample application, by configuring right resources to pipeline.</p>
 <div class="paragraph">
-<p>Pipeline Steps:</p>
+<p><strong>Here is a summary of Pipeline Steps (what the pipeline does):</strong></p>
 </div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Clones the source code of the application from a git repository by referring (git-url and git-revision param)</p>
+<p>Clones the source code of the application from a Git repository by referring to <code>git-url</code> and <code>git-revision</code> parammeters.</p>
 </li>
 <li>
-<p>Builds the container image of application using the buildah task that uses Buildah to build the image</p>
+<p>Builds the container image of application using the <code>Buildah</code> task that uses Buildah to build the image</p>
 </li>
 <li>
-<p>The application image is pushed to an image registry by refering (image param)</p>
+<p>The application image is pushed to an image registry based on the <code>IMAGE</code> parameter.</p>
 </li>
 <li>
-<p>The new application image is deployed on OpenShift using the apply-manifests and update-deployment tasks.</p>
+<p>The new application image is deployed on OpenShift using the <code>apply-manifests</code> and <code>update-deployment</code> tasks we&#8217;ve created earlier.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>You might have noticed that there are no references to the git repository or the image registry it will be pushed to in pipeline. That&#8217;s because pipeline in Tekton are designed to be generic and re-usable across environments and stages through the application&#8217;s lifecycle. Pipelines abstract away the specifics of the git source repository and image to be produced as PipelineResources or Params. When triggering a pipeline, you can provide different git repositories and image registries to be used during pipeline execution. Be patient! You will do that in a little bit in the next section.</p>
+<p>You might have noticed that there are no references to the Git repository or the image registry it will be pushed to in pipeline. That&#8217;s because pipeline in Tekton are designed to be generic and re-usable across environments and stages through the application&#8217;s lifecycle.</p>
 </div>
 <div class="paragraph">
 <p>+
-The execution order of tasks is determined by dependencies that are defined between the tasks via inputs and outputs as well as explicit orders that are defined via runAfter.</p>
+Pipelines abstract away the specifics of the git source repository and image to be produced as PipelineResources or Params. When triggering a pipeline, you can provide different git repositories and image registries to be used during pipeline execution. Be patient! You will do that in a little bit in the next section.</p>
 </div>
 <div class="paragraph">
 <p>+
-workspaces field allows you to specify one or more volumes that each Task in the Pipeline requires during execution. You specify one or more Workspaces in the workspaces field.</p>
+The execution order of tasks is determined by dependencies that are defined between the tasks via inputs and outputs as well as explicit orders that are defined via <code>runAfter</code>.</p>
+</div>
+<div class="paragraph">
+<p>+
+The <code>workspaces</code> field allows you to specify one or more volumes that each <code>Task</code> in the Pipeline requires during execution. You specify one or more Workspaces in the <code>workspaces</code> field.</p>
 </div>
 </li>
 <li>
-<p>Create PersistentVolumeClaim for share workspace in Pipeline, Click Import YAML from Top Right of Developer Console</p>
+<p>Create <code>PersistentVolumeClaim</code> for share workspace in <code>Pipeline</code>. Click on the <strong>+</strong> button at the top right corner of OpenShift console, then select <strong>Import YAML</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-11.png" alt="tk 11">
@@ -570,7 +571,7 @@ workspaces field allows you to specify one or more volumes that each Task in the
 </div>
 </li>
 <li>
-<p>Paste PersistentVolumeClaim YAML in Editor, click Create</p>
+<p>Copy this YAML and paste to the editor, then click <strong>Create</strong> button.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: v1
@@ -586,15 +587,7 @@ spec:
 </div>
 </div>
 <div class="paragraph">
-<p>Example</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/tekton/tk-12.png" alt="tk 12">
-</div>
-</div>
-<div class="paragraph">
-<p>PVC after Created</p>
+<p>PersistentVolumeClaim should be created successfully.</p>
 </div>
 <div class="imageblock">
 <div class="content">
