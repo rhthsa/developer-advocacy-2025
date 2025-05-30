@@ -31,7 +31,7 @@ The custom resources needed to define a pipeline are listed below:
 * *TaskRun*: the execution and result of running an instance of task
 * *PipelineRun*: the execution and result of running an instance of pipeline, which includes a number of TaskRuns
 
-image::tekton/tekton-architecture.svg[]
+image::tekton/tekton-architecture.png[]
 
 In short, in order to create a pipeline, one does the following:
 
@@ -110,7 +110,7 @@ When a task starts running, it starts a pod and runs each step sequentially in a
 Note that only the requirement for a git repository is declared on the task and not a specific git repository to be used. That allows tasks to be reusable for multiple pipelines and purposes. You can find more examples of reusable tasks in the https://github.com/tektoncd/catalog[Tekton Catalog] and https://github.com/openshift/pipelines-catalog[OpenShift Catalog] repositories.
 
 * Create the `apply-manifests` and `update-deployment` `Tasks` from the repository using `oc` or `kubectl` command.
-
++
 NOTE: These 2 tasks you will need for creating a `Pipeline` in the next section. Review https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/01_apply_manifest_task.yaml[apply-manifests] and https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/02_update_deployment_task.yaml[update-deployment] tasks definition if you need.
 
 * Run these commands to create `Tasks`.
@@ -250,7 +250,7 @@ image::tekton/tk-7.png[]
 +
 image::tekton/tk-8.png[]
 
-* View Pipeline parameter in *Parameters* tab,
+* View Pipeline parameter in *Parameters* tab. You'll have to set these parameters when you run the pipeline.
 +
 image::tekton/tk-9.png[]
 
@@ -258,9 +258,7 @@ image::tekton/tk-9.png[]
 +
 image::tekton/tk-10.png[]
 
-* This pipeline helps you to build and deploy sample application, by configuring right resources to pipeline.
-+
-
+This pipeline helps you to build and deploy sample application, by configuring right resources to pipeline.
 *Here is a summary of Pipeline Steps (what the pipeline does):*
 
  .. Clones the source code of the application from a Git repository by referring to `git-url` and `git-revision` parammeters.
@@ -316,23 +314,25 @@ Using `tektoncd/triggers` in conjunction with `tektoncd/pipeline` enables you to
 
 NOTE: You can learn more about triggers by checking out the https://github.com/tektoncd/triggers/blob/master/docs/README.md[docs]
 
-In the following sections, you will go through each of the above steps to define and invoke a pipeline.
+In the following sections, you will go through each step to define and invoke a pipeline.
 
-A `PipelineRun` is how you can start a pipeline and tie it to the `persistentVolumeClaim` and params that should be used for this specific invocation.
+A `PipelineRun` is how you can start a pipeline and tie it to the `PersistentVolumeClaim` we've created, and parameters that should be used for this specific invocation.
 
 * Go to *gitea* web console and copy Git repository URL of the `simple-rest-go` repository.
 +
 image::shipwright/shp-20.png[]
 
-* Go to *Pipelines* menu, select *Pipelines* tab, then click on action menu of `build-to-deploy` pipeline, then select *start*.
+* Back to OpenShift console and select *Pipelines* menu, select *Pipelines* tab, then click on action menu of `build-to-deploy` pipeline, then select *start*.
 +
 image::tekton/tk-14.png[]
 
 In the *Parameter* section, enter following parameters:
+
 * Enter `simple-rest-go` to *deployment-name* parameter.
 * Paste the `simple-rest-go` Git reposity URL you've copied to *git-url* parameter. (Don't use the URL in the screenshot!)
 * Enter `main` to *git revision* parameter.
 * Enter `image-registry.openshift-image-registry.svc:5000/*<project>*/simple-rest-go:latest` to *IMAGE* parameter.
++
 [IMPORTANT]
 ====
 Change the *<project>* that matches to your username i.e. user1-tekton
@@ -361,11 +361,12 @@ image::tekton/tk-19.png[]
 +
 image::tekton/tk-20.png[]
 
-* Click *Topology* menu on the left to open Topology view. Select `simple-rest-go` Deployment, then go to *Resource* tab on the right panel, then open the application URL in the *Routes* section.
+* Click *Topology* menu on the left to open Topology view. Select `simple-rest-go` Deployment, then go to *Resources* tab on the right panel, then open the application URL in the *Routes* section.
 +
 image::tekton/tk-21.png[]
 +
 * You should be able to see a response from the application we've deployed via OpenShift Pipelines!.
++
 image::tekton/tk-22.png[]
 
 === [Optional] Trigger Pipeline with Tekton CLI
@@ -392,8 +393,8 @@ Pipelinerun started: <prefixname>-xxxxx
 In order to track the pipelinerun progress run:
 tkn pipelinerun logs <prefixname>-xxxxx -f -n <project>
 ----
-
-* As soon as you start pipeline, a `PipelineRun` will be instantiated and pods will be created to execute the tasks that are defined in the pipeline.
++
+As soon as you start pipeline, a `PipelineRun` will be instantiated and pods will be created to execute the tasks that are defined in the pipeline.
 +
 * Run this command to view all pipelines and statuses.
 +
