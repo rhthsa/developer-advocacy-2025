@@ -242,7 +242,7 @@ Developer can enable monitoring for user-defined projects in addition to the def
     - name: backend
       rules:
       - alert: HighLatency
-        expr: com_example_quarkus_BackendResource_timeBackend_seconds_max>0.1
+        expr: com_example_quarkus_BackendResource_timeBackend_seconds_max>0.01
         labels:
           severity: 'critical'
         annotations:
