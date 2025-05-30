@@ -15,6 +15,7 @@
 <!-- /TOC -->
 <!-- /TOC -->
 <!-- /TOC -->
+<!-- /TOC -->
 
 ## What is OpenShift Observability?
 
@@ -251,7 +252,7 @@ Need more details about OpenShift Logging --> [Link](https://docs.redhat.com/en/
   
   ![](../images/logs/log-50.png)
 
-- Paste `{ log_type="application", kubernetes_namespace_name="userX-observe" } |= `BackendResource` | json` in query text box (change x to your username) to find all logs coming from `BackendResource`
+- Paste `{ log_type="application", kubernetes_namespace_name="userX-observe" } |= "BackendResource" | json` in query text box (change x to your username) to find all logs coming from `BackendResource`
 
   ![](../images/logs/log-51.png)  
 
