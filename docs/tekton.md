@@ -150,7 +150,7 @@ A pipeline defines a number of tasks that should be executed and how they intera
 
 In this tutorial, you will create a pipeline that takes the source code of the application from Git and then builds and deploys it on OpenShift.
 
-- Here is the YAML file that represents the above pipeline:
+- Here is the YAML file that represents the pipeline:
 
   ```yaml
   apiVersion: tekton.dev/v1
@@ -307,7 +307,7 @@ Now that the pipeline is created, you can trigger it to execute the tasks specif
 
 A PipelineRun is how you can start a pipeline and tie it to the persistentVolumeClaim and params that should be used for this specific invocation.
 
-- copy git URL of `simple-rest-go` repository from previous lab (Shipwright) such as  `https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git` 
+- copy git URL of `simple-rest-go` repository from previous lab (Shipwright),  `https://gitlab.com/chatapazar/simple-rest-go.git` 
 
 - Go to Pipelines menu, Pipelines tab, select actio menu for `build-to-deploy` pipeline, select `start`
   

@@ -33,7 +33,7 @@ create_projects() {
     
     for i in $( seq 1 $totalUsers )
     do    
-        oc adm policy add-role-to-user view user$i -n gitea
+        #oc adm policy add-role-to-user view user$i -n gitea
         oc adm policy add-role-to-user view user$i -n test
         oc adm policy add-role-to-user view user$i -n openshift-pipelines
         oc adm policy add-role-to-user shipwright-build-aggregate-edit user$i

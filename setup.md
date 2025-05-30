@@ -95,7 +95,7 @@
         type: Local
   ```
 
-- For build of openshift if not found crd, restart operator
+- For build of openshift if not found crd, restart operator, not enable pipeline console plugin
 
 - ArgoCD
 
