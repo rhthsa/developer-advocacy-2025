@@ -90,6 +90,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#createpipeline">2.3 Create Pipeline</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#triggerpipeline">2.4 Trigger Pipeline</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -546,22 +549,23 @@ spec:
 </li>
 </ol>
 </div>
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>You might have noticed that there are no references to the Git repository or the image registry it will be pushed to in pipeline. That&#8217;s because pipeline in Tekton are designed to be generic and re-usable across environments and stages through the application&#8217;s lifecycle.</p>
 </div>
 <div class="paragraph">
-<p>+
-Pipelines abstract away the specifics of the git source repository and image to be produced as PipelineResources or Params. When triggering a pipeline, you can provide different git repositories and image registries to be used during pipeline execution. Be patient! You will do that in a little bit in the next section.</p>
+<p>Pipelines abstract away the specifics of the git source repository and image to be produced as PipelineResources or Params. When triggering a pipeline, you can provide different git repositories and image registries to be used during pipeline execution. Be patient! You will do that in a little bit in the next section.</p>
 </div>
 <div class="paragraph">
-<p>+
-The execution order of tasks is determined by dependencies that are defined between the tasks via inputs and outputs as well as explicit orders that are defined via <code>runAfter</code>.</p>
+<p>The execution order of tasks is determined by dependencies that are defined between the tasks via inputs and outputs as well as explicit orders that are defined via <code>runAfter</code>.</p>
 </div>
 <div class="paragraph">
-<p>+
-The <code>workspaces</code> field allows you to specify one or more volumes that each <code>Task</code> in the Pipeline requires during execution. You specify one or more Workspaces in the <code>workspaces</code> field.</p>
+<p>The <code>workspaces</code> field allows you to specify one or more volumes that each <code>Task</code> in the Pipeline requires during execution. You specify one or more Workspaces in the <code>workspaces</code> field.</p>
 </div>
-</li>
+<div class="ulist">
+<ul>
 <li>
 <p>Create <code>PersistentVolumeClaim</code> for share workspace in <code>Pipeline</code>. Click on the <strong>+</strong> button at the top right corner of OpenShift console, then select <strong>Import YAML</strong>.</p>
 <div class="imageblock">
@@ -598,29 +602,24 @@ spec:
 </ul>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_trigger_pipeline"><a class="anchor" href="#_trigger_pipeline"></a>Trigger Pipeline</h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="_concept"><a class="anchor" href="#_concept"></a>Concept</h3>
+<h3 id="triggerpipeline"><a class="anchor" href="#triggerpipeline"></a>Trigger Pipeline</h3>
 <div class="paragraph">
-<p>Triggers extend the Tekton architecture with the following CRDs:</p>
+<p>Now that the pipeline is created, you can trigger it to execute the tasks specified in the pipeline. Triggers extend the Tekton architecture with the following CRDs:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/triggertemplates.md">TriggerTemplate</a> - Templates resources to be created (e.g. Create PipelineResources and PipelineRun that uses them)</p>
+<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/triggertemplates.md">TriggerTemplate</a> - Templates resources to be created (e.g. Create <code>PipelineResources</code> and <code>PipelineRun</code> that uses them)</p>
 </li>
 <li>
 <p><a href="https://github.com/tektoncd/triggers/blob/master/docs/triggerbindings.md">TriggerBinding</a> - Validates events and extracts payload fields</p>
 </li>
 <li>
-<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/triggers.md">Trigger</a> - combines TriggerTemplate, TriggerBindings and interceptors.</p>
+<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/triggers.md">Trigger</a> - combines <code>TriggerTemplate</code>, <code>TriggerBindings</code> and interceptors.</p>
 </li>
 <li>
-<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/eventlisteners.md">EventListener</a> - provides an addressable endpoint (the event sink). Trigger is referenced inside the EventListener Spec. It uses the extracted event parameters from each TriggerBinding (and any supplied static parameters) to create the resources specified in the corresponding TriggerTemplate. It also optionally allows an external service to pre-process the event payload via the interceptor field.</p>
+<p><a href="https://github.com/tektoncd/triggers/blob/master/docs/eventlisteners.md">EventListener</a> - provides an addressable endpoint (the event sink). Trigger is referenced inside the EventListener Spec. It uses the extracted event parameters from each <code>TriggerBinding</code> (and any supplied static parameters) to create the resources specified in the corresponding <code>TriggerTemplate</code>. It also optionally allows an external service to pre-process the event payload via the interceptor field.</p>
 </li>
 <li>
 <p><a href="https://github.com/tektoncd/triggers/blob/master/docs/clustertriggerbindings.md">ClusterTriggerBinding</a> - A cluster-scoped TriggerBinding</p>
@@ -628,47 +627,71 @@ spec:
 </ul>
 </div>
 <div class="paragraph">
-<p>Using tektoncd/triggers in conjunction with tektoncd/pipeline enables you to easily create full-fledged CI/CD systems where the execution is defined entirely through Kubernetes resources.</p>
+<p>Using <code>tektoncd/triggers</code> in conjunction with <code>tektoncd/pipeline</code> enables you to easily create full-fledged CI/CD systems where the execution is defined entirely through Kubernetes resources.</p>
 </div>
-<div class="paragraph">
-<p>You can learn more about triggers by checking out the <a href="https://github.com/tektoncd/triggers/blob/master/docs/README.md">docs</a></p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can learn more about triggers by checking out the <a href="https://github.com/tektoncd/triggers/blob/master/docs/README.md">docs</a>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>In the following sections, you will go through each of the above steps to define and invoke a pipeline.</p>
 </div>
 <div class="paragraph">
-<p>Now that the pipeline is created, you can trigger it to execute the tasks specified in the pipeline.</p>
-</div>
-<div class="paragraph">
-<p>A PipelineRun is how you can start a pipeline and tie it to the persistentVolumeClaim and params that should be used for this specific invocation.</p>
+<p>A <code>PipelineRun</code> is how you can start a pipeline and tie it to the <code>persistentVolumeClaim</code> and params that should be used for this specific invocation.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>copy git URL of <code>simple-rest-go</code> repository from previous lab (Shipwright) such as  <code>https://gitea-gitea.apps.cluster-ldrt9.ldrt9.sandbox1106.opentlc.com/user1/simple-rest-go.git</code></p>
+<p>Go to <strong>gitea</strong> web console and copy Git repository URL of the <code>simple-rest-go</code> repository.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-20.png" alt="shp 20">
+</div>
+</div>
 </li>
 <li>
-<p>Go to Pipelines menu, Pipelines tab, select actio menu for <code>build-to-deploy</code> pipeline, select <code>start</code></p>
+<p>Go to <strong>Pipelines</strong> menu, select <strong>Pipelines</strong> tab, then click on action menu of <code>build-to-deploy</code> pipeline, then select <strong>start</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-14.png" alt="tk 14">
 </div>
 </div>
 </li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In the <strong>Parameter</strong> section, enter following parameters:
+* Enter <code>simple-rest-go</code> to <strong>deployment-name</strong> parameter.
+* Paste the <code>simple-rest-go</code> Git reposity URL you&#8217;ve copied to <strong>git-url</strong> parameter. (Don&#8217;t use the URL in the screenshot!)
+* Enter <code>main</code> to <strong>git revision</strong> parameter.
+* Enter <code>image-registry.openshift-image-registry.svc:5000/<strong>&lt;project&gt;</strong>/simple-rest-go:latest</code> to <strong>IMAGE</strong> parameter.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Change the <strong>&lt;project&gt;</strong> that matches to your username i.e. user1-tekton</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>In Start Pipeline, input <code>simple-rest-go</code> in deployment-name parameter,</p>
-</li>
-<li>
-<p>Input previous copy git url <code>simple-rest-go</code> in git-url parameter, (Don&#8217;t copy from picture!!!)</p>
-</li>
-<li>
-<p>Input <code>main</code> in git revision  parameter</p>
-</li>
-<li>
-<p>Input <code>image-registry.openshift-image-registry.svc:5000/&lt;project&gt;/simple-rest-go:latest</code> in Image parameter, change <project>to your username such as user1-tekton</project></p>
-</li>
-<li>
-<p>Leave default timeout</p>
+<p>Leave <strong>Timeouts</strong> as default.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-15.png" alt="tk 15">
@@ -676,7 +699,7 @@ spec:
 </div>
 </li>
 <li>
-<p>In Workspaces, select <code>PersistentVolumeClaim - source-pvc</code> for shared-workspace parameter, click start</p>
+<p>In the <strong>Workspaces</strong> section, select <code>PersistentVolumeClaim</code> and <code>source-pvc</code> for <strong>shared-workspace</strong> parameter, then click <strong>Start</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-16.png" alt="tk 16">
@@ -684,7 +707,7 @@ spec:
 </div>
 </li>
 <li>
-<p>After click start, PipelineRun will be create. you can view detail by click task in PipelineRun details</p>
+<p>The <code>PipelineRun</code> will be created. you can view details by click on each task in <code>PipelineRun</code> to see the details.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-17.png" alt="tk 17">
@@ -692,12 +715,15 @@ spec:
 </div>
 </li>
 <li>
-<p>view logs from each task and wait until status change to Succeeded!</p>
+<p>Go to <strong>Logs</strong> tab to view logs from each task.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-18.png" alt="tk 18">
 </div>
 </div>
+</li>
+<li>
+<p>Wait until the pipeline status changes to <code>Succeeded</code>!</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-19.png" alt="tk 19">
@@ -705,7 +731,7 @@ spec:
 </div>
 </li>
 <li>
-<p>Back to Pipeline to view detail of lastest PipelineRun</p>
+<p>Back to <strong>Pipeline</strong> menu to view the status of <code>Pipeline</code> and <code>PipelineRun</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-20.png" alt="tk 20">
@@ -713,129 +739,140 @@ spec:
 </div>
 </li>
 <li>
-<p>Back to Topology view, view <code>simple-rest-go</code> deployment, service and route, click Open URL to test application</p>
+<p>Click <strong>Topology</strong> menu on the left to open Topology view. Select <code>simple-rest-go</code> Deployment, then go to <strong>Resource</strong> tab on the right panel, then open the application URL in the <strong>Routes</strong> section.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-21.png" alt="tk 21">
 </div>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/tekton/tk-22.png" alt="tk 22">
-</div>
-</div>
+</li>
+<li>
+<p>You should be able to see a response from the application we&#8217;ve deployed via OpenShift Pipelines!.
+image::tekton/tk-22.png[]</p>
 </li>
 </ul>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_tekton_cli_optional"><a class="anchor" href="#_tekton_cli_optional"></a>Tekton CLI (Optional!)</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_optional_trigger_pipeline_with_tekton_cli"><a class="anchor" href="#_optional_trigger_pipeline_with_tekton_cli"></a>[Optional] Trigger Pipeline with Tekton CLI</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Start a pipeline to build and deploy the application using tkn:</p>
-<div class="listingblock">
+<p>Start a pipeline to build and deploy the application using <code>tkn</code> command line.</p>
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">  tkn pipeline start &lt;pipelinename&gt; \
-      --prefix-name &lt;prefixname&gt; \
-      -w &lt;share_storage&gt; \
-      -p &lt;param=value&gt; \
-      --use-param-defaults
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">tkn pipeline start &lt;pipelinename&gt; \
+    --prefix-name &lt;prefixname&gt; \
+    -w &lt;share_storage&gt; \
+    -p &lt;param=value&gt; \
+    --use-param-defaults</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output.</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">Pipelinerun started: &lt;prefixname&gt;-xxxxx
 
-
-  Pipelinerun started: &lt;prefixname&gt;-xxxxx
-
-  In order to track the pipelinerun progress run:
-  tkn pipelinerun logs &lt;prefixname&gt;-xxxxx -f -n &lt;project&gt;</code></pre>
+In order to track the pipelinerun progress run:
+tkn pipelinerun logs &lt;prefixname&gt;-xxxxx -f -n &lt;project&gt;</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>As soon as you start pipeline, a pipelinerun will be instantiated and pods will be created to execute the tasks that are defined in the pipeline.</p>
-<div class="listingblock">
+<p>As soon as you start pipeline, a <code>PipelineRun</code> will be instantiated and pods will be created to execute the tasks that are defined in the pipeline.</p>
+</li>
+<li>
+<p>Run this command to view all pipelines and statuses.</p>
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">  tkn pipeline list
-  NAME               AGE              LAST RUN        STARTED          DURATION   STATUS
-  build-and-deploy   10 minutes ago   vote-ui-9tb2q   47 seconds ago   ---        Running</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">tkn pipeline list</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output.</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">NAME               AGE              LAST RUN                 STARTED          DURATION   STATUS
+build-and-deploy   10 minutes ago   build-and-deploy-9tb2q   47 seconds ago   ---        Running</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Above we have started build-and-deploy pipeline, with relevant pipeline resources to deploy the backend/frontend applications using single pipeline</p>
-<div class="listingblock">
+<p>Above we have started <code>build-and-deploy</code> pipeline, with relevant pipeline resources to deploy the application. Run this command to view <code>PipelineRun</code> status.</p>
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">  tkn pipelinerun ls
-  NAME             STARTED         DURATION   STATUS
-  vote-ui-9tb2q    1 minute ago    ---        Running
-  vote-api-t9tpq   1 minute ago    ---        Running</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">tkn pipelinerun ls</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output.</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">NAME                      STARTED         DURATION   STATUS
+build-and-deploy-9tb2q    1 minute ago    ---        Running
+build-and-deploy-t9tpq    1 minute ago    ---        Running</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Check out the logs of the pipelinerun as it runs using the tkn pipeline logs command which interactively allows you to pick the pipelinerun of your interest and inspect the logs:</p>
-<div class="listingblock">
+<p>Check out the logs of the pipelinerun as it runs using the <code>tkn pipeline logs</code> command which interactively allows you to pick the pipelinerun of your interest and inspect the logs:</p>
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">  tkn pipeline logs -f
-  ? Select pipelinerun:  [Use arrows to move, type to filter]
-  &gt; vote-ui-9tb2q started 3 minutes ago
-  vote-api-t9tpq started 7 minutes ago</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">tkn pipeline logs -f</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output.</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">? Select pipelinerun:  [Use arrows to move, type to filter]
+&gt; build-and-deploy-9tb2q started 3 minutes ago
+build-and-deploy-t9tpq started 7 minutes ago</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>After a few minutes, the pipeline should finish successfully.</p>
-<div class="listingblock">
+<p>After a few minutes, the pipeline should finish successfully. Run this command to view <code>PipelineRun</code> status.</p>
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">  $ tkn pipelinerun list
-  NAME             STARTED         DURATION   STATUS
-  vote-ui-9tb2q    1 minute ago    1m23s      Succeeded
-  vote-api-t9tpq   5 minutes ago   1m31s      Succeeded</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">tkn pipelinerun list</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output.</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">NAME                      STARTED         DURATION   STATUS
+build-and-deploy-9tb2q    1 minute ago    1m23s      Succeeded
+build-and-deploy-t9tpq    5 minutes ago   1m31s      Succeeded</code></pre>
 </div>
 </div>
 </li>
 <li>
 <p>If you want to re-run the pipeline again, you can use the following short-hand command to rerun the last pipelinerun again that uses the same workspaces, params and service account used in the previous pipeline run:</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">tkn pipeline start build-and-deploy --last</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">tkn pipeline start build-and-deploy --last</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
-<li>
+<div class="paragraph">
 <p>Whenever there is any change to your repository we need to start the pipeline explicitly to see new changes take effect.</p>
+</div>
 </li>
 </ul>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_bonus_add_web_hook_for_trigger_pipeline"><a class="anchor" href="#_bonus_add_web_hook_for_trigger_pipeline"></a>[Bonus!] Add Web Hook for Trigger Pipeline</h3>
+<div class="paragraph">
+<p>Triggers in conjunction with pipelines enable us to hook our Pipelines to respond to external Git events (push events, pull requests etc). get more information and example from this <a href="https://github.com/openshift/pipelines-tutorial?tab=readme-ov-file#triggers">tutorial</a>.</p>
 </div>
-<div class="sect1">
-<h2 id="_add_web_hook_for_trigger_pipeline_optional"><a class="anchor" href="#_add_web_hook_for_trigger_pipeline_optional"></a>Add Web Hook for Trigger Pipeline (Optional!)</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>Triggers in conjunction with pipelines enable us to hook our Pipelines to respond to external Git events (push events, pull requests etc). get more information and example <a href="https://github.com/openshift/pipelines-tutorial?tab=readme-ov-file#triggers">Link</a></p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_step"><a class="anchor" href="#_next_step"></a>Next Step</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#argocd.adoc" class="xref unresolved">Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II</a></p>
-</li>
-</ul>
 </div>
 </div>
 </div>
