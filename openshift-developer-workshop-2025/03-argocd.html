@@ -108,6 +108,9 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#kustomizeresources">3.3 Kustomize Resources</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deployappwithgitops">3.4 Deploy Application with OpenShift GitOps</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -342,7 +345,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>Go back to the repository main page, then go into <strong>overlays/dev</strong> directory. This directory contains configuration for the <code>Development</code> environment.</p>
+<p>Go to the <strong>overlays/dev</strong> directory. This directory contains configuration for the <code>Development</code> environment.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-32.png" alt="argo 32">
@@ -388,10 +391,10 @@ To recap, Kustomize relies on the following system of configuration management l
 <div class="ulist">
 <ul>
 <li>
-<p>kustomization.yaml</p>
+<p><code>kustomization.yaml</code></p>
 </li>
 <li>
-<p>deployment.yaml</p>
+<p><code>deployment.yaml</code></p>
 </li>
 </ul>
 </div>
@@ -411,14 +414,17 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </div>
 <div class="sect2">
-<h3 id="_create_applicaiton_in_openshift_gitops"><a class="anchor" href="#_create_applicaiton_in_openshift_gitops"></a>Create Applicaiton in OpenShift GitOps</h3>
+<h3 id="deployappwithgitops"><a class="anchor" href="#deployappwithgitops"></a>Deploy Applicaiton with OpenShift GitOps</h3>
+<div class="paragraph">
+<p>In this lab we&#8217;re going to deploy the <code>simple-rest-go</code> application to OpenShift using OpenShift GitOps. The application will be deployed into 2 projects; <code>userX-gitops-dev</code> and <code>userX-gitops-prod</code> to pretend that you need to deploy the application to 2 environments - <strong>Development</strong> and <strong>Production</strong> respectively.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s deploy the application for the <strong>Development</strong> environment first.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Open your developer console, go to your project 'userX-gitops-dev' (replace X with your username)</p>
-</li>
-<li>
-<p>Go to top right of developer console, Navigate to the table menu (It&#8217;s to the left of the plus sign menu.) -&#8594; OpenShift GitOps -&#8594; Cluster Argo CD.</p>
+<p>In OpenShift web console, click on the application palette icon at the top right corner then select  <strong>OpenShift GitOps &gt; Cluster Argo CD</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-38.png" alt="argo 38">
@@ -426,7 +432,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>Use local user for login, type your username and password (same with your openshift login), click <code>SIGN IN</code></p>
+<p>Log in with your username and password same as OpenShift&#8217;s credential.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-2.png" alt="argo 2">
@@ -434,7 +440,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>Review Argo CD Console, Click <code>+ New App</code></p>
+<p>On the <strong>Applications</strong> page, click <strong>+ NEW APP</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-3.png" alt="argo 3">
@@ -442,13 +448,13 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>In create application, Input <code>userX-go-dev</code> to Application Name (change X to your username)</p>
+<p>Enter <code>userX-go-dev</code> to <strong>Application Name</strong> (change <code>userX</code> to your username)</p>
 </li>
 <li>
-<p>set <code>default</code> to Project Name</p>
+<p>Enter <code>default</code> to <strong>Project Name</strong></p>
 </li>
 <li>
-<p>set <code>Manual</code> to SYNC POLICY</p>
+<p>Select <code>Manual</code> for <strong>SYNC POLICY</strong></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-4.png" alt="argo 4">
@@ -456,13 +462,13 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>In SOURCE section, input <code>https://github.com/rhthsa/simple-rest-go.git</code> to Repository URL</p>
+<p>In the <strong>SOURCE</strong> section, enter <code><a href="https://github.com/rhthsa/simple-rest-go.git" class="bare">https://github.com/rhthsa/simple-rest-go.git</a></code> to <strong>Repository URL</strong>.</p>
 </li>
 <li>
-<p>set Revision to <code>HEAD</code></p>
+<p>Set <strong>Revision</strong> to <code>HEAD</code></p>
 </li>
 <li>
-<p>set Path to <code>apps-kustomize/overlays/dev</code></p>
+<p>Enter <code>apps-kustomize/overlays/dev</code> to <strong>Path</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-5.png" alt="argo 5">
@@ -470,10 +476,10 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>In Destination section, select first cluster (from dropdownlist) to Cluster URL</p>
+<p>In the  <strong>DESTINATION</strong> section, select the first cluster in <strong>Cluster URL</strong> dropdownlist.</p>
 </li>
 <li>
-<p>set Namespace to <code>userX-gitops-dev</code> (change X to your username)</p>
+<p>Enter <code>userX-gitops-dev</code> to <strong>Namespace</strong> (change <code>userX`</code> to your username).</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-6.png" alt="argo 6">
@@ -481,7 +487,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>leave default last part, click Create</p>
+<p>Leave default for the rest of configurations, then click <strong>Create</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-7.png" alt="argo 7">
@@ -489,7 +495,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>Back to Main page, set filter in namespace to <code>userX*</code> (change X to your username), this help filter your app in page.</p>
+<p>Back to the main page, set filter for <strong>NAMESPACES</strong> to <code>userX*</code> (change <code>userX`</code> to your username), this helps filter only your app to be displayed on the page.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-8.png" alt="argo 8">
@@ -497,15 +503,12 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>Review application in Applications page</p>
+<p>Review application in the <strong>Applications</strong> page, Click on <code>userX-go-dev</code> application tile to view application details.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-9.png" alt="argo 9">
 </div>
 </div>
-</li>
-<li>
-<p>Click <code>userX-go-dev</code> to view details of application</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-10.png" alt="argo 10">
@@ -513,7 +516,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>click <code>sync</code> to synchronize application to cluster</p>
+<p>Click <strong>SYNC</strong> button then <strong>SYNCHRONIZE</strong> to synchronize application configurations from Git repository to your project on OpenShift.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-11.png" alt="argo 11">
@@ -521,7 +524,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>wait until App Health change to <code>Healthy</code>, Sync status to <code>Synced</code>, Last sync to <code>Sync OK</code>, check number of pod in this deployment (2 Pods)</p>
+<p>Wait until <strong>APP HEALTH</strong> status changed to <code>Healthy</code>, <strong>SYNC STATUS</strong> changed to <code>Synced</code>, and <strong>LAST SYNC</strong> changed to <code>Sync OK</code>. Then check number of pods, there should be 2 pods as configured in the <code>overlays/dev/deployment.yaml</code> file in Git repository you&#8217;ve reviewed before.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-12.png" alt="argo 12">
@@ -529,9 +532,9 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>Change from Tree view to Pods view, to Network view and List view to see kubernetes object in each view.</p>
+<p>At the top right corner of application view area, you can change view mode to <strong>Tree view</strong>, <strong>Pods view</strong>, <strong>Network view</strong>, and <strong>List view</strong> to see resources in each view.</p>
 <div class="paragraph">
-<p>Pods view</p>
+<p>Sample of Pods view.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -539,7 +542,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </div>
 <div class="paragraph">
-<p>Network view</p>
+<p>Sample of Network view.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -547,7 +550,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </div>
 <div class="paragraph">
-<p>List view</p>
+<p>Sample of List view.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -555,17 +558,24 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </div>
 </li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Next, let&#8217;s deploy the application for <strong>Production</strong> environment.</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>Create Application for Production, back to Applications, click <code>+ NEW APP</code></p>
+<p>Select the <strong>Applications</strong> menu on the left, the click <code>+ NEW APP</code> button.</p>
 </li>
 <li>
-<p>set Application Name to <code>userX-go-prod</code> (change X to your username)</p>
+<p>set <strong>Application Name</strong> to <code>userX-go-prod</code> (change <code>userX</code> to your username)</p>
 </li>
 <li>
-<p>set Project Name to <code>default</code></p>
+<p>set <strong>Project Name</strong> to <code>default</code></p>
 </li>
 <li>
-<p>set SYNC POLICY to <code>Manual</code></p>
+<p>set <strong>SYNC POLICY</strong> to <code>Manual</code></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-16.png" alt="argo 16">
@@ -573,13 +583,13 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>In SOURCE section, input <code>https://github.com/rhthsa/simple-rest-go.git</code> to Repository URL</p>
+<p>In the <strong>SOURCE</strong> section, Enter <code><a href="https://github.com/rhthsa/simple-rest-go.git" class="bare">https://github.com/rhthsa/simple-rest-go.git</a></code> to <strong>Repository URL</strong>.</p>
 </li>
 <li>
-<p>set Revision to <code>HEAD</code></p>
+<p>set <strong>Revision</strong> to <code>HEAD</code></p>
 </li>
 <li>
-<p>set Path to <code>apps-kustomize/overlays/prod</code></p>
+<p>set <strong>Path</strong> to <code>apps-kustomize/overlays/prod</code></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-17.png" alt="argo 17">
@@ -587,10 +597,10 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>In Destination section, select first cluster (from dropdownlist) to Cluster URL</p>
+<p>In the <strong>Destination</strong> section, select the first cluster in <strong>Cluster URL</strong> dropdownlist.</p>
 </li>
 <li>
-<p>set Namespace to <code>userX-gitops-prod</code> (change X to your username)</p>
+<p>set <strong>Namespace</strong> to <code>userX-gitops-prod</code> (change <code>userX`</code> to your username).</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-18.png" alt="argo 18">
@@ -598,7 +608,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>leave default last part, click Create</p>
+<p>Leave default for the rest of configurations, then click <strong>Create</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-19.png" alt="argo 19">
@@ -606,7 +616,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>View new applicaiton in applications view, click <code>userX-go-prod</code> (change x to your username)</p>
+<p>You should see a new application - <code>userX-go-prod</code> that matches to your username shows up. Click on in to see application details.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-20.png" alt="argo 20">
@@ -614,7 +624,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>Click Sync and wait until sync complete, check number of Pods (3 Pods)</p>
+<p>Click on <strong>SYNC</strong> to synchronize configurations from Git repository to OpenShift and wait until the synchonization completed, there should be 3 Pods running.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-21.png" alt="argo 21">
@@ -622,7 +632,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>back to OpenShift Console, view topology in <code>userX-gitops-dev</code> project (change X to your username), check number of pods.</p>
+<p>Go back to OpenShift Console, select <strong>Topology</strong> menu on the left. Change project to <code>userX-gitops-dev</code> matches to your username, then click on the <code>simple-rest-go</code> Deployment. On the right panel, click on <strong>Resources</strong> tab then check the number of Pods. There should be 2 Pods running.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-22.png" alt="argo 22">
@@ -630,7 +640,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>view topology in <code>userX-gitops-prod</code> project (change X to your username), check number of pods.</p>
+<p>Now change project to <code>userX-gitops-prod</code> matches to your username, then check the number of Pods. There should be 3 Pods running.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-23.png" alt="argo 23">
@@ -638,7 +648,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>In <code>userX-gitops-prod</code> project, try to reduce replica of deployment by, click in Details tab of <code>simple-rest-go</code> deployment, and click scale down from 3 to 2</p>
+<p>In the <code>userX-gitops-prod</code> project, try to reduce the number of replicas by just go to the <strong>Details</strong> tab on the right panel, click on <strong>v</strong> to scale down the application from 3 to 2 replicas.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-24.png" alt="argo 24">
@@ -646,7 +656,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>Back to ArgoCD, view <code>userX-go-prod</code> application, Status change to <code>OutOfSync</code>, Click to view Detail</p>
+<p>Go to Argo CD web console, on the <strong>Applications</strong> main page, you should see the status of <code>userX-go-prod</code> application changed to <code>OutOfSync</code>. Click on the application tile to see details.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-25.png" alt="argo 25">
@@ -654,7 +664,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>In applicaiton detail, click diff button</p>
+<p>In the applicaiton details view, click on the <strong>DIFF</strong> button at the top.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-26.png" alt="argo 26">
@@ -662,7 +672,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>check <code>compact diff</code> and <code>inline diff</code> to view diff between current state on Cluster and yaml file on Git</p>
+<p>Select <strong>compact diff</strong> and <strong>inline diff</strong> checkbox to view the differences between current configuration in OpenShift cluster and the configurations file on Git.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-27.png" alt="argo 27">
@@ -670,7 +680,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>Click Sync button, Click Synchronize to update deployment to value from Git.</p>
+<p>Click <strong>SYNC</strong> button, then click <strong>SYNCHRONIZE</strong> to synchronize configurations from Git to OpenShift again.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-28.png" alt="argo 28">
@@ -678,7 +688,7 @@ To recap, Kustomize relies on the following system of configuration management l
 </div>
 </li>
 <li>
-<p>Back to OpenShift Developer Console, Review number of replica again.</p>
+<p>Go back to OpenShift console and check the number of replicas of <code>simple-rest-go</code> Deployment again. It should be back to 3 replicas.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-29.png" alt="argo 29">
@@ -688,11 +698,8 @@ To recap, Kustomize relies on the following system of configuration management l
 </ul>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h3>
 <div class="paragraph">
 <p>OpenShift GitOps takes advantage of Argo CD and integrates it into Red Hat OpenShift to deliver a consistent, fully supported, declarative Kubernetes platform to configure and use with GitOps principles.</p>
 </div>
@@ -720,6 +727,7 @@ To recap, Kustomize relies on the following system of configuration management l
 <p>Support advanced deployment strategies, including blue green and canary, using automated traffic management and testing capabilities with <a href="https://argoproj.github.io/rollouts/">Argo Rollouts</a>.</p>
 </li>
 </ul>
+</div>
 </div>
 </div>
 </div>
