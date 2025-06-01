@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Untitled :: OpenShift Developer Workshop 2025</title>
+    <title>Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II :: OpenShift Developer Workshop 2025</title>
     <link rel="canonical" href="https://rhthsa.github.io/developer-advocacy-2025/openshift-developer-workshop-2025/03-argocd.html">
     <link rel="prev" href="02-tekton.html">
     <meta name="generator" content="Antora 3.0.0">
@@ -79,7 +79,7 @@
   </li>
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD</a>
+    <a class="nav-link" href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD - Part I</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="02-tekton.html#openshiftpipelines">2.1 OpenShift Pipelines</a>
@@ -93,25 +93,34 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="02-tekton.html#triggerpipeline">2.4 Trigger Pipeline</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="03-argocd.html">2.4 OpenShift GitOps</a>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-argocd.html">3. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#openshiftgitops">3.1 OpenShift GitOps</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#gitopswithkustomize">2.5 GitOps with Kustomize</a>
+    <a class="nav-link" href="#gitopswithkustomize">3.2 GitOps with Kustomize</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#kustomizeresources">3.3 Kustomize Resources</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">3. Observability through logs: Centralized logging with Loki &amp; querying via LogQL</span>
+    <span class="nav-text">4. Observability through logs: Centralized logging with Loki &amp; querying via LogQL</span>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">4. Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</span>
+    <span class="nav-text">5. Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</span>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">5. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</span>
+    <span class="nav-text">6. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</span>
   </li>
   <li class="nav-item" data-depth="1">
-    <span class="nav-text">6. Accelerating software development with Red Hat Developer Hub</span>
+    <span class="nav-text">7. Accelerating software development with Red Hat Developer Hub</span>
   </li>
 </ul>
   </li>
@@ -128,16 +137,16 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">OpenShift Developer Workshop 2025</a></li>
-    <li><a href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD</a></li>
-    <li><a href="03-argocd.html">2.4 OpenShift GitOps</a></li>
+    <li><a href="03-argocd.html">3. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II</a></li>
   </ul>
 </nav>
   <div class="edit-this-page"><a href="https://github.com/rhthsa/developer-advocacy-2025/edit/master/documentation/modules/ROOT/pages/03-argocd.adoc">Edit this Page</a></div>
   </div>
   <div class="content">
 <article class="doc">
+<h1 class="page">Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II</h1>
 <div class="sect1">
-<h2 id="_red_hat_openshift_gitops"><a class="anchor" href="#_red_hat_openshift_gitops"></a>Red Hat OpenShift GitOps</h2>
+<h2 id="openshiftgitops"><a class="anchor" href="#openshiftgitops"></a>Red Hat OpenShift GitOps</h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_what_is_gitops"><a class="anchor" href="#_what_is_gitops"></a>What is GitOps?</h3>
@@ -195,7 +204,7 @@ Many other tools can be used together to build a GitOps framework. For example, 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_red_hat_openshift_gitops_2"><a class="anchor" href="#_red_hat_openshift_gitops_2"></a>Red Hat OpenShift GitOps</h3>
+<h3 id="_red_hat_openshift_gitops"><a class="anchor" href="#_red_hat_openshift_gitops"></a>Red Hat OpenShift GitOps</h3>
 <div class="paragraph">
 <p>Red Hat OpenShift GitOps ensures consistency in applications when you deploy them to different clusters in different environments, such as: development, staging, and production. Red Hat OpenShift GitOps organizes the deployment process around the configuration repositories and makes them the central element. It always has at least two repositories:</p>
 </div>
@@ -241,20 +250,13 @@ Many other tools can be used together to build a GitOps framework. For example, 
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_what_is_kustomize"><a class="anchor" href="#_what_is_kustomize"></a>What is Kustomize?</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Start with <a href="https://kustomize.io">Kustomized</a></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/kustomize-1.png" alt="kustomize 1">
 </div>
 </div>
 <div class="paragraph">
-<p>Kustomize provides a solution for customizing Kubernetes resource   configuration free from templates and DSLs.</p>
-</div>
-<div class="paragraph">
-<p>Kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as is.</p>
+<p><a href="https://kustomize.io">Kustomized</a> provides a solution for customizing Kubernetes resource   configuration free from templates and DSLs. Kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as is.</p>
 </div>
 <div class="paragraph">
 <p>Kustomize targets kubernetes; it understands and can patch kubernetes style API objects. It&#8217;s like make, in that what it does is declared in a file, and it&#8217;s like sed, in that it emits edited text.</p>
@@ -263,15 +265,16 @@ Many other tools can be used together to build a GitOps framework. For example, 
 <p>With kustomize, your team can ingest any base file updates for your underlying components while keeping use-case specific customization overrides intact. Another benefit of utilizing patch overlays is that they add dimensionality to your configuration settings, which can be isolated for troubleshooting misconfigurations or layered to create a framework of most-broad to most-specific configuration specifications.</p>
 </div>
 <div class="paragraph">
-<p>To recap, Kustomize relies on the following system of configuration management layering to achieve reusability:</p>
+<p>+
+To recap, Kustomize relies on the following system of configuration management layering to achieve reusability:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Base Layer - Specifies the most common resources</p>
+<p><strong>Base Layer</strong> - Specifies the most common resources</p>
 </li>
 <li>
-<p>Patch Layers - Specifies use case specific resources</p>
+<p><strong>Patch Layers</strong> - Specifies use case specific resources</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/kustomize-2.png" alt="kustomize 2">
@@ -280,22 +283,16 @@ Many other tools can be used together to build a GitOps framework. For example, 
 </li>
 </ul>
 </div>
-</li>
-</ul>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_review_kustomize_resource_in_git_repository"><a class="anchor" href="#_review_kustomize_resource_in_git_repository"></a>Review Kustomize Resource in Git Repository</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="kustomizeresources"><a class="anchor" href="#kustomizeresources"></a>Kustomize Resources</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>For this workshop, we will deploy <code>simple-rest-go</code> application agian by Red Hat OpenShift GitOps</p>
+<p>For this workshop, we will deploy <code>simple-rest-go</code> application agian using Red Hat OpenShift GitOps.</p>
 </li>
 <li>
-<p>open browser to <a href="https://github.com/rhthsa/simple-rest-go.git" class="bare">https://github.com/rhthsa/simple-rest-go.git</a></p>
+<p>Go to <a href="https://github.com/rhthsa/simple-rest-go" class="bare">https://github.com/rhthsa/simple-rest-go</a> to view application repository.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-30.png" alt="argo 30">
@@ -303,15 +300,15 @@ Many other tools can be used together to build a GitOps framework. For example, 
 </div>
 </li>
 <li>
-<p>go to /apps-kustomize</p>
+<p>Go into <strong>apps-kustomize</strong> directory. There are 2 directoies, <strong>base</strong> directory contains all files for common resources, and <strong>overlays</strong> directory contains all use case or environment specific resources.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/argocd/argo-31.png" alt="argo 31">
+<img src="_images/argocd/argo-41.png" alt="argo 41">
 </div>
 </div>
 </li>
 <li>
-<p>go to base folder</p>
+<p>Go into the <strong>base</strong> directory.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-40.png" alt="argo 40">
@@ -320,23 +317,23 @@ Many other tools can be used together to build a GitOps framework. For example, 
 <div class="ulist">
 <ul>
 <li>
-<p>review following file:</p>
+<p>Open these files to view configurations for application deployment (Configuration as Code). These files will be used as the base layer.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>kustomization.yaml</p>
+<p><code>kustomization.yaml</code></p>
 </li>
 <li>
-<p>rolebinding.yaml</p>
+<p><code>rolebinding.yaml</code></p>
 </li>
 <li>
-<p>deployment.yaml</p>
+<p><code>deployment.yaml</code></p>
 </li>
 <li>
-<p>service.yaml</p>
+<p><code>service.yaml</code></p>
 </li>
 <li>
-<p>route.yaml</p>
+<p><code>route.yaml</code></p>
 </li>
 </ul>
 </div>
@@ -345,7 +342,7 @@ Many other tools can be used together to build a GitOps framework. For example, 
 </div>
 </li>
 <li>
-<p>go to overlays/dev folder</p>
+<p>Go back to the repository main page, then go into <strong>overlays/dev</strong> directory. This directory contains configuration for the <code>Development</code> environment.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-32.png" alt="argo 32">
@@ -354,39 +351,31 @@ Many other tools can be used together to build a GitOps framework. For example, 
 <div class="ulist">
 <ul>
 <li>
-<p>review following file:</p>
+<p>Review following files:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>kustomization.yaml</p>
+<p><code>kustomization.yaml</code></p>
 </li>
 <li>
-<p>deployment.yaml</p>
+<p><code>deployment.yaml</code></p>
 </li>
 </ul>
 </div>
 </li>
-</ul>
-</div>
-</li>
 <li>
-<p>content of deployment.yaml in overlays/dev/kustomization.yml</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/argocd/argo-34.png" alt="argo 34">
-</div>
-</div>
-</li>
-<li>
-<p>compare content of deployment.yaml between base folder and overlays/dev folder (about replica)</p>
+<p>content of <code>deployment.yaml</code></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-35.png" alt="argo 35">
 </div>
 </div>
 </li>
+</ul>
+</div>
+</li>
 <li>
-<p>go to overlays/prod folder</p>
+<p>Go to the <strong>overlays/prod</strong> folder. This directory contains configuration for the <code>Production</code> environment.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-33.png" alt="argo 33">
@@ -395,7 +384,7 @@ Many other tools can be used together to build a GitOps framework. For example, 
 <div class="ulist">
 <ul>
 <li>
-<p>review following file:</p>
+<p>Review following file:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -407,32 +396,22 @@ Many other tools can be used together to build a GitOps framework. For example, 
 </ul>
 </div>
 </li>
-</ul>
-</div>
-</li>
 <li>
-<p>compare content of deployment.yaml between base folder and overlays/dev folder (about replica)</p>
+<p>As you can see, the <code>replicas</code> field in the <code>deployment.yaml</code> is <code>3</code> while the configuration for Development enviroyment (<code>overlays/dev/deployment.yaml</code>) is <code>2</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/argocd/argo-36.png" alt="argo 36">
 </div>
 </div>
 </li>
-<li>
-<p>summary kustomize structure of this workshop</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/argocd/argo-37.png" alt="argo 37">
-</div>
+</ul>
 </div>
 </li>
 </ul>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_create_applicaiton_in_openshift_gitops"><a class="anchor" href="#_create_applicaiton_in_openshift_gitops"></a>Create Applicaiton in OpenShift GitOps</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_create_applicaiton_in_openshift_gitops"><a class="anchor" href="#_create_applicaiton_in_openshift_gitops"></a>Create Applicaiton in OpenShift GitOps</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -710,6 +689,7 @@ Many other tools can be used together to build a GitOps framework. For example, 
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
 <div class="sectionbody">
@@ -744,7 +724,7 @@ Many other tools can be used together to build a GitOps framework. For example, 
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD</a></span>
+  <span class="prev"><a href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD - Part I</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">
