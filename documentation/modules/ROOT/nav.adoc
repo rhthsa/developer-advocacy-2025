@@ -17,6 +17,7 @@
 ** xref:03-argocd.adoc#openshiftgitops[3.1 OpenShift GitOps]
 ** xref:03-argocd.adoc#gitopswithkustomize[3.2 GitOps with Kustomize]
 ** xref:03-argocd.adoc#kustomizeresources[3.3 Kustomize Resources]
+** xref:03-argocd.adoc#deployappwithgitops[3.4 Deploy Application with OpenShift GitOps]
 
 * 4. Observability through logs: Centralized logging with Loki & querying via LogQL
 

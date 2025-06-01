@@ -95,7 +95,7 @@ image::argocd/argo-40.png[]
   *** `service.yaml`
   *** `route.yaml`
 
-* Go back to the repository main page, then go into *overlays/dev* directory. This directory contains configuration for the `Development` environment.
+* Go to the *overlays/dev* directory. This directory contains configuration for the `Development` environment.
 +
 image::argocd/argo-32.png[]
 
@@ -112,146 +112,150 @@ image::argocd/argo-35.png[]
 image::argocd/argo-33.png[]
 +
 ** Review following file:
-*** kustomization.yaml
-*** deployment.yaml
+*** `kustomization.yaml`
+*** `deployment.yaml`
 +
 ** As you can see, the `replicas` field in the `deployment.yaml` is `3` while the configuration for Development enviroyment (`overlays/dev/deployment.yaml`) is `2`.
 +
 image::argocd/argo-36.png[]
 
-=== Create Applicaiton in OpenShift GitOps
+[#deployappwithgitops]
+=== Deploy Applicaiton with OpenShift GitOps
 
-* Open your developer console, go to your project 'userX-gitops-dev' (replace X with your username)
-* Go to top right of developer console, Navigate to the table menu (It's to the left of the plus sign menu.) --> OpenShift GitOps --> Cluster Argo CD.
+In this lab we're going to deploy the `simple-rest-go` application to OpenShift using OpenShift GitOps. The application will be deployed into 2 projects; `userX-gitops-dev` and `userX-gitops-prod` to pretend that you need to deploy the application to 2 environments - *Development* and *Production* respectively.
+
+Let's deploy the application for the *Development* environment first.
+
+* In OpenShift web console, click on the application palette icon at the top right corner then select  *OpenShift GitOps > Cluster Argo CD*.
 +
 image::argocd/argo-38.png[]
 
-* Use local user for login, type your username and password (same with your openshift login), click `SIGN IN`
+* Log in with your username and password same as OpenShift's credential.
 +
 image::argocd/argo-2.png[]
 
-* Review Argo CD Console, Click `+ New App`
+* On the *Applications* page, click *+ NEW APP* button.
 +
 image::argocd/argo-3.png[]
 
-* In create application, Input `userX-go-dev` to Application Name (change X to your username)
-* set `default` to Project Name
-* set `Manual` to SYNC POLICY
+* Enter `userX-go-dev` to *Application Name* (change `userX` to your username)
+* Enter `default` to *Project Name*
+* Select `Manual` for *SYNC POLICY*
 +
 image::argocd/argo-4.png[]
 
-* In SOURCE section, input `+https://github.com/rhthsa/simple-rest-go.git+` to Repository URL
-* set Revision to `HEAD`
-* set Path to `apps-kustomize/overlays/dev`
+* In the *SOURCE* section, enter `https://github.com/rhthsa/simple-rest-go.git` to *Repository URL*.
+* Set *Revision* to `HEAD`
+* Enter `apps-kustomize/overlays/dev` to *Path*.
 +
 image::argocd/argo-5.png[]
 
-* In Destination section, select first cluster (from dropdownlist) to Cluster URL
-* set Namespace to `userX-gitops-dev` (change X to your username)
+* In the  *DESTINATION* section, select the first cluster in *Cluster URL* dropdownlist.
+* Enter `userX-gitops-dev` to *Namespace* (change `userX`` to your username).
 +
 image::argocd/argo-6.png[]
 
-* leave default last part, click Create
+* Leave default for the rest of configurations, then click *Create* button.
 +
 image::argocd/argo-7.png[]
 
-* Back to Main page, set filter in namespace to `userX*` (change X to your username), this help filter your app in page.
+* Back to the main page, set filter for *NAMESPACES* to `userX*` (change `userX`` to your username), this helps filter only your app to be displayed on the page.
 +
 image::argocd/argo-8.png[]
 
-* Review application in Applications page
+* Review application in the *Applications* page, Click on `userX-go-dev` application tile to view application details.
 +
 image::argocd/argo-9.png[]
-
-* Click `userX-go-dev` to view details of application
 +
 image::argocd/argo-10.png[]
 
-* click `sync` to synchronize application to cluster
+* Click *SYNC* button then *SYNCHRONIZE* to synchronize application configurations from Git repository to your project on OpenShift.
 +
 image::argocd/argo-11.png[]
 
-* wait until App Health change to `Healthy`, Sync status to `Synced`, Last sync to `Sync OK`, check number of pod in this deployment (2 Pods)
+* Wait until *APP HEALTH* status changed to `Healthy`, *SYNC STATUS* changed to `Synced`, and *LAST SYNC* changed to `Sync OK`. Then check number of pods, there should be 2 pods as configured in the `overlays/dev/deployment.yaml` file in Git repository you've reviewed before.
 +
 image::argocd/argo-12.png[]
 
-* Change from Tree view to Pods view, to Network view and List view to see kubernetes object in each view.
+* At the top right corner of application view area, you can change view mode to *Tree view*, *Pods view*, *Network view*, and *List view* to see resources in each view.
 +
-Pods view
+Sample of Pods view.
 +
 image::argocd/argo-13.png[]
 +
-Network view
+Sample of Network view.
 +
 image::argocd/argo-14.png[]
 +
-List view
+Sample of List view.
 +
 image::argocd/argo-15.png[]
 
-* Create Application for Production, back to Applications, click `+ NEW APP`
-* set Application Name to `userX-go-prod` (change X to your username)
-* set Project Name to `default`
-* set SYNC POLICY to `Manual`
+Next, let's deploy the application for *Production* environment.
+
+* Select the *Applications* menu on the left, the click `+ NEW APP` button.
+* set *Application Name* to `userX-go-prod` (change `userX` to your username)
+* set *Project Name* to `default`
+* set *SYNC POLICY* to `Manual`
 +
 image::argocd/argo-16.png[]
 
-* In SOURCE section, input `+https://github.com/rhthsa/simple-rest-go.git+` to Repository URL
-* set Revision to `HEAD`
-* set Path to `apps-kustomize/overlays/prod`
+* In the *SOURCE* section, Enter `https://github.com/rhthsa/simple-rest-go.git` to *Repository URL*.
+* set *Revision* to `HEAD`
+* set *Path* to `apps-kustomize/overlays/prod`
 +
 image::argocd/argo-17.png[]
 
-* In Destination section, select first cluster (from dropdownlist) to Cluster URL
-* set Namespace to `userX-gitops-prod` (change X to your username)
+* In the *Destination* section, select the first cluster in *Cluster URL* dropdownlist.
+* set *Namespace* to `userX-gitops-prod` (change `userX`` to your username).
 +
 image::argocd/argo-18.png[]
 
-* leave default last part, click Create
+* Leave default for the rest of configurations, then click *Create* button.
 +
 image::argocd/argo-19.png[]
 
-* View new applicaiton in applications view, click `userX-go-prod` (change x to your username)
+* You should see a new application - `userX-go-prod` that matches to your username shows up. Click on in to see application details.
 +
 image::argocd/argo-20.png[]
 
-* Click Sync and wait until sync complete, check number of Pods (3 Pods)
+* Click on *SYNC* to synchronize configurations from Git repository to OpenShift and wait until the synchonization completed, there should be 3 Pods running.
 +
 image::argocd/argo-21.png[]
 
-* back to OpenShift Console, view topology in `userX-gitops-dev` project (change X to your username), check number of pods.
+* Go back to OpenShift Console, select *Topology* menu on the left. Change project to `userX-gitops-dev` matches to your username, then click on the `simple-rest-go` Deployment. On the right panel, click on *Resources* tab then check the number of Pods. There should be 2 Pods running.
 +
 image::argocd/argo-22.png[]
 
-* view topology in `userX-gitops-prod` project (change X to your username), check number of pods.
+* Now change project to `userX-gitops-prod` matches to your username, then check the number of Pods. There should be 3 Pods running.
 +
 image::argocd/argo-23.png[]
 
-* In `userX-gitops-prod` project, try to reduce replica of deployment by, click in Details tab of `simple-rest-go` deployment, and click scale down from 3 to 2
+* In the `userX-gitops-prod` project, try to reduce the number of replicas by just go to the *Details* tab on the right panel, click on *v* to scale down the application from 3 to 2 replicas.
 +
 image::argocd/argo-24.png[]
 
-* Back to ArgoCD, view `userX-go-prod` application, Status change to `OutOfSync`, Click to view Detail
+* Go to Argo CD web console, on the *Applications* main page, you should see the status of `userX-go-prod` application changed to `OutOfSync`. Click on the application tile to see details.
 +
 image::argocd/argo-25.png[]
 
-* In applicaiton detail, click diff button
+* In the applicaiton details view, click on the *DIFF* button at the top.
 +
 image::argocd/argo-26.png[]
 
-* check `compact diff` and `inline diff` to view diff between current state on Cluster and yaml file on Git
+* Select *compact diff* and *inline diff* checkbox to view the differences between current configuration in OpenShift cluster and the configurations file on Git.
 +
 image::argocd/argo-27.png[]
 
-* Click Sync button, Click Synchronize to update deployment to value from Git.
+* Click *SYNC* button, then click *SYNCHRONIZE* to synchronize configurations from Git to OpenShift again.
 +
 image::argocd/argo-28.png[]
 
-* Back to OpenShift Developer Console, Review number of replica again.
+* Go back to OpenShift console and check the number of replicas of `simple-rest-go` Deployment again. It should be back to 3 replicas.
 +
 image::argocd/argo-29.png[]
 
-== Summary
+=== Summary
 
 OpenShift GitOps takes advantage of Argo CD and integrates it into Red Hat OpenShift to deliver a consistent, fully supported, declarative Kubernetes platform to configure and use with GitOps principles.
 
