@@ -1,4 +1,4 @@
-= Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD
+= Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD - Part I
 
 [#openshiftpipelines]
 == OpenShift Pipelines

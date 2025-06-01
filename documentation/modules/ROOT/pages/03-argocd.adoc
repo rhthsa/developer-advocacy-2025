@@ -1,3 +1,6 @@
+= Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD - Part II
+
+[#openshiftgitops]
 == Red Hat OpenShift GitOps
 
 === What is GitOps?
@@ -54,80 +57,69 @@ image::argocd/ocp-pipeline-and-gitops.webp[OpenShift Pipelines & GitOps]
 
 === What is Kustomize?
 
-* Start with https://kustomize.io[Kustomized]
-+
 image::argocd/kustomize-1.png[]
-+
-Kustomize provides a solution for customizing Kubernetes resource   configuration free from templates and DSLs.
-+
-Kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as is.
-+
+
+https://kustomize.io[Kustomized] provides a solution for customizing Kubernetes resource   configuration free from templates and DSLs. Kustomize lets you customize raw, template-free YAML files for multiple purposes, leaving the original YAML untouched and usable as is.
+
 Kustomize targets kubernetes; it understands and can patch kubernetes style API objects. It's like make, in that what it does is declared in a file, and it's like sed, in that it emits edited text.
-+
+
 With kustomize, your team can ingest any base file updates for your underlying components while keeping use-case specific customization overrides intact. Another benefit of utilizing patch overlays is that they add dimensionality to your configuration settings, which can be isolated for troubleshooting misconfigurations or layered to create a framework of most-broad to most-specific configuration specifications.
 +
 To recap, Kustomize relies on the following system of configuration management layering to achieve reusability:
 
- ** Base Layer - Specifies the most common resources
- ** Patch Layers - Specifies use case specific resources
+ ** *Base Layer* - Specifies the most common resources
+ ** *Patch Layers* - Specifies use case specific resources
 +
 image::argocd/kustomize-2.png[]
 
-== Review Kustomize Resource in Git Repository
+[#kustomizeresources]
+=== Kustomize Resources
 
-* For this workshop, we will deploy `simple-rest-go` application agian by Red Hat OpenShift GitOps
-* open browser to https://github.com/rhthsa/simple-rest-go.git
+* For this workshop, we will deploy `simple-rest-go` application agian using Red Hat OpenShift GitOps.
+* Go to https://github.com/rhthsa/simple-rest-go to view application repository.
 +
 image::argocd/argo-30.png[]
 
-* go to /apps-kustomize
+* Go into *apps-kustomize* directory. There are 2 directoies, *base* directory contains all files for common resources, and *overlays* directory contains all use case or environment specific resources.
 +
-image::argocd/argo-31.png[]
+image::argocd/argo-41.png[]
 
-* go to base folder
+* Go into the *base* directory.
 +
 image::argocd/argo-40.png[]
 
- ** review following file:
-  *** kustomization.yaml
-  *** rolebinding.yaml
-  *** deployment.yaml
-  *** service.yaml
-  *** route.yaml
+ ** Open these files to view configurations for application deployment (Configuration as Code). These files will be used as the base layer.
+  *** `kustomization.yaml`
+  *** `rolebinding.yaml`
+  *** `deployment.yaml`
+  *** `service.yaml`
+  *** `route.yaml`
 
-* go to overlays/dev folder
+* Go back to the repository main page, then go into *overlays/dev* directory. This directory contains configuration for the `Development` environment.
 +
 image::argocd/argo-32.png[]
 
- ** review following file:
-  *** kustomization.yaml
-  *** deployment.yaml
-
-* content of deployment.yaml in overlays/dev/kustomization.yml
+** Review following files:
+*** `kustomization.yaml`
+*** `deployment.yaml`
 +
-image::argocd/argo-34.png[]
-
-* compare content of deployment.yaml between base folder and overlays/dev folder (about replica)
+** content of `deployment.yaml`
 +
 image::argocd/argo-35.png[]
 
-* go to overlays/prod folder
+* Go to the *overlays/prod* folder. This directory contains configuration for the `Production` environment.
 +
 image::argocd/argo-33.png[]
-
- ** review following file:
-  *** kustomization.yaml
-  *** deployment.yaml
-
-* compare content of deployment.yaml between base folder and overlays/dev folder (about replica)
++
+** Review following file:
+*** kustomization.yaml
+*** deployment.yaml
++
+** As you can see, the `replicas` field in the `deployment.yaml` is `3` while the configuration for Development enviroyment (`overlays/dev/deployment.yaml`) is `2`.
 +
 image::argocd/argo-36.png[]
 
-* summary kustomize structure of this workshop
-+
-image::argocd/argo-37.png[]
-
-== Create Applicaiton in OpenShift GitOps
+=== Create Applicaiton in OpenShift GitOps
 
 * Open your developer console, go to your project 'userX-gitops-dev' (replace X with your username)
 * Go to top right of developer console, Navigate to the table menu (It's to the left of the plus sign menu.) --> OpenShift GitOps --> Cluster Argo CD.

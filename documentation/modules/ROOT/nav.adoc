@@ -7,18 +7,21 @@
 ** xref:01-shipwright.adoc#shipwrights2i[1.6 Build and Deploy Application using Shipwright and Source-to-Image (S2I)]
 ** xref:01-shipwright.adoc#summary[1.7 Summary]
 
-* xref:02-tekton.adoc[2. Ship faster, safer, smarter. GitOps CI/CD with Tekton & Argo CD]
+* xref:02-tekton.adoc[2. Ship faster, safer, smarter. GitOps CI/CD with Tekton & Argo CD - Part I]
 ** xref:02-tekton.adoc#openshiftpipelines[2.1 OpenShift Pipelines]
 ** xref:02-tekton.adoc#createtask[2.2 Create Task]
 ** xref:02-tekton.adoc#createpipeline[2.3 Create Pipeline]
 ** xref:02-tekton.adoc#triggerpipeline[2.4 Trigger Pipeline]
-** xref:03-argocd.adoc[2.4 OpenShift GitOps]
-** xref:03-argocd.adoc#gitopswithkustomize[2.5 GitOps with Kustomize]
 
-* 3. Observability through logs: Centralized logging with Loki & querying via LogQL
+* xref:03-argocd.adoc[3. Ship faster, safer, smarter. GitOps CI/CD with Tekton & ArgoCD - Part II]
+** xref:03-argocd.adoc#openshiftgitops[3.1 OpenShift GitOps]
+** xref:03-argocd.adoc#gitopswithkustomize[3.2 GitOps with Kustomize]
+** xref:03-argocd.adoc#kustomizeresources[3.3 Kustomize Resources]
 
-* 4. Metrics-driven mastery: How to monitor, alert & scale like a Pro
+* 4. Observability through logs: Centralized logging with Loki & querying via LogQL
 
-* 5. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation
+* 5. Metrics-driven mastery: How to monitor, alert & scale like a Pro
 
-* 6. Accelerating software development with Red Hat Developer Hub
+* 6. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation
+
+* 7. Accelerating software development with Red Hat Developer Hub
