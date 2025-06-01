@@ -12,7 +12,8 @@
 ** xref:02-tekton.adoc#createtask[2.2 Create Task]
 ** xref:02-tekton.adoc#createpipeline[2.3 Create Pipeline]
 ** xref:02-tekton.adoc#triggerpipeline[2.4 Trigger Pipeline]
-
+** xref:03-argocd.adoc[2.4 OpenShift GitOps]
+** xref:03-argocd.adoc#gitopswithkustomize[2.5 GitOps with Kustomize]
 
 * 3. Observability through logs: Centralized logging with Loki & querying via LogQL
 
