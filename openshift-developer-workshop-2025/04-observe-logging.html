@@ -124,16 +124,16 @@
     <a class="nav-link" href="#openshiftlogging">4.2 OpenShift Logging</a>
   </li>
   <li class="nav-item is-current-page" data-depth="2">
-    <a class="nav-link" href="04-observe-logging.html">4.2 Review Application Codes and Deployment Configuraitons</a>
+    <a class="nav-link" href="04-observe-logging.html">4.3 Review Application Codes and Deployment Configuraitons</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#deployapplication">4.4 Deploy Sample Applications</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <span class="nav-text">xref:04-observe-logging.adoc</span>
+    <a class="nav-link" href="#viewapplicationlogs">4.5 View Individual Application Logs</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <span class="nav-text">xref:04-observe-logging.adoc</span>
+    <a class="nav-link" href="#loganalysis">4.6 Analyse Application Logs using OpenShift Logging</a>
   </li>
 </ul>
   </li>
@@ -234,7 +234,7 @@
 <p><strong>ClusterLogging (CL)</strong> , After the Operators are installed, you create a <code>ClusterLogging</code> custom resource (CR) to schedule logging pods and other resources necessary to support the logging. The <code>ClusterLogging</code> CR deploys the collector and forwarder, which currently are both implemented by a daemonset running on each node. The Red Hat OpenShift Logging Operator watches the <code>ClusterLogging</code> CR and adjusts the logging deployment accordingly.</p>
 </li>
 <li>
-<p><strong>ClusterLogForwarder (CLF)</strong> - Generates collector configuration to forward logs per user configuration. Based on <a href="https://github.com/vectordotdev/vector">Vector</a></p>
+<p><strong>ClusterLogForwarder (CLF)</strong> - Generates collector configuration to forward logs per user configuration. The collector is based on <a href="https://github.com/vectordotdev/vector">Vector</a>.</p>
 </li>
 <li>
 <p><a href="https://grafana.com/oss/loki/"><strong>LokiStack</strong></a> - Controls the Loki cluster as log store and the web proxy with OpenShift Container Platform authentication integration to enforce multi-tenancy.</p>
@@ -264,13 +264,13 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>frontend</strong> - A simple Node.js application acts as a frontend application.</p>
+<p><strong>frontend</strong> - A simple web application acts as a frontend application developed with <a href="https://nodejs.org/en">Node.js</a>.</p>
 </li>
 <li>
-<p><strong>simple-go</strong> - A Go application provides APIs for frontend application.</p>
+<p><strong>simple-go</strong> - A Go application developed with <a href="https://go.dev/">Golang</a> provides APIs for frontend application.</p>
 </li>
 <li>
-<p><strong>backend</strong> - A Java application acts as a backend application.</p>
+<p><strong>backend</strong> - A Java application developed with <a href="https://quarkus.io/">Quarkus Framework</a>. acts as a backend application.</p>
 </li>
 </ul>
 </div>
@@ -282,7 +282,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Go to <a href="https://github.com/rhthsa/developer-advocacy-2025/tree/main/config" class="bare">https://github.com/rhthsa/developer-advocacy-2025/tree/main/config</a> repository to see deployment configurations.</p>
+<p>Go to <a href="https://github.com/rhthsa/developer-advocacy-2025/tree/main/config" class="bare">https://github.com/rhthsa/developer-advocacy-2025/tree/main/config</a> Git repository to see deployment configurations.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-6.png" alt="log 6">
@@ -290,7 +290,7 @@
 </div>
 </li>
 <li>
-<p>Review <code>Deployment</code> and <code>Service</code> resoures of the <code>backend</code> application in <code>backend.yaml</code> file. The application is developed with <a href="https://quarkus.io/">Quarkus Framework</a>.</p>
+<p>Review <code>Deployment</code> and <code>Service</code> resoures of the <code>backend</code> application in <code>backend.yaml</code> file.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-7.png" alt="log 7">
@@ -298,7 +298,7 @@
 </div>
 </li>
 <li>
-<p>Review <code>Deployment</code> and <code>Service</code> of the <code>simple-go</code> application in <code>simple-go.yaml</code> file. The application is developed with <a href="https://go.dev/">Golang</a>.</p>
+<p>Review <code>Deployment</code> and <code>Service</code> of the <code>simple-go</code> application in <code>simple-go.yaml</code> file.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-8.png" alt="log 8">
@@ -314,7 +314,7 @@
 </div>
 </li>
 <li>
-<p>Review <code>Deployment</code>, <code>Service</code> and <code>Route</code> resources of the <code>frontend</code> application in <code>frontend.yaml</code> file. The application is developed with <a href="https://nodejs.org/en">Node.js</a>.</p>
+<p>Review <code>Deployment</code>, <code>Service</code> and <code>Route</code> resources of the <code>frontend</code> application in <code>frontend.yaml</code> file.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-10.png" alt="log 10">
@@ -329,8 +329,15 @@
 </div>
 </div>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_application_codes"><a class="anchor" href="#_application_codes"></a>Application Codes</h3>
+<div class="ulist">
+<ul>
 <li>
-<p>Review Source Code of <code>backend</code> application from <a href="https://gitlab.com/ocp-demo/backend_quarkus" class="bare">https://gitlab.com/ocp-demo/backend_quarkus</a></p>
+<p>Go to <a href="https://gitlab.com/ocp-demo/backend_quarkus" class="bare">https://gitlab.com/ocp-demo/backend_quarkus</a> Git repository to see the <code>backend</code> application code.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-12.png" alt="log 12">
@@ -338,15 +345,7 @@
 </div>
 </li>
 <li>
-<p>Review Source Code of <code>BackendResource.java</code> in <code>/code/src/main/java/com/example/quarkus</code></p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/logs/log-13.png" alt="log 13">
-</div>
-</div>
-</li>
-<li>
-<p>Example of Logging code in <a href="https://quarkus.io/guides/logging">Java Quarkus</a></p>
+<p>Open the <code>BackendResource.java</code> file in <code>/code/src/main/java/com/example/quarkus</code> directory. At <a href="https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads#L69">line 69</a>, you should see the code that logs a message.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-14.png" alt="log 14">
@@ -354,7 +353,7 @@
 </div>
 </li>
 <li>
-<p>Review Source Code of <code>simple-go</code> application from <a href="https://github.com/rhthsa/simple-rest-go.git">https://gitlab.com/ocp-demo/backend_quarkus</a></p>
+<p>Go to <a href="https://github.com/rhthsa/simple-rest-go" class="bare">https://github.com/rhthsa/simple-rest-go</a> Git repository to see the <code>simple-go</code> application code.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-15.png" alt="log 15">
@@ -362,7 +361,7 @@
 </div>
 </li>
 <li>
-<p>Review Source Code of <code>main.go</code></p>
+<p>Open the <code>main.go</code> file,</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-16.png" alt="log 16">
@@ -493,7 +492,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_try_to_test_built_in_log_view_in_openshift_developer_console"><a class="anchor" href="#_try_to_test_built_in_log_view_in_openshift_developer_console"></a>Try to Test Built-in Log view in OpenShift Developer Console</h2>
+<h2 id="viewapplicationlogs"><a class="anchor" href="#viewapplicationlogs"></a>View Individual Application Logs</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -638,7 +637,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_troubel_shoot_with_openshift_logging"><a class="anchor" href="#_troubel_shoot_with_openshift_logging"></a>Troubel Shoot with OpenShift Logging</h2>
+<h2 id="loganalysis"><a class="anchor" href="#loganalysis"></a>Analyse Application Logs using OpenShift Logging</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
