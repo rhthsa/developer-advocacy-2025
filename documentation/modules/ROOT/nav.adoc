@@ -19,7 +19,13 @@
 ** xref:03-argocd.adoc#kustomizeresources[3.3 Kustomize Resources]
 ** xref:03-argocd.adoc#deployappwithgitops[3.4 Deploy Application with OpenShift GitOps]
 
-* 4. Observability through logs: Centralized logging with Loki & querying via LogQL
+* xref:04-observe-logging.adoc[4. Observability through logs: Centralized logging with Loki & querying via LogQL]
+** xref:04-observe-logging.adoc#observability[4.1 OpenShift Observability]
+** xref:04-observe-logging.adoc#openshiftlogging[4.2 OpenShift Logging]
+** xref:04-observe-logging.adoc[4.2 Review Application Codes and Deployment Configuraitons]
+** xref:04-observe-logging.adoc#deployapplication[4.4 Deploy Sample Applications]
+** xref:04-observe-logging.adoc
+** xref:04-observe-logging.adoc
 
 * 5. Metrics-driven mastery: How to monitor, alert & scale like a Pro
 
