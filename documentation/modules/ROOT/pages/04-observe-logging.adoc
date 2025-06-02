@@ -31,7 +31,7 @@ image::logs/log-3.png[]
 == Logging resources
 
 * *ClusterLogging (CL)* , After the Operators are installed, you create a `ClusterLogging` custom resource (CR) to schedule logging pods and other resources necessary to support the logging. The `ClusterLogging` CR deploys the collector and forwarder, which currently are both implemented by a daemonset running on each node. The Red Hat OpenShift Logging Operator watches the `ClusterLogging` CR and adjusts the logging deployment accordingly.
-* *ClusterLogForwarder (CLF)* - Generates collector configuration to forward logs per user configuration. Based on https://github.com/vectordotdev/vector[Vector]
+* *ClusterLogForwarder (CLF)* - Generates collector configuration to forward logs per user configuration. The collector is based on https://github.com/vectordotdev/vector[Vector].
 * https://grafana.com/oss/loki/[*LokiStack*] - Controls the Loki cluster as log store and the web proxy with OpenShift Container Platform authentication integration to enforce multi-tenancy.
 
 Loki is a horizontally scalable, highly available, multi-tenant log aggregation system offered as a GA log store for logging for Red Hat OpenShift that can be visualized with the OpenShift Observability UI.
@@ -46,23 +46,23 @@ Need more details about OpenShift Logging? Visit this https://docs.redhat.com/en
 
 The sample applications used in this lab are consisted of 3 different applications:
 
-* *frontend* - A simple Node.js application acts as a frontend application.
-* *simple-go* - A Go application provides APIs for frontend application.
-* *backend* - A Java application acts as a backend application.
+* *frontend* - A simple web application acts as a frontend application developed with https://nodejs.org/en[Node.js].
+* *simple-go* - A Go application developed with https://go.dev/[Golang] provides APIs for frontend application.
+* *backend* - A Java application developed with https://quarkus.io/[Quarkus Framework]. acts as a backend application.
 
 Review these application deployment configurations as well as the application codes to understand how logging works.
 
 === Applications Deployment Configurations
 
-* Go to https://github.com/rhthsa/developer-advocacy-2025/tree/main/config repository to see deployment configurations.
+* Go to https://github.com/rhthsa/developer-advocacy-2025/tree/main/config Git repository to see deployment configurations.
 +
 image::logs/log-6.png[]
 
-* Review `Deployment` and `Service` resoures of the `backend` application in `backend.yaml` file. The application is developed with https://quarkus.io/[Quarkus Framework].
+* Review `Deployment` and `Service` resoures of the `backend` application in `backend.yaml` file.
 +
 image::logs/log-7.png[]
 
-* Review `Deployment` and `Service` of the `simple-go` application in `simple-go.yaml` file. The application is developed with https://go.dev/[Golang].
+* Review `Deployment` and `Service` of the `simple-go` application in `simple-go.yaml` file.
 +
 image::logs/log-8.png[]
 
@@ -70,7 +70,7 @@ image::logs/log-8.png[]
 +
 image::logs/log-9.png[]
 
-* Review `Deployment`, `Service` and `Route` resources of the `frontend` application in `frontend.yaml` file. The application is developed with https://nodejs.org/en[Node.js].
+* Review `Deployment`, `Service` and `Route` resources of the `frontend` application in `frontend.yaml` file.
 +
 image::logs/log-10.png[]
 
@@ -78,23 +78,21 @@ image::logs/log-10.png[]
 +
 image::logs/log-11.png[]
 
-* Review Source Code of `backend` application from https://gitlab.com/ocp-demo/backend_quarkus
+=== Application Codes
+
+* Go to https://gitlab.com/ocp-demo/backend_quarkus Git repository to see the `backend` application code.
 +
 image::logs/log-12.png[]
 
-* Review Source Code of `BackendResource.java` in `/code/src/main/java/com/example/quarkus`
-+
-image::logs/log-13.png[]
-
-* Example of Logging code in https://quarkus.io/guides/logging[Java Quarkus]
+* Open the `BackendResource.java` file in `/code/src/main/java/com/example/quarkus` directory. At https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads#L69[line 69], you should see the code that logs a message.
 +
 image::logs/log-14.png[]
 
-* Review Source Code of `simple-go` application from https://github.com/rhthsa/simple-rest-go.git[https://gitlab.com/ocp-demo/backend_quarkus]
+* Go to https://github.com/rhthsa/simple-rest-go Git repository to see the `simple-go` application code.
 +
 image::logs/log-15.png[]
 
-* Review Source Code of `main.go`
+* Open the `main.go` file,
 +
 image::logs/log-16.png[]
 +
@@ -155,7 +153,8 @@ image::logs/log-27.png[]
 +
 image::logs/log-28.png[,500]
 
-== Try to Test Built-in Log view in OpenShift Developer Console
+[#viewapplicationlogs]
+== View Individual Application Logs
 
 * Click `backend` Deployment, right click `view logs` of Pods in Resources tab, open link in new tab.
 +
@@ -225,7 +224,8 @@ image::logs/log-45.png[]
 +
 image::logs/log-46.png[]
 
-== Troubel Shoot with OpenShift Logging
+[#loganalysis]
+== Analyse Application Logs using OpenShift Logging
 
 * Go to Observe Menu, Logs Tab, view all log in this namespace/project.
 +

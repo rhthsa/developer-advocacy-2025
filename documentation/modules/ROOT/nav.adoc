@@ -22,10 +22,10 @@
 * xref:04-observe-logging.adoc[4. Observability through logs: Centralized logging with Loki & querying via LogQL]
 ** xref:04-observe-logging.adoc#observability[4.1 OpenShift Observability]
 ** xref:04-observe-logging.adoc#openshiftlogging[4.2 OpenShift Logging]
-** xref:04-observe-logging.adoc[4.2 Review Application Codes and Deployment Configuraitons]
+** xref:04-observe-logging.adoc[4.3 Review Application Codes and Deployment Configuraitons]
 ** xref:04-observe-logging.adoc#deployapplication[4.4 Deploy Sample Applications]
-** xref:04-observe-logging.adoc
-** xref:04-observe-logging.adoc
+** xref:04-observe-logging.adoc#viewapplicationlogs[4.5 View Individual Application Logs]
+** xref:04-observe-logging.adoc#loganalysis[4.6 Analyse Application Logs using OpenShift Logging]
 
 * 5. Metrics-driven mastery: How to monitor, alert & scale like a Pro
 
