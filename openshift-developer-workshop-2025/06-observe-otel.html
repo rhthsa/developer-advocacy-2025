@@ -178,10 +178,10 @@
     <a class="nav-link" href="#viewapptraces">6.5 View Application Traces</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#autoinstrumentation">6.5 OTel Auto-Instrumentation</a>
+    <a class="nav-link" href="#autoinstrumentation">6.5 OpenTelemetry Auto-Instrumentation</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#setupinstrument">6.6 Setup Otel Instrumentation</a>
+    <a class="nav-link" href="#setupinstrument">6.6 Setup OpenTelemetry Instrumentation</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#deployappforautoinstrument">6.7 Deploy Application for Auto-Instrumentation</a>
@@ -624,12 +624,12 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </div>
 </div>
 <div class="sect1">
-<h2 id="setupinstrument"><a class="anchor" href="#setupinstrument"></a>Setup Otel Instrumentation</h2>
+<h2 id="setupinstrument"><a class="anchor" href="#setupinstrument"></a>Setup OpenTelemetry Instrumentation</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Review <code>instrumentation.yaml</code> <a href="https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml" class="bare">https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml</a></p>
+<p>Review the Instrumentation configurations here <a href="https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml" class="bare">https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml</a>. You can see the Otel Collector endpoint and a bunch of configurations for the Java and Go application auto-instrumentation.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-14.png" alt="otel 14">
@@ -637,7 +637,15 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </div>
 </li>
 <li>
-<p>Copy <code>instrumentation.yaml</code> and paste in Import YAML, click Create</p>
+<p>Click on the <strong>+</strong> button at the top right corner of console, then select <strong>Import YAML</strong>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-37.png" alt="otel 37">
+</div>
+</div>
+</li>
+<li>
+<p>Copy all YAML code from this <a href="https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml" class="bare">https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml</a> and paste to YAML editor in OpenShift console. Then click Create button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-15.png" alt="otel 15">
@@ -645,7 +653,7 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </div>
 </li>
 <li>
-<p>Review Instrumentation Details</p>
+<p>The <code>instrumentation</code> resource should be created.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-16.png" alt="otel 16">
@@ -671,20 +679,20 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </li>
 <li>
 <p>Open Web Terminal again, run command to create frontend application (change X to your username)</p>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc project userX-otel
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc project userX-otel
 PROJECT=userX-otel
 cd openshift-otel
 oc create -f config/frontend.yaml -n $PROJECT</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Output</p>
+<p>Sample output.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">deployment.apps/frontend created
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">deployment.apps/frontend created
 service/frontend created
 route.route.openshift.io/frontend created</code></pre>
 </div>
@@ -692,35 +700,35 @@ route.route.openshift.io/frontend created</code></pre>
 </li>
 <li>
 <p>Add Annotate deployment for auto-instrumentation</p>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc patch deployment/frontend \
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc patch deployment/frontend \
   -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-nodejs":"true"}}}}}' \
   -n $PROJECT</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Output</p>
+<p>Sample output.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">deployment.apps/frontend patched</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">deployment.apps/frontend patched</code></pre>
 </div>
 </div>
 </li>
 <li>
 <p>Verify that auto-instrumentation is working with init-container</p>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc get po $(oc get po -l app=frontend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc get po $(oc get po -l app=frontend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Output</p>
+<p>Sample output.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">[
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">[
   {
     "containerID": "cri-o://8461a346ece60ba52018f6395b1133298c26d532a0d411a30e5d147bee089fc0",
     "image": "ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs:0.53.0",
@@ -759,9 +767,9 @@ route.route.openshift.io/frontend created</code></pre>
 </li>
 <li>
 <p>Set environment variables</p>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc set env deploy frontend OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector-headless:4318 -n $PROJECT
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc set env deploy frontend OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector-headless:4318 -n $PROJECT
 oc set env deploy frontend OTEL_SERVICE_NAME=frontend -n $PROJECT
 oc set env deploy frontend OTEL_PROPAGATORS=tracecontext,b3 -n $PROJECT</code></pre>
 </div>
@@ -780,17 +788,17 @@ oc set env deploy frontend OTEL_PROPAGATORS=tracecontext,b3 -n $PROJECT</code></
 </li>
 <li>
 <p>Run Command Line to Deploy simple-go app,</p>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc create -f config/simple-go.yaml -n $PROJECT</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc create -f config/simple-go.yaml -n $PROJECT</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Output</p>
+<p>Sample output.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">deployment.apps/simple-go created
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">deployment.apps/simple-go created
 service/simple-go created</code></pre>
 </div>
 </div>
@@ -816,7 +824,7 @@ service/simple-go created</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - name: OTEL_EXPORTER_OTLP_ENDPOINT
-        value: http://otel-collector-headless:4318
+        value: <a href="http://otel-collector-headless:4318" class="bare">http://otel-collector-headless:4318</a>
       - name: OTEL_SERVICE_NAME
         value: simple-go
       - name: OTEL_GO_AUTO_TARGET_EXE
@@ -828,18 +836,18 @@ service/simple-go created</code></pre>
 </li>
 <li>
 <p>Verify that auto-instrumentation is working with container sidecar</p>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc get po -l app=simple-go -n $PROJECT
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc get po -l app=simple-go -n $PROJECT
 oc get po $(oc get po -l app=simple-go -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.spec.containers[1].name}'</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Output</p>
+<p>Sample output.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">NAME                        READY   STATUS    RESTARTS   AGE
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">NAME                        READY   STATUS    RESTARTS   AGE
 simple-go-56f8c644b-w4sxw   2/2     Running   0          7m42s
 opentelemetry-auto-instrumentation</code></pre>
 </div>
@@ -872,7 +880,7 @@ opentelemetry-auto-instrumentation</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - name: OTEL_EXPORTER_OTLP_ENDPOINT
-        value: http://otel-collector-headless:4318
+        value: <a href="http://otel-collector-headless:4318" class="bare">http://otel-collector-headless:4318</a>
       - name: OTEL_SERVICE_NAME
         value: backend
       - name: OTEL_PROPAGATORS
@@ -882,25 +890,25 @@ opentelemetry-auto-instrumentation</code></pre>
 </li>
 <li>
 <p>Deploy Java RESTful App with Command Line</p>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc create -f config/backend.yaml -n $PROJECT</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc create -f config/backend.yaml -n $PROJECT</code></pre>
 </div>
 </div>
 </li>
 <li>
 <p>Verify that auto-instrumentation is working with init-container</p>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc get po $(oc get po -l app=backend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq|head -n 8</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc get po $(oc get po -l app=backend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq|head -n 8</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Output</p>
+<p>Sample output.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">[
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">[
   {
     "containerID": "cri-o://f88eea516f6b51b9bf772b17f88f73ccd920728a8ff4237a855d89a08d2499a9",
     "image": "ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:1.33.6",
@@ -914,17 +922,17 @@ opentelemetry-auto-instrumentation</code></pre>
 </li>
 <li>
 <p>Check container log</p>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc logs $(oc get po -l app=backend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT | head -n 4</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc logs $(oc get po -l app=backend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT | head -n 4</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Output</p>
+<p>Sample output.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">Defaulted container "backend" out of: backend, opentelemetry-auto-instrumentation-java (init)
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">Defaulted container "backend" out of: backend, opentelemetry-auto-instrumentation-java (init)
 INFO exec -a "java" java -Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -cp "." -jar /deployments/quarkus-run.jar
 INFO running in /deployments
 Picked up JAVA_TOOL_OPTIONS:  -javaagent:/otel-auto-instrumentation-java/javaagent.jar
@@ -951,18 +959,18 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 <ul>
 <li>
 <p>Test app</p>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc project userX-otel
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc project userX-otel
 curl -v https://$(oc get route frontend -n $PROJECT -o jsonpath='{.spec.host}')</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Output</p>
+<p>Sample output.</p>
 </div>
-<div class="listingblock">
+<div class="listingblock console-output">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">* Connection #0 to host frontend-demo.apps.cluster-4thxh.4thxh.sandbox2298.opentlc.com left intact
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">* Connection #0 to host frontend-demo.apps.cluster-4thxh.4thxh.sandbox2298.opentlc.com left intact
 Frontend version: v1 =&gt; [Backend: http://simple-go:8080, Response: 200, Body: Backend version:v1, Response:200, Host:backend-68589df886-gtbpx, Status:200, Message: Hello, World]</code></pre>
 </div>
 </div>
