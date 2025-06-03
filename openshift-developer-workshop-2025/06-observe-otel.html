@@ -177,6 +177,18 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#viewapptraces">6.5 View Application Traces</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#autoinstrumentation">6.5 OTel Auto-Instrumentation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#setupinstrument">6.6 Setup Otel Instrumentation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deployappforautoinstrument">6.7 Deploy Application for Auto-Instrumentation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#viewautoinstrumentapptraces">6.8 View Auto-Instrument Application Traces</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -549,7 +561,7 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 <div class="ulist">
 <ul>
 <li>
-<p>Navigate to Administrator -&gt; Observe -&gt; Trace Select Tempo Instance <code>userX-otel/sample</code> and Tenant to dev</p>
+<p>Switch to <strong>Administrator</strong> perspective. Then go to <strong>Observe</strong> &#8594; <strong>Trace</strong> menu on the left. Select  <code>userX-otel/sample</code> in <strong>Tempo Instance</strong> drop-down list and select <code>dev</code> in <strong>Tenant</strong> drop-down list.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-34.png" alt="otel 34">
@@ -557,7 +569,7 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </div>
 </li>
 <li>
-<p>Select trace and check its details</p>
+<p>Click on the trace to see trace details.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-35.png" alt="otel 35">
@@ -565,7 +577,7 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </div>
 </li>
 <li>
-<p>view SQL Statement</p>
+<p>Click on <code>todo:INSERT todo.Todo</code> span to see the span attributes.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-36.png" alt="otel 36">
@@ -577,10 +589,10 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_auto_instrumentation_in_the_red_hat_build_of_opentelemetry_operator"><a class="anchor" href="#_auto_instrumentation_in_the_red_hat_build_of_opentelemetry_operator"></a>Auto-instrumentation in the Red Hat build of OpenTelemetry Operator</h2>
+<h2 id="autoinstrumentation"><a class="anchor" href="#autoinstrumentation"></a>Auto-instrumentation in the Red Hat build of OpenTelemetry Operator</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Auto-instrumentation in the Red Hat build of OpenTelemetry Operator can automatically instrument an application without manual code changes. Developers and administrators can monitor applications with minimal effort and changes to the existing codebase.</p>
+<p>Auto-instrumentation in the Red Hat build of OpenTelemetry Operator can <strong>automatically instrument an application without manual code changes</strong>. Developers and administrators can monitor applications with minimal effort and changes to the existing codebase.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -609,6 +621,11 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 <div class="paragraph">
 <p>Auto-instrumentation enables you to start collecting telemetry data quickly without having to manually integrate the OpenTelemetry SDK into your application code. However, some applications might require specific configurations or custom manual instrumentation.</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="setupinstrument"><a class="anchor" href="#setupinstrument"></a>Setup Otel Instrumentation</h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
@@ -640,7 +657,7 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_deploy_application_without_opentelemetry_library_use_auto_instruement"><a class="anchor" href="#_deploy_application_without_opentelemetry_library_use_auto_instruement"></a>Deploy Application without OpenTelemetry Library (use Auto-Instruement)</h2>
+<h2 id="deployappforautoinstrument"><a class="anchor" href="#deployappforautoinstrument"></a>Deploy Appliation for Auto-Instrumentation</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -928,7 +945,7 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 </div>
 </div>
 <div class="sect1">
-<h2 id="_test_restful_app"><a class="anchor" href="#_test_restful_app"></a>Test RESTful App</h2>
+<h2 id="_view_auto_instrument_application_traces"><a class="anchor" href="#_view_auto_instrument_application_traces"></a>View Auto-Instrument Application Traces</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -986,18 +1003,6 @@ Frontend version: v1 =&gt; [Backend: http://simple-go:8080, Response: 200, Body:
 </div>
 <div class="paragraph">
 <p>With distributed tracing, software teams can monitor data that passes through complex paths connecting various microservices and data storage. Using distributed tracing tools, software teams track requests and visualize data propagation paths with precision.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_step"><a class="anchor" href="#_next_step"></a>Next Step</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#developerhub.adoc" class="xref unresolved">Accelerating software development with Red Hat Developer Hub</a></p>
-</li>
-</ul>
 </div>
 </div>
 </div>
