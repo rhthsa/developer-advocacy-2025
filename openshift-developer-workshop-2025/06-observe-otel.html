@@ -783,7 +783,7 @@ route.route.openshift.io/frontend created</code></pre>
 </div>
 </li>
 <li>
-<p>Run these commands to set environment variables for the <code>frontend</code> Deployment.</p>
+<p>Run these commands to set environment variables for the <code>frontend</code> Deployment. These environment variables will be used by OTel auto-instrumentation.</p>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc set env deploy frontend OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector-headless:4318 -n $PROJECT
@@ -820,9 +820,9 @@ With opentelemetry-operator v0.119.0-2 and Go autoinstrumentation-go:v0.20.0 onl
 </div>
 </li>
 <li>
-<p>For the <code>frontend</code> application, we added <code>annotation</code> and set environment variables with <code>oc patch</code> and <code>oc set env</code> commands to the Deployment after we&#8217;ve created it .</p>
+<p>For the <code>frontend</code> application, we added annotation and set environment variables with <code>oc patch</code> and <code>oc set env</code> commands to the Deployment after we&#8217;ve created it .</p>
 <div class="paragraph">
-<p>But this time, we&#8217;ll add the annotations to the <code>simple-go</code> Deployment YAML configurations before we create the Deployment resource to demonstate different ways to configure OTel auto-instrument for Deployment resource.</p>
+<p>But this time, we&#8217;ll add the annotations and environment variables to the <code>simple-go</code> Deployment YAML configurations before we create the Deployment resource to demonstate different ways to configure OTel auto-instrument for Deployment resource.</p>
 </div>
 <div class="paragraph">
 <p>Annotations in <code>simple-go</code> Deployment YAML configurations.</p>
@@ -1016,7 +1016,7 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 <div class="ulist">
 <ul>
 <li>
-<p>Run this command in web terminal to trigger API calls from <code>frontend</code> application.</p>
+<p>Run this command a few times in web terminal to trigger API calls from <code>frontend</code> application.</p>
 <div class="admonitionblock important">
 <table>
 <tr>
