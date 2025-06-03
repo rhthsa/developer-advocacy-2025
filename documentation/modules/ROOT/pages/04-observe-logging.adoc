@@ -40,7 +40,7 @@ The Loki configuration provided by OpenShift Logging is a short-term log store d
 
 Logging for Red Hat OpenShift is an opinionated collector and normalizer of application, infrastructure, and audit logs. It is intended to be used for forwarding logs to various supported systems.
 
-Need more details about OpenShift Logging? Visit this https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/logging/logging-6-2[Link].
+Need more details about OpenShift Logging? Visit this https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/logging/logging-6-2[link].
 
 == Review Sample Application Codes and Deployment Configuraitons
 
@@ -84,7 +84,7 @@ image::logs/log-11.png[]
 +
 image::logs/log-12.png[]
 
-* Open the `BackendResource.java` file in `/code/src/main/java/com/example/quarkus` directory. At https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads#L69[line 69], you should see the code that logs a message.
+* Open the `BackendResource.java` file in `/code/src/main/java/com/example/quarkus` directory. Then search for `logger.info` - these lines of code will print log messages to `stdout` (https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)[Standard output]).
 +
 image::logs/log-14.png[]
 
@@ -92,24 +92,24 @@ image::logs/log-14.png[]
 +
 image::logs/log-15.png[]
 
-* Open the `main.go` file,
+* Open the `main.go` file, seach for `log.Printf` and `accessLogger.Printf` - these codes will print log messages to `stdout`.
 +
 image::logs/log-16.png[]
 +
 image::logs/log-17.png[]
 
-* Review Source Code of `frontend` application from https://gitlab.com/ocp-demo/frontend-js
+* Go to https://gitlab.com/ocp-demo/frontend-js Git repository to see the `frontend` application code.
 +
 image::logs/log-18.png[]
 
-* Review Source Code of `server.js`
+* Open the `server.js` file, search for `logger.info` - these lines of code will print log messages to `stdout`.
 +
 image::logs/log-19.png[]
 
 [#deployapplication]
-== Deploy Sample Application
+== Deploy Sample Applications
 
-* Back to OpenShift Developer Console, select `userX-observe` project (change X to your username)
+* In OpenShift console, change to `userX-observe` matches to your username.
 +
 image::logs/log-4.png[]
 
@@ -225,7 +225,7 @@ image::logs/log-45.png[]
 image::logs/log-46.png[]
 
 [#loganalysis]
-== Analyse Application Logs using OpenShift Logging
+== Query Application Logs using OpenShift Logging
 
 * Go to Observe Menu, Logs Tab, view all log in this namespace/project.
 +

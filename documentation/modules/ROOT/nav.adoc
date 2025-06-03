@@ -25,7 +25,7 @@
 ** xref:04-observe-logging.adoc[4.3 Review Application Codes and Deployment Configuraitons]
 ** xref:04-observe-logging.adoc#deployapplication[4.4 Deploy Sample Applications]
 ** xref:04-observe-logging.adoc#viewapplicationlogs[4.5 View Individual Application Logs]
-** xref:04-observe-logging.adoc#loganalysis[4.6 Analyse Application Logs using OpenShift Logging]
+** xref:04-observe-logging.adoc#loganalysis[4.6 Query Application Logs using OpenShift Logging]
 
 * 5. Metrics-driven mastery: How to monitor, alert & scale like a Pro
 
