@@ -288,7 +288,9 @@ spec:
 +
 image::monitors/mon-34.png[]
 
-* Copy the YAML from code snippet above and paste to YAML editor in OpenShift console. *Important!*  update the `namespace` field value to matches to your username. Then click *Create* button.
+* Copy the YAML from code snippet above and paste to YAML editor in OpenShift console. Update the `userX-observe` in the `namespace` field to matches to your username. Then click *Create* button.
++
+IMPORTANT: Don't forget to update the `userX-observe` in the `namespace` field to matches to your username.
 
 * Run more `curl` command in the web terminal to trigger API calls.
 +
