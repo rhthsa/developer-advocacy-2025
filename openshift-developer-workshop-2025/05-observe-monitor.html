@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro :: OpenShift Developer Workshop 2025</title>
+    <link rel="canonical" href="https://rhthsa.github.io/developer-advocacy-2025/openshift-developer-workshop-2025/05-observe-monitor.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://rhthsa.github.io/developer-advocacy-2025">OpenShift Developer Workshop 2025</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="openshift-developer-workshop-2025" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-shipwright.html">1. Build your application containers the right way with Shipwright</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#setup">1.1 Setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#deploycontainerimage">1.2 Deploy Container Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#accesstheapplication">1.3 Access To Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwright">1.4 OpenShift Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwrightbuidah">1.5 Build and Deploy Application using Shipwright and Buildah</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwrights2i">1.6 Build and Deploy Application using Shipwright and Source-to-Image (S2I)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#summary">1.7 Summary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD - Part I</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#openshiftpipelines">2.1 OpenShift Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#createtask">2.2 Create Task</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#createpipeline">2.3 Create Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#triggerpipeline">2.4 Trigger Pipeline</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-argocd.html">3. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#openshiftgitops">3.1 OpenShift GitOps</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#gitopswithkustomize">3.2 GitOps with Kustomize</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#kustomizeresources">3.3 Kustomize Resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#deployappwithgitops">3.4 Deploy Application with OpenShift GitOps</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-observe-logging.html">4. Observability through logs: Centralized logging with Loki &amp; querying via LogQL</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#observability">4.1 OpenShift Observability</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#openshiftlogging">4.2 OpenShift Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#reviewcodeandconfig">4.3 Review Application Codes and Deployment Configuraitons</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#deployapplication">4.4 Deploy Sample Applications</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#viewapplicationlogs">4.5 View Individual Application Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#logquery">4.6 Query Application Logs using OpenShift Logging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="#05-observe-monitoring.adoc">5. Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#05-observe-monitoring.adoc#openshiftmonitoring">5.1 OpenShift Monitoring</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">6. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</span>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">7. Accelerating software development with Red Hat Developer Hub</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Developer Workshop 2025</a></li>
+    <li><a href="05-observe-monitor.html">Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/rhthsa/developer-advocacy-2025/edit/master/documentation/modules/ROOT/pages/05-observe-monitor.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</h1>
+<div class="sect1">
+<h2 id="openshiftmonitoring"><a class="anchor" href="#openshiftmonitoring"></a>OpenShift Monitoring</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift Container Platform includes a preconfigured, preinstalled, and self-updating monitoring stack that provides monitoring for core platform components. You also have the option to enable monitoring for user-defined projects.</p>
+</div>
+<div class="paragraph">
+<p>A cluster administrator can configure the monitoring stack with the supported configurations. OpenShift Container Platform delivers monitoring best practices out of the box.</p>
+</div>
+<div class="paragraph">
+<p>A set of alerts are included by default that immediately notify administrators about issues with a cluster. Default dashboards in the OpenShift Container Platform web console include visual representations of cluster metrics to help you to quickly understand the state of your cluster. With the OpenShift Container Platform web console, you can access metrics and manage alerts.</p>
+</div>
+<div class="paragraph">
+<p>After installing OpenShift Container Platform, cluster administrators can optionally enable monitoring for user-defined projects. By using this feature, cluster administrators, developers, and other users can specify how services and pods are monitored in their own projects. As a cluster administrator, you can find answers to common problems such as user metrics unavailability and high consumption of disk space by Prometheus in Troubleshooting monitoring issues.</p>
+</div>
+<div class="sect2">
+<h3 id="_monitoring_stack_architecture"><a class="anchor" href="#_monitoring_stack_architecture"></a>Monitoring stack architecture</h3>
+<div class="paragraph">
+<p>The OpenShift Container Platform monitoring stack is based on the Prometheus open source project and its wider ecosystem. The monitoring stack includes default monitoring components and components for monitoring user-defined projects.</p>
+</div>
+<div class="paragraph">
+<p>The monitoring stack includes the following components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Default platform monitoring components.</strong> A set of platform monitoring components are installed in the <code>openshift-monitoring</code> project by default during an OpenShift Container Platform installation. This provides monitoring for core cluster components including Kubernetes services. The default monitoring stack also enables remote health monitoring for clusters.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>These components are illustrated in the Installed by default section in the following diagram.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>user-defined projects monitoring components.</strong> After optionally enabling monitoring for user-defined projects, additional monitoring components are installed in the <code>openshift-user-workload-monitoring</code> project. This provides monitoring for user-defined projects. These components are illustrated in the <strong>User</strong> section in the following diagram.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Visit this <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/monitoring/about-openshift-container-platform-monitoring">link</a> for more information about OpenShift Monitoring.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/monitoring-architecture.png" alt="monitoring architecture">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_openshift_default_monitoring"><a class="anchor" href="#_openshift_default_monitoring"></a>OpenShift Default Monitoring</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>In OpenShift Developer Console, Select project <code>userX-observe</code> (change X to your username),</p>
+</li>
+<li>
+<p>View default monitoring per deployment, click topology, click <code>backend</code> deployment, in backend deployment, select observe tab</p>
+<div class="ulist">
+<ul>
+<li>
+<p>view CPU usage,</p>
+</li>
+<li>
+<p>view Memory usage</p>
+</li>
+<li>
+<p>bandwidth</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-1.png" alt="mon 1">
+</div>
+</div>
+<div class="paragraph">
+<p>+
+image::monitors/mon-2.png[]</p>
+</div>
+</li>
+<li>
+<p>Or view monitoring per pod, change to Resources tab, and click Pod to view details</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-3.png" alt="mon 3">
+</div>
+</div>
+</li>
+<li>
+<p>In Pod Details, change to Metrics tab to view Memory usage, CPU usage, Filesystem and Network In of this pod.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-4.png" alt="mon 4">
+</div>
+</div>
+</li>
+<li>
+<p>To view default monitoring of all deployment in this project, click Observe in left menu, select Dashboard Tab, default dashboard will show monitoring of all pod in this namespace.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-5.png" alt="mon 5">
+</div>
+</div>
+</li>
+<li>
+<p>You can change view by select Dashboard and criteria such as select <code>Kubernetes/Compute Resources/Pod</code> and specific pod</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-6.png" alt="mon 6">
+</div>
+</div>
+</li>
+<li>
+<p>view default monitoring such as CPU Usage, CPU Throttling, CPU Quota, etc.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-7.png" alt="mon 7">
+</div>
+</div>
+</li>
+<li>
+<p>select tab Metrics to view performance/metrics information by type, click select query dropdown list to select default metrics information such as cpu usage, memory usage, filesystem usage, etc.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-8.png" alt="mon 8">
+</div>
+</div>
+</li>
+<li>
+<p>select CPU usage, click check box 'Stacked'</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-12.png" alt="mon 12">
+</div>
+</div>
+</li>
+<li>
+<p>change to another metrics such as memory usage.</p>
+</li>
+<li>
+<p>OpenShift Monitoring base on Prometheus Technology, you can use PromQL for retrive metric information, in query text box,  type 'container_cpu' and wait auto suggestion,</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-13.png" alt="mon 13">
+</div>
+</div>
+</li>
+<li>
+<p>select 'container_cpu_usage_seconds_total' and type 'enter' button to view this metrics from PromQL</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-14.png" alt="mon 14">
+</div>
+</div>
+</li>
+<li>
+<p>type 'pod:container_cpu_usage:sum' and type 'enter' button to view this metrics from PromQL</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-15.png" alt="mon 15">
+</div>
+</div>
+</li>
+<li>
+<p>You can save this page for later use.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-16.png" alt="mon 16">
+</div>
+</div>
+</li>
+<li>
+<p>click Alerts tab to view all alert (the Alerting UI enables you to manage alerts, silences, and alerting rules, we will create alert in next step in this session)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-17.png" alt="mon 17">
+</div>
+</div>
+</li>
+<li>
+<p>click Events Tab to view All event in this project or filter by resource</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-18.png" alt="mon 18">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_review_application_performance_metric_code"><a class="anchor" href="#_review_application_performance_metric_code"></a>Review Application Performance Metric Code</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Developer can enable monitoring for user-defined projects in addition to the default platform monitoring. You can now monitor your own projects in OpenShift Container Platform without the need for an additional monitoring solution.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>review application metric code</p>
+<div class="ulist">
+<ul>
+<li>
+<p>backend application use quarkus microprofile metrics libraly to generate application metrics</p>
+</li>
+<li>
+<p>example code: <a href="https://gitlab.com/ocp-demo/backend_quarkus" class="bare">https://gitlab.com/ocp-demo/backend_quarkus</a>,</p>
+</li>
+<li>
+<p>example custom metrics in code: path <code>/code/src/main/java/com/example/quarkus/BackendResource.java</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-19.png" alt="mon 19">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-20.png" alt="mon 20">
+</div>
+</div>
+</li>
+<li>
+<p>In Maven Repository of Project (pom.xml)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-21.png" alt="mon 21">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-22.png" alt="mon 22">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>review example metrics of backend application, in topology view, click <code>backend</code> deployment, and click on pod</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-9.png" alt="mon 9">
+</div>
+</div>
+</li>
+<li>
+<p>select terminal tab, try to run curl command</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">curl -s http://localhsot:8080/q/metrics</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-10.png" alt="mon 10">
+</div>
+</div>
+<div class="paragraph">
+<p>example result</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-11.png" alt="mon 11">
+</div>
+</div>
+</li>
+<li>
+<p>call custom quarkus microprofile metrics example</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">curl -s  http://localhost:8080/q/metrics/application</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>example result</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-26.png" alt="mon 26">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_application_performance_metric_to_openshift"><a class="anchor" href="#_add_application_performance_metric_to_openshift"></a>Add Application Performance Metric to OpenShift</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>create ServiceMonitor, go to Search in left menu, in search page, in resources drop down, type 'servicemonitor' for filter, click 'SM ServiceMonitor'</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-23.png" alt="mon 23">
+</div>
+</div>
+</li>
+<li>
+<p>Click Create ServiceMonitor button</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-24.png" alt="mon 24">
+</div>
+</div>
+</li>
+<li>
+<p>in Create ServiceMonitor Page, input below YAML for create ServiceMonitor to backend application</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: backend-monitor
+  name: backend-monitor
+spec:
+  endpoints:
+  - interval: 30s
+    port: http
+    path: /q/metrics
+    scheme: http
+  - interval: 30s
+    port: http
+    path: /q/metrics/application
+    scheme: http
+  selector:
+    matchLabels:
+      app: backend</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>example:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-30.png" alt="mon 30">
+</div>
+</div>
+</li>
+<li>
+<p>click create and review your ServiceMonitor, click YAML tab to view your yaml code.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-27.png" alt="mon 27">
+</div>
+</div>
+</li>
+<li>
+<p>test call you backend application</p>
+</li>
+<li>
+<p>open web terminal. test call your backend 2-3 times (change X to your username)</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project userX-observe
+curl http://backend:8080</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>such as</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-28.png" alt="mon 28">
+</div>
+</div>
+</li>
+<li>
+<p>click Observe in left menu, select Metrics Tab</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-29.png" alt="mon 29">
+</div>
+</div>
+</li>
+<li>
+<p>in PromQL, type <code>com</code> and wait auto suggesstion</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-31.png" alt="mon 31">
+</div>
+</div>
+</li>
+<li>
+<p>Remark: if you don&#8217;t found metrics 'com*' in auto suggession, wait a few minute and retry again</p>
+</li>
+<li>
+<p>select from suggestion or type in query box with <code>com_example_quarkus_BackendResource_countBackend_total</code>, type enter.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-32.png" alt="mon 32">
+</div>
+</div>
+</li>
+<li>
+<p>change your custom PromQL to average call backend service in 1 minute is</p>
+<div class="ulist">
+<ul>
+<li>
+<p>type: <code>rate(com_example_quarkus_BackendResource_countBackend_total[1m])</code></p>
+</li>
+<li>
+<p>enter</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-33.png" alt="mon 33">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Perfect!!! you can add metrics to OpenShift Monitoring Now.</p>
+</li>
+<li>
+<p>Optional: test call backend 2-3 times and check metrics change in Monitoring Pages</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_alert_to_openshift_monitoring"><a class="anchor" href="#_add_alert_to_openshift_monitoring"></a>Add Alert to OpenShift Monitoring</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Check Example <code>PrometheusRule</code> (change X to your username before create)</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: backend-app-alert
+  namespace: userX-observe
+  labels:
+    openshift.io/prometheus-rule-evaluation-scope: leaf-prometheus
+spec:
+  groups:
+  - name: backend
+    rules:
+    - alert: HighLatency
+      expr: com_example_quarkus_BackendResource_timeBackend_seconds_max&gt;0.1
+      labels:
+        severity: 'critical'
+      annotations:
+        message: '{{ $labels.instance }} response time is {{ $value }} sec'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>HightLatency Alert will fire when response time is greateer than 1 sec</p>
+</div>
+</li>
+<li>
+<p>Create backend-app-alert, click Import YAML</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-34.png" alt="mon 34">
+</div>
+</div>
+</li>
+<li>
+<p>input PrometheusRule yaml in editor and create (change <code>namespace!!!</code> before run)</p>
+</li>
+<li>
+<p>open web terminal. test call your backend 2-3 times</p>
+</li>
+<li>
+<p>go to Observe menu, Alerts tab, and wait until it&#8217;s show! (may be need refresh page.)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-35.png" alt="mon 35">
+</div>
+</div>
+</li>
+<li>
+<p>View in Topology, see alert icon on backend application</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-36.png" alt="mon 36">
+</div>
+</div>
+</li>
+<li>
+<p>Delete prometheusrule before go to next step, use search menu, and filter with <code>PrometheusRule</code>, click Delete in Action.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-37.png" alt="mon 37">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift Monitoring provides real-time visibility into cluster health and performance using integrated tools like Prometheus, AlertManager, etc. It helps detect issues early, ensuring high availability and reliability of applications. The built-in alerting system enables proactive response and efficient resource management.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_step"><a class="anchor" href="#_next_step"></a>Next Step</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#observe-otel.adoc" class="xref unresolved">Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
