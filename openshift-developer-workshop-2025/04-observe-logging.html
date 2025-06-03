@@ -133,7 +133,7 @@
     <a class="nav-link" href="#viewapplicationlogs">4.5 View Individual Application Logs</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#loganalysis">4.6 Analyse Application Logs using OpenShift Logging</a>
+    <a class="nav-link" href="#loganalysis">4.6 Query Application Logs using OpenShift Logging</a>
   </li>
 </ul>
   </li>
@@ -251,7 +251,7 @@
 <p>Logging for Red Hat OpenShift is an opinionated collector and normalizer of application, infrastructure, and audit logs. It is intended to be used for forwarding logs to various supported systems.</p>
 </div>
 <div class="paragraph">
-<p>Need more details about OpenShift Logging? Visit this <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/logging/logging-6-2">Link</a>.</p>
+<p>Need more details about OpenShift Logging? Visit this <a href="https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/logging/logging-6-2">link</a>.</p>
 </div>
 </div>
 </div>
@@ -345,7 +345,7 @@
 </div>
 </li>
 <li>
-<p>Open the <code>BackendResource.java</code> file in <code>/code/src/main/java/com/example/quarkus</code> directory. At <a href="https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads#L69">line 69</a>, you should see the code that logs a message.</p>
+<p>Open the <code>BackendResource.java</code> file in <code>/code/src/main/java/com/example/quarkus</code> directory. Then search for <code>logger.info</code> - these lines of code will print log messages to <code>stdout</code> (<a href="https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)">Standard output</a>).</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-14.png" alt="log 14">
@@ -361,7 +361,7 @@
 </div>
 </li>
 <li>
-<p>Open the <code>main.go</code> file,</p>
+<p>Open the <code>main.go</code> file, seach for <code>log.Printf</code> and <code>accessLogger.Printf</code> - these codes will print log messages to <code>stdout</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-16.png" alt="log 16">
@@ -374,7 +374,7 @@
 </div>
 </li>
 <li>
-<p>Review Source Code of <code>frontend</code> application from <a href="https://gitlab.com/ocp-demo/frontend-js" class="bare">https://gitlab.com/ocp-demo/frontend-js</a></p>
+<p>Go to <a href="https://gitlab.com/ocp-demo/frontend-js" class="bare">https://gitlab.com/ocp-demo/frontend-js</a> Git repository to see the <code>frontend</code> application code.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-18.png" alt="log 18">
@@ -382,7 +382,7 @@
 </div>
 </li>
 <li>
-<p>Review Source Code of <code>server.js</code></p>
+<p>Open the <code>server.js</code> file, search for <code>logger.info</code> - these lines of code will print log messages to <code>stdout</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-19.png" alt="log 19">
@@ -395,12 +395,12 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="deployapplication"><a class="anchor" href="#deployapplication"></a>Deploy Sample Application</h2>
+<h2 id="deployapplication"><a class="anchor" href="#deployapplication"></a>Deploy Sample Applications</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Back to OpenShift Developer Console, select <code>userX-observe</code> project (change X to your username)</p>
+<p>In OpenShift console, change to <code>userX-observe</code> matches to your username.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-4.png" alt="log 4">
@@ -637,7 +637,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="loganalysis"><a class="anchor" href="#loganalysis"></a>Analyse Application Logs using OpenShift Logging</h2>
+<h2 id="loganalysis"><a class="anchor" href="#loganalysis"></a>Query Application Logs using OpenShift Logging</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
