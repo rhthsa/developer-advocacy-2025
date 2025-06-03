@@ -27,7 +27,8 @@
 ** xref:04-observe-logging.adoc#viewapplicationlogs[4.5 View Individual Application Logs]
 ** xref:04-observe-logging.adoc#logquery[4.6 Query Application Logs using OpenShift Logging]
 
-* 5. Metrics-driven mastery: How to monitor, alert & scale like a Pro
+* xref:05-observe-monitoring.adoc[5. Metrics-driven mastery: How to monitor, alert & scale like a Pro]
+** xref:05-observe-monitoring.adoc#openshiftmonitoring[5.1 OpenShift Monitoring]
 
 * 6. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation
 
