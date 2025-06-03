@@ -29,6 +29,10 @@
 
 * xref:05-observe-monitor.adoc[5. Metrics-driven mastery: How to monitor, alert & scale like a Pro]
 ** xref:05-observe-monitor.adoc#openshiftmonitoring[5.1 OpenShift Monitoring]
+** xref:05-observe-monitor.adoc#monitoryourapp[5.2 Monitor Your Applications]
+** xref:05-observe-monitor.adoc#exposemetrics[5.3 Expose Metrics from Your Application]
+** xref:05-observe-monitor.adoc#monitorappcustommetric[5.4 Monitor Application with Custom Metrics]
+** xref:05-observe-monitor.adoc#createalert[5.5 Create Alert for Metrics]
 
 * 6. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation
 

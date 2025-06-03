@@ -17,74 +17,74 @@ The OpenShift Container Platform monitoring stack is based on the Prometheus ope
 
 The monitoring stack includes the following components:
 
-* *Default platform monitoring components.* A set of platform monitoring components are installed in the `openshift-monitoring` project by default during an OpenShift Container Platform installation. This provides monitoring for core cluster components including Kubernetes services. The default monitoring stack also enables remote health monitoring for clusters.
+* *Default platform monitoring components.* A set of platform monitoring components are installed in the `openshift-monitoring` project by default during an OpenShift Container Platform installation. This provides monitoring for core cluster components including Kubernetes services. The default monitoring stack also enables remote health monitoring for clusters. These components are illustrated in the *__Installed by default__* section in the diagram below.
 
-These components are illustrated in the Installed by default section in the following diagram.
-
-* *user-defined projects monitoring components.* After optionally enabling monitoring for user-defined projects, additional monitoring components are installed in the `openshift-user-workload-monitoring` project. This provides monitoring for user-defined projects. These components are illustrated in the *User* section in the following diagram.
+* *user-defined projects monitoring components.* After optionally enabling monitoring for user-defined projects, additional monitoring components are installed in the `openshift-user-workload-monitoring` project. This provides monitoring for user-defined projects. These components are illustrated in the *User* section in the diagram.
 
 Visit this https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/monitoring/about-openshift-container-platform-monitoring[link] for more information about OpenShift Monitoring.
 
 image::monitors/monitoring-architecture.png[]
 
-== OpenShift Default Monitoring
+[#monitoryourapp]
+== Monitor your application
 
-* In OpenShift Developer Console, Select project `userX-observe` (change X to your username),
-* View default monitoring per deployment, click topology, click `backend` deployment, in backend deployment, select observe tab
- ** view CPU usage,
- ** view Memory usage
- ** bandwidth
+OpenShift provides a bunch of default out-of-the-box monitoring dashboard for you to monitor your applications deployed in the cluster. In OpenShift console, select *Topology* menu on the left. Then change to project `userX-observe` that matches to your username (if it's not already).
 
+* Click on the `backend` Deployment, then select *Observe* tab on the right panel. You can see the CPU usage, Memory usage, and network bandwidth.
 +
 image::monitors/mon-1.png[]
 +
 image::monitors/mon-2.png[]
-* Or view monitoring per pod, change to Resources tab, and click Pod to view details
+* To view more monitoring information for a specific Pod in this deployment, click on *Resources* tab, then click on the Pod to view monitoring details for a particular Pod.
 +
 image::monitors/mon-3.png[]
 
-* In Pod Details, change to Metrics tab to view Memory usage, CPU usage, Filesystem and Network In of this pod.
+* In Pod Details page, select *Metrics* tab to view monitoring infomation e.g. Memory usage, CPU usage, Filesystem, and Network for this Pod.
 +
 image::monitors/mon-4.png[]
 
-* To view default monitoring of all deployment in this project, click Observe in left menu, select Dashboard Tab, default dashboard will show monitoring of all pod in this namespace.
+* To monitor all deployments in this Project, click *Observe* menu on the left, then select *Dashboards* bab, default dashboard will show all monitoring information of all Pods in this namespace/Project.
 +
 image::monitors/mon-5.png[]
 
-* You can change view by select Dashboard and criteria such as select `Kubernetes/Compute Resources/Pod` and specific pod
+* You can view different dashboards by select a dashboard from the *Dashboard* dropdownlist i.e. `Kubernetes/Compute Resources/Pod` dashboard to filter and view Pod-specific monitoring information.
 +
 image::monitors/mon-6.png[]
 
-* view default monitoring such as CPU Usage, CPU Throttling, CPU Quota, etc.
+* The dashboard will show fundamental application monitoring information such as CPU, Memory, Disk, Network etc.
 +
 image::monitors/mon-7.png[]
 
-* select tab Metrics to view performance/metrics information by type, click select query dropdown list to select default metrics information such as cpu usage, memory usage, filesystem usage, etc.
+All the graphs you've seen in the dashboard are rendered from metrics data collected from the resources deployed in OpenShift cluster. OpenShift Monitoring uses https://prometheus.io/[Prometheus] to collect and store all metrics in the cluster.
+
+To query metrics, select tab *Metrics*, then select built-in queries from the *Query* dropdownlist to query metrics information such as cpu usage, memory usage, filesystem usage, etc. then click on *Run queries* button.
 +
 image::monitors/mon-8.png[]
 
-* select CPU usage, click check box 'Stacked'
+* select `CPU Usage` query, run the query and then select the *Stacked* checkbox to stack the line chart.
++
+NOTE: Try to select different queries in the *Query* dropdownlist to see different metrics information.
 +
 image::monitors/mon-12.png[]
 
-* change to another metrics such as memory usage.
-* OpenShift Monitoring base on Prometheus Technology, you can use PromQL for retrive metric information, in query text box,  type 'container_cpu' and wait auto suggestion,
+
+* You can use https://prometheus.io/docs/prometheus/latest/querying/basics/[PromQL (Prometheus Query Language)] to query metrics information, in query input box, delete existing query then type `container_cpu` and wait for auto suggestion.
 +
 image::monitors/mon-13.png[]
 
-* select 'container_cpu_usage_seconds_total' and type 'enter' button to view this metrics from PromQL
+* select `container_cpu_usage_seconds_total` metric then press `Enter` to query the metric from Prometheus.
 +
 image::monitors/mon-14.png[]
 
-* type 'pod:container_cpu_usage:sum' and type 'enter' button to view this metrics from PromQL
+* Try new query by enter `pod:container_cpu_usage:sum` to input box then press `Enter` to run query.
 +
 image::monitors/mon-15.png[]
 
-* You can save this page for later use.
+* In the web browser address bar, you can see the URL for the query you've just run. You can save or bookmark this URL for later.
 +
 image::monitors/mon-16.png[]
 
-* click Alerts tab to view all alert (the Alerting UI enables you to manage alerts, silences, and alerting rules, we will create alert in next step in this session)
+* Click *Alerts* tab to view all alerts. The Alerting UI enables you to manage alerts, silences, and alerting rules. We will create alert later in this lab.
 +
 image::monitors/mon-17.png[]
 
@@ -92,44 +92,49 @@ image::monitors/mon-17.png[]
 +
 image::monitors/mon-18.png[]
 
-== Review Application Performance Metric Code
+[#exposemetrics]
+== Expose Metrics from Your Application
 
 Developer can enable monitoring for user-defined projects in addition to the default platform monitoring. You can now monitor your own projects in OpenShift Container Platform without the need for an additional monitoring solution.
 
-* review application metric code
- ** backend application use quarkus microprofile metrics libraly to generate application metrics
- ** example code: https://gitlab.com/ocp-demo/backend_quarkus,
- ** example custom metrics in code: path `/code/src/main/java/com/example/quarkus/BackendResource.java`
+=== Review Application Code
+* Review the `backend` application source code. The application uses https://quarkus.io/guides/telemetry-micrometer[Quarkus Micrometer] API in https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads[`BackendResource.java`] file to expose custom metrics from the application.
 +
 image::monitors/mon-19.png[]
 +
 image::monitors/mon-20.png[]
 
- ** In Maven Repository of Project (pom.xml)
+ ** The Quarkus Micrometer library is included in https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/pom.xml?ref_type=heads#L64[`pom.xml`] file.
 +
 image::monitors/mon-21.png[]
 +
 image::monitors/mon-22.png[]
-* review example metrics of backend application, in topology view, click `backend` deployment, and click on pod
+
+=== View Raw Application Metrics
+* In Topology view, select `backend` deployment, go to *Resources* tab in the right panel, then click on the applciation Pod.
 +
 image::monitors/mon-9.png[]
 
-* select terminal tab, try to run curl command
+* Go to *Terminal* tab, then run this command to see all metrics exposed from the application.
 +
-[,ssh]
+NOTE: the `/q/metrics` endpoint is automatically exposed from the application. This endpoint will be used by Prometheus to collect metrics from the application.
++
+[.console-input]
+[source,adoc]
 ----
 curl -s http://localhsot:8080/q/metrics
 ----
 +
 image::monitors/mon-10.png[]
 +
-example result
+Sample result.
 +
 image::monitors/mon-11.png[]
 
-* call custom quarkus microprofile metrics example
+* To view only application-specific metrics (including the custom metrics in the code you've reviewed), run this command in the Terminal tab. Then press `Ctrl + F` on keyboard and search for `BackendResource` metrics. These are custom metrics defined in the code of https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads#L75[`BackendResource.java`] file.
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 curl -s  http://localhost:8080/q/metrics/application
 ----
@@ -137,20 +142,35 @@ curl -s  http://localhost:8080/q/metrics/application
 example result
 +
 image::monitors/mon-26.png[]
++
+[NOTE]
+====
+* `*/q/metrics*`: This endpoint provides a general overview of Quarkus's internal metrics, such as CPU usage, memory consumption, and garbage collection statistics. It's useful for monitoring the health and performance of the Quarkus runtime itself.
 
-== Add Application Performance Metric to OpenShift
+* `*/q/metrics/application*`:
+This endpoint exposes metrics that you've specifically defined in your Quarkus application using the Micrometer library. Micrometer is a facade that allows you to easily collect metrics that can be exported to various monitoring systems like Prometheus. You can use Micrometer to create custom metrics like counters, gauges, and timers to track various aspects of your application's behavior.
+====
 
-* create ServiceMonitor, go to Search in left menu, in search page, in resources drop down, type 'servicemonitor' for filter, click 'SM ServiceMonitor'
+[#monitorappcustommetric]
+== Monitor Application with Custom Metrics
+
+Now our `backend` application has exposed metrics including our custom metrics defined in the code of https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads#L75[`BackendResource.java`] file. In the previous topic we've seen how to get all metrics from the URL exposed by the application.
+
+However, in practice, we won't use `curl` command to query metrics but we're going to use OpenShift console to query the metrics using PromQL just like we've done before.
+
+Though those metrics exposed from the `backend` application haven't been collected by Prometheus yet, and we have to configure Prometheus to know our application and which URL it should use to collect the metrics. To do that we have to create a `ServiceMonitor` object.
+
+* In OpenShift console, click on *Search* menu on the left, then enter `servicemonitor` to the *Resource* dorpdownlist, and then select *SM ServiceMonitor*.
 +
 image::monitors/mon-23.png[]
 
-* Click Create ServiceMonitor button
+* Click *Create ServiceMonitor* button.
 +
 image::monitors/mon-24.png[]
 
-* in Create ServiceMonitor Page, input below YAML for create ServiceMonitor to backend application
+* Delete all YAML code in the YAML editor. Copy this YAML from the code snippet below and paste to the YAML editor in OpenShift console. Then click *Create* button.
 +
-[,yaml]
+[source,yaml,subs="+macros,attributes+"]
 ----
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
@@ -173,53 +193,73 @@ spec:
       app: backend
 ----
 +
-example:
-+
 image::monitors/mon-30.png[]
 
-* click create and review your ServiceMonitor, click YAML tab to view your yaml code.
+* The `ServiceMonitor` resource should be created. Click *YAML* tab to view YAML configuration.
 +
 image::monitors/mon-27.png[]
 
-* test call you backend application
-* open web terminal. test call your backend 2-3 times (change X to your username)
+* Open the web terminal and run following command to test API calls in `backend` application 2-3 times. Some custom metric values will be geneated based on these API calls.
 +
-[,bash]
+IMPORTANT: Don't forget to change `userX` in the command to match to your username.
++
+[.console-input]
+[source,adoc]
 ----
 oc project userX-observe
 curl http://backend:8080
 ----
 +
-such as
+Sample output.
 +
 image::monitors/mon-28.png[]
 
-* click Observe in left menu, select Metrics Tab
+* Next try to query the custom metrics. Click on *Observe* menu on the left, then select *Metrics* tab.
 +
 image::monitors/mon-29.png[]
 
-* in PromQL, type `com` and wait auto suggesstion
+* Enter `com` to the *Expression* input and wait for auto suggesstion.
 +
 image::monitors/mon-31.png[]
++
+NOTE: If you don't see any metrics started with `com` in auto suggession, this is because the Prometheus has't collect metrics from the application yet. So, just wait for a few minutes and try again.
 
-* Remark: if you don't found metrics 'com*' in auto suggession, wait a few minute and retry again
-* select from suggestion or type in query box with `com_example_quarkus_BackendResource_countBackend_total`, type enter.
+* Select `com_example_quarkus_BackendResource_countBackend_total` from suggestion list or you can type it in expresion input then press `Enter` on keyboard.
 +
 image::monitors/mon-32.png[]
 
-* change your custom PromQL to average call backend service in 1 minute is
- ** type: `rate(com_example_quarkus_BackendResource_countBackend_total[1m])`
- ** enter
+* Now, try to query the metric with https://prometheus.io/docs/prometheus/latest/querying/functions/#rate[`rate`] function using PromQL to calcualte per-second average rate of API calls in 1 minute. Copy this query and paste in the expression input then press `Enter`.
+
+[.console-input]
+[source,adoc]
+----
+rate(com_example_quarkus_BackendResource_countBackend_total[1m])
+----
 +
 image::monitors/mon-33.png[]
-* Perfect!!! you can add metrics to OpenShift Monitoring Now.
-* Optional: test call backend 2-3 times and check metrics change in Monitoring Pages
 
-== Add Alert to OpenShift Monitoring
+* Run more `curl` command in the web terminal and run the metric query again to see the result changes.
+[.console-input]
+[source,adoc]
+----
+curl http://backend:8080
+----
 
-* Check Example `PrometheusRule` (change X to your username before create)
+[#createalert]
+== Create Alert for Metrics
+
+Keep looking at the metric values by running the PromQL is one of monitoring methods. But who will do that?
+
+In real world, you won't have time to keep your eyes on the OpenShift console and run the PromQL for every 5 seconds to see whether the metric value used to determine API call latency hits threshold or not, so you can, for example, scale up your application to be able to serve more request and so the latency is reduced.
+
+What you need is something that can keep tracking the metric value and let you know when the value has hit threshold. This is where the `Alert` comes in.
+
+* Review this `PrometheusRule` resource. This resource is used to configure the alert based on the `com_example_quarkus_BackendResource_timeBackend_seconds_max` defined in the `expr` (expression) field. The alert will be fired when the metric's value is more than `0.01` (1 second).
 +
-[,yaml]
+NOTE: The `com_example_quarkus_BackendResource_timeBackend_seconds_max` metric is our custom metric in the `backend` application used to measure processing time for an API. If the value of this metric is high, it means the API response time will be high as well so resulting *high latency*.
+
++
+[source,yaml,subs="+macros,attributes+"]
 ----
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
@@ -239,31 +279,32 @@ spec:
       annotations:
         message: '{{ $labels.instance }} response time is {{ $value }} sec'
 ----
-+
-HightLatency Alert will fire when response time is greateer than 1 sec
 
-* Create backend-app-alert, click Import YAML
+* Create the `PrometheusRule` resource above by click on the *+* button at the top right corner of OpenShift console then select *Import YAML*.
 +
 image::monitors/mon-34.png[]
 
-* input PrometheusRule yaml in editor and create (change `namespace!!!` before run)
-* open web terminal. test call your backend 2-3 times
-* go to Observe menu, Alerts tab, and wait until it's show! (may be need refresh page.)
+* Copy the YAML from code snippet above and paste to YAML editor in OpenShift console. Update the `namespace` field value to matches to your username. Then click *Create* button.
+
+* Run more `curl` command in the web terminal to trigger API calls.
+[.console-input]
+[source,adoc]
+----
+curl http://backend:8080
+----
+
+* Select *Observe* menu on the left, go to *Alerts* tab, and wait until the alert shows up. (Refresh web browser if you've wait more than 1-2 minutes and don't see the alert.)
 +
 image::monitors/mon-35.png[]
 
-* View in Topology, see alert icon on backend application
+* Go to the *Topology* menu, you should see the alert icon on `backend` application.
 +
 image::monitors/mon-36.png[]
 
-* Delete prometheusrule before go to next step, use search menu, and filter with `PrometheusRule`, click Delete in Action.
+* Delete the `PrometheusRule` resource we've created by click on *Search* menu on the left. Then filter for `PrometheusRule` resource. Delete the `backend-app-alert` resource by  click on action menu then select *Delete PrometheusRule*.
 +
 image::monitors/mon-37.png[]
 
 == Summary
 
 OpenShift Monitoring provides real-time visibility into cluster health and performance using integrated tools like Prometheus, AlertManager, etc. It helps detect issues early, ensuring high availability and reliability of applications. The built-in alerting system enables proactive response and efficient resource management.
-
-== Next Step
-
-* xref:observe-otel.adoc[Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation]
