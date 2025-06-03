@@ -269,7 +269,7 @@
 </div>
 </li>
 <li>
-<p>To monitor all deployments in this Project, click <strong>Observe</strong> menu on the left, then select <strong>Dashboards</strong> bab, default dashboard will show all monitoring information of all Pods in this namespace/Project.</p>
+<p>To monitor all deployments in this Project, click <strong>Observe</strong> menu on the left, then select <strong>Dashboards</strong> tab, default dashboard will show all monitoring information of all Pods in this namespace/Project.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-5.png" alt="mon 5">
@@ -298,11 +298,12 @@
 <p>All the graphs you&#8217;ve seen in the dashboard are rendered from metrics data collected from the resources deployed in OpenShift cluster. OpenShift Monitoring uses <a href="https://prometheus.io/">Prometheus</a> to collect and store all metrics in the cluster.</p>
 </div>
 <div class="paragraph">
-<p>To query metrics, select tab <strong>Metrics</strong>, then select built-in queries from the <strong>Query</strong> dropdownlist to query metrics information such as cpu usage, memory usage, filesystem usage, etc. then click on <strong>Run queries</strong> button.</p>
+<p>To query metrics, select <strong>Metrics</strong> tab, then select built-in queries from the <strong>Query</strong> dropdownlist to query metrics information such as cpu usage, memory usage, filesystem usage, etc. then click on <strong>Run queries</strong> button.</p>
 </div>
-<div class="paragraph">
-<p>+
-image::monitors/mon-8.png[]</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-8.png" alt="mon 8">
+</div>
 </div>
 <div class="ulist">
 <ul>
@@ -327,7 +328,7 @@ Try to select different queries in the <strong>Query</strong> dropdownlist to se
 </div>
 </li>
 <li>
-<p>You can use <a href="https://prometheus.io/docs/prometheus/latest/querying/basics/">PromQL (Prometheus Query Language)</a> to query metrics information, in query input box, delete existing query then type <code>container_cpu</code> and wait for auto suggestion.</p>
+<p>You can use <a href="https://prometheus.io/docs/prometheus/latest/querying/basics/">PromQL (Prometheus Query Language)</a> to query metrics information with custom query as well. Delete existing query then type <code>container_cpu</code> in the expression input and wait for auto suggestion.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-13.png" alt="mon 13">
@@ -335,7 +336,7 @@ Try to select different queries in the <strong>Query</strong> dropdownlist to se
 </div>
 </li>
 <li>
-<p>select <code>container_cpu_usage_seconds_total</code> metric then press <code>Enter</code> to query the metric from Prometheus.</p>
+<p>select <code>container_cpu_usage_seconds_total</code> metric then press <code>Enter</code> on keyboard to query the metric from Prometheus.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-14.png" alt="mon 14">
@@ -343,7 +344,7 @@ Try to select different queries in the <strong>Query</strong> dropdownlist to se
 </div>
 </li>
 <li>
-<p>Try new query by enter <code>pod:container_cpu_usage:sum</code> to input box then press <code>Enter</code> to run query.</p>
+<p>Try new query by enter <code>pod:container_cpu_usage:sum</code> to expression input then press <code>Enter</code> to run query.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-15.png" alt="mon 15">
@@ -351,7 +352,7 @@ Try to select different queries in the <strong>Query</strong> dropdownlist to se
 </div>
 </li>
 <li>
-<p>In the web browser address bar, you can see the URL for the query you&#8217;ve just run. You can save or bookmark this URL for later.</p>
+<p>In the web browser address bar, you can see the URL for the query you&#8217;ve just run. You can save or bookmark this URL for later use.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-16.png" alt="mon 16">
@@ -359,7 +360,7 @@ Try to select different queries in the <strong>Query</strong> dropdownlist to se
 </div>
 </li>
 <li>
-<p>Click <strong>Alerts</strong> tab to view all alerts. The Alerting UI enables you to manage alerts, silences, and alerting rules. We will create alert later in this lab.</p>
+<p>Click <strong>Alerts</strong> tab to view all alerts (if any). The Alerting UI enables you to manage alerts, silences, and alerting rules. We will create alert later in this lab.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-17.png" alt="mon 17">
@@ -367,7 +368,7 @@ Try to select different queries in the <strong>Query</strong> dropdownlist to se
 </div>
 </li>
 <li>
-<p>click Events Tab to view All event in this project or filter by resource</p>
+<p>click <strong>Events</strong> Tab to view All event in this project or filter by resources.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-18.png" alt="mon 18">
@@ -403,7 +404,7 @@ Try to select different queries in the <strong>Query</strong> dropdownlist to se
 <div class="ulist">
 <ul>
 <li>
-<p>The Quarkus Micrometer library is included in <a href="https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/pom.xml?ref_type=heads#L64"><code>pom.xml</code></a> file.</p>
+<p>The Quarkus Micrometer library is included in <a href="https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/pom.xml?ref_type=heads#L64"><code>pom.xml</code></a> file as the application&#8217;s dependency.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-21.png" alt="mon 21">
@@ -426,7 +427,7 @@ Try to select different queries in the <strong>Query</strong> dropdownlist to se
 <div class="ulist">
 <ul>
 <li>
-<p>In Topology view, select <code>backend</code> deployment, go to <strong>Resources</strong> tab in the right panel, then click on the applciation Pod.</p>
+<p>In Topology view, select <code>backend</code> deployment, go to <strong>Resources</strong> tab in the right panel, then click on the application Pod.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-9.png" alt="mon 9">
@@ -435,6 +436,11 @@ Try to select different queries in the <strong>Query</strong> dropdownlist to se
 </li>
 <li>
 <p>Go to <strong>Terminal</strong> tab, then run this command to see all metrics exposed from the application.</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">curl -s http://localhsot:8080/q/metrics</code></pre>
+</div>
+</div>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -446,11 +452,6 @@ the <code>/q/metrics</code> endpoint is automatically exposed from the applicati
 </td>
 </tr>
 </table>
-</div>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">curl -s http://localhsot:8080/q/metrics</code></pre>
-</div>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -516,15 +517,15 @@ This endpoint exposes metrics that you&#8217;ve specifically defined in your Qua
 <p>Now our <code>backend</code> application has exposed metrics including our custom metrics defined in the code of <a href="https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads#L75"><code>BackendResource.java</code></a> file. In the previous topic we&#8217;ve seen how to get all metrics from the URL exposed by the application.</p>
 </div>
 <div class="paragraph">
-<p>However, in practice, we won&#8217;t use <code>curl</code> command to query metrics but we&#8217;re going to use OpenShift console to query the metrics using PromQL just like we&#8217;ve done before.</p>
+<p>However, in practice, we won&#8217;t use <code>curl</code> command to query metrics but we&#8217;re going to use OpenShift console to query the metrics with PromQL just like we&#8217;ve done before.</p>
 </div>
 <div class="paragraph">
-<p>Though those metrics exposed from the <code>backend</code> application haven&#8217;t been collected by Prometheus yet, and we have to configure Prometheus to know our application and which URL it should use to collect the metrics. To do that we have to create a <code>ServiceMonitor</code> object.</p>
+<p>Though those metrics exposed from the <code>backend</code> application haven&#8217;t been collected by Prometheus yet. So, we have to configure Prometheus to know our application and from which URL it should use to collect the metrics. To do that we have to create a <code>ServiceMonitor</code> object.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>In OpenShift console, click on <strong>Search</strong> menu on the left, then enter <code>servicemonitor</code> to the <strong>Resource</strong> dorpdownlist, and then select <strong>SM ServiceMonitor</strong>.</p>
+<p>In OpenShift console, click on <strong>Search</strong> menu on the left, then enter <code>servicemonitor</code> to the <strong>Resource</strong> dorpdownlist, and then select <strong>SM ServiceMonitor</strong> from the list.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-23.png" alt="mon 23">
@@ -541,6 +542,18 @@ This endpoint exposes metrics that you&#8217;ve specifically defined in your Qua
 </li>
 <li>
 <p>Delete all YAML code in the YAML editor. Copy this YAML from the code snippet below and paste to the YAML editor in OpenShift console. Then click <strong>Create</strong> button.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You can see that we&#8217;ve specified the <code>/q/metrics</code> and <code>/q/metrics/application</code> endpoint in the <code>path</code> field. So Prometheus will know what endpoint it should call to collect metrics.
+</td>
+</tr>
+</table>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: monitoring.coreos.com/v1
@@ -629,7 +642,7 @@ curl http://backend:8080</code></pre>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-If you don&#8217;t see any metrics started with <code>com</code> in auto suggession, this is because the Prometheus has&#8217;t collect metrics from the application yet. So, just wait for a few minutes and try again.
+If you don&#8217;t see any metrics started with <code>com</code> in auto suggession, this is because the Prometheus hasn&#8217;t collect metrics from the application yet. So, just wait for a few minutes and try again.
 </td>
 </tr>
 </table>
@@ -645,29 +658,26 @@ If you don&#8217;t see any metrics started with <code>com</code> in auto suggess
 </li>
 <li>
 <p>Now, try to query the metric with <a href="https://prometheus.io/docs/prometheus/latest/querying/functions/#rate"><code>rate</code></a> function using PromQL to calcualte per-second average rate of API calls in 1 minute. Copy this query and paste in the expression input then press <code>Enter</code>.</p>
-</li>
-</ul>
-</div>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">rate(com_example_quarkus_BackendResource_countBackend_total[1m])</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>+
-image::monitors/mon-33.png[]</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-33.png" alt="mon 33">
 </div>
-<div class="ulist">
-<ul>
+</div>
+</li>
 <li>
 <p>Run more <code>curl</code> command in the web terminal and run the metric query again to see the result changes.</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">curl http://backend:8080</code></pre>
+</div>
+</div>
 </li>
 </ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>curl http://backend:8080</pre>
-</div>
 </div>
 </div>
 </div>
@@ -681,12 +691,12 @@ image::monitors/mon-33.png[]</p>
 <p>In real world, you won&#8217;t have time to keep your eyes on the OpenShift console and run the PromQL for every 5 seconds to see whether the metric value used to determine API call latency hits threshold or not, so you can, for example, scale up your application to be able to serve more request and so the latency is reduced.</p>
 </div>
 <div class="paragraph">
-<p>What you need is something that can keep tracking the metric value and let you know when the value has hit threshold. This is where the <code>Alert</code> comes in.</p>
+<p>What you need is something that can keep tracking the metric value and let you know when the value has hit threshold. This is where the <strong>Alert</strong> comes in.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Review this <code>PrometheusRule</code> resource. This resource is used to configure the alert based on the <code>com_example_quarkus_BackendResource_timeBackend_seconds_max</code> defined in the <code>expr</code> (expression) field. The alert will be fired when the metric&#8217;s value is more than <code>0.01</code> (1 second).</p>
+<p>Review this <code>PrometheusRule</code> resource. This resource is used to configure an alert based on the <code>com_example_quarkus_BackendResource_timeBackend_seconds_max</code> metric defined in the <code>expr</code> (expression) field. The alert will be fired when the metric&#8217;s value is more than <code>0.01</code> (1 second).</p>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -730,22 +740,18 @@ spec:
 </div>
 </li>
 <li>
-<p>Copy the YAML from code snippet above and paste to YAML editor in OpenShift console. Update the <code>namespace</code> field value to matches to your username. Then click <strong>Create</strong> button.</p>
+<p>Copy the YAML from code snippet above and paste to YAML editor in OpenShift console. <strong>Important!</strong>  update the <code>namespace</code> field value to matches to your username. Then click <strong>Create</strong> button.</p>
 </li>
 <li>
 <p>Run more <code>curl</code> command in the web terminal to trigger API calls.</p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
+<div class="listingblock console-input">
 <div class="content">
-<pre>curl http://backend:8080</pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">curl http://backend:8080</code></pre>
 </div>
 </div>
-<div class="ulist">
-<ul>
+</li>
 <li>
-<p>Select <strong>Observe</strong> menu on the left, go to <strong>Alerts</strong> tab, and wait until the alert shows up. (Refresh web browser if you&#8217;ve wait more than 1-2 minutes and don&#8217;t see the alert.)</p>
+<p>Select <strong>Observe</strong> menu on the left, go to <strong>Alerts</strong> tab, and wait until the alert shows up. (Refresh web browser if you&#8217;ve waited more than 1-2 minutes and don&#8217;t see the alert.)</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-35.png" alt="mon 35">
