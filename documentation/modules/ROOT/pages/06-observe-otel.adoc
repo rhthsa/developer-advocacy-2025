@@ -523,7 +523,7 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 +
 image::otel/otel-21.png[]
 
-[viewautoinstrumentapptraces]
+[#viewautoinstrumentapptraces]
 == View Auto-Instrument Application Traces
 
 * Run this command a few times in web terminal to trigger API calls from `frontend` application.
