@@ -144,6 +144,18 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#openshiftmonitoring">5.1 OpenShift Monitoring</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#monitoryourapp">5.2 Monitor Your Applications</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#exposemetrics">5.3 Expose Metrics from Your Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#monitorappcustommetric">5.4 Monitor Application with Custom Metrics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#createalert">5.5 Create Alert for Metrics</a>
+  </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="1">
@@ -201,17 +213,10 @@
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Default platform monitoring components.</strong> A set of platform monitoring components are installed in the <code>openshift-monitoring</code> project by default during an OpenShift Container Platform installation. This provides monitoring for core cluster components including Kubernetes services. The default monitoring stack also enables remote health monitoring for clusters.</p>
+<p><strong>Default platform monitoring components.</strong> A set of platform monitoring components are installed in the <code>openshift-monitoring</code> project by default during an OpenShift Container Platform installation. This provides monitoring for core cluster components including Kubernetes services. The default monitoring stack also enables remote health monitoring for clusters. These components are illustrated in the <strong><em>Installed by default</em></strong> section in the diagram below.</p>
 </li>
-</ul>
-</div>
-<div class="paragraph">
-<p>These components are illustrated in the Installed by default section in the following diagram.</p>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p><strong>user-defined projects monitoring components.</strong> After optionally enabling monitoring for user-defined projects, additional monitoring components are installed in the <code>openshift-user-workload-monitoring</code> project. This provides monitoring for user-defined projects. These components are illustrated in the <strong>User</strong> section in the following diagram.</p>
+<p><strong>user-defined projects monitoring components.</strong> After optionally enabling monitoring for user-defined projects, additional monitoring components are installed in the <code>openshift-user-workload-monitoring</code> project. This provides monitoring for user-defined projects. These components are illustrated in the <strong>User</strong> section in the diagram.</p>
 </li>
 </ul>
 </div>
@@ -227,40 +232,28 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_openshift_default_monitoring"><a class="anchor" href="#_openshift_default_monitoring"></a>OpenShift Default Monitoring</h2>
+<h2 id="monitoryourapp"><a class="anchor" href="#monitoryourapp"></a>Monitor your application</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>In OpenShift Developer Console, Select project <code>userX-observe</code> (change X to your username),</p>
-</li>
-<li>
-<p>View default monitoring per deployment, click topology, click <code>backend</code> deployment, in backend deployment, select observe tab</p>
-<div class="ulist">
-<ul>
-<li>
-<p>view CPU usage,</p>
-</li>
-<li>
-<p>view Memory usage</p>
-</li>
-<li>
-<p>bandwidth</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>OpenShift provides a bunch of default out-of-the-box monitoring dashboard for you to monitor your applications deployed in the cluster. In OpenShift console, select <strong>Topology</strong> menu on the left. Then change to project <code>userX-observe</code> that matches to your username (if it&#8217;s not already).</p>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>Click on the <code>backend</code> Deployment, then select <strong>Observe</strong> tab on the right panel. You can see the CPU usage, Memory usage, and network bandwidth.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-1.png" alt="mon 1">
 </div>
 </div>
-<div class="paragraph">
-<p>+
-image::monitors/mon-2.png[]</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/monitors/mon-2.png" alt="mon 2">
+</div>
 </div>
 </li>
 <li>
-<p>Or view monitoring per pod, change to Resources tab, and click Pod to view details</p>
+<p>To view more monitoring information for a specific Pod in this deployment, click on <strong>Resources</strong> tab, then click on the Pod to view monitoring details for a particular Pod.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-3.png" alt="mon 3">
@@ -268,7 +261,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>In Pod Details, change to Metrics tab to view Memory usage, CPU usage, Filesystem and Network In of this pod.</p>
+<p>In Pod Details page, select <strong>Metrics</strong> tab to view monitoring infomation e.g. Memory usage, CPU usage, Filesystem, and Network for this Pod.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-4.png" alt="mon 4">
@@ -276,7 +269,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>To view default monitoring of all deployment in this project, click Observe in left menu, select Dashboard Tab, default dashboard will show monitoring of all pod in this namespace.</p>
+<p>To monitor all deployments in this Project, click <strong>Observe</strong> menu on the left, then select <strong>Dashboards</strong> bab, default dashboard will show all monitoring information of all Pods in this namespace/Project.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-5.png" alt="mon 5">
@@ -284,7 +277,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>You can change view by select Dashboard and criteria such as select <code>Kubernetes/Compute Resources/Pod</code> and specific pod</p>
+<p>You can view different dashboards by select a dashboard from the <strong>Dashboard</strong> dropdownlist i.e. <code>Kubernetes/Compute Resources/Pod</code> dashboard to filter and view Pod-specific monitoring information.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-6.png" alt="mon 6">
@@ -292,23 +285,41 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>view default monitoring such as CPU Usage, CPU Throttling, CPU Quota, etc.</p>
+<p>The dashboard will show fundamental application monitoring information such as CPU, Memory, Disk, Network etc.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-7.png" alt="mon 7">
 </div>
 </div>
 </li>
-<li>
-<p>select tab Metrics to view performance/metrics information by type, click select query dropdown list to select default metrics information such as cpu usage, memory usage, filesystem usage, etc.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/monitors/mon-8.png" alt="mon 8">
+</ul>
 </div>
+<div class="paragraph">
+<p>All the graphs you&#8217;ve seen in the dashboard are rendered from metrics data collected from the resources deployed in OpenShift cluster. OpenShift Monitoring uses <a href="https://prometheus.io/">Prometheus</a> to collect and store all metrics in the cluster.</p>
 </div>
-</li>
+<div class="paragraph">
+<p>To query metrics, select tab <strong>Metrics</strong>, then select built-in queries from the <strong>Query</strong> dropdownlist to query metrics information such as cpu usage, memory usage, filesystem usage, etc. then click on <strong>Run queries</strong> button.</p>
+</div>
+<div class="paragraph">
+<p>+
+image::monitors/mon-8.png[]</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>select CPU usage, click check box 'Stacked'</p>
+<p>select <code>CPU Usage</code> query, run the query and then select the <strong>Stacked</strong> checkbox to stack the line chart.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Try to select different queries in the <strong>Query</strong> dropdownlist to see different metrics information.
+</td>
+</tr>
+</table>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-12.png" alt="mon 12">
@@ -316,10 +327,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>change to another metrics such as memory usage.</p>
-</li>
-<li>
-<p>OpenShift Monitoring base on Prometheus Technology, you can use PromQL for retrive metric information, in query text box,  type 'container_cpu' and wait auto suggestion,</p>
+<p>You can use <a href="https://prometheus.io/docs/prometheus/latest/querying/basics/">PromQL (Prometheus Query Language)</a> to query metrics information, in query input box, delete existing query then type <code>container_cpu</code> and wait for auto suggestion.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-13.png" alt="mon 13">
@@ -327,7 +335,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>select 'container_cpu_usage_seconds_total' and type 'enter' button to view this metrics from PromQL</p>
+<p>select <code>container_cpu_usage_seconds_total</code> metric then press <code>Enter</code> to query the metric from Prometheus.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-14.png" alt="mon 14">
@@ -335,7 +343,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>type 'pod:container_cpu_usage:sum' and type 'enter' button to view this metrics from PromQL</p>
+<p>Try new query by enter <code>pod:container_cpu_usage:sum</code> to input box then press <code>Enter</code> to run query.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-15.png" alt="mon 15">
@@ -343,7 +351,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>You can save this page for later use.</p>
+<p>In the web browser address bar, you can see the URL for the query you&#8217;ve just run. You can save or bookmark this URL for later.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-16.png" alt="mon 16">
@@ -351,7 +359,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>click Alerts tab to view all alert (the Alerting UI enables you to manage alerts, silences, and alerting rules, we will create alert in next step in this session)</p>
+<p>Click <strong>Alerts</strong> tab to view all alerts. The Alerting UI enables you to manage alerts, silences, and alerting rules. We will create alert later in this lab.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-17.png" alt="mon 17">
@@ -371,25 +379,17 @@ image::monitors/mon-2.png[]</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_review_application_performance_metric_code"><a class="anchor" href="#_review_application_performance_metric_code"></a>Review Application Performance Metric Code</h2>
+<h2 id="exposemetrics"><a class="anchor" href="#exposemetrics"></a>Expose Metrics from Your Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Developer can enable monitoring for user-defined projects in addition to the default platform monitoring. You can now monitor your own projects in OpenShift Container Platform without the need for an additional monitoring solution.</p>
 </div>
+<div class="sect2">
+<h3 id="_review_application_code"><a class="anchor" href="#_review_application_code"></a>Review Application Code</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>review application metric code</p>
-<div class="ulist">
-<ul>
-<li>
-<p>backend application use quarkus microprofile metrics libraly to generate application metrics</p>
-</li>
-<li>
-<p>example code: <a href="https://gitlab.com/ocp-demo/backend_quarkus" class="bare">https://gitlab.com/ocp-demo/backend_quarkus</a>,</p>
-</li>
-<li>
-<p>example custom metrics in code: path <code>/code/src/main/java/com/example/quarkus/BackendResource.java</code></p>
+<p>Review the <code>backend</code> application source code. The application uses <a href="https://quarkus.io/guides/telemetry-micrometer">Quarkus Micrometer</a> API in <a href="https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads"><code>BackendResource.java</code></a> file to expose custom metrics from the application.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-19.png" alt="mon 19">
@@ -400,9 +400,10 @@ image::monitors/mon-2.png[]</p>
 <img src="_images/monitors/mon-20.png" alt="mon 20">
 </div>
 </div>
-</li>
+<div class="ulist">
+<ul>
 <li>
-<p>In Maven Repository of Project (pom.xml)</p>
+<p>The Quarkus Micrometer library is included in <a href="https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/pom.xml?ref_type=heads#L64"><code>pom.xml</code></a> file.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-21.png" alt="mon 21">
@@ -417,8 +418,15 @@ image::monitors/mon-2.png[]</p>
 </ul>
 </div>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_view_raw_application_metrics"><a class="anchor" href="#_view_raw_application_metrics"></a>View Raw Application Metrics</h3>
+<div class="ulist">
+<ul>
 <li>
-<p>review example metrics of backend application, in topology view, click <code>backend</code> deployment, and click on pod</p>
+<p>In Topology view, select <code>backend</code> deployment, go to <strong>Resources</strong> tab in the right panel, then click on the applciation Pod.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-9.png" alt="mon 9">
@@ -426,10 +434,22 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>select terminal tab, try to run curl command</p>
-<div class="listingblock">
+<p>Go to <strong>Terminal</strong> tab, then run this command to see all metrics exposed from the application.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+the <code>/q/metrics</code> endpoint is automatically exposed from the application. This endpoint will be used by Prometheus to collect metrics from the application.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">curl -s http://localhsot:8080/q/metrics</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">curl -s http://localhsot:8080/q/metrics</code></pre>
 </div>
 </div>
 <div class="imageblock">
@@ -438,7 +458,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </div>
 <div class="paragraph">
-<p>example result</p>
+<p>Sample result.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -447,10 +467,10 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>call custom quarkus microprofile metrics example</p>
-<div class="listingblock">
+<p>To view only application-specific metrics (including the custom metrics in the code you&#8217;ve reviewed), run this command in the Terminal tab. Then press <code>Ctrl + F</code> on keyboard and search for <code>BackendResource</code> metrics. These are custom metrics defined in the code of <a href="https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads#L75"><code>BackendResource.java</code></a> file.</p>
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">curl -s  http://localhost:8080/q/metrics/application</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">curl -s  http://localhost:8080/q/metrics/application</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -461,18 +481,50 @@ image::monitors/mon-2.png[]</p>
 <img src="_images/monitors/mon-26.png" alt="mon 26">
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code><strong>/q/metrics</strong></code>: This endpoint provides a general overview of Quarkus&#8217;s internal metrics, such as CPU usage, memory consumption, and garbage collection statistics. It&#8217;s useful for monitoring the health and performance of the Quarkus runtime itself.</p>
+</li>
+<li>
+<p><code><strong>/q/metrics/application</strong></code>:
+This endpoint exposes metrics that you&#8217;ve specifically defined in your Quarkus application using the Micrometer library. Micrometer is a facade that allows you to easily collect metrics that can be exported to various monitoring systems like Prometheus. You can use Micrometer to create custom metrics like counters, gauges, and timers to track various aspects of your application&#8217;s behavior.</p>
+</li>
+</ul>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </li>
 </ul>
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="_add_application_performance_metric_to_openshift"><a class="anchor" href="#_add_application_performance_metric_to_openshift"></a>Add Application Performance Metric to OpenShift</h2>
+<h2 id="monitorappcustommetric"><a class="anchor" href="#monitorappcustommetric"></a>Monitor Application with Custom Metrics</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Now our <code>backend</code> application has exposed metrics including our custom metrics defined in the code of <a href="https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads#L75"><code>BackendResource.java</code></a> file. In the previous topic we&#8217;ve seen how to get all metrics from the URL exposed by the application.</p>
+</div>
+<div class="paragraph">
+<p>However, in practice, we won&#8217;t use <code>curl</code> command to query metrics but we&#8217;re going to use OpenShift console to query the metrics using PromQL just like we&#8217;ve done before.</p>
+</div>
+<div class="paragraph">
+<p>Though those metrics exposed from the <code>backend</code> application haven&#8217;t been collected by Prometheus yet, and we have to configure Prometheus to know our application and which URL it should use to collect the metrics. To do that we have to create a <code>ServiceMonitor</code> object.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>create ServiceMonitor, go to Search in left menu, in search page, in resources drop down, type 'servicemonitor' for filter, click 'SM ServiceMonitor'</p>
+<p>In OpenShift console, click on <strong>Search</strong> menu on the left, then enter <code>servicemonitor</code> to the <strong>Resource</strong> dorpdownlist, and then select <strong>SM ServiceMonitor</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-23.png" alt="mon 23">
@@ -480,7 +532,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>Click Create ServiceMonitor button</p>
+<p>Click <strong>Create ServiceMonitor</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-24.png" alt="mon 24">
@@ -488,7 +540,7 @@ image::monitors/mon-2.png[]</p>
 </div>
 </li>
 <li>
-<p>in Create ServiceMonitor Page, input below YAML for create ServiceMonitor to backend application</p>
+<p>Delete all YAML code in the YAML editor. Copy this YAML from the code snippet below and paste to the YAML editor in OpenShift console. Then click <strong>Create</strong> button.</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: monitoring.coreos.com/v1
@@ -512,9 +564,6 @@ spec:
       app: backend</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>example:</p>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-30.png" alt="mon 30">
@@ -522,7 +571,7 @@ spec:
 </div>
 </li>
 <li>
-<p>click create and review your ServiceMonitor, click YAML tab to view your yaml code.</p>
+<p>The <code>ServiceMonitor</code> resource should be created. Click <strong>YAML</strong> tab to view YAML configuration.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-27.png" alt="mon 27">
@@ -530,18 +579,27 @@ spec:
 </div>
 </li>
 <li>
-<p>test call you backend application</p>
-</li>
-<li>
-<p>open web terminal. test call your backend 2-3 times (change X to your username)</p>
-<div class="listingblock">
+<p>Open the web terminal and run following command to test API calls in <code>backend</code> application 2-3 times. Some custom metric values will be geneated based on these API calls.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Don&#8217;t forget to change <code>userX</code> in the command to match to your username.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc project userX-observe
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc project userX-observe
 curl http://backend:8080</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>such as</p>
+<p>Sample output.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -550,7 +608,7 @@ curl http://backend:8080</code></pre>
 </div>
 </li>
 <li>
-<p>click Observe in left menu, select Metrics Tab</p>
+<p>Next try to query the custom metrics. Click on <strong>Observe</strong> menu on the left, then select <strong>Metrics</strong> tab.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-29.png" alt="mon 29">
@@ -558,18 +616,27 @@ curl http://backend:8080</code></pre>
 </div>
 </li>
 <li>
-<p>in PromQL, type <code>com</code> and wait auto suggesstion</p>
+<p>Enter <code>com</code> to the <strong>Expression</strong> input and wait for auto suggesstion.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-31.png" alt="mon 31">
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you don&#8217;t see any metrics started with <code>com</code> in auto suggession, this is because the Prometheus has&#8217;t collect metrics from the application yet. So, just wait for a few minutes and try again.
+</td>
+</tr>
+</table>
+</div>
 </li>
 <li>
-<p>Remark: if you don&#8217;t found metrics 'com*' in auto suggession, wait a few minute and retry again</p>
-</li>
-<li>
-<p>select from suggestion or type in query box with <code>com_example_quarkus_BackendResource_countBackend_total</code>, type enter.</p>
+<p>Select <code>com_example_quarkus_BackendResource_countBackend_total</code> from suggestion list or you can type it in expresion input then press <code>Enter</code> on keyboard.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-32.png" alt="mon 32">
@@ -577,40 +644,61 @@ curl http://backend:8080</code></pre>
 </div>
 </li>
 <li>
-<p>change your custom PromQL to average call backend service in 1 minute is</p>
+<p>Now, try to query the metric with <a href="https://prometheus.io/docs/prometheus/latest/querying/functions/#rate"><code>rate</code></a> function using PromQL to calcualte per-second average rate of API calls in 1 minute. Copy this query and paste in the expression input then press <code>Enter</code>.</p>
+</li>
+</ul>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">rate(com_example_quarkus_BackendResource_countBackend_total[1m])</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>+
+image::monitors/mon-33.png[]</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>type: <code>rate(com_example_quarkus_BackendResource_countBackend_total[1m])</code></p>
+<p>Run more <code>curl</code> command in the web terminal and run the metric query again to see the result changes.</p>
 </li>
-<li>
-<p>enter</p>
-<div class="imageblock">
+</ul>
+</div>
+<div class="listingblock">
 <div class="content">
-<img src="_images/monitors/mon-33.png" alt="mon 33">
+<pre>curl http://backend:8080</pre>
 </div>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Perfect!!! you can add metrics to OpenShift Monitoring Now.</p>
-</li>
-<li>
-<p>Optional: test call backend 2-3 times and check metrics change in Monitoring Pages</p>
-</li>
-</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_add_alert_to_openshift_monitoring"><a class="anchor" href="#_add_alert_to_openshift_monitoring"></a>Add Alert to OpenShift Monitoring</h2>
+<h2 id="createalert"><a class="anchor" href="#createalert"></a>Create Alert for Metrics</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Keep looking at the metric values by running the PromQL is one of monitoring methods. But who will do that?</p>
+</div>
+<div class="paragraph">
+<p>In real world, you won&#8217;t have time to keep your eyes on the OpenShift console and run the PromQL for every 5 seconds to see whether the metric value used to determine API call latency hits threshold or not, so you can, for example, scale up your application to be able to serve more request and so the latency is reduced.</p>
+</div>
+<div class="paragraph">
+<p>What you need is something that can keep tracking the metric value and let you know when the value has hit threshold. This is where the <code>Alert</code> comes in.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Check Example <code>PrometheusRule</code> (change X to your username before create)</p>
+<p>Review this <code>PrometheusRule</code> resource. This resource is used to configure the alert based on the <code>com_example_quarkus_BackendResource_timeBackend_seconds_max</code> defined in the <code>expr</code> (expression) field. The alert will be fired when the metric&#8217;s value is more than <code>0.01</code> (1 second).</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <code>com_example_quarkus_BackendResource_timeBackend_seconds_max</code> metric is our custom metric in the <code>backend</code> application used to measure processing time for an API. If the value of this metric is high, it means the API response time will be high as well so resulting <strong>high latency</strong>.
+</td>
+</tr>
+</table>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: monitoring.coreos.com/v1
@@ -632,12 +720,9 @@ spec:
         message: '{{ $labels.instance }} response time is {{ $value }} sec'</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>HightLatency Alert will fire when response time is greateer than 1 sec</p>
-</div>
 </li>
 <li>
-<p>Create backend-app-alert, click Import YAML</p>
+<p>Create the <code>PrometheusRule</code> resource above by click on the <strong>+</strong> button at the top right corner of OpenShift console then select <strong>Import YAML</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-34.png" alt="mon 34">
@@ -645,13 +730,22 @@ spec:
 </div>
 </li>
 <li>
-<p>input PrometheusRule yaml in editor and create (change <code>namespace!!!</code> before run)</p>
+<p>Copy the YAML from code snippet above and paste to YAML editor in OpenShift console. Update the <code>namespace</code> field value to matches to your username. Then click <strong>Create</strong> button.</p>
 </li>
 <li>
-<p>open web terminal. test call your backend 2-3 times</p>
+<p>Run more <code>curl</code> command in the web terminal to trigger API calls.</p>
 </li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>curl http://backend:8080</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
-<p>go to Observe menu, Alerts tab, and wait until it&#8217;s show! (may be need refresh page.)</p>
+<p>Select <strong>Observe</strong> menu on the left, go to <strong>Alerts</strong> tab, and wait until the alert shows up. (Refresh web browser if you&#8217;ve wait more than 1-2 minutes and don&#8217;t see the alert.)</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-35.png" alt="mon 35">
@@ -659,7 +753,7 @@ spec:
 </div>
 </li>
 <li>
-<p>View in Topology, see alert icon on backend application</p>
+<p>Go to the <strong>Topology</strong> menu, you should see the alert icon on <code>backend</code> application.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-36.png" alt="mon 36">
@@ -667,7 +761,7 @@ spec:
 </div>
 </li>
 <li>
-<p>Delete prometheusrule before go to next step, use search menu, and filter with <code>PrometheusRule</code>, click Delete in Action.</p>
+<p>Delete the <code>PrometheusRule</code> resource we&#8217;ve created by click on <strong>Search</strong> menu on the left. Then filter for <code>PrometheusRule</code> resource. Delete the <code>backend-app-alert</code> resource by  click on action menu then select <strong>Delete PrometheusRule</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/monitors/mon-37.png" alt="mon 37">
@@ -683,18 +777,6 @@ spec:
 <div class="sectionbody">
 <div class="paragraph">
 <p>OpenShift Monitoring provides real-time visibility into cluster health and performance using integrated tools like Prometheus, AlertManager, etc. It helps detect issues early, ensuring high availability and reliability of applications. The built-in alerting system enables proactive response and efficient resource management.</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_next_step"><a class="anchor" href="#_next_step"></a>Next Step</h2>
-<div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><a href="#observe-otel.adoc" class="xref unresolved">Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</a></p>
-</li>
-</ul>
 </div>
 </div>
 </div>
