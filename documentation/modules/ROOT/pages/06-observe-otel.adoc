@@ -220,16 +220,21 @@ Auto-instrumentation runs as follows:
 Auto-instrumentation enables you to start collecting telemetry data quickly without having to manually integrate the OpenTelemetry SDK into your application code. However, some applications might require specific configurations or custom manual instrumentation.
 
 [#setupinstrument]
-== Setup Otel Instrumentation
-* Review `instrumentation.yaml` https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml
+== Setup OpenTelemetry Instrumentation
+
+* Review the Instrumentation configurations here https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml. You can see the Otel Collector endpoint and a bunch of configurations for the Java and Go application auto-instrumentation.
 +
 image::otel/otel-14.png[]
 
-* Copy `instrumentation.yaml` and paste in Import YAML, click Create
+* Click on the *+* button at the top right corner of console, then select *Import YAML*.
++
+image::otel/otel-37.png[]
+
+* Copy all YAML code from this https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml and paste to YAML editor in OpenShift console. Then click Create button.
 +
 image::otel/otel-15.png[]
 
-* Review Instrumentation Details
+* The `instrumentation` resource should be created.
 +
 image::otel/otel-16.png[]
 
@@ -242,7 +247,8 @@ image::otel/otel-10.png[]
 
 * Open Web Terminal again, run command to create frontend application (change X to your username)
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 oc project userX-otel
 PROJECT=userX-otel
@@ -250,9 +256,10 @@ cd openshift-otel
 oc create -f config/frontend.yaml -n $PROJECT
 ----
 +
-Output
+Sample output.
 +
-[,ssh]
+[.console-output]
+[source,adoc]
 ----
 deployment.apps/frontend created
 service/frontend created
@@ -261,30 +268,34 @@ route.route.openshift.io/frontend created
 
 * Add Annotate deployment for auto-instrumentation
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 oc patch deployment/frontend \
   -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-nodejs":"true"}}}}}' \
   -n $PROJECT
 ----
 +
-Output
+Sample output.
 +
-[,ssh]
+[.console-output]
+[source,adoc]
 ----
 deployment.apps/frontend patched
 ----
 
 * Verify that auto-instrumentation is working with init-container
 +
-[,ssh]
+[.console-output]
+[source,adoc]
 ----
 oc get po $(oc get po -l app=frontend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq
 ----
 +
-Output
+Sample output.
 +
-[,ssh]
+[.console-output]
+[source,adoc]
 ----
 [
   {
@@ -324,7 +335,8 @@ Output
 
 * Set environment variables
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 oc set env deploy frontend OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector-headless:4318 -n $PROJECT
 oc set env deploy frontend OTEL_SERVICE_NAME=frontend -n $PROJECT
@@ -339,14 +351,16 @@ image::otel/otel-11.png[]
 
 * Run Command Line to Deploy simple-go app,
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 oc create -f config/simple-go.yaml -n $PROJECT
 ----
 +
-Output
+Sample output.
 +
-[,ssh]
+[.console-output]
+[source,adoc]
 ----
 deployment.apps/simple-go created
 service/simple-go created
@@ -356,7 +370,7 @@ service/simple-go created
 +
 Annotations
 +
-[,yaml]
+[source,yaml,subs="+macros,attributes+"]
 ----
 template:
   metadata:
@@ -368,7 +382,7 @@ template:
 +
 Enviornment variables
 +
-[,yaml]
+[source,yaml,subs="+macros,attributes+"]
 ----
       - name: OTEL_EXPORTER_OTLP_ENDPOINT
         value: http://otel-collector-headless:4318
@@ -382,15 +396,17 @@ Enviornment variables
 
 * Verify that auto-instrumentation is working with container sidecar
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 oc get po -l app=simple-go -n $PROJECT
 oc get po $(oc get po -l app=simple-go -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.spec.containers[1].name}'
 ----
 +
-Output
+Sample output.
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 NAME                        READY   STATUS    RESTARTS   AGE
 simple-go-56f8c644b-w4sxw   2/2     Running   0          7m42s
@@ -405,7 +421,7 @@ image::otel/otel-12.png[]
 +
 Annotations
 +
-[,yaml]
+[source,yaml,subs="+macros,attributes+"]
 ----
   template:
     metadata:
@@ -415,7 +431,7 @@ Annotations
 +
 Enviornment variables
 +
-[,yaml]
+[source,yaml,subs="+macros,attributes+"]
 ----
       - name: OTEL_EXPORTER_OTLP_ENDPOINT
         value: http://otel-collector-headless:4318
@@ -427,21 +443,24 @@ Enviornment variables
 
 * Deploy Java RESTful App with Command Line
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 oc create -f config/backend.yaml -n $PROJECT
 ----
 
 * Verify that auto-instrumentation is working with init-container
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 oc get po $(oc get po -l app=backend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq|head -n 8
 ----
 +
-Output
+Sample output.
 +
-[,ssh]
+[.console-output]
+[source,adoc]
 ----
 [
   {
@@ -456,14 +475,16 @@ Output
 
 * Check container log
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 oc logs $(oc get po -l app=backend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT | head -n 4
 ----
 +
-Output
+Sample output.
 +
-[,ssh]
+[.console-output]
+[source,adoc]
 ----
 Defaulted container "backend" out of: backend, opentelemetry-auto-instrumentation-java (init)
 INFO exec -a "java" java -Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -cp "." -jar /deployments/quarkus-run.jar
@@ -481,15 +502,17 @@ image::otel/otel-21.png[]
 
 * Test app
 +
-[,ssh]
+[.console-input]
+[source,adoc]
 ----
 oc project userX-otel
 curl -v https://$(oc get route frontend -n $PROJECT -o jsonpath='{.spec.host}')
 ----
 +
-Output
+Sample output.
 +
-[,ssh]
+[.console-output]
+[source,adoc]
 ----
 * Connection #0 to host frontend-demo.apps.cluster-4thxh.4thxh.sandbox2298.opentlc.com left intact
 Frontend version: v1 => [Backend: http://simple-go:8080, Response: 200, Body: Backend version:v1, Response:200, Host:backend-68589df886-gtbpx, Status:200, Message: Hello, World]
