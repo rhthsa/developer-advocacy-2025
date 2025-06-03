@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation :: OpenShift Developer Workshop 2025</title>
+    <link rel="canonical" href="https://rhthsa.github.io/developer-advocacy-2025/openshift-developer-workshop-2025/06-observe-otel.html">
+    <link rel="prev" href="05-observe-monitor.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://rhthsa.github.io/developer-advocacy-2025">OpenShift Developer Workshop 2025</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="openshift-developer-workshop-2025" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-shipwright.html">1. Build your application containers the right way with Shipwright</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#setup">1.1 Setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#deploycontainerimage">1.2 Deploy Container Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#accesstheapplication">1.3 Access To Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwright">1.4 OpenShift Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwrightbuidah">1.5 Build and Deploy Application using Shipwright and Buildah</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwrights2i">1.6 Build and Deploy Application using Shipwright and Source-to-Image (S2I)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#summary">1.7 Summary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD - Part I</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#openshiftpipelines">2.1 OpenShift Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#createtask">2.2 Create Task</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#createpipeline">2.3 Create Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#triggerpipeline">2.4 Trigger Pipeline</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-argocd.html">3. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#openshiftgitops">3.1 OpenShift GitOps</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#gitopswithkustomize">3.2 GitOps with Kustomize</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#kustomizeresources">3.3 Kustomize Resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#deployappwithgitops">3.4 Deploy Application with OpenShift GitOps</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-observe-logging.html">4. Observability through logs: Centralized logging with Loki &amp; querying via LogQL</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#observability">4.1 OpenShift Observability</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#openshiftlogging">4.2 OpenShift Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#reviewcodeandconfig">4.3 Review Application Codes and Deployment Configuraitons</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#deployapplication">4.4 Deploy Sample Applications</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#viewapplicationlogs">4.5 View Individual Application Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#logquery">4.6 Query Application Logs using OpenShift Logging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="05-observe-monitor.html">5. Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="05-observe-monitor.html#openshiftmonitoring">5.1 OpenShift Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="05-observe-monitor.html#monitoryourapp">5.2 Monitor Your Applications</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="05-observe-monitor.html#exposemetrics">5.3 Expose Metrics from Your Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="05-observe-monitor.html#monitorappcustommetric">5.4 Monitor Application with Custom Metrics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="05-observe-monitor.html#createalert">5.5 Create Alert for Metrics</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="06-observe-otel.html">6. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#distributedtracing">6.1 What is Distributed Tracing?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#createtempo">6.2 Create Tempo instance - Tempo Monolithic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#createotelcollector">6.3 Create OpenTelemetry (Otel) Collector</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#deploysampleapp">6.4 Deploy Sample Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#viewapptraces">6.5 View Application Traces</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <span class="nav-text">7. Accelerating software development with Red Hat Developer Hub</span>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Developer Workshop 2025</a></li>
+    <li><a href="06-observe-otel.html">6. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/rhthsa/developer-advocacy-2025/edit/master/documentation/modules/ROOT/pages/06-observe-otel.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</h1>
+<div class="sect1">
+<h2 id="distributedtracing"><a class="anchor" href="#distributedtracing"></a>What is Distributed Tracing?</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-25.png" alt="otel 25">
+</div>
+</div>
+<div class="paragraph">
+<p>Distributed tracing is a technique that helps developers and operators understand how requests flow through distributed systems, especially those built with microservices. It provides a comprehensive view of a request&#8217;s journey across different services, including the time taken at each step and any errors encountered.</p>
+</div>
+<div class="paragraph">
+<p>As a service owner, you can use distributed tracing to instrument your services to gather insights into your service architecture. You can use the Red Hat OpenShift distributed tracing platform for monitoring, network profiling, and troubleshooting the interaction between components in modern, cloud-native, microservices-based applications.</p>
+</div>
+<div class="paragraph">
+<p>With the distributed tracing platform, you can perform the following functions:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Monitor distributed transactions</p>
+</li>
+<li>
+<p>Optimize performance and latency</p>
+</li>
+<li>
+<p>Perform root cause analysis</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>You can use the <strong>Red Hat OpenShift distributed tracing platform (Tempo)</strong> in combination with the <strong>Red Hat build of OpenTelemetry</strong>.</p>
+</div>
+<div class="sect2">
+<h3 id="_red_hat_openshift_distributed_tracing_platform_features"><a class="anchor" href="#_red_hat_openshift_distributed_tracing_platform_features"></a>Red Hat OpenShift distributed tracing platform features</h3>
+<div class="paragraph">
+<p>Red Hat OpenShift distributed tracing platform provides the following capabilities:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Integration with Kiali</strong>&#8201;&#8212;&#8201;When properly configured, you can view distributed tracing platform data from the Kiali console.</p>
+</li>
+<li>
+<p><strong>High scalability</strong>&#8201;&#8212;&#8201;The distributed tracing platform back end is designed to have no single points of failure and to scale with the business needs.</p>
+</li>
+<li>
+<p><strong>Distributed Context Propagation</strong>&#8201;&#8212;&#8201;Enables you to connect data from different components together to create a complete end-to-end trace.</p>
+</li>
+<li>
+<p><strong>Backwards compatibility with Zipkin</strong>&#8201;&#8212;&#8201;Red Hat OpenShift distributed tracing platform has APIs that enable it to be used as a drop-in replacement for Zipkin, but Red Hat is not supporting Zipkin compatibility in this release.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_red_hat_openshift_distributed_tracing_platform_architecture"><a class="anchor" href="#_red_hat_openshift_distributed_tracing_platform_architecture"></a>Red Hat OpenShift distributed tracing platform architecture</h3>
+<div class="paragraph">
+<p>Red Hat OpenShift distributed tracing platform is made up of several components that work together to collect, store, and display tracing data.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_red_hat_openshift_distributed_tracing_platform_tempo"><a class="anchor" href="#_red_hat_openshift_distributed_tracing_platform_tempo"></a>Red Hat OpenShift distributed tracing platform (Tempo)</h3>
+<div class="paragraph">
+<p>This component is based on the open source <a href="https://grafana.com/oss/tempo/">Grafana Tempo project</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-26.png" alt="otel 26">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Gateway</strong>&#8201;&#8212;&#8201;The Gateway handles authentication, authorization, and forwarding requests to the <strong>Distributor</strong> or <strong>Query Frontend</strong> service.</p>
+</li>
+<li>
+<p><strong>Distributor</strong>&#8201;&#8212;&#8201;The Distributor accepts spans in multiple formats including Jaeger, OpenTelemetry, and Zipkin. It routes spans to Ingesters by hashing the traceID and using a distributed consistent hash ring.</p>
+</li>
+<li>
+<p><strong>Ingester</strong>&#8201;&#8212;&#8201;The Ingester batches a trace into blocks, creates bloom filters and indexes, and then flushes it all to the back end.</p>
+</li>
+<li>
+<p><strong>Query Frontend</strong>&#8201;&#8212;&#8201;The Query Frontend is responsible for sharding the search space for an incoming query. The search query is then sent to the Queriers. The Query Frontend deployment exposes the Jaeger UI through the Tempo Query sidecar.</p>
+</li>
+<li>
+<p><strong>Querier</strong> - The Querier is responsible for finding the requested trace ID in either the Ingesters or the back-end storage. Depending on parameters, it can query the Ingesters and pull Bloom indexes from the back end to search blocks in object storage.</p>
+</li>
+<li>
+<p><strong>Compactor</strong>&#8201;&#8212;&#8201;The Compactors stream blocks to and from the back-end storage to reduce the total number of blocks.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_red_hat_build_of_opentelemetry"><a class="anchor" href="#_red_hat_build_of_opentelemetry"></a>Red Hat build of OpenTelemetry</h3>
+<div class="paragraph">
+<p>This component is based on the open source <a href="https://opentelemetry.io/">OpenTelemetry project</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-diagram.svg" alt="otel diagram">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>OpenTelemetry Collector</strong> - The OpenTelemetry Collector is a vendor-agnostic way to receive, process, and export telemetry data. The OpenTelemetry Collector supports open-source observability data formats, for example, Jaeger and Prometheus, sending to one or more open-source or commercial back-ends. The Collector is the default location instrumentation libraries export their telemetry data.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="createtempo"><a class="anchor" href="#createtempo"></a>Create Tempo instance - Tempo Monolithic</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In Tempo Monolithic mode all core components such as compactor, distributor, ingester, querier, and query-frontend of Tempo are contained in a single binary, in a single container. This vastly simplifies the deployment, as only a single pod is created, and avoids potential issues arising from distributed deployments such as connectivity issues between pods or nodes, scheduling issues, etc.</p>
+</div>
+<div class="paragraph">
+<p>Additionally, this mode supports storing traces in-memory, and in a Persistent Volume. However, this mode comes at the expense of scalability: this mode does not scale horizontally. To scale your Tempo deployment horizontally, continue using the Tempo Microservices deployment via the <code>TempoStack</code> Custom Resource (CR).</p>
+</div>
+<div class="paragraph">
+<p><strong>The Monolithic mode is ideal for small deployments, demo and test setups</strong>, and is the recommended migration path of the Red Hat OpenShift distributed tracing platform (Jaeger) all-in-one deployment.</p>
+</div>
+<div class="paragraph">
+<p>Follow these steps to create Tempo instance in monolithic mode.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>In OpenShift console, change Project to <code>userX-otel</code> that matches to your username.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-1.png" alt="otel 1">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the + button at the top right corner of console, then select Import YAML.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-37.png" alt="otel 37">
+</div>
+</div>
+</li>
+<li>
+<p>Copy all YAML code from this <a href="https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/tempoMonolithic.yaml" class="bare">https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/tempoMonolithic.yaml</a> and paste to YAML editor in OpenShift console. Then click <strong>Create</strong> button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-2.png" alt="otel 2">
+</div>
+</div>
+</li>
+<li>
+<p>The <code>TempoMonolithic</code> resource should be created.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-4.png" alt="otel 4">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Topology</strong> menu, click on <code>tempo-sample</code> entity, go to the <strong>Resources</strong> tab in the right panel then wait unti the <code>tempo-sample-0</code> Pod status changes to <code>Running</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-5.png" alt="otel 5">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="createotelcollector"><a class="anchor" href="#createotelcollector"></a>Create OpenTelemetry (OTel) Collector</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Click on the + button at the top right corner of console, then select Import YAML.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-37.png" alt="otel 37">
+</div>
+</div>
+</li>
+<li>
+<p>Copy all YAML code from <a href="https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/otel-collector-multi-tenant.yaml" class="bare">https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/otel-collector-multi-tenant.yaml</a> and paste to YAML editor in OpenShift console.</p>
+<div class="paragraph">
+<p>Update the <code>userX</code> in the value of <code>server_name_override</code> field to your username. Then click <strong>Create</strong> button.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Don&#8217;t forget to update the <code>userX</code> in the value of <code>server_name_override</code> field to your username.
+</td>
+</tr>
+</table>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-6.png" alt="otel 6">
+</div>
+</div>
+</li>
+<li>
+<p>The <code>OpenTelemetryCollectors</code> should be created.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-8.png" alt="otel 8">
+</div>
+</div>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Go to <strong>Topology</strong> menu, you should see <code>otel-collector</code> deployment. Click on it then go to the <strong>Resources</strong> tab in the right panel and make sure the Pod status is Running.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-28.png" alt="otel 28">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="deploysampleapp"><a class="anchor" href="#deploysampleapp"></a>Deploy Sample Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this lab, we&#8217;ll deploy a simple Todo Java application hosted in Github here: The Todo application Source Code is Git repository here: <a href="https://github.com/voraviz/quarkus-todo-app/tree/otel" class="bare">https://github.com/voraviz/quarkus-todo-app/tree/otel</a>.</p>
+</div>
+<div class="paragraph">
+<p>The application is developed with <a href="https://quarkus.io/">Quarkus</a> framework and use <a href="https://quarkus.io/guides/opentelemetry">Quarkus Opentelemetry</a> extension to be able to send out tracing data to the OpenTelemetry Collector you&#8217;ve deployed.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Open the <code>pom.xml</code> file in <a href="https://github.com/voraviz/quarkus-todo-app/tree/otel/todo" class="bare">https://github.com/voraviz/quarkus-todo-app/tree/otel/todo</a> directory, and search for <code>opentelemetry</code>, you should see a few dependencies added to the application.</p>
+<div class="paragraph">
+<p><span class="image"><img src="_images/otel/otel-30.png" alt="otel 30"></span></p>
+</div>
+</li>
+<li>
+<p>Review deployment configuration here: <a href="https://github.com/voraviz/openshift-otel/blob/main/todo-kustomize/overlays/otel/todo.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/todo-kustomize/overlays/otel/todo.yaml</a>. Look for the <code>env</code> field, you should see the Otel Collector endpoint that Todo application will send tracing data to the collector.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-31.png" alt="otel 31">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the command prompt icon at the top right corner of OpenShift web console to open the web terminal.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-38.png" alt="otel 38">
+</div>
+</div>
+</li>
+<li>
+<p>Run this command to set current project to <code>userX-otel</code>. Don&#8217;t forget to change <code>userX</code> to match to your username.</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc project userX-otel</code></pre>
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-9.png" alt="otel 9">
+</div>
+</div>
+</li>
+<li>
+<p>Run these commands to clone Git repository from <a href="https://github.com/voraviz/openshift-otel.git" class="bare">https://github.com/voraviz/openshift-otel.git</a>.</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">git clone https://github.com/voraviz/openshift-otel.git
+cd openshift-otel</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Deploy the Todo applciation with command line. Don&#8217;t forget to change <code>userX</code> to match to your username. Then wait until all deployment commplete.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Don&#8217;t forget to change <code>userX</code> to match to your username.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">PROJECT=userX-otel
+echo $PROJECT
+oc create -k todo-kustomize/overlays/otel -n $PROJECT
+oc wait --for condition=ready --timeout=180s pod -l app=todo-db  -n $PROJECT
+oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Review the deployments in Topology view, wait until all pods status change to Running.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-32.png" alt="otel 32">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the arrow icon of <code>todo</code> deployment to access Todo application. Then try to add a few tasks, set some task&#8217;s status to completed and delete some tasks.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-33.png" alt="otel 33">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="viewapptraces"><a class="anchor" href="#viewapptraces"></a>View Application Traces</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to Administrator -&gt; Observe -&gt; Trace Select Tempo Instance <code>userX-otel/sample</code> and Tenant to dev</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-34.png" alt="otel 34">
+</div>
+</div>
+</li>
+<li>
+<p>Select trace and check its details</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-35.png" alt="otel 35">
+</div>
+</div>
+</li>
+<li>
+<p>view SQL Statement</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-36.png" alt="otel 36">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_auto_instrumentation_in_the_red_hat_build_of_opentelemetry_operator"><a class="anchor" href="#_auto_instrumentation_in_the_red_hat_build_of_opentelemetry_operator"></a>Auto-instrumentation in the Red Hat build of OpenTelemetry Operator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Auto-instrumentation in the Red Hat build of OpenTelemetry Operator can automatically instrument an application without manual code changes. Developers and administrators can monitor applications with minimal effort and changes to the existing codebase.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-27.png" alt="otel 27">
+</div>
+</div>
+<div class="paragraph">
+<p>Auto-instrumentation runs as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The Red Hat build of OpenTelemetry Operator injects an init-container, or a sidecar container for Go, to add the instrumentation libraries for the programming language of the instrumented application.</p>
+</li>
+<li>
+<p>The Red Hat build of OpenTelemetry Operator sets the required environment variables in the application&#8217;s runtime environment. These variables configure the auto-instrumentation libraries to collect traces, metrics, and logs and send them to the appropriate OpenTelemetry Collector or another telemetry backend.</p>
+</li>
+<li>
+<p>The injected libraries automatically instrument your application by connecting to known frameworks and libraries, such as web servers or database clients, to collect telemetry data. The source code of the instrumented application is not modified.</p>
+</li>
+<li>
+<p>Once the application is running with the injected instrumentation, the application automatically generates telemetry data, which is sent to a designated OpenTelemetry Collector or an external OTLP endpoint for further processing.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Auto-instrumentation enables you to start collecting telemetry data quickly without having to manually integrate the OpenTelemetry SDK into your application code. However, some applications might require specific configurations or custom manual instrumentation.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Review <code>instrumentation.yaml</code> <a href="https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml" class="bare">https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml</a></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-14.png" alt="otel 14">
+</div>
+</div>
+</li>
+<li>
+<p>Copy <code>instrumentation.yaml</code> and paste in Import YAML, click Create</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-15.png" alt="otel 15">
+</div>
+</div>
+</li>
+<li>
+<p>Review Instrumentation Details</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-16.png" alt="otel 16">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_application_without_opentelemetry_library_use_auto_instruement"><a class="anchor" href="#_deploy_application_without_opentelemetry_library_use_auto_instruement"></a>Deploy Application without OpenTelemetry Library (use Auto-Instruement)</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Deploy Node.js Application, Review deployment from <a href="https://github.com/voraviz/openshift-otel/blob/main/config/frontend.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/frontend.yaml</a></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-10.png" alt="otel 10">
+</div>
+</div>
+</li>
+<li>
+<p>Open Web Terminal again, run command to create frontend application (change X to your username)</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc project userX-otel
+PROJECT=userX-otel
+cd openshift-otel
+oc create -f config/frontend.yaml -n $PROJECT</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">deployment.apps/frontend created
+service/frontend created
+route.route.openshift.io/frontend created</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Add Annotate deployment for auto-instrumentation</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc patch deployment/frontend \
+  -p '{"spec":{"template":{"metadata":{"annotations":{"instrumentation.opentelemetry.io/inject-nodejs":"true"}}}}}' \
+  -n $PROJECT</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">deployment.apps/frontend patched</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify that auto-instrumentation is working with init-container</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc get po $(oc get po -l app=frontend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">[
+  {
+    "containerID": "cri-o://8461a346ece60ba52018f6395b1133298c26d532a0d411a30e5d147bee089fc0",
+    "image": "ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-nodejs:0.53.0",
+    "imageID": "ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-
+     nodejs@sha256:70ba757df71d0596aaccac91f439e8be7f81136b868205e79178e8fd3c36a763",
+    "lastState": {},
+    "name": "opentelemetry-auto-instrumentation-nodejs",
+    "ready": true,
+    "restartCount": 0,
+    "started": false,
+    "state": {
+      "terminated": {
+        "containerID": "cri-o://8461a346ece60ba52018f6395b1133298c26d532a0d411a30e5d147bee089fc0",
+        "exitCode": 0,
+        "finishedAt": "2025-05-05T07:22:25Z",
+        "reason": "Completed",
+        "startedAt": "2025-05-05T07:22:23Z"
+      }
+    },
+    "volumeMounts": [
+      {
+        "mountPath": "/otel-auto-instrumentation-nodejs",
+        "name": "opentelemetry-auto-instrumentation-nodejs"
+      },
+      {
+        "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount",
+        "name": "kube-api-access-6zqld",
+        "readOnly": true,
+        "recursiveReadOnly": "Disabled"
+      }
+    ]
+  }
+]</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Set environment variables</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc set env deploy frontend OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector-headless:4318 -n $PROJECT
+oc set env deploy frontend OTEL_SERVICE_NAME=frontend -n $PROJECT
+oc set env deploy frontend OTEL_PROPAGATORS=tracecontext,b3 -n $PROJECT</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Deploy Go Application, Review deployment from <a href="https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml</a></p>
+<div class="paragraph">
+<p>Remark: With opentelemetry-operator.v0.119.0-2 and go autoinstrumentation-go:v0.20.0 only work with golang 1.23</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-11.png" alt="otel 11">
+</div>
+</div>
+</li>
+<li>
+<p>Run Command Line to Deploy simple-go app,</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc create -f config/simple-go.yaml -n $PROJECT</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">deployment.apps/simple-go created
+service/simple-go created</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check simple-go deployment <a href="https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml</a></p>
+<div class="paragraph">
+<p>Annotations</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">template:
+  metadata:
+    annotations:
+      instrumentation.opentelemetry.io/inject-go: "true"
+      instrumentation.opentelemetry.io/otel-go-auto-target-exe: /app/api
+      openshift.io/required-scc: otel-go-instrumentation-scc</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enviornment variables</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - name: OTEL_EXPORTER_OTLP_ENDPOINT
+        value: http://otel-collector-headless:4318
+      - name: OTEL_SERVICE_NAME
+        value: simple-go
+      - name: OTEL_GO_AUTO_TARGET_EXE
+        value: /app/api
+      - name: OTEL_PROPAGATORS
+        value: tracecontext,b3</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify that auto-instrumentation is working with container sidecar</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc get po -l app=simple-go -n $PROJECT
+oc get po $(oc get po -l app=simple-go -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.spec.containers[1].name}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">NAME                        READY   STATUS    RESTARTS   AGE
+simple-go-56f8c644b-w4sxw   2/2     Running   0          7m42s
+opentelemetry-auto-instrumentation</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Deploy Node.js Application, Review deployment from <a href="https://github.com/voraviz/openshift-otel/blob/main/config/backend.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/backend.yaml</a></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-12.png" alt="otel 12">
+</div>
+</div>
+</li>
+<li>
+<p>Check backend deployment</p>
+<div class="paragraph">
+<p>Annotations</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">  template:
+    metadata:
+      annotations:
+        instrumentation.opentelemetry.io/inject-java: "true"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enviornment variables</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - name: OTEL_EXPORTER_OTLP_ENDPOINT
+        value: http://otel-collector-headless:4318
+      - name: OTEL_SERVICE_NAME
+        value: backend
+      - name: OTEL_PROPAGATORS
+        value: tracecontext,b3</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Deploy Java RESTful App with Command Line</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc create -f config/backend.yaml -n $PROJECT</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify that auto-instrumentation is working with init-container</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc get po $(oc get po -l app=backend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq|head -n 8</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">[
+  {
+    "containerID": "cri-o://f88eea516f6b51b9bf772b17f88f73ccd920728a8ff4237a855d89a08d2499a9",
+    "image": "ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:1.33.6",
+    "imageID": "ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java@sha256:502d3170177a0676db8b806eba047a520af9bb83400e734fc64f24a593b2ca64",
+    "lastState": {},
+    "name": "opentelemetry-auto-instrumentation-java",
+    "ready": true,
+...</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check container log</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc logs $(oc get po -l app=backend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT | head -n 4</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">Defaulted container "backend" out of: backend, opentelemetry-auto-instrumentation-java (init)
+INFO exec -a "java" java -Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -cp "." -jar /deployments/quarkus-run.jar
+INFO running in /deployments
+Picked up JAVA_TOOL_OPTIONS:  -javaagent:/otel-auto-instrumentation-java/javaagent.jar
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Review applicaiton deployment in Topology View</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-21.png" alt="otel 21">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_test_restful_app"><a class="anchor" href="#_test_restful_app"></a>Test RESTful App</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Test app</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">oc project userX-otel
+curl -v https://$(oc get route frontend -n $PROJECT -o jsonpath='{.spec.host}')</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Output</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ssh hljs" data-lang="ssh">* Connection #0 to host frontend-demo.apps.cluster-4thxh.4thxh.sandbox2298.opentlc.com left intact
+Frontend version: v1 =&gt; [Backend: http://simple-go:8080, Response: 200, Body: Backend version:v1, Response:200, Host:backend-68589df886-gtbpx, Status:200, Message: Hello, World]</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Check trace in console with Query {rootServiceName="frontend"}</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-22.png" alt="otel 22">
+</div>
+</div>
+</li>
+<li>
+<p>Overall Trace</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-23.png" alt="otel 23">
+</div>
+</div>
+</li>
+<li>
+<p>Client Information</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/otel/otel-24.png" alt="otel 24">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>OpenShift&#8217;s distributed tracing provides a major benefit: it allows for tracing requests across microservices, enabling a deeper understanding of application performance and dependencies. This is crucial for monitoring and troubleshooting transactions in complex, distributed systems.</p>
+</div>
+<div class="paragraph">
+<p>With distributed tracing, software teams can monitor data that passes through complex paths connecting various microservices and data storage. Using distributed tracing tools, software teams track requests and visualize data propagation paths with precision.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_step"><a class="anchor" href="#_next_step"></a>Next Step</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#developerhub.adoc" class="xref unresolved">Accelerating software development with Red Hat Developer Hub</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="05-observe-monitor.html">5. Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
