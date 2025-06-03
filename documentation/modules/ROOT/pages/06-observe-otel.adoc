@@ -15,7 +15,7 @@ With the distributed tracing platform, you can perform the following functions:
 * Optimize performance and latency
 * Perform root cause analysis
 
-You can use the *Red Hat OpenShift distributed tracing platform (Tempo)* in combination with the *Red Hat build of OpenTelemetry*.
+You can use the *Red Hat OpenShift distributed tracing platform (Tempo)* in combination with the *Red Hat build of OpenTelemetry* to setup distributed tracing platform in OpenShift for your applications.
 
 === Red Hat OpenShift distributed tracing platform features
 
@@ -94,14 +94,14 @@ image::otel/otel-4.png[]
 // oc get pvc -n $PROJECT
 // ----
 
-* Go to *Topology* menu, click on `tempo-sample` entity, go to the *Resources* tab in the right panel then wait unti the `tempo-sample-0` Pod status changes to `Running`.
+* Go to *Topology* menu, click on `tempo-sample` entity, go to the *Resources* tab in the right panel then wait until the `tempo-sample-0` Pod status changes to `Running`.
 +
 image::otel/otel-5.png[]
 
 [#createotelcollector]
 == Create OpenTelemetry (OTel) Collector
 
-* Click on the + button at the top right corner of console, then select Import YAML.
+* Click on the + button at the top right corner of console, then select *Import YAML*.
 +
 image::otel/otel-37.png[]
 
@@ -113,7 +113,7 @@ IMPORTANT: Don't forget to update the `userX` in the value of `server_name_overr
 +
 image::otel/otel-6.png[]
 
-* The `OpenTelemetryCollectors` should be created.
+* The `OpenTelemetryCollector` should be created.
 +
 image::otel/otel-8.png[]
 
@@ -126,13 +126,13 @@ image::otel/otel-8.png[]
 // ----
 
 * Go to *Topology* menu, you should see `otel-collector` deployment. Click on it then go to the *Resources* tab in the right panel and make sure the Pod status is Running.
-
++
 image::otel/otel-28.png[]
 
 [#deploysampleapp]
 == Deploy Sample Application
 
-In this lab, we'll deploy a simple Todo Java application hosted in Github here: The Todo application Source Code is Git repository here: https://github.com/voraviz/quarkus-todo-app/tree/otel.
+In this lab, we'll deploy a simple Todo Java application hosted in Github here: https://github.com/voraviz/quarkus-todo-app/tree/otel.
 
 The application is developed with https://quarkus.io/[Quarkus] framework and use https://quarkus.io/guides/opentelemetry[Quarkus Opentelemetry] extension to be able to send out tracing data to the OpenTelemetry Collector you've deployed.
 
@@ -140,7 +140,7 @@ The application is developed with https://quarkus.io/[Quarkus] framework and use
 +
 image:otel/otel-30.png[]
 
-* Review deployment configuration here: https://github.com/voraviz/openshift-otel/blob/main/todo-kustomize/overlays/otel/todo.yaml. Look for the `env` field, you should see the Otel Collector endpoint that Todo application will send tracing data to the collector.
+* Review deployment configuration here: https://github.com/voraviz/openshift-otel/blob/main/todo-kustomize/overlays/otel/kustomization.yaml. Look for the `quarkus.otel.exporter.otlp.endpoint`, you should see the Otel Collector endpoint that Todo application will send tracing data to the collector.
 +
 image::otel/otel-31.png[]
 
@@ -167,7 +167,7 @@ git clone https://github.com/voraviz/openshift-otel.git
 cd openshift-otel
 ----
 
-* Deploy the Todo applciation with command line. Don't forget to change `userX` to match to your username. Then wait until all deployment commplete.
+* Deploy the Todo applciation with command line. Don't forget to change `userX` to match to your username. Then wait until all deployment commpleted.
 +
 IMPORTANT: Don't forget to change `userX` to match to your username.
 +
