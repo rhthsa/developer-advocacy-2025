@@ -339,7 +339,7 @@ Sample output.
 ]
 ----
 
-* Run these commands to set environment variables for the `frontend` Deployment.
+* Run these commands to set environment variables for the `frontend` Deployment. These environment variables will be used by OTel auto-instrumentation.
 +
 [.console-input]
 [source,adoc]
@@ -357,9 +357,9 @@ NOTE: With opentelemetry-operator v0.119.0-2 and Go autoinstrumentation-go:v0.20
 +
 image::otel/otel-11.png[]
 
-* For the `frontend` application, we added `annotation` and set environment variables with `oc patch` and `oc set env` commands to the Deployment after we've created it .
+* For the `frontend` application, we added annotation and set environment variables with `oc patch` and `oc set env` commands to the Deployment after we've created it .
 +
-But this time, we'll add the annotations to the `simple-go` Deployment YAML configurations before we create the Deployment resource to demonstate different ways to configure OTel auto-instrument for Deployment resource.
+But this time, we'll add the annotations and environment variables to the `simple-go` Deployment YAML configurations before we create the Deployment resource to demonstate different ways to configure OTel auto-instrument for Deployment resource.
 +
 Annotations in `simple-go` Deployment YAML configurations.
 +
@@ -526,7 +526,7 @@ image::otel/otel-21.png[]
 [viewautoinstrumentapptraces]
 == View Auto-Instrument Application Traces
 
-* Run this command in web terminal to trigger API calls from `frontend` application.
+* Run this command a few times in web terminal to trigger API calls from `frontend` application.
 +
 IMPORTANT: Don't forget to change `userX` in the command to your username.
 +
