@@ -184,7 +184,7 @@
     <a class="nav-link" href="#setupinstrument">6.6 Setup OpenTelemetry Instrumentation</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="#deployappforautoinstrument">6.7 Deploy Application for Auto-Instrumentation</a>
+    <a class="nav-link" href="#deployappforautoinstrument">6.7 Deploy Applications for Auto-Instrumentation</a>
   </li>
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#viewautoinstrumentapptraces">6.8 View Auto-Instrument Application Traces</a>
@@ -629,7 +629,7 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 <div class="ulist">
 <ul>
 <li>
-<p>Review the Instrumentation configurations here <a href="https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml" class="bare">https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml</a>. You can see the Otel Collector endpoint and a bunch of configurations for the Java and Go application auto-instrumentation.</p>
+<p>Review the Instrumentation configurations here <a href="https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml" class="bare">https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml</a>. You can see the Otel Collector endpoint and a bunch of custom configurations for the Java and Go application auto-instrumentation.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-14.png" alt="otel 14">
@@ -645,7 +645,7 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </div>
 </li>
 <li>
-<p>Copy all YAML code from this <a href="https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml" class="bare">https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml</a> and paste to YAML editor in OpenShift console. Then click Create button.</p>
+<p>Copy all YAML code from this <a href="https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml" class="bare">https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml</a> and paste to YAML editor in OpenShift console. Then click <strong>Create</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-15.png" alt="otel 15">
@@ -665,12 +665,17 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </div>
 </div>
 <div class="sect1">
-<h2 id="deployappforautoinstrument"><a class="anchor" href="#deployappforautoinstrument"></a>Deploy Appliation for Auto-Instrumentation</h2>
+<h2 id="deployappforautoinstrument"><a class="anchor" href="#deployappforautoinstrument"></a>Deploy Appliations for Auto-Instrumentation</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>In this lab, we&#8217;re going to deploy 3 applications developed with different programming languages and frameworks to demonstrate Open Telemetry auto-instrumentation. Basically, you&#8217;ll be able to trace transactions in your applications without changing the codes to add dependency or library to your application.</p>
+</div>
+<div class="sect2">
+<h3 id="_deploy_frontend_node_js_application"><a class="anchor" href="#_deploy_frontend_node_js_application"></a>Deploy <code>frontend</code> Node.js Application.</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Deploy Node.js Application, Review deployment from <a href="https://github.com/voraviz/openshift-otel/blob/main/config/frontend.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/frontend.yaml</a></p>
+<p>Review deployment configuration for the <code>frontend</code> application here: <a href="https://github.com/voraviz/openshift-otel/blob/main/config/frontend.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/frontend.yaml</a></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-10.png" alt="otel 10">
@@ -678,7 +683,19 @@ oc wait --for condition=ready --timeout=180s pod -l app=todo  -n $PROJECT</code>
 </div>
 </li>
 <li>
-<p>Open Web Terminal again, run command to create frontend application (change X to your username)</p>
+<p>Open the Web Terminal in OpenShift console, then run these commands to deploy the <code>frontend</code> application.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Don&#8217;t forget to change <strong><code>user-X</code></strong> in the command to your username.
+</td>
+</tr>
+</table>
+</div>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc project userX-otel
@@ -699,7 +716,7 @@ route.route.openshift.io/frontend created</code></pre>
 </div>
 </li>
 <li>
-<p>Add Annotate deployment for auto-instrumentation</p>
+<p>Run this command to update the <code>frontend</code> Deployment resource by adding an annotation to the Deployment for auto-instrumentation.</p>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc patch deployment/frontend \
@@ -717,8 +734,8 @@ route.route.openshift.io/frontend created</code></pre>
 </div>
 </li>
 <li>
-<p>Verify that auto-instrumentation is working with init-container</p>
-<div class="listingblock console-output">
+<p>Run this command to verify that auto-instrumentation is working as init-container.</p>
+<div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc get po $(oc get po -l app=frontend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq</code></pre>
 </div>
@@ -766,7 +783,7 @@ route.route.openshift.io/frontend created</code></pre>
 </div>
 </li>
 <li>
-<p>Set environment variables</p>
+<p>Run these commands to set environment variables for the <code>frontend</code> Deployment.</p>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc set env deploy frontend OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector-headless:4318 -n $PROJECT
@@ -775,11 +792,27 @@ oc set env deploy frontend OTEL_PROPAGATORS=tracecontext,b3 -n $PROJECT</code></
 </div>
 </div>
 </li>
-<li>
-<p>Deploy Go Application, Review deployment from <a href="https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml</a></p>
-<div class="paragraph">
-<p>Remark: With opentelemetry-operator.v0.119.0-2 and go autoinstrumentation-go:v0.20.0 only work with golang 1.23</p>
+</ul>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_simple_go_go_application"><a class="anchor" href="#_deploy_simple_go_go_application"></a>Deploy <code>simple-go</code> Go Application.</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+With opentelemetry-operator v0.119.0-2 and Go autoinstrumentation-go:v0.20.0 only work with golang 1.23
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Review deployment configuration for the <code>simple-go</code> application here: <a href="https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml</a></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-11.png" alt="otel 11">
@@ -787,7 +820,41 @@ oc set env deploy frontend OTEL_PROPAGATORS=tracecontext,b3 -n $PROJECT</code></
 </div>
 </li>
 <li>
-<p>Run Command Line to Deploy simple-go app,</p>
+<p>For the <code>frontend</code> application, we added <code>annotation</code> and set environment variables with <code>oc patch</code> and <code>oc set env</code> commands to the Deployment after we&#8217;ve created it .</p>
+<div class="paragraph">
+<p>But this time, we&#8217;ll add the annotations to the <code>simple-go</code> Deployment YAML configurations before we create the Deployment resource to demonstate different ways to configure OTel auto-instrument for Deployment resource.</p>
+</div>
+<div class="paragraph">
+<p>Annotations in <code>simple-go</code> Deployment YAML configurations.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">template:
+  metadata:
+    annotations:
+      instrumentation.opentelemetry.io/inject-go: "true"
+      instrumentation.opentelemetry.io/otel-go-auto-target-exe: /app/api
+      openshift.io/required-scc: otel-go-instrumentation-scc</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Enviornment variables in <code>simple-go</code> Deployment YAML configurations.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - name: OTEL_EXPORTER_OTLP_ENDPOINT
+        value: <a href="http://otel-collector-headless:4318" class="bare">http://otel-collector-headless:4318</a>
+      - name: OTEL_SERVICE_NAME
+        value: simple-go
+      - name: OTEL_GO_AUTO_TARGET_EXE
+        value: /app/api
+      - name: OTEL_PROPAGATORS
+        value: tracecontext,b3</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Run this command to deploy <code>simple-go</code> application.</p>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc create -f config/simple-go.yaml -n $PROJECT</code></pre>
@@ -804,57 +871,47 @@ service/simple-go created</code></pre>
 </div>
 </li>
 <li>
-<p>Check simple-go deployment <a href="https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml</a></p>
-<div class="paragraph">
-<p>Annotations</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">template:
-  metadata:
-    annotations:
-      instrumentation.opentelemetry.io/inject-go: "true"
-      instrumentation.opentelemetry.io/otel-go-auto-target-exe: /app/api
-      openshift.io/required-scc: otel-go-instrumentation-scc</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Enviornment variables</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">      - name: OTEL_EXPORTER_OTLP_ENDPOINT
-        value: <a href="http://otel-collector-headless:4318" class="bare">http://otel-collector-headless:4318</a>
-      - name: OTEL_SERVICE_NAME
-        value: simple-go
-      - name: OTEL_GO_AUTO_TARGET_EXE
-        value: /app/api
-      - name: OTEL_PROPAGATORS
-        value: tracecontext,b3</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Verify that auto-instrumentation is working with container sidecar</p>
+<p>Run this command to verify that <code>simple-go</code> application Pod status is <code>Running</code>.</p>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc get po -l app=simple-go -n $PROJECT
-oc get po $(oc get po -l app=simple-go -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.spec.containers[1].name}'</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc get po -l app=simple-go -n $PROJECT</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Sample output.</p>
 </div>
-<div class="listingblock console-input">
+<div class="listingblock console-output">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">NAME                        READY   STATUS    RESTARTS   AGE
-simple-go-56f8c644b-w4sxw   2/2     Running   0          7m42s
-opentelemetry-auto-instrumentation</code></pre>
+simple-go-56f8c644b-w4sxw   2/2     Running   0          7m42s</code></pre>
 </div>
 </div>
 </li>
 <li>
-<p>Deploy Node.js Application, Review deployment from <a href="https://github.com/voraviz/openshift-otel/blob/main/config/backend.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/backend.yaml</a></p>
+<p>Run this command to verify that auto-instrumentation is working with as sidecar container.</p>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc get po $(oc get po -l app=simple-go -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.spec.containers[1].name}'</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sample output.</p>
+</div>
+<div class="listingblock console-output">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">opentelemetry-auto-instrumentation</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_backend_java_application"><a class="anchor" href="#_deploy_backend_java_application"></a>Deploy <code>backend</code> Java Application.</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Review deployment configuration for the <code>backend</code> application here: <a href="https://github.com/voraviz/openshift-otel/blob/main/config/backend.yaml" class="bare">https://github.com/voraviz/openshift-otel/blob/main/config/backend.yaml</a></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-12.png" alt="otel 12">
@@ -862,9 +919,9 @@ opentelemetry-auto-instrumentation</code></pre>
 </div>
 </li>
 <li>
-<p>Check backend deployment</p>
+<p>The <code>backend</code> Deployment configuration already has the annotation and environment variables requried for OTel auto-instrumentation.</p>
 <div class="paragraph">
-<p>Annotations</p>
+<p>Annotations.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -875,7 +932,7 @@ opentelemetry-auto-instrumentation</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Enviornment variables</p>
+<p>Enviornment variables.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -889,7 +946,7 @@ opentelemetry-auto-instrumentation</code></pre>
 </div>
 </li>
 <li>
-<p>Deploy Java RESTful App with Command Line</p>
+<p>Run this command to deploy <code>backend</code> application,</p>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc create -f config/backend.yaml -n $PROJECT</code></pre>
@@ -897,7 +954,7 @@ opentelemetry-auto-instrumentation</code></pre>
 </div>
 </li>
 <li>
-<p>Verify that auto-instrumentation is working with init-container</p>
+<p>Verify that auto-instrumentation is working as init-container.</p>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc get po $(oc get po -l app=backend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq|head -n 8</code></pre>
@@ -921,7 +978,7 @@ opentelemetry-auto-instrumentation</code></pre>
 </div>
 </li>
 <li>
-<p>Check container log</p>
+<p>Run this command to check application container&#8217;s logs. Look for <code>JAVA_TOOL_OPTIONS</code> in the logs, you should see the Otel auto-instrumentation Java agent is configured.</p>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc logs $(oc get po -l app=backend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT | head -n 4</code></pre>
@@ -941,7 +998,7 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 </div>
 </li>
 <li>
-<p>Review applicaiton deployment in Topology View</p>
+<p>Switch to <strong>Developer</strong> perspective, then select <strong>Topology</strong> menu on the left. All applications should be up and running.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-21.png" alt="otel 21">
@@ -952,13 +1009,26 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_view_auto_instrument_application_traces"><a class="anchor" href="#_view_auto_instrument_application_traces"></a>View Auto-Instrument Application Traces</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Test app</p>
+<p>Run this command in web terminal to trigger API calls from <code>frontend</code> application.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Don&#8217;t forget to change <code>userX</code> in the command to your username.
+</td>
+</tr>
+</table>
+</div>
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc project userX-otel
@@ -976,7 +1046,7 @@ Frontend version: v1 =&gt; [Backend: http://simple-go:8080, Response: 200, Body:
 </div>
 </li>
 <li>
-<p>Check trace in console with Query {rootServiceName="frontend"}</p>
+<p>Switch to <strong>Administrator</strong> perspective. Then go to <strong>Observe</strong> &#8594; <strong>Trace</strong> menu on the left. Select  <code>userX-otel/sample</code> in <strong>Tempo Instance</strong> drop-down list, select <code>dev</code> in <strong>Tenant</strong> drop-down list, and enter <code>{rootServiceName="frontend"}</code> to <strong>Query</strong> input. Then click <strong>Run query</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-22.png" alt="otel 22">
@@ -984,7 +1054,7 @@ Frontend version: v1 =&gt; [Backend: http://simple-go:8080, Response: 200, Body:
 </div>
 </li>
 <li>
-<p>Overall Trace</p>
+<p>Click on the trace returned from the query to see trace details.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-23.png" alt="otel 23">
@@ -992,7 +1062,7 @@ Frontend version: v1 =&gt; [Backend: http://simple-go:8080, Response: 200, Body:
 </div>
 </li>
 <li>
-<p>Client Information</p>
+<p>Click on each span to see span details.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/otel/otel-24.png" alt="otel 24">
