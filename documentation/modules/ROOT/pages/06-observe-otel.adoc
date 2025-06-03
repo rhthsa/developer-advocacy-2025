@@ -222,7 +222,7 @@ Auto-instrumentation enables you to start collecting telemetry data quickly with
 [#setupinstrument]
 == Setup OpenTelemetry Instrumentation
 
-* Review the Instrumentation configurations here https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml. You can see the Otel Collector endpoint and a bunch of configurations for the Java and Go application auto-instrumentation.
+* Review the Instrumentation configurations here https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml. You can see the Otel Collector endpoint and a bunch of custom configurations for the Java and Go application auto-instrumentation.
 +
 image::otel/otel-14.png[]
 
@@ -230,7 +230,7 @@ image::otel/otel-14.png[]
 +
 image::otel/otel-37.png[]
 
-* Copy all YAML code from this https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml and paste to YAML editor in OpenShift console. Then click Create button.
+* Copy all YAML code from this https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml and paste to YAML editor in OpenShift console. Then click *Create* button.
 +
 image::otel/otel-15.png[]
 
@@ -239,13 +239,19 @@ image::otel/otel-15.png[]
 image::otel/otel-16.png[]
 
 [#deployappforautoinstrument]
-== Deploy Appliation for Auto-Instrumentation
+== Deploy Appliations for Auto-Instrumentation
 
-* Deploy Node.js Application, Review deployment from https://github.com/voraviz/openshift-otel/blob/main/config/frontend.yaml
+In this lab, we're going to deploy 3 applications developed with different programming languages and frameworks to demonstrate Open Telemetry auto-instrumentation. Basically, you'll be able to trace transactions in your applications without changing the codes to add dependency or library to your application.
+
+=== Deploy `frontend` Node.js Application.
+
+* Review deployment configuration for the `frontend` application here: https://github.com/voraviz/openshift-otel/blob/main/config/frontend.yaml
 +
 image::otel/otel-10.png[]
 
-* Open Web Terminal again, run command to create frontend application (change X to your username)
+* Open the Web Terminal in OpenShift console, then run these commands to deploy the `frontend` application.
++
+IMPORTANT: Don't forget to change *`user-X`* in the command to your username.
 +
 [.console-input]
 [source,adoc]
@@ -266,7 +272,7 @@ service/frontend created
 route.route.openshift.io/frontend created
 ----
 
-* Add Annotate deployment for auto-instrumentation
+* Run this command to update the `frontend` Deployment resource by adding an annotation to the Deployment for auto-instrumentation.
 +
 [.console-input]
 [source,adoc]
@@ -284,9 +290,9 @@ Sample output.
 deployment.apps/frontend patched
 ----
 
-* Verify that auto-instrumentation is working with init-container
+* Run this command to verify that auto-instrumentation is working as init-container.
 +
-[.console-output]
+[.console-input]
 [source,adoc]
 ----
 oc get po $(oc get po -l app=frontend -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.status.initContainerStatuses}'|jq
@@ -333,7 +339,7 @@ Sample output.
 ]
 ----
 
-* Set environment variables
+* Run these commands to set environment variables for the `frontend` Deployment.
 +
 [.console-input]
 [source,adoc]
@@ -343,13 +349,45 @@ oc set env deploy frontend OTEL_SERVICE_NAME=frontend -n $PROJECT
 oc set env deploy frontend OTEL_PROPAGATORS=tracecontext,b3 -n $PROJECT
 ----
 
-* Deploy Go Application, Review deployment from https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml
-+
-Remark: With opentelemetry-operator.v0.119.0-2 and go autoinstrumentation-go:v0.20.0 only work with golang 1.23
+=== Deploy `simple-go` Go Application.
+
+NOTE: With opentelemetry-operator v0.119.0-2 and Go autoinstrumentation-go:v0.20.0 only work with golang 1.23
+
+* Review deployment configuration for the `simple-go` application here: https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml
 +
 image::otel/otel-11.png[]
 
-* Run Command Line to Deploy simple-go app,
+* For the `frontend` application, we added `annotation` and set environment variables with `oc patch` and `oc set env` commands to the Deployment after we've created it .
++
+But this time, we'll add the annotations to the `simple-go` Deployment YAML configurations before we create the Deployment resource to demonstate different ways to configure OTel auto-instrument for Deployment resource.
++
+Annotations in `simple-go` Deployment YAML configurations.
++
+[source,yaml,subs="+macros,attributes+"]
+----
+template:
+  metadata:
+    annotations:
+      instrumentation.opentelemetry.io/inject-go: "true"
+      instrumentation.opentelemetry.io/otel-go-auto-target-exe: /app/api
+      openshift.io/required-scc: otel-go-instrumentation-scc
+----
++
+Enviornment variables in `simple-go` Deployment YAML configurations.
++
+[source,yaml,subs="+macros,attributes+"]
+----
+      - name: OTEL_EXPORTER_OTLP_ENDPOINT
+        value: http://otel-collector-headless:4318
+      - name: OTEL_SERVICE_NAME
+        value: simple-go
+      - name: OTEL_GO_AUTO_TARGET_EXE
+        value: /app/api
+      - name: OTEL_PROPAGATORS
+        value: tracecontext,b3
+----
+
+* Run this command to deploy `simple-go` application.
 +
 [.console-input]
 [source,adoc]
@@ -366,60 +404,48 @@ deployment.apps/simple-go created
 service/simple-go created
 ----
 
-* Check simple-go deployment https://github.com/voraviz/openshift-otel/blob/main/config/simple-go.yaml
-+
-Annotations
-+
-[source,yaml,subs="+macros,attributes+"]
-----
-template:
-  metadata:
-    annotations:
-      instrumentation.opentelemetry.io/inject-go: "true"
-      instrumentation.opentelemetry.io/otel-go-auto-target-exe: /app/api
-      openshift.io/required-scc: otel-go-instrumentation-scc
-----
-+
-Enviornment variables
-+
-[source,yaml,subs="+macros,attributes+"]
-----
-      - name: OTEL_EXPORTER_OTLP_ENDPOINT
-        value: http://otel-collector-headless:4318
-      - name: OTEL_SERVICE_NAME
-        value: simple-go
-      - name: OTEL_GO_AUTO_TARGET_EXE
-        value: /app/api
-      - name: OTEL_PROPAGATORS
-        value: tracecontext,b3
-----
-
-* Verify that auto-instrumentation is working with container sidecar
+* Run this command to verify that `simple-go` application Pod status is `Running`.
 +
 [.console-input]
 [source,adoc]
 ----
 oc get po -l app=simple-go -n $PROJECT
+----
++
+Sample output.
++
+[.console-output]
+[source,adoc]
+----
+NAME                        READY   STATUS    RESTARTS   AGE
+simple-go-56f8c644b-w4sxw   2/2     Running   0          7m42s
+----
+
+* Run this command to verify that auto-instrumentation is working with as sidecar container.
++
+[.console-input]
+[source,adoc]
+----
 oc get po $(oc get po -l app=simple-go -o custom-columns='Name:.metadata.name' -n $PROJECT --no-headers) -n $PROJECT -o jsonpath='{.spec.containers[1].name}'
 ----
 +
 Sample output.
 +
-[.console-input]
+[.console-output]
 [source,adoc]
 ----
-NAME                        READY   STATUS    RESTARTS   AGE
-simple-go-56f8c644b-w4sxw   2/2     Running   0          7m42s
 opentelemetry-auto-instrumentation
 ----
 
-* Deploy Node.js Application, Review deployment from https://github.com/voraviz/openshift-otel/blob/main/config/backend.yaml
+=== Deploy `backend` Java Application.
+
+* Review deployment configuration for the `backend` application here: https://github.com/voraviz/openshift-otel/blob/main/config/backend.yaml
 +
 image::otel/otel-12.png[]
 
-* Check backend deployment
+* The `backend` Deployment configuration already has the annotation and environment variables requried for OTel auto-instrumentation.
 +
-Annotations
+Annotations.
 +
 [source,yaml,subs="+macros,attributes+"]
 ----
@@ -429,7 +455,7 @@ Annotations
         instrumentation.opentelemetry.io/inject-java: "true"
 ----
 +
-Enviornment variables
+Enviornment variables.
 +
 [source,yaml,subs="+macros,attributes+"]
 ----
@@ -441,7 +467,7 @@ Enviornment variables
         value: tracecontext,b3
 ----
 
-* Deploy Java RESTful App with Command Line
+* Run this command to deploy `backend` application,
 +
 [.console-input]
 [source,adoc]
@@ -449,7 +475,7 @@ Enviornment variables
 oc create -f config/backend.yaml -n $PROJECT
 ----
 
-* Verify that auto-instrumentation is working with init-container
+* Verify that auto-instrumentation is working as init-container.
 +
 [.console-input]
 [source,adoc]
@@ -473,7 +499,7 @@ Sample output.
 ...
 ----
 
-* Check container log
+* Run this command to check application container's logs. Look for `JAVA_TOOL_OPTIONS` in the logs, you should see the Otel auto-instrumentation Java agent is configured.
 +
 [.console-input]
 [source,adoc]
@@ -493,14 +519,16 @@ Picked up JAVA_TOOL_OPTIONS:  -javaagent:/otel-auto-instrumentation-java/javaage
 OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
 ----
 
-* Review applicaiton deployment in Topology View
+* Switch to *Developer* perspective, then select *Topology* menu on the left. All applications should be up and running.
 +
 image::otel/otel-21.png[]
 
 [viewautoinstrumentapptraces]
 == View Auto-Instrument Application Traces
 
-* Test app
+* Run this command in web terminal to trigger API calls from `frontend` application.
++
+IMPORTANT: Don't forget to change `userX` in the command to your username.
 +
 [.console-input]
 [source,adoc]
@@ -518,15 +546,15 @@ Sample output.
 Frontend version: v1 => [Backend: http://simple-go:8080, Response: 200, Body: Backend version:v1, Response:200, Host:backend-68589df886-gtbpx, Status:200, Message: Hello, World]
 ----
 
-* Check trace in console with Query {rootServiceName="frontend"}
+* Switch to *Administrator* perspective. Then go to *Observe* -> *Trace* menu on the left. Select  `userX-otel/sample` in *Tempo Instance* drop-down list, select `dev` in *Tenant* drop-down list, and enter `{rootServiceName="frontend"}` to *Query* input. Then click *Run query* button.
 +
 image::otel/otel-22.png[]
 
-* Overall Trace
+* Click on the trace returned from the query to see trace details.
 +
 image::otel/otel-23.png[]
 
-* Client Information
+* Click on each span to see span details.
 +
 image::otel/otel-24.png[]
 
