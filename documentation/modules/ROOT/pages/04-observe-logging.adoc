@@ -191,7 +191,7 @@ image::logs/log-36.png[,500]
 +
 image::logs/log-37.png[]
 
-* Review logs of `frontend` application in the web browser tab we opened earlier.
+* Review logs of `frontend` application in the web browser tab we opened earlier. You should see new log messages from the application.
 +
 image::logs/log-39.png[]
 +
@@ -199,11 +199,11 @@ if the logs don't show up, please check whether the `Log steam paused`. If so, j
 +
 image::logs/log-38.png[]
 
-* Review logs of `simple-go` application in the web browser tab we opened earlier.
+* Review logs of `simple-go` application in the web browser tab we opened earlier. You should see new log messages from the application.
 +
 image::logs/log-40.png[]
 
-* Review logs of `backend` application in the web browser tab we opened earlier.
+* Review logs of `backend` application in the web browser tab we opened earlier. You should see new log messages from the application.
 +
 image::logs/log-41.png[]
 
@@ -216,7 +216,7 @@ image::logs/log-43.png[]
 +
 image::logs/log-44.png[]
 
-* Go to the *Resources* tab and view the `backend` application logs agian.
+* Go to the *Resources* tab and view the `backend` application logs again.
 +
 image::logs/log-45.png[]
 
@@ -233,9 +233,9 @@ In the previous section, you've learned how to view application logs in OpenShif
 
 Luckly!, OpenShift Logging has provided the software stack for log management for your applications in the OpenShift cluster. You can store your applications's logs in the OpenShift cluster for short-term period i.e. 15 - 30 days, then shift all older logs to external log management stack i.e. EFK/ELK for long-term log persistent.
 
-OpenShift Logging comes with web console plug-in that provides the UI for log view and query.
+OpenShift Logging comes with web console plug-in that provides the UI to view and query logs stored in the OpenShift cluster.
 
-* Go to *Observe* menu, select *Logs* tab, view all logs from all applications in a particular project.
+* Go to *Observe* menu, select *Logs* tab to view all logs from all applications in a particular project.
 +
 image::logs/log-47.png[]
 
@@ -243,7 +243,7 @@ image::logs/log-47.png[]
 +
 image::logs/log-48.png[]
 
-* Click on *Show Resources* or *Hide Resources* link, to view log's metadata e.g. Namespace/Project, Pod, and Container from which the log was produced.
+* Click on *Show Resources* or *Hide Resources* link, to show/hide log's metadata e.g. Namespace/Project, Pod, and Container from which the log was produced.
 +
 image::logs/log-49.png[]
 
