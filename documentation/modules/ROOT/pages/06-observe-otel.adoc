@@ -191,21 +191,22 @@ image::otel/otel-33.png[]
 
 [#viewapptraces]
 == View Application Traces
-* Navigate to Administrator \-> Observe \-> Trace Select Tempo Instance `userX-otel/sample` and Tenant to dev
+* Switch to *Administrator* perspective. Then go to *Observe* -> *Trace* menu on the left. Select  `userX-otel/sample` in *Tempo Instance* drop-down list and select `dev` in *Tenant* drop-down list.
 +
 image::otel/otel-34.png[]
 
-* Select trace and check its details
+* Click on the trace to see trace details.
 +
 image::otel/otel-35.png[]
 
-* view SQL Statement
+* Click on `todo:INSERT todo.Todo` span to see the span attributes.
 +
 image::otel/otel-36.png[]
 
+[#autoinstrumentation]
 == Auto-instrumentation in the Red Hat build of OpenTelemetry Operator
 
-Auto-instrumentation in the Red Hat build of OpenTelemetry Operator can automatically instrument an application without manual code changes. Developers and administrators can monitor applications with minimal effort and changes to the existing codebase.
+Auto-instrumentation in the Red Hat build of OpenTelemetry Operator can *automatically instrument an application without manual code changes*. Developers and administrators can monitor applications with minimal effort and changes to the existing codebase.
 
 image::otel/otel-27.png[]
 
@@ -218,6 +219,8 @@ Auto-instrumentation runs as follows:
 
 Auto-instrumentation enables you to start collecting telemetry data quickly without having to manually integrate the OpenTelemetry SDK into your application code. However, some applications might require specific configurations or custom manual instrumentation.
 
+[#setupinstrument]
+== Setup Otel Instrumentation
 * Review `instrumentation.yaml` https://github.com/rhthsa/developer-advocacy-2025/blob/main/config/otel/instrumentation.yaml
 +
 image::otel/otel-14.png[]
@@ -230,7 +233,8 @@ image::otel/otel-15.png[]
 +
 image::otel/otel-16.png[]
 
-== Deploy Application without OpenTelemetry Library (use Auto-Instruement)
+[#deployappforautoinstrument]
+== Deploy Appliation for Auto-Instrumentation
 
 * Deploy Node.js Application, Review deployment from https://github.com/voraviz/openshift-otel/blob/main/config/frontend.yaml
 +
@@ -472,7 +476,8 @@ OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader clas
 +
 image::otel/otel-21.png[]
 
-== Test RESTful App
+[viewautoinstrumentapptraces]
+== View Auto-Instrument Application Traces
 
 * Test app
 +
@@ -507,7 +512,3 @@ image::otel/otel-24.png[]
 OpenShift's distributed tracing provides a major benefit: it allows for tracing requests across microservices, enabling a deeper understanding of application performance and dependencies. This is crucial for monitoring and troubleshooting transactions in complex, distributed systems.
 
 With distributed tracing, software teams can monitor data that passes through complex paths connecting various microservices and data storage. Using distributed tracing tools, software teams track requests and visualize data propagation paths with precision.
-
-== Next Step
-
-* xref:developerhub.adoc[Accelerating software development with Red Hat Developer Hub]
