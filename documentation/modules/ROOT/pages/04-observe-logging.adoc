@@ -67,7 +67,7 @@ image::logs/log-7.png[]
 +
 image::logs/log-8.png[]
 
-* For `Deployment` resource in `simple-go.yaml` file, you should see an environment variable named `BACKEND`, the value is the `backend` application endpoint so the `simple-go` application will call to the `backend` application with this URL.
+* For `Deployment` resource in `simple-go.yaml` file, you should see an environment variable named `BACKEND`, the value is the `backend` application endpoint that the `simple-go` application will call to the `backend` application via this URL.
 +
 image::logs/log-9.png[]
 
@@ -75,7 +75,7 @@ image::logs/log-9.png[]
 +
 image::logs/log-10.png[]
 
-* For the `Deployment` resource in `frontend.yaml` file, you should see an environment variable named `BACKEND_URL`, the value is the `simple-go` application endpoint so the `frontend` application will call to the `simple-go` application with this URL.
+* For the `Deployment` resource in `frontend.yaml` file, you should see an environment variable named `BACKEND_URL`, the value is the `simple-go` application endpoint that the `frontend` application will call to the `simple-go` application via this URL.
 +
 image::logs/log-11.png[]
 
@@ -110,141 +110,172 @@ image::logs/log-19.png[]
 [#deployapplication]
 == Deploy Sample Applications
 
-* In OpenShift console, change to `userX-observe` matches to your username.
+Next, we're going to deploy those 3 applications we've reviewed the codes and deployment configurations. We'll deploy the applications using the deployment configurations defined as YAML in the `*.yaml` files we've seen earlier.
+
+* In OpenShift console, change to `userX-observe` project that matches to your username.
 +
 image::logs/log-4.png[]
 
-* click Import YAML
+* Click on the *+* button at the top right corner of console, then select *Import YAML*.
 +
 image::logs/log-5.png[]
 
-* copy YAML from `backend.yaml` from https://github.com/rhthsa/developer-advocacy-2025/tree/main/config and paste in Import YAML
+* Copy all YAML code from `backend.yaml` file in https://github.com/rhthsa/developer-advocacy-2025/tree/main/config and paste to YAML editor in OpenShift console.
 +
 image::logs/log-20.png[]
 
-* click Create, and wait util all complete.
+* Click *Create*, and wait util all resources created successfully.
 +
 image::logs/log-21.png[]
 
-* Review Deployment in Topology view
+* Select *Topology* menu on the left. The `backend` Deployment should appear.
 +
 image::logs/log-22.png[,300]
 
-* Click Import YAML, copy YAML from `simple-go.yaml` from https://github.com/rhthsa/developer-advocacy-2025/tree/main/config and paste in Import YAML
+* Click on the *+* button at the top right corner of console, then select *Import YAML*. Copy all YAML code from `simple-go.yaml` file in https://github.com/rhthsa/developer-advocacy-2025/tree/main/config and paste to YAML editor in OpenShift console.
 +
 image::logs/log-23.png[]
 
-* click Create, and wait util all complete.
+* click *Create*, and wait util all resources created successfully.
 +
 image::logs/log-24.png[]
 
-* Review Deployment in Topology view
+* Select *Topology* menu on the left. The `simple-go` Deployment should appear.
 +
 image::logs/log-25.png[,500]
 
-* Click Import YAML, copy YAML from `frontend.yaml` from https://github.com/rhthsa/developer-advocacy-2025/tree/main/config and paste in Import YAML
+* Click on the *+* button at the top right corner of console, then select *Import YAML*. Copy all YAML code from  `frontend.yaml` file in https://github.com/rhthsa/developer-advocacy-2025/tree/main/config and paste to YAML editor in OpenShift console.
 +
 image::logs/log-26.png[]
 
-* click Create, and wait util all complete.
+* click *Create*, and wait util all resources created successfully.
 +
 image::logs/log-27.png[]
 
-* Review Deployment in Topology view
+* Select *Topology* menu on the left. The `frontend` Deployment should appear.
 +
 image::logs/log-28.png[,500]
 
 [#viewapplicationlogs]
 == View Individual Application Logs
 
-* Click `backend` Deployment, right click `view logs` of Pods in Resources tab, open link in new tab.
+* Select the `backend` Deployment, go to the *Resources* tab on the right panel, then right click on the *View logs* link and select *Open Link in New Tab* to view application logs in a separated tab.
 +
 image::logs/log-30.png[]
 
-* View log in Logs tab in Pods Details
+* You should see the `backend` application logs in the *Logs* tab in Pods Details page.
 +
 image::logs/log-31.png[]
 
-* Click `simple-go` Deployment, right click `view logs` of Pods in Resources tab, open link in new tab.
+* Go back to the web browser tab that opened with the topology view. Select the  `simple-go` Deployment, repeat the same steps above to view application logs.
 +
 image::logs/log-32.png[]
 
-* View log in Logs tab in Pods Details
+* You should see the `simple-go` application logs in the *Logs* tab in Pods Details page.
 +
 image::logs/log-33.png[]
 
-* Click `frontend` Deployment, right click `view logs` of Pods in Resources tab, open link in new tab.
+* Go back to the web browser tab that opened with the topology view. Select the `frontend` Deployment, repeat the same steps to view application logs.
 +
 image::logs/log-34.png[]
 
-* View log in Logs tab in Pods Details
+* You should see the `frontend` application logs in the *Logs* tab in Pods Details page.
 +
 image::logs/log-35.png[]
 
-* Click Open URL in `frontend` Deployment
+* Go back to the web browser tab that opened with the topology view. Click on the arrow icon of the `frontend` Deployment to open application URL.
 +
 image::logs/log-36.png[,500]
 
-* View Output of frontend application, try to refresh 2-3 times
+* You shold see the response from `frontend` application, try to refresh the web browser 2-3 times.
 +
 image::logs/log-37.png[]
 
-* Review Logs of frontend application (from previous open tab)
+* Review logs of `frontend` application in the web browser tab we opened earlier.
 +
 image::logs/log-39.png[]
 +
-if log don't show, please check `Log steam paused` and click Run.
+if the logs don't show up, please check whether the `Log steam paused`. If so, just click the play button.
 +
 image::logs/log-38.png[]
 
-* Review Logs of simple-go application (from previous open tab)
+* Review logs of `simple-go` application in the web browser tab we opened earlier.
 +
 image::logs/log-40.png[]
 
-* Review Logs of backend application (from previous open tab)
+* Review logs of `backend` application in the web browser tab we opened earlier.
 +
 image::logs/log-41.png[]
 
-* Try to restart pod, click `backend` deployment, select details tab, click scale down from `1 Pod` to `0 Pod`
+* Try to restart the `backend` application by select the `backend` deployment, go to the *Details* tab on the right panel. Then click *v* button to scale the Pod to `0` and wait until the Pod scaled down to `0`.
 +
 image::logs/log-42.png[]
-
-* wait until Pod scale down to `0`
-+
 image::logs/log-43.png[]
 
-* scale up to `1` again
+* Click on *^* button to scale Pod up to `1` again.
 +
 image::logs/log-44.png[]
 
-* Reopen view logs of `backend` deployment agian
+* Go to the *Resources* tab and view the `backend` application logs agian.
 +
 image::logs/log-45.png[]
 
-* Review `backend` application log, The Old Logs is gone! How to Trouble Shoot with log after log is gone!
+* You should see that all previous logs now disappear and there are only new logs from the new Pod we've just scaled up.
 +
 image::logs/log-46.png[]
 
 [#logquery]
 == Query Application Logs using OpenShift Logging
 
-* Go to Observe Menu, Logs Tab, view all log in this namespace/project.
+In the previous section, you've learned how to view application logs in OpenShift web console. Also, you've seen that if the application container/Pod got restarted, all the previous logs would disappear.
+
+*The question is, how can you view all the previous application logs for problem troubleshooting and diagnostic?*
+
+Luckly!, OpenShift Logging has provided the software stack for log management for your applications in the OpenShift cluster. You can store your applications's logs in the OpenShift cluster for short-term period i.e. 15 - 30 days, then shift all older logs to external log management stack i.e. EFK/ELK for long-term log persistent.
+
+OpenShift Logging comes with web console plug-in that provides the UI for log view and query.
+
+* Go to *Observe* menu, select *Logs* tab, view all logs from all applications in a particular project.
 +
 image::logs/log-47.png[]
 
-* Try to fileter with Pods, select all `backend` pods. click Run Query Button.
+* Try to fileter with Pods, select all `backend` pods then click *Run Query* Button.
 +
 image::logs/log-48.png[]
 
-* Click Show Resources, to view Namesapce, Pod and Container of each log data.
+* Click on *Show Resources* or *Hide Resources* link, to view log's metadata e.g. Namespace/Project, Pod, and Container from which the log was produced.
 +
 image::logs/log-49.png[]
 
-* Click clear filter and show query, paste `{ log_type="application", kubernetes_namespace_name="userX-observe", kubernetes_container_name=~"backend" } | json` in query text box (change X to your username), click Run Query to find all logs from `backend` container in your namesapce.
+* Now let's try logs query using https://grafana.com/docs/loki/latest/query/[LogQL language]. First, click *Clear all filters* to clear all filters, then click *Show Query* to open logs query input.
++
+Copy this query and past to the input text box then click *Run Query* button. The query statement is used to query all logs from the `backend` container in `userX-observe` namespace/Project.
++
+[IMPORTANT]
+====
+Change the `*userX-observe*` in the query to matches to your username.
+====
++
+[.console-input]
+[source,adoc]
+----
+{ log_type="application", kubernetes_namespace_name="userX-observe", kubernetes_container_name=~"backend" } | json
+----
 +
 image::logs/log-50.png[]
 
-* Paste ``{ log_type="application", kubernetes_namespace_name="userX-observe" } |= ``BackendResource`` | json`` in query text box (change x to your username) to find all logs coming from `BackendResource`
+* Next, try another query to find all logs coming from the https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads[`BackendResource.java`] class.
++
+[IMPORTANT]
+====
+Change the `*userX-observe*` in the query to matches to your username.
+====
++
+[.console-input]
+[source,adoc]
+----
+{ log_type="application", kubernetes_namespace_name="userX-observe" } |= "BackendResource" | json
+----
 +
 image::logs/log-51.png[]
 
