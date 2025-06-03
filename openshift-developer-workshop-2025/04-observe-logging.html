@@ -306,7 +306,7 @@
 </div>
 </li>
 <li>
-<p>For <code>Deployment</code> resource in <code>simple-go.yaml</code> file, you should see an environment variable named <code>BACKEND</code>, the value is the <code>backend</code> application endpoint so the <code>simple-go</code> application will call to the <code>backend</code> application with this URL.</p>
+<p>For <code>Deployment</code> resource in <code>simple-go.yaml</code> file, you should see an environment variable named <code>BACKEND</code>, the value is the <code>backend</code> application endpoint that the <code>simple-go</code> application will call to the <code>backend</code> application via this URL.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-9.png" alt="log 9">
@@ -322,7 +322,7 @@
 </div>
 </li>
 <li>
-<p>For the <code>Deployment</code> resource in <code>frontend.yaml</code> file, you should see an environment variable named <code>BACKEND_URL</code>, the value is the <code>simple-go</code> application endpoint so the <code>frontend</code> application will call to the <code>simple-go</code> application with this URL.</p>
+<p>For the <code>Deployment</code> resource in <code>frontend.yaml</code> file, you should see an environment variable named <code>BACKEND_URL</code>, the value is the <code>simple-go</code> application endpoint that the <code>frontend</code> application will call to the <code>simple-go</code> application via this URL.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-11.png" alt="log 11">
@@ -397,10 +397,13 @@
 <div class="sect1">
 <h2 id="deployapplication"><a class="anchor" href="#deployapplication"></a>Deploy Sample Applications</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Next, we&#8217;re going to deploy those 3 applications we&#8217;ve reviewed the codes and deployment configurations. We&#8217;ll deploy the applications using the deployment configurations defined as YAML in the <code>*.yaml</code> files we&#8217;ve seen earlier.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>In OpenShift console, change to <code>userX-observe</code> matches to your username.</p>
+<p>In OpenShift console, change to <code>userX-observe</code> project that matches to your username.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-4.png" alt="log 4">
@@ -408,7 +411,7 @@
 </div>
 </li>
 <li>
-<p>click Import YAML</p>
+<p>Click on the <strong>+</strong> button at the top right corner of console, then select <strong>Import YAML</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-5.png" alt="log 5">
@@ -416,7 +419,7 @@
 </div>
 </li>
 <li>
-<p>copy YAML from <code>backend.yaml</code> from <a href="https://github.com/rhthsa/developer-advocacy-2025/tree/main/config" class="bare">https://github.com/rhthsa/developer-advocacy-2025/tree/main/config</a> and paste in Import YAML</p>
+<p>Copy all YAML code from <code>backend.yaml</code> file in <a href="https://github.com/rhthsa/developer-advocacy-2025/tree/main/config" class="bare">https://github.com/rhthsa/developer-advocacy-2025/tree/main/config</a> and paste to YAML editor in OpenShift console.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-20.png" alt="log 20">
@@ -424,7 +427,7 @@
 </div>
 </li>
 <li>
-<p>click Create, and wait util all complete.</p>
+<p>Click <strong>Create</strong>, and wait util all resources created successfully.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-21.png" alt="log 21">
@@ -432,7 +435,7 @@
 </div>
 </li>
 <li>
-<p>Review Deployment in Topology view</p>
+<p>Select <strong>Topology</strong> menu on the left. The <code>backend</code> Deployment should appear.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-22.png" alt="log 22" width="300">
@@ -440,7 +443,7 @@
 </div>
 </li>
 <li>
-<p>Click Import YAML, copy YAML from <code>simple-go.yaml</code> from <a href="https://github.com/rhthsa/developer-advocacy-2025/tree/main/config" class="bare">https://github.com/rhthsa/developer-advocacy-2025/tree/main/config</a> and paste in Import YAML</p>
+<p>Click on the <strong>+</strong> button at the top right corner of console, then select <strong>Import YAML</strong>. Copy all YAML code from <code>simple-go.yaml</code> file in <a href="https://github.com/rhthsa/developer-advocacy-2025/tree/main/config" class="bare">https://github.com/rhthsa/developer-advocacy-2025/tree/main/config</a> and paste to YAML editor in OpenShift console.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-23.png" alt="log 23">
@@ -448,7 +451,7 @@
 </div>
 </li>
 <li>
-<p>click Create, and wait util all complete.</p>
+<p>click <strong>Create</strong>, and wait util all resources created successfully.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-24.png" alt="log 24">
@@ -456,7 +459,7 @@
 </div>
 </li>
 <li>
-<p>Review Deployment in Topology view</p>
+<p>Select <strong>Topology</strong> menu on the left. The <code>simple-go</code> Deployment should appear.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-25.png" alt="log 25" width="500">
@@ -464,7 +467,7 @@
 </div>
 </li>
 <li>
-<p>Click Import YAML, copy YAML from <code>frontend.yaml</code> from <a href="https://github.com/rhthsa/developer-advocacy-2025/tree/main/config" class="bare">https://github.com/rhthsa/developer-advocacy-2025/tree/main/config</a> and paste in Import YAML</p>
+<p>Click on the <strong>+</strong> button at the top right corner of console, then select <strong>Import YAML</strong>. Copy all YAML code from  <code>frontend.yaml</code> file in <a href="https://github.com/rhthsa/developer-advocacy-2025/tree/main/config" class="bare">https://github.com/rhthsa/developer-advocacy-2025/tree/main/config</a> and paste to YAML editor in OpenShift console.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-26.png" alt="log 26">
@@ -472,7 +475,7 @@
 </div>
 </li>
 <li>
-<p>click Create, and wait util all complete.</p>
+<p>click <strong>Create</strong>, and wait util all resources created successfully.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-27.png" alt="log 27">
@@ -480,7 +483,7 @@
 </div>
 </li>
 <li>
-<p>Review Deployment in Topology view</p>
+<p>Select <strong>Topology</strong> menu on the left. The <code>frontend</code> Deployment should appear.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-28.png" alt="log 28" width="500">
@@ -497,7 +500,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Click <code>backend</code> Deployment, right click <code>view logs</code> of Pods in Resources tab, open link in new tab.</p>
+<p>Select the <code>backend</code> Deployment, go to the <strong>Resources</strong> tab on the right panel, then right click on the <strong>View logs</strong> link and select <strong>Open Link in New Tab</strong> to view application logs in a separated tab.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-30.png" alt="log 30">
@@ -505,7 +508,7 @@
 </div>
 </li>
 <li>
-<p>View log in Logs tab in Pods Details</p>
+<p>You should see the <code>backend</code> application logs in the <strong>Logs</strong> tab in Pods Details page.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-31.png" alt="log 31">
@@ -513,7 +516,7 @@
 </div>
 </li>
 <li>
-<p>Click <code>simple-go</code> Deployment, right click <code>view logs</code> of Pods in Resources tab, open link in new tab.</p>
+<p>Go back to the web browser tab that opened with the topology view. Select the  <code>simple-go</code> Deployment, repeat the same steps above to view application logs.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-32.png" alt="log 32">
@@ -521,7 +524,7 @@
 </div>
 </li>
 <li>
-<p>View log in Logs tab in Pods Details</p>
+<p>You should see the <code>simple-go</code> application logs in the <strong>Logs</strong> tab in Pods Details page.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-33.png" alt="log 33">
@@ -529,7 +532,7 @@
 </div>
 </li>
 <li>
-<p>Click <code>frontend</code> Deployment, right click <code>view logs</code> of Pods in Resources tab, open link in new tab.</p>
+<p>Go back to the web browser tab that opened with the topology view. Select the <code>frontend</code> Deployment, repeat the same steps to view application logs.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-34.png" alt="log 34">
@@ -537,7 +540,7 @@
 </div>
 </li>
 <li>
-<p>View log in Logs tab in Pods Details</p>
+<p>You should see the <code>frontend</code> application logs in the <strong>Logs</strong> tab in Pods Details page.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-35.png" alt="log 35">
@@ -545,7 +548,7 @@
 </div>
 </li>
 <li>
-<p>Click Open URL in <code>frontend</code> Deployment</p>
+<p>Go back to the web browser tab that opened with the topology view. Click on the arrow icon of the <code>frontend</code> Deployment to open application URL.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-36.png" alt="log 36" width="500">
@@ -553,7 +556,7 @@
 </div>
 </li>
 <li>
-<p>View Output of frontend application, try to refresh 2-3 times</p>
+<p>You shold see the response from <code>frontend</code> application, try to refresh the web browser 2-3 times.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-37.png" alt="log 37">
@@ -561,14 +564,14 @@
 </div>
 </li>
 <li>
-<p>Review Logs of frontend application (from previous open tab)</p>
+<p>Review logs of <code>frontend</code> application in the web browser tab we opened earlier.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-39.png" alt="log 39">
 </div>
 </div>
 <div class="paragraph">
-<p>if log don&#8217;t show, please check <code>Log steam paused</code> and click Run.</p>
+<p>if the logs don&#8217;t show up, please check whether the <code>Log steam paused</code>. If so, just click the play button.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -577,7 +580,7 @@
 </div>
 </li>
 <li>
-<p>Review Logs of simple-go application (from previous open tab)</p>
+<p>Review logs of <code>simple-go</code> application in the web browser tab we opened earlier.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-40.png" alt="log 40">
@@ -585,7 +588,7 @@
 </div>
 </li>
 <li>
-<p>Review Logs of backend application (from previous open tab)</p>
+<p>Review logs of <code>backend</code> application in the web browser tab we opened earlier.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-41.png" alt="log 41">
@@ -593,15 +596,12 @@
 </div>
 </li>
 <li>
-<p>Try to restart pod, click <code>backend</code> deployment, select details tab, click scale down from <code>1 Pod</code> to <code>0 Pod</code></p>
+<p>Try to restart the <code>backend</code> application by select the <code>backend</code> deployment, go to the <strong>Details</strong> tab on the right panel. Then click <strong>v</strong> button to scale the Pod to <code>0</code> and wait until the Pod scaled down to <code>0</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-42.png" alt="log 42">
 </div>
 </div>
-</li>
-<li>
-<p>wait until Pod scale down to <code>0</code></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-43.png" alt="log 43">
@@ -609,7 +609,7 @@
 </div>
 </li>
 <li>
-<p>scale up to <code>1</code> again</p>
+<p>Click on <strong>^</strong> button to scale Pod up to <code>1</code> again.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-44.png" alt="log 44">
@@ -617,7 +617,7 @@
 </div>
 </li>
 <li>
-<p>Reopen view logs of <code>backend</code> deployment agian</p>
+<p>Go to the <strong>Resources</strong> tab and view the <code>backend</code> application logs agian.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-45.png" alt="log 45">
@@ -625,7 +625,7 @@
 </div>
 </li>
 <li>
-<p>Review <code>backend</code> application log, The Old Logs is gone! How to Trouble Shoot with log after log is gone!</p>
+<p>You should see that all previous logs now disappear and there are only new logs from the new Pod we&#8217;ve just scaled up.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-46.png" alt="log 46">
@@ -639,10 +639,22 @@
 <div class="sect1">
 <h2 id="logquery"><a class="anchor" href="#logquery"></a>Query Application Logs using OpenShift Logging</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>In the previous section, you&#8217;ve learned how to view application logs in OpenShift web console. Also, you&#8217;ve seen that if the application container/Pod got restarted, all the previous logs would disappear.</p>
+</div>
+<div class="paragraph">
+<p><strong>The question is, how can you view all the previous application logs for problem troubleshooting and diagnostic?</strong></p>
+</div>
+<div class="paragraph">
+<p>Luckly!, OpenShift Logging has provided the software stack for log management for your applications in the OpenShift cluster. You can store your applications&#8217;s logs in the OpenShift cluster for short-term period i.e. 15 - 30 days, then shift all older logs to external log management stack i.e. EFK/ELK for long-term log persistent.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift Logging comes with web console plug-in that provides the UI for log view and query.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Go to Observe Menu, Logs Tab, view all log in this namespace/project.</p>
+<p>Go to <strong>Observe</strong> menu, select <strong>Logs</strong> tab, view all logs from all applications in a particular project.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-47.png" alt="log 47">
@@ -650,7 +662,7 @@
 </div>
 </li>
 <li>
-<p>Try to fileter with Pods, select all <code>backend</code> pods. click Run Query Button.</p>
+<p>Try to fileter with Pods, select all <code>backend</code> pods then click <strong>Run Query</strong> Button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-48.png" alt="log 48">
@@ -658,7 +670,7 @@
 </div>
 </li>
 <li>
-<p>Click Show Resources, to view Namesapce, Pod and Container of each log data.</p>
+<p>Click on <strong>Show Resources</strong> or <strong>Hide Resources</strong> link, to view log&#8217;s metadata e.g. Namespace/Project, Pod, and Container from which the log was produced.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-49.png" alt="log 49">
@@ -666,7 +678,29 @@
 </div>
 </li>
 <li>
-<p>Click clear filter and show query, paste <code>{ log_type="application", kubernetes_namespace_name="userX-observe", kubernetes_container_name=~"backend" } | json</code> in query text box (change X to your username), click Run Query to find all logs from <code>backend</code> container in your namesapce.</p>
+<p>Now let&#8217;s try logs query using <a href="https://grafana.com/docs/loki/latest/query/">LogQL language</a>. First, click <strong>Clear all filters</strong> to clear all filters, then click <strong>Show Query</strong> to open logs query input.</p>
+<div class="paragraph">
+<p>Copy this query and past to the input text box then click <strong>Run Query</strong> button. The query statement is used to query all logs from the <code>backend</code> container in <code>userX-observe</code> namespace/Project.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Change the <code><strong>userX-observe</strong></code> in the query to matches to your username.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">{ log_type="application", kubernetes_namespace_name="userX-observe", kubernetes_container_name=~"backend" } | json</code></pre>
+</div>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-50.png" alt="log 50">
@@ -674,7 +708,26 @@
 </div>
 </li>
 <li>
-<p>Paste <code>{ log_type="application", kubernetes_namespace_name="userX-observe" } |= </code>BackendResource<code> | json</code> in query text box (change x to your username) to find all logs coming from <code>BackendResource</code></p>
+<p>Next, try another query to find all logs coming from the <a href="https://gitlab.com/ocp-demo/backend_quarkus/-/blob/master/code/src/main/java/com/example/quarkus/BackendResource.java?ref_type=heads"><code>BackendResource.java</code></a> class.</p>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Change the <code><strong>userX-observe</strong></code> in the query to matches to your username.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock console-input">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">{ log_type="application", kubernetes_namespace_name="userX-observe" } |= "BackendResource" | json</code></pre>
+</div>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/logs/log-51.png" alt="log 51">
