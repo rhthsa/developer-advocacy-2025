@@ -120,7 +120,7 @@ image::monitors/mon-9.png[]
 [.console-input]
 [source,adoc]
 ----
-curl -s http://localhsot:8080/q/metrics
+curl -s http://localhost:8080/q/metrics
 ----
 +
 NOTE: the `/q/metrics` endpoint is automatically exposed from the application. This endpoint will be used by Prometheus to collect metrics from the application.
@@ -210,7 +210,7 @@ IMPORTANT: Don't forget to change `userX` in the command to match to your userna
 [source,adoc]
 ----
 oc project userX-observe
-curl http://backend:8080
+curl http://http://backend.userX-observe.svc.cluster.local:8080
 ----
 +
 Sample output.
@@ -277,7 +277,7 @@ spec:
   - name: backend
     rules:
     - alert: HighLatency
-      expr: com_example_quarkus_BackendResource_timeBackend_seconds_max>0.1
+      expr: com_example_quarkus_BackendResource_timeBackend_seconds_max>0.01
       labels:
         severity: 'critical'
       annotations:
