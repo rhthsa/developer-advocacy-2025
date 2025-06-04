@@ -6,8 +6,7 @@ include::_attributes.adoc[]
 
 === Register to access the lab
 
-* Get the lab registration URL and password from instructor.
-* Register with your email address and password `openshift` to access the lab.
+* Get the lab registration URL from instructor. Then register with your email address and password `openshift` to access the lab.
 +
 image::setup/register-01.png[]
 
@@ -17,7 +16,7 @@ image::setup/register-01.png[]
 +
 image::setup/register-02.png[]
 +
-* Log in with username and password get from the registration page.
+* Log in with your username and password provided in the registration page.
 +
 image::shipwright/shp-1.png[]
 
@@ -25,7 +24,7 @@ image::shipwright/shp-1.png[]
 +
 image::shipwright/shp-2.png[]
 
-* Switch to *Developer* perspective (if it's not) from the drop-down list near the hamburger menu. Then click on *userX-shipwright* project where *userX* is your username such as `user1`.
+* Switch to *Developer* perspective (if it's not) from the drop-down list near the hamburger menu. Then click on *`userX`-shipwright* project where `*userX*` is your username such as `user1`.
 +
 image::shipwright/shp-3.png[]
 
@@ -144,52 +143,23 @@ Get More information
 [#shipwrightbuidah]
 == Build and Deploy Application using Shipwright and Buildah
 
-In this lab, we are going to build application container from the code hosted on a Git repository. Follow these steps to build and deploy the applcation using OpenShift Builds in combination of Shipwright and Buildah.
-
-
-
-* Run this command to get *gitea* URL.
-+
-[.console-input]
-[source,adoc]
-----
-oc get route gitea -n gitea
-----
-+
-sample output.
-+
-[.console-output]
-[source,adoc]
-----
-NAME    HOST/PORT                                                      PATH   SERVICES   PORT    TERMINATION     WILDCARD
-gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gitea      <all>   edge/Redirect   None
-----
-
-* Copy the gitea DNS hostname and open it with a web browser.
-+
-image::shipwright/shp-15.png[]
-
-* Log in with your username, and use `openshift` as password.
-+
-image::shipwright/shp-16.png[]
-
-* Select `simple-rest-go` repository.
-+
-image::shipwright/shp-17.png[]
+In this lab, we are going to build application container from the Go application code hosted on a Git repository. Follow these steps to build and deploy the applcation using OpenShift Builds in combination of Shipwright and Buildah.
 
 === Review the Container Image Build Instruction
+
+* Go to https://gitlab.com/chatapazar/simple-rest-go Git repository.
++
+image::shipwright/shp-15.png[]
 
 * Open the `Dockerfile`, then review build steps in the `Dockerfile` file.
 +
 image::shipwright/shp-18.png[]
-+
-image::shipwright/shp-19.png[]
 
-=== Build and Deploy Container
-
-* In gitea, back to the main `simple-rest-go` repository page, click on *<> Code* button then click copy button to copy the repository URL.
+* Back to the main page of repository, click on *Code* button then copy the repository URL labeled with *Clone with HTTPS*.
 +
 image::shipwright/shp-20.png[]
+
+=== Build and Deploy Container
 
 * Go to OpenShift web console then click *+Add* menu on the left. Select *Git Repository - Import from Git* tile.
 +
@@ -197,7 +167,7 @@ image::shipwright/shp-21.png[]
 
 On the *Import from Git* form, follow these steps:
 
-* Enter the Git repository URL you've copied to *Git Repo URL* input.
+* Paste the Git repository URL you've copied earlier to *Git Repo URL* input.
 * The wizard will detect the `Dockerfile` in the repository automatically.
 * Select `Create Application` for the  *Application* drop-down list.
 * Set *Application name* to `simple-rest-go`.
@@ -213,7 +183,7 @@ image::shipwright/shp-23.png[]
 
 === View Build Configuration and Build Logs
 
-* In the Topology view, select `simple-rest-go` Deployment, go to *BuildRuns* section, then click *View logs* link.
+* In the Topology view, select `simple-rest-go` Deployment, click *Resources* tab in the right panel, then in *BuildRuns* section, click *View logs* link.
 +
 image::shipwright/shp-24.png[]
 
@@ -229,7 +199,7 @@ image::shipwright/shp-26.png[]
 +
 image::shipwright/shp-27.png[]
 
-* Select *Topology* menu on the left, select `simple-rest-go` Deployment, go to *BuildRuns* section again you'll see the build status shown as `Succeeded`.
+* Select *Topology* menu on the left, click on `simple-rest-go` Deployment, click *Resources* tab in the right panel, in *BuildRuns* section you'll see the build status shown as `Succeeded`. And in the *Pods* section the Pod status is `Running`.
 +
 image::shipwright/shp-28.png[]
 
@@ -248,9 +218,8 @@ image::shipwright/shp-30.png[]
 
 === Review Application Source Code.
 
-* Go to *gitea* web console then open the `backend_quarkus` repository.
+* Go to https://gitlab.com/chatapazar/backend_quarkus Git repository.
 +
-image::shipwright/shp-31.png[]
 image::shipwright/shp-32.png[]
 
 * Open the `code` directory to view the application source code. It's a Java application based on Quarkus framework. The APIs that application exposes are in `src/main/java/com/example/quarkus/BackendResource.java` file.
@@ -260,7 +229,7 @@ image::shipwright/shp-35.png[]
 
 === Build and Deploy Container
 
-* In gitea, back to the main `backend_quarkus` repository page, click on *<> Code* button then click copy button to copy the repository URL.
+* In GitLab, back to the main `backend_quarkus` repository page, click on *Code* button then copy the repository URL labeled with *Clone with HTTPS*.
 +
 image::shipwright/shp-33.png[]
 
@@ -270,8 +239,8 @@ image::shipwright/shp-21.png[]
 
 On the *Import from Git* form, follow these steps:
 
-* Enter the `backend_quarkus` Git repository URL you've copied to *Git Repo URL* input.
-* Enter `/code` in *Context dir* input.
+* Paste the `backend_quarkus` Git repository URL you've copied to *Git Repo URL* input.
+* Enter `/code` to *Context dir* input.
 +
 image::shipwright/shp-36.png[]
 
