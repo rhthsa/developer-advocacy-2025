@@ -958,10 +958,13 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_deploy_application_to_prepod"><a class="anchor" href="#_deploy_application_to_prepod"></a>Deploy Application to Prepod</h3>
+<div class="paragraph">
+<p>Container image deployment to preprod occurs when you tag your source in your source code repository. Tagging your source code in the GitLab repository triggers a webhook which starts your container image deployment to preprod.</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>Image promotion to preprod occurs when you tag your source in your source code repository. Tagging your source code in the GitLab repository triggers a webhook which starts your image promotion to preprod. In overview tab, click <code>view source</code> link.</p>
+<p>In RHDH console, go to <strong>Overview</strong> tab, then click <strong>View Source</strong> link.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-52.png" alt="dh 52">
@@ -969,7 +972,7 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 </li>
 <li>
-<p>Click on the Tags link.</p>
+<p>Click on the <strong>Tags</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-53.png" alt="dh 53">
@@ -977,7 +980,7 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 </li>
 <li>
-<p>Click on New tag</p>
+<p>Click <strong>New tag</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-54.png" alt="dh 54">
@@ -985,7 +988,7 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 </li>
 <li>
-<p>For the Tag name, enter <code>v1.0</code> and click Create tag.</p>
+<p>Enter <code>v1.0</code> to <strong>Tag name</strong> input, then click <strong>Create tag</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-55.png" alt="dh 55">
@@ -993,7 +996,7 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 </li>
 <li>
-<p>Switch back to the pipelines page (CI tab) on your RHDH.</p>
+<p>Go back to the RHDH web console, Click <strong>CI</strong> tab to view pipeline. You should see the pipline got triggered and automatically running.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-56.png" alt="dh 56">
@@ -1001,7 +1004,7 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 </li>
 <li>
-<p>View Pipeline Logs.</p>
+<p>View the Pipeline Logs.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-57.png" alt="dh 57">
@@ -1009,7 +1012,7 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 </li>
 <li>
-<p>After Complete, Back to Topology tab, test <code>my-quarkus-app-prepod</code> deployment.</p>
+<p>After the pipline run completed, go to <strong>Topology</strong> tab, then open the <code>my-quarkus-userX-preprod</code> application URL by click on the arrow icon of the Deployment to test the application.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-58.png" alt="dh 58">
@@ -1021,18 +1024,20 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 <div class="sect2">
 <h3 id="_deploy_application_to_production"><a class="anchor" href="#_deploy_application_to_production"></a>Deploy Application to Production</h3>
+<div class="paragraph">
+<p>The next step is to promote your container image to production. Promotion to production occurs when you create a release in GitLab.</p>
+</div>
+<div class="paragraph">
+<p><strong>Switch back to GitLab console and select the <code>development/my-quarkus-userX</code> repository. Ensure you are in the root of the repository. Click the *Tag</strong> link as you previously did.</p>
+</div>
+<div class="paragraph">
+<p>+
+image::devhub/dh-59.png[]</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>The next step is to promote your image to production.  Promotion to production occurs when you create a release in GitLab. Switch back to GitLab and select the development / my-quarkus-app repository.  Ensure you are in the root of the repository. Click the Tag link as you previously did.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devhub/dh-59.png" alt="dh 59">
-</div>
-</div>
-</li>
-<li>
-<p>On the v1.0 tag, click the Create release button.</p>
+<p>On the <strong>v1.0</strong> tag, click the <strong>Create release</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-60.png" alt="dh 60">
@@ -1040,7 +1045,7 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 </li>
 <li>
-<p>For the Release title enter <code>Prod v1.0</code>, leave all other defaults and click the Create release button at the bottom of the screen.</p>
+<p>For the <strong>Release title</strong> enter <code>Prod v1.0</code>, leave all other fields as defaults and click the <strong>Create release</strong> button at the bottom of the screen.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-61.png" alt="dh 61">
@@ -1061,7 +1066,7 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 </li>
 <li>
-<p>Switch back to CI tab on your RHDH. Wait until pipeline run complete.</p>
+<p>Switch back to RHDH console, go to <strong>CI</strong> tab, then wait until the pipeline run complete.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-63.png" alt="dh 63">
@@ -1069,7 +1074,7 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 </li>
 <li>
-<p>Switch to Topology tab, test <code>my-quarkus-app-prod</code></p>
+<p>Go to <strong>Topology</strong> tab, then open the <code>my-quarkus-userX-prod</code> application URL by click on the arrow icon of the Deployment to test the application.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-64.png" alt="dh 64">
@@ -1077,7 +1082,7 @@ If you have navigated away from this page, select <strong>Catalog</strong> on th
 </div>
 </li>
 <li>
-<p>Switch to CD tab, view all ArgoCD Application Synced and Healthy.</p>
+<p>Go to <strong>CD</strong> tab, you should see all Argo CD Applications are Synced and Healthy.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-65.png" alt="dh 65">
