@@ -331,7 +331,7 @@ In the *Parameter* section, enter following parameters:
 * Enter `simple-rest-go` to *deployment-name* parameter.
 * Enter `https://gitlab.com/chatapazar/simple-rest-go.git` to *git-url* parameter. (Don't use the URL in the screenshot!)
 * Enter `main` to *git revision* parameter.
-* Enter `image-registry.openshift-image-registry.svc:5000/*<project>*/simple-rest-go:latest` to *IMAGE* parameter.
+* Enter `image-registry.openshift-image-registry.svc:5000/*<project>*/simple-rest-go` to *IMAGE* parameter.
 +
 [IMPORTANT]
 ====
