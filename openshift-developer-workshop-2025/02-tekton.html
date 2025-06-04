@@ -740,15 +740,7 @@ You can learn more about triggers by checking out the <a href="https://github.co
 <div class="ulist">
 <ul>
 <li>
-<p>Go to <strong>gitea</strong> web console and copy Git repository URL of the <code>simple-rest-go</code> repository.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-20.png" alt="shp 20">
-</div>
-</div>
-</li>
-<li>
-<p>Back to OpenShift console and select <strong>Pipelines</strong> menu, select <strong>Pipelines</strong> tab, then click on action menu of <code>build-to-deploy</code> pipeline, then select <strong>start</strong>.</p>
+<p>In OpenShift console click on <strong>Pipelines</strong> menu, select <strong>Pipelines</strong> tab, then click on action menu of <code>build-to-deploy</code> pipeline, then select <strong>start</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/tekton/tk-14.png" alt="tk 14">
@@ -766,7 +758,7 @@ You can learn more about triggers by checking out the <a href="https://github.co
 <p>Enter <code>simple-rest-go</code> to <strong>deployment-name</strong> parameter.</p>
 </li>
 <li>
-<p>Paste the <code>simple-rest-go</code> Git reposity URL you&#8217;ve copied to <strong>git-url</strong> parameter. (Don&#8217;t use the URL in the screenshot!)</p>
+<p>Enter <code><a href="https://gitlab.com/chatapazar/simple-rest-go.git" class="bare">https://gitlab.com/chatapazar/simple-rest-go.git</a></code> to <strong>git-url</strong> parameter. (Don&#8217;t use the URL in the screenshot!)</p>
 </li>
 <li>
 <p>Enter <code>main</code> to <strong>git revision</strong> parameter.</p>
@@ -781,7 +773,7 @@ You can learn more about triggers by checking out the <a href="https://github.co
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Change the <strong>&lt;project&gt;</strong> that matches to your username i.e. user1-tekton</p>
+<p>Change the <strong>&lt;project&gt;</strong> in the image registry URL to matches to your username i.e. user1-tekton</p>
 </div>
 </td>
 </tr>
