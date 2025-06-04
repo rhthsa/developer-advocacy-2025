@@ -347,45 +347,49 @@ image::devhub/dh-51.png[]
 == Deploy Application
 === Deploy Application to Prepod
 
-* Image promotion to preprod occurs when you tag your source in your source code repository. Tagging your source code in the GitLab repository triggers a webhook which starts your image promotion to preprod. In overview tab, click `view source` link.
+Container image deployment to preprod occurs when you tag your source in your source code repository. Tagging your source code in the GitLab repository triggers a webhook which starts your container image deployment to preprod.
+
+* In RHDH console, go to *Overview* tab, then click *View Source* link.
 +
 image::devhub/dh-52.png[]
 
-* Click on the Tags link.
+* Click on the *Tags*.
 +
 image::devhub/dh-53.png[]
 
-* Click on New tag
+* Click *New tag* button.
 +
 image::devhub/dh-54.png[]
 
-* For the Tag name, enter `v1.0` and click Create tag.
+* Enter `v1.0` to *Tag name* input, then click *Create tag* button.
 +
 image::devhub/dh-55.png[]
 
-* Switch back to the pipelines page (CI tab) on your RHDH.
+* Go back to the RHDH web console, Click *CI* tab to view pipeline. You should see the pipline got triggered and automatically running.
 +
 image::devhub/dh-56.png[]
 
-* View Pipeline Logs.
+* View the Pipeline Logs.
 +
 image::devhub/dh-57.png[]
 
-* After Complete, Back to Topology tab, test `my-quarkus-app-prepod` deployment.
+* After the pipline run completed, go to *Topology* tab, then open the `my-quarkus-userX-preprod` application URL by click on the arrow icon of the Deployment to test the application.
 +
 image::devhub/dh-58.png[]
 
 === Deploy Application to Production
 
-* The next step is to promote your image to production.  Promotion to production occurs when you create a release in GitLab. Switch back to GitLab and select the development / my-quarkus-app repository.  Ensure you are in the root of the repository. Click the Tag link as you previously did.
+The next step is to promote your container image to production. Promotion to production occurs when you create a release in GitLab.
+
+*Switch back to GitLab console and select the `development/my-quarkus-userX` repository. Ensure you are in the root of the repository. Click the *Tag* link as you previously did.
 +
 image::devhub/dh-59.png[]
 
-* On the v1.0 tag, click the Create release button.
+* On the *v1.0* tag, click the *Create release* button.
 +
 image::devhub/dh-60.png[]
 
-* For the Release title enter `Prod v1.0`, leave all other defaults and click the Create release button at the bottom of the screen.
+* For the *Release title* enter `Prod v1.0`, leave all other fields as defaults and click the *Create release* button at the bottom of the screen.
 +
 image::devhub/dh-61.png[]
 +
@@ -395,15 +399,15 @@ image::devhub/dh-62.png[]
 +
 image::devhub/dh-66.png[]
 
-* Switch back to CI tab on your RHDH. Wait until pipeline run complete.
+* Switch back to RHDH console, go to *CI* tab, then wait until the pipeline run complete.
 +
 image::devhub/dh-63.png[]
 
-* Switch to Topology tab, test `my-quarkus-app-prod`
+* Go to *Topology* tab, then open the `my-quarkus-userX-prod` application URL by click on the arrow icon of the Deployment to test the application.
 +
 image::devhub/dh-64.png[]
 
-* Switch to CD tab, view all ArgoCD Application Synced and Healthy.
+* Go to *CD* tab, you should see all Argo CD Applications are Synced and Healthy.
 +
 image::devhub/dh-65.png[]
 
