@@ -324,7 +324,7 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 </div>
 </li>
 <li>
-<p>After register, you&#8217;ll get username, password, and URL for access to each component.</p>
+<p>After registration, you&#8217;ll get username, password, and URL for access to each component.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-68.png" alt="dh 68">
@@ -467,7 +467,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Click on <code>scaffolders-templates</code> directory. We will begin creating a software component based on the <code>quarkus-web-template</code> - Quarkus Service with ArgoCD and a Tekton Pipeline.</p>
+<p>Click on <code>scaffolders-templates</code> directory to view pre-defined templates. We will begin creating a software component based on the <code>quarkus-web-template</code> template to create a Quarkus application with a Tekton Pipeline and Argo CD for CI/CD.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-7.png" alt="dh 7">
@@ -475,7 +475,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Click on <code>quarkus-web-template</code> diretory.</p>
+<p>Click on <code>quarkus-web-template</code> diretory to see the template structure and files.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-8.png" alt="dh 8">
@@ -550,13 +550,10 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 <div class="ulist">
 <ul>
 <li>
-<p>Back To Developer Hub, Once you&#8217;ve chosen the template, you will be presented with a wizard which will guide you through the creation of your software component.  As seen in the GitLab project, the fields presented to you are configured in your golden path template and will be used to create the various artifacts of your software component.</p>
+<p>Back to Developer Hub web console, on the RHDH home screen, click on <strong>+ Create…</strong> menu, You will be presented with a group of tiles representing all the golden path templates created for you.</p>
 </li>
 <li>
-<p>On the RHDH home screen, click <code>Create…</code>, You will be presented with a group of tiles representing all the golden path templates created for you.</p>
-</li>
-<li>
-<p>Locate the <code>Quarkus Service with ArgoCD and a Tekton Pipeline</code> and click the CHOOSE link on the bottom right of the tile.</p>
+<p>Look for the <code>Quarkus Service with ArgoCD and a Tekton Pipeline</code> and click the <strong>Choose</strong> button on the bottom right of the tile.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-12.png" alt="dh 12">
@@ -567,10 +564,10 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 <p>Once you&#8217;ve chosen the template, you will be presented with a wizard which will guide you through the creation of your software component.  As seen in the GitLab project, the fields presented to you are configured in your golden path template and will be used to create the various artifacts of your software component.</p>
 </li>
 <li>
-<p>The first part of the template requires you to complete the metadata required for the application.  You will be creating a software component called my-quarkus-app.</p>
+<p>The first part of the template requires you to complete the metadata required for the application.  You will be creating a software component called <code>my-quarkus-userX</code>.</p>
 </li>
 <li>
-<p>Change Name to <code>my-quarkus-userX</code>, change X to your username</p>
+<p>Change Name to <code>my-quarkus-userX</code> where <code>userX</code> is your username.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-73.png" alt="dh 73">
@@ -578,7 +575,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Leave other defaults and click Next Step</p>
+<p>Leave other fields as default and click on <strong>Next</strong> button.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-18.png" alt="dh 18">
@@ -586,13 +583,13 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>You will then be asked to provide image registry information to store your container images. We will be using our self hosted Quay instance for this demonstration.  Select <code>Quay</code> for Image Registry.</p>
+<p>You will then be asked to provide image registry information to store your container images. We will be using our self hosted Quay instance for this demonstration.  Select <code>Quay</code> for <strong>Image Registry</strong>.</p>
 </li>
 <li>
-<p>Once you&#8217;ve selected Quay, you will be shown your quay server host, the organization your container image repositories will be stored in as well as the tag to use for your base image.</p>
-</li>
-<li>
-<p>Leave the defaults and click Next Step</p>
+<p>Once you&#8217;ve selected <code>Quay</code>, you will be shown your Quay server host, the organization your container image repositories will be stored in as well as the tag to use for your base image.</p>
+<div class="paragraph">
+<p>Leave all fields as default and click on <strong>Next</strong> button.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-19.png" alt="dh 19">
@@ -600,11 +597,16 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>You will now be presented with the target repository details where your generated software components will be installed.  Note that there will be two artifacts generated i.e. your source code repo for the app and a gitops repo to build and deploy your app.
-This screen will show the git server hosting your repo&#8217;s and the GitLab group that will contain these repo&#8217;s.</p>
-</li>
-<li>
-<p>Leave the defaults and click Next Step</p>
+<p>You will now be presented with the target repository details where your generated software components will be installed.</p>
+<div class="paragraph">
+<p>Note that there will be two artifacts generated i.e. your source code repository for the app and a GitOps repository to build and deploy your app.</p>
+</div>
+<div class="paragraph">
+<p>This screen will show the Git server hosting your repositories and the GitLab group that will contain these repositories.</p>
+</div>
+<div class="paragraph">
+<p>Leave all fields as default and click on <strong>Review</strong> button.</p>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-20.png" alt="dh 20">
@@ -612,7 +614,7 @@ This screen will show the git server hosting your repo&#8217;s and the GitLab gr
 </div>
 </li>
 <li>
-<p>You will be presented with a summary of your template replacement values used to create your software component:</p>
+<p>You will be presented with a summary of your template replacement values used to create your software component. Click on <strong>Create</strong> button to create your software component.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-21.png" alt="dh 21">
@@ -620,31 +622,28 @@ This screen will show the git server hosting your repo&#8217;s and the GitLab gr
 </div>
 </li>
 <li>
-<p>Click CREATE to create your software component.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/devhub/dh-22.png" alt="dh 22">
-</div>
-</div>
-</li>
-<li>
-<p>Now that your software component is created, let&#8217;s take a look at the artifacts generated by this action. Based on your golden path, you would have generated a RHDH component as well as a skeleton source code repository and a gitops repository:</p>
+<p>Now that your software component is created, let&#8217;s take a look at the artifacts generated by this action. Based on your golden path, you would have generated a RHDH component as well as a skeleton source code repository and a GitOps repository:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>RHDH component - Your new software component is now imported into the RHDH catalog.</p>
+<p><strong>RHDH component</strong> - Your new software component is now imported into the RHDH catalog.</p>
 </li>
 <li>
-<p>Source code repo - This is source code representing a basic quarkus application.  You may expand on this project as this is just a starting point for your development life cycle.</p>
+<p><strong>Source code repository</strong> - This is source code representing a basic quarkus application.  You may expand on this project as this is just a starting point for your development life cycle.</p>
 </li>
 <li>
-<p>Gitops Repository - This is a repository containing artifacts such as pipelines, tasks and kubernetes resources used to set up CI/CD processes for your application.</p>
+<p><strong>Gitops Repository</strong> - This is a repository containing artifacts such as Pipelines, Tasks and Kubernetes resources used to set up CI/CD processes for your application.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>On the RHDH screen click <code>Source Code Repository</code> to view Source Code in GitLab.</p>
+<p>On the <strong>Run of quarkus-web-template</strong> wizard screen click on <strong>Source Code Repository</strong> link to view source code in GitLab.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-22.png" alt="dh 22">
+</div>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-23.png" alt="dh 23">
@@ -652,7 +651,7 @@ This screen will show the git server hosting your repo&#8217;s and the GitLab gr
 </div>
 </li>
 <li>
-<p>Click on developement link</p>
+<p>Click on <strong>developement</strong> link to go back to top level.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-71.png" alt="dh 71">
@@ -660,15 +659,12 @@ This screen will show the git server hosting your repo&#8217;s and the GitLab gr
 </div>
 </li>
 <li>
-<p>select <code>my-quarkus-app-gitops</code> project</p>
+<p>Select <code>my-quarkus-app-gitops</code> project to view all artifacts for applcation deployment with GitOps.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-72.png" alt="dh 72">
 </div>
 </div>
-</li>
-<li>
-<p>view Gitops Repository</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-70.png" alt="dh 70">
@@ -676,7 +672,19 @@ This screen will show the git server hosting your repo&#8217;s and the GitLab gr
 </div>
 </li>
 <li>
-<p>On the RHDH screen click <code>Open Component in catalog</code>.  If you have navigated away from this page, select Catalog on the left menu and select Component on the drop down.  Click on the my-quarkus-app component.</p>
+<p>Go back to RHDH web console, nn the <strong>Run of quarkus-web-template</strong> wizard screen click on <strong>SOpen Component in catalog</strong> link.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If you have navigated away from this page, select <strong>Catalog</strong> on the left menu and select <code>my-quarkus-userX</code> in the  <strong>Component</strong> drop-down list.
+</td>
+</tr>
+</table>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-24.png" alt="dh 24">
@@ -688,7 +696,7 @@ This screen will show the git server hosting your repo&#8217;s and the GitLab gr
 <div class="ulist">
 <ul>
 <li>
-<p><code>Links</code></p>
+<p><strong>Links</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -701,10 +709,7 @@ This screen will show the git server hosting your repo&#8217;s and the GitLab gr
 </div>
 </li>
 <li>
-<p><code>Merge request statistics</code> - provides information regarding your GitLab merge requests</p>
-</li>
-<li>
-<p><code>About</code></p>
+<p><strong>About</strong></p>
 <div class="ulist">
 <ul>
 <li>
@@ -717,11 +722,14 @@ This screen will show the git server hosting your repo&#8217;s and the GitLab gr
 </div>
 </li>
 <li>
-<p><code>ArgoCD overview</code></p>
+<p><strong>Merge request statistics</strong> - provides information regarding your GitLab merge requests</p>
+</li>
+<li>
+<p><strong>ArgoCD overview</strong></p>
 <div class="ulist">
 <ul>
 <li>
-<p>This view shows your current status of your <code>ArgoCD</code> dev application.  It would eventually progress to a degraded state as your deployment cannot find your new quarkus app image.</p>
+<p>This view shows your current status of your <code>Argo CD</code> dev application.  It would eventually progress to a degraded state as your deployment cannot find your new quarkus app image.</p>
 </li>
 </ul>
 </div>
@@ -737,7 +745,7 @@ This screen will show the git server hosting your repo&#8217;s and the GitLab gr
 </div>
 </div>
 <div class="sect1">
-<h2 id="_start_development_with_rhdh"><a class="anchor" href="#_start_development_with_rhdh"></a>Start Development with RHDH</h2>
+<h2 id="startdevelopment"><a class="anchor" href="#startdevelopment"></a>Start Development with RHDH</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
