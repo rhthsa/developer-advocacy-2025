@@ -854,7 +854,7 @@
 </div>
 </li>
 <li>
-<p>Select <strong>Builds</strong> menu on the left, then click on <strong>Shipwright Builds</strong> tab to view Shipwrite Build configuration.</p>
+<p>Select <strong>Builds</strong> menu on the left, then click on <strong>Shipwright Builds</strong> tab to view Shipwright Build configuration.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-44.png" alt="shp 44">
@@ -863,6 +863,11 @@
 </li>
 <li>
 <p>Select <strong>Topology</strong> menu on the left, then select <code>backend-quarkus</code> Deployment, go to <strong>BuildRuns</strong> section again you&#8217;ll see the build status shown as <code>Succeeded</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/shipwright/shp-45.png" alt="shp 45">
+</div>
+</div>
 </li>
 </ul>
 </div>
@@ -895,38 +900,6 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Go back to the <strong>gitea</strong> web console. In the <code>backend_quarkus</code> repository, open the <code>BackendResource.java</code> file in <code>code/src/main/java/com/example/quarkus</code> directory.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-47.png" alt="shp 47">
-</div>
-</div>
-</li>
-<li>
-<p>Click on the pencil icon to edit file.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-48.png" alt="shp 48">
-</div>
-</div>
-</li>
-<li>
-<p>Go to line number <code>201</code>, change the <code>Backend version...</code> to <code>Backend OpenShift version...</code></p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-49.png" alt="shp 49">
-</div>
-</div>
-</li>
-<li>
-<p>Enter the commit message then click <strong>Commit Changes</strong> button.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-50.png" alt="shp 50">
-</div>
-</div>
-</li>
-<li>
 <p>Go back to OpenShift console. Select <strong>Builds</strong> menu on the left then click on <strong>Shipwright Builds</strong> tab. Click on action menu of <code>backend-quarkus</code> build configuration then select <strong>Start</strong>.</p>
 <div class="imageblock">
 <div class="content">
@@ -935,7 +908,7 @@
 </div>
 </li>
 <li>
-<p>The build process should be started. Wait until the build status changes to <code>Succeeded</code>.</p>
+<p>The build process should be started. Click on <strong>Logs</strong> tab to view build logs.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-52.png" alt="shp 52">
@@ -944,19 +917,6 @@
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-53.png" alt="shp 53">
-</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-54.png" alt="shp 54">
-</div>
-</div>
-</li>
-<li>
-<p>Open the application URL again, you should see the response message from the application change to <code>Backend OpenShift version...</code></p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-55.png" alt="shp 55">
 </div>
 </div>
 </li>
