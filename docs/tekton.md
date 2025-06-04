@@ -326,7 +326,7 @@ A PipelineRun is how you can start a pipeline and tie it to the persistentVolume
   ![](../images/tekton/tk-14.png)
 
 - In Start Pipeline, input `simple-rest-go` in deployment-name parameter,
-- Input previous copy git url `simple-rest-go` in git-url parameter, (Don't copy from picture!!!)
+- Input previous copy git url `simple-rest-go` in git-url parameter, (`https://gitlab.com/chatapazar/simple-rest-go.git`)
 - Input `main` in git revision  parameter
 - Input `image-registry.openshift-image-registry.svc:5000/<project>/simple-rest-go` in Image parameter, change <project> to your username such as user1-tekton
 - Leave default timeout
