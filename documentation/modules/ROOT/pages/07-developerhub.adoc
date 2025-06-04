@@ -15,72 +15,76 @@ image::devhub/dh-benefit.png[]
 
 More Details about https://developers.redhat.com/products/rhdh/overview[Red Hat Developer Hub].
 
-== RHDH Demo Components
+[#labenvironment]
+== Red Hat Developer Hub Lab Environment
 
 image::devhub/dh-demo.png[]
 
-* Red Hat Developer Hub (RHDH)
+* *Red Hat Developer Hub (RHDH)*
 +
 RHDH (i.e. Backstage) is the front end of our RHDH Demo. It gives insight into the components installed in our Clusters and how those components connect to one another.
 +
 RHDH Demo also uses RHDH plugins to allow for the rapid deployment of new components. With the click of a button application teams can create a new code base including repo, pipelines, security, Kubernetes objects and everything required for development and deployment into OpenShift.
 
-* Developer Workspaces
+* *Developer Workspaces*
 +
 The RHDH Demo deployment includes integration with Dev Spaces allowing development teams to have instant access to an IDE preloaded with their new code and ready for development.
 
-* Deployment
+* *Deployment*
 +
 RHDH Demo deploys a pipeline using OpenShift Pipelines(Tekton) that run test and security scans on the code, as well as packaging the application and building/deploying the container image into a specified registry.
 +
 OpenShift GitOps(ArgoCD) enables customers to build and integrate declarative git driven CD workflows directly into their application development platform.
 
-* Security
+* *Security*
 +
 Red Hat SSO(Keycloak)
 Red Hat SSO(Keycloak) is an identity management platform that secures our services (such as backstage) using a range of Identity Providers
 
-== Access Red Hat Developer Hub
+[#register]
+== Register for Lab Access
 
-* Open Link workshop form Instructor, login with your email and password `openshift`
+* Open workshop link provided from instructor, register with your email and `openshift` as password.
 +
 image::devhub/dh-67.png[]
 
-* After Login, Workshop will show username, password and URL for this lab.
+* After register, you'll get username, password, and URL for access to each component.
 +
 image::devhub/dh-68.png[]
 
-* Open Red Hat Developer Hub
+* Open Red Hat Developer Hub URL.
 +
 image::devhub/dh-69.png[]
 
-* In Login Page, select sign in with GitLab.
+* In Sign In page, choose sign in with GitLab.
 +
 image::devhub/dh-1.png[]
 
-* Input username and password (from workshop page)
+* Enter username and password for Gitlab provided in the lab registration page.
 +
 image::devhub/dh-2.png[]
 
-* Give authorize keycloak to using OpenID Connect to your account on GitLab.
+* Give authorize to Keycloak to access your account profile on GitLab.
 +
 image::devhub/dh-3.png[]
 
-* KeyCloak will redirect to the RHDH home screen.
+* You should be authenticated successfully and redirected to the RHDH home screen.
 +
 image::devhub/dh-4.png[]
 
+[#goldenpath]
 == Technical Storytelling - Golden Path
 
-Golden Paths are a fundamental ingredient of well architected Internal Developer Platforms (IDP). Spotify uses the term "`Golden Path`", but that concept has other monikers. For example Netflix calls the same idea "`Paved Road.`"
+*Golden Paths* are a fundamental ingredient of well architected *Internal Developer Platforms (IDP)*. https://www.spotify.com/[Spotify] uses the term *__"Golden Path"__*, but that concept has other monikers. For example Netflix calls the same idea *__"Paved Road"__*.
 
-The general notion behind this concept is that the platform offers some form of pre-architected and supported approaches to building and deploying a particular piece of software. If a team can "`stay`" in the path (because the requirements of what they are building allow them to), then they get a supported road to production without having to learn all the details of the technology used to create that road.
+The general notion behind this concept is that the platform offers some form of pre-architected and supported approaches to building and deploying a particular piece of software. If a team can __"stay"__ in the path (because the requirements of what they are building allow them to), then they get a supported road to production without having to learn all the details of the technology used to create that road.
 
 This approach accelerates typical application development use cases (onboarding of a new team member, onboarding of a new application), and at the same time, injects the best practices that have been learned in the past. The more sophisticated Golden Paths are, the more they will be adopted, providing, as a result, more uniformity of configuration and behavior across the application portfolio.
 
 So, what is in a Golden Path? It depends on what is being deployed. In the case of an internally developed application, a Golden Path will have at a minimum, the following ingredients:
 
 A repository template to get started with. This could be a simple hello world application, but with the key resources and the configurations that allows any developer to get started quickly with the company IDEs and all the settings that embodies the best practices for code development.
+
 A pipeline that can take the aforementioned repository, build it, and push the resulting artifacts all the way to production. The pipeline will have all of the steps that are deemed necessary for the organization to trust that code being deployed to production.
 
 A set of manifests to allow for deploying the application. These could be Helm charts or kustomize configurations in the Kubernetes world, or other forms configuration descriptions, if not using Kubernetes.
@@ -90,71 +94,73 @@ Now, let's assume that we onboard an application using a Golden Path. Here is wh
 
 image::devhub/dh-gold.png[]
 
-== Golden Path with Red Hat Developer Hub Software Templates Library
+=== Golden Path with Red Hat Developer Hub Software Templates Library
 
-https://github.com/redhat-developer/red-hat-developer-hub-software-templates[Link] Welcome to the Red Hat Developer Hub Software Templates Library. This repository contains a collection of software templates designed to illustrate best practices in software development and deployment. Our templates cover a wide range of technologies and frameworks, ensuring you have a suitable starting point for your project's needs.
+Welcome to the Red Hat Developer Hub Software Templates Library https://github.com/redhat-developer/red-hat-developer-hub-software-templates[(Link)]. This repository contains a collection of software templates designed to illustrate best practices in software development and deployment. Our templates cover a wide range of technologies and frameworks, ensuring you have a suitable starting point for your project's needs.
 
-* Software / Golden Templates
+* *Software / Golden Templates*
 +
 Software / Golden Templates are pre-configured, best practice templates that are considered the standard for certain types of applications or environments. They are maintained with the latest recommendations and practices. Using Software Templates can help ensure that your projects adhere to industry standards and organizational policies.
 +
 Our software templates are crafted to provide you with a solid foundation for your projects. Each template is a blueprint that includes predefined configurations, dependencies, and deployment procedures. These templates are intended to help you quickly set up and deploy applications with industry best practices.
 
-* https://github.com/redhat-developer/red-hat-developer-hub-software-templates#how-to-use-software-templates[Software Templates List]
+* https://github.com/redhat-developer/red-hat-developer-hub-software-templates#how-to-use-software-templates[*Software Templates List*]
 +
 image::devhub/dh-template.png[]
 
-== Review Software Template in this lab.
+[#reviewtemplate]
+== Review Software Template
 
-* Back to workshop page, click GitLab URL (login with your username and password if it required!)
+* Back to workshop registration result page, then open GitLab URL and login with the given username and password (if required).
 +
 image::devhub/dh-68.png[]
 
-* Click Project `rhdh/software-template`
+* Select `rhdh/software-template` project.
 +
 image::devhub/dh-5.png[]
 
-* Review Project Structure,
+* Review the repository structure.
 +
 image::devhub/dh-6.png[]
 
-* Review software-templates/scaffolders-templates, Now that we've seen what our template looks like, we will begin creating a software component based on this golden path template i.e. `Quarkus Service with ArgoCD and a Tekton Pipeline`. (`quarkus-web-template`)
+* Click on `scaffolders-templates` directory. We will begin creating a software component based on the `quarkus-web-template` - Quarkus Service with ArgoCD and a Tekton Pipeline.
 +
 image::devhub/dh-7.png[]
 
-* Click on rhdh / software-templates navigate to scaffolder-templates > quarkus-web-template > template.yaml
+* Click on `quarkus-web-template` diretory.
 +
 image::devhub/dh-8.png[]
 
-* Click on skeleton/src/main/java/${{values.java_package_name}} to view skeleton code in this template
+* Go into `skeleton/src/main/java/${{values.java_package_name}}` directory to view skeleton code in this template.
 +
 image::devhub/dh-9.png[]
 
-* Click on skeleton/src/main/resources to view sample properties in this template
+* Go into `skeleton/src/main/resources` directory to view sample `application.properties` file in this template.
 +
 image::devhub/dh-10.png[]
 
-* Click on skeleton/pom.xml to view skeleton maven config in this template
+* Open the `skeleton/pom.xml` file to view Maven project configuration in this template.
 +
 image::devhub/dh-11.png[]
 
-* Click on manifests/helm/build/templates/pipeline-build.yaml to view tekton pipeline (CI)
+* Open `manifests/helm/build/templates/pipeline-build.yaml` file to view Tekton Pipeline (CI) configurations.
 +
 image::devhub/dh-13.png[]
 +
 image::devhub/dh-14.png[]
 
-* Click on manifests/argocd/ to view argocd object (CD)
+* Go into `manifests/argocd` directory to view Argo CD resources (CD).
 +
 image::devhub/dh-15.png[]
 +
 image::devhub/dh-16.png[]
 
-* Click on manifests/helm/app/templates to view kubernetes object for deployment (such as deployment, service, route, etc.)
+* Go into `manifests/helm/app/templates` to view Kubernetes resources for application deployment (such as deployment, service, route, etc.)
 +
 image::devhub/dh-17.png[]
 
-== Create Project from Software Template
+[#createapp]
+== Create Application from Software Template
 
 * Back To Developer Hub, Once you've chosen the template, you will be presented with a wizard which will guide you through the creation of your software component.  As seen in the GitLab project, the fields presented to you are configured in your golden path template and will be used to create the various artifacts of your software component.
 * On the RHDH home screen, click `Create…`, You will be presented with a group of tiles representing all the golden path templates created for you.

@@ -45,6 +45,10 @@
 ** xref:06-observe-otel.adoc#deployappforautoinstrument[6.8 Deploy Applications for Auto-Instrumentation]
 ** xref:06-observe-otel.adoc#viewautoinstrumentapptraces[6.9 View Auto-Instrument Application Traces]
 
-
 * xref:07-developerhub.adoc[7. Accelerating software development with Red Hat Developer Hub]
 ** xref:07-developerhub.adoc#redhatdevhub[7.1 Red Hat Developer Hub]
+** xref:07-developerhub.adoc#labenvironment[7.2 Red Hat Developer Hub Lab Environment]
+** xref:07-developerhub.adoc#register[7.3 Register for Lab Access]
+** xref:07-developerhub.adoc#goldenpath[7.4 Technical Storytelling - Golden Path]
+** xref:07-developerhub.adoc#reviewtemplate[7.5 Review Software Template]
+** xref:07-developerhub.adoc#createapp[7.6 Create Application from Software Template]
