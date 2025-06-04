@@ -5,7 +5,7 @@ include::_attributes.adoc[]
 == Register to access the lab
 
 * Get the lab registration URL and password from instructor.
-* Register with your email address and the given password to access the lab.
+* Register with your email address and password `openshift` to access the lab.
 +
 image::setup/register-01.png[]
 
@@ -19,7 +19,7 @@ image::setup/register-02.png[]
 +
 image::shipwright/shp-1.png[]
 
-* If it's the first time you log in to web console, the quick tour dialog will show up, just click Skip tour or close the dialog.
+* If it's the first time you log in to web console, the quick tour dialog will show up, just click *Skip tour* or close the dialog.
 +
 image::shipwright/shp-2.png[]
 
@@ -59,7 +59,7 @@ image::shipwright/shp-7.png[]
 +
 image::shipwright/shp-8.png[]
 
-* You will be redirected back to the *Topology* view. Wait until the Pod change to `Running`.
+* You will be redirected back to the *Topology* view. Wait until the Pod status change to `Running`.
 +
 image::shipwright/shp-9.png[]
 
@@ -75,7 +75,7 @@ image::shipwright/shp-10.png[]
 image::shipwright/shp-11.png[]
 
 
-Now you can see that we can deploy container images via OpenShift console. It's easy!, right? But what if you don't have container image?
+Now you can see that we can deploy container images via OpenShift console with a few clicks. It's easy!, right? But what if you don't have container image?
 
 * How to build container image if you only have source code?
 * How to build container image from your Dockerfile or Containerfile you've written?
