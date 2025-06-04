@@ -198,6 +198,21 @@
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="#redhatdevhub">7.1 Red Hat Developer Hub</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#labenvironment">7.2 Red Hat Developer Hub Lab Environment</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#register">7.3 Register for Lab Access</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#goldenpath">7.4 Technical Storytelling - Golden Path</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#reviewtemplate">7.5 Review Software Template</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#createapp">7.6 Create Application from Software Template</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -251,7 +266,7 @@
 </div>
 </div>
 <div class="sect1">
-<h2 id="_rhdh_demo_components"><a class="anchor" href="#_rhdh_demo_components"></a>RHDH Demo Components</h2>
+<h2 id="labenvironment"><a class="anchor" href="#labenvironment"></a>Red Hat Developer Hub Lab Environment</h2>
 <div class="sectionbody">
 <div class="imageblock">
 <div class="content">
@@ -261,7 +276,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Red Hat Developer Hub (RHDH)</p>
+<p><strong>Red Hat Developer Hub (RHDH)</strong></p>
 <div class="paragraph">
 <p>RHDH (i.e. Backstage) is the front end of our RHDH Demo. It gives insight into the components installed in our Clusters and how those components connect to one another.</p>
 </div>
@@ -270,13 +285,13 @@
 </div>
 </li>
 <li>
-<p>Developer Workspaces</p>
+<p><strong>Developer Workspaces</strong></p>
 <div class="paragraph">
 <p>The RHDH Demo deployment includes integration with Dev Spaces allowing development teams to have instant access to an IDE preloaded with their new code and ready for development.</p>
 </div>
 </li>
 <li>
-<p>Deployment</p>
+<p><strong>Deployment</strong></p>
 <div class="paragraph">
 <p>RHDH Demo deploys a pipeline using OpenShift Pipelines(Tekton) that run test and security scans on the code, as well as packaging the application and building/deploying the container image into a specified registry.</p>
 </div>
@@ -285,7 +300,7 @@
 </div>
 </li>
 <li>
-<p>Security</p>
+<p><strong>Security</strong></p>
 <div class="paragraph">
 <p>Red Hat SSO(Keycloak)
 Red Hat SSO(Keycloak) is an identity management platform that secures our services (such as backstage) using a range of Identity Providers</p>
@@ -296,12 +311,12 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 </div>
 </div>
 <div class="sect1">
-<h2 id="_access_red_hat_developer_hub"><a class="anchor" href="#_access_red_hat_developer_hub"></a>Access Red Hat Developer Hub</h2>
+<h2 id="register"><a class="anchor" href="#register"></a>Register for Lab Access</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Open Link workshop form Instructor, login with your email and password <code>openshift</code></p>
+<p>Open workshop link provided from instructor, register with your email and <code>openshift</code> as password.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-67.png" alt="dh 67">
@@ -309,7 +324,7 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 </div>
 </li>
 <li>
-<p>After Login, Workshop will show username, password and URL for this lab.</p>
+<p>After register, you&#8217;ll get username, password, and URL for access to each component.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-68.png" alt="dh 68">
@@ -317,7 +332,7 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 </div>
 </li>
 <li>
-<p>Open Red Hat Developer Hub</p>
+<p>Open Red Hat Developer Hub URL.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-69.png" alt="dh 69">
@@ -325,7 +340,7 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 </div>
 </li>
 <li>
-<p>In Login Page, select sign in with GitLab.</p>
+<p>In Sign In page, choose sign in with GitLab.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-1.png" alt="dh 1">
@@ -333,7 +348,7 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 </div>
 </li>
 <li>
-<p>Input username and password (from workshop page)</p>
+<p>Enter username and password for Gitlab provided in the lab registration page.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-2.png" alt="dh 2">
@@ -341,7 +356,7 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 </div>
 </li>
 <li>
-<p>Give authorize keycloak to using OpenID Connect to your account on GitLab.</p>
+<p>Give authorize to Keycloak to access your account profile on GitLab.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-3.png" alt="dh 3">
@@ -349,7 +364,7 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 </div>
 </li>
 <li>
-<p>KeyCloak will redirect to the RHDH home screen.</p>
+<p>You should be authenticated successfully and redirected to the RHDH home screen.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-4.png" alt="dh 4">
@@ -361,13 +376,13 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 </div>
 </div>
 <div class="sect1">
-<h2 id="_technical_storytelling_golden_path"><a class="anchor" href="#_technical_storytelling_golden_path"></a>Technical Storytelling - Golden Path</h2>
+<h2 id="goldenpath"><a class="anchor" href="#goldenpath"></a>Technical Storytelling - Golden Path</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Golden Paths are a fundamental ingredient of well architected Internal Developer Platforms (IDP). Spotify uses the term &#8220;Golden Path&#8221;, but that concept has other monikers. For example Netflix calls the same idea &#8220;Paved Road.&#8221;</p>
+<p><strong>Golden Paths</strong> are a fundamental ingredient of well architected <strong>Internal Developer Platforms (IDP)</strong>. <a href="https://www.spotify.com/">Spotify</a> uses the term <strong><em>"Golden Path"</em></strong>, but that concept has other monikers. For example Netflix calls the same idea <strong><em>"Paved Road"</em></strong>.</p>
 </div>
 <div class="paragraph">
-<p>The general notion behind this concept is that the platform offers some form of pre-architected and supported approaches to building and deploying a particular piece of software. If a team can &#8220;stay&#8221; in the path (because the requirements of what they are building allow them to), then they get a supported road to production without having to learn all the details of the technology used to create that road.</p>
+<p>The general notion behind this concept is that the platform offers some form of pre-architected and supported approaches to building and deploying a particular piece of software. If a team can <em>"stay"</em> in the path (because the requirements of what they are building allow them to), then they get a supported road to production without having to learn all the details of the technology used to create that road.</p>
 </div>
 <div class="paragraph">
 <p>This approach accelerates typical application development use cases (onboarding of a new team member, onboarding of a new application), and at the same time, injects the best practices that have been learned in the past. The more sophisticated Golden Paths are, the more they will be adopted, providing, as a result, more uniformity of configuration and behavior across the application portfolio.</p>
@@ -376,8 +391,10 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 <p>So, what is in a Golden Path? It depends on what is being deployed. In the case of an internally developed application, a Golden Path will have at a minimum, the following ingredients:</p>
 </div>
 <div class="paragraph">
-<p>A repository template to get started with. This could be a simple hello world application, but with the key resources and the configurations that allows any developer to get started quickly with the company IDEs and all the settings that embodies the best practices for code development.
-A pipeline that can take the aforementioned repository, build it, and push the resulting artifacts all the way to production. The pipeline will have all of the steps that are deemed necessary for the organization to trust that code being deployed to production.</p>
+<p>A repository template to get started with. This could be a simple hello world application, but with the key resources and the configurations that allows any developer to get started quickly with the company IDEs and all the settings that embodies the best practices for code development.</p>
+</div>
+<div class="paragraph">
+<p>A pipeline that can take the aforementioned repository, build it, and push the resulting artifacts all the way to production. The pipeline will have all of the steps that are deemed necessary for the organization to trust that code being deployed to production.</p>
 </div>
 <div class="paragraph">
 <p>A set of manifests to allow for deploying the application. These could be Helm charts or kustomize configurations in the Kubernetes world, or other forms configuration descriptions, if not using Kubernetes.
@@ -391,18 +408,15 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 <img src="_images/devhub/dh-gold.png" alt="dh gold">
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_golden_path_with_red_hat_developer_hub_software_templates_library"><a class="anchor" href="#_golden_path_with_red_hat_developer_hub_software_templates_library"></a>Golden Path with Red Hat Developer Hub Software Templates Library</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_golden_path_with_red_hat_developer_hub_software_templates_library"><a class="anchor" href="#_golden_path_with_red_hat_developer_hub_software_templates_library"></a>Golden Path with Red Hat Developer Hub Software Templates Library</h3>
 <div class="paragraph">
-<p><a href="https://github.com/redhat-developer/red-hat-developer-hub-software-templates">Link</a> Welcome to the Red Hat Developer Hub Software Templates Library. This repository contains a collection of software templates designed to illustrate best practices in software development and deployment. Our templates cover a wide range of technologies and frameworks, ensuring you have a suitable starting point for your project&#8217;s needs.</p>
+<p>Welcome to the Red Hat Developer Hub Software Templates Library <a href="https://github.com/redhat-developer/red-hat-developer-hub-software-templates">(Link)</a>. This repository contains a collection of software templates designed to illustrate best practices in software development and deployment. Our templates cover a wide range of technologies and frameworks, ensuring you have a suitable starting point for your project&#8217;s needs.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Software / Golden Templates</p>
+<p><strong>Software / Golden Templates</strong></p>
 <div class="paragraph">
 <p>Software / Golden Templates are pre-configured, best practice templates that are considered the standard for certain types of applications or environments. They are maintained with the latest recommendations and practices. Using Software Templates can help ensure that your projects adhere to industry standards and organizational policies.</p>
 </div>
@@ -411,7 +425,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p><a href="https://github.com/redhat-developer/red-hat-developer-hub-software-templates#how-to-use-software-templates">Software Templates List</a></p>
+<p><a href="https://github.com/redhat-developer/red-hat-developer-hub-software-templates#how-to-use-software-templates"><strong>Software Templates List</strong></a></p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-template.png" alt="dh template">
@@ -422,13 +436,14 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="_review_software_template_in_this_lab"><a class="anchor" href="#_review_software_template_in_this_lab"></a>Review Software Template in this lab.</h2>
+<h2 id="reviewtemplate"><a class="anchor" href="#reviewtemplate"></a>Review Software Template</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p>Back to workshop page, click GitLab URL (login with your username and password if it required!)</p>
+<p>Back to workshop registration result page, then open GitLab URL and login with the given username and password (if required).</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-68.png" alt="dh 68">
@@ -436,7 +451,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Click Project <code>rhdh/software-template</code></p>
+<p>Select <code>rhdh/software-template</code> project.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-5.png" alt="dh 5">
@@ -444,7 +459,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Review Project Structure,</p>
+<p>Review the repository structure.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-6.png" alt="dh 6">
@@ -452,7 +467,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Review software-templates/scaffolders-templates, Now that we&#8217;ve seen what our template looks like, we will begin creating a software component based on this golden path template i.e. <code>Quarkus Service with ArgoCD and a Tekton Pipeline</code>. (<code>quarkus-web-template</code>)</p>
+<p>Click on <code>scaffolders-templates</code> directory. We will begin creating a software component based on the <code>quarkus-web-template</code> - Quarkus Service with ArgoCD and a Tekton Pipeline.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-7.png" alt="dh 7">
@@ -460,7 +475,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Click on rhdh / software-templates navigate to scaffolder-templates &gt; quarkus-web-template &gt; template.yaml</p>
+<p>Click on <code>quarkus-web-template</code> diretory.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-8.png" alt="dh 8">
@@ -468,7 +483,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Click on skeleton/src/main/java/${{values.java_package_name}} to view skeleton code in this template</p>
+<p>Go into <code>skeleton/src/main/java/${{values.java_package_name}}</code> directory to view skeleton code in this template.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-9.png" alt="dh 9">
@@ -476,7 +491,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Click on skeleton/src/main/resources to view sample properties in this template</p>
+<p>Go into <code>skeleton/src/main/resources</code> directory to view sample <code>application.properties</code> file in this template.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-10.png" alt="dh 10">
@@ -484,7 +499,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Click on skeleton/pom.xml to view skeleton maven config in this template</p>
+<p>Open the <code>skeleton/pom.xml</code> file to view Maven project configuration in this template.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-11.png" alt="dh 11">
@@ -492,7 +507,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Click on manifests/helm/build/templates/pipeline-build.yaml to view tekton pipeline (CI)</p>
+<p>Open <code>manifests/helm/build/templates/pipeline-build.yaml</code> file to view Tekton Pipeline (CI) configurations.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-13.png" alt="dh 13">
@@ -505,7 +520,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Click on manifests/argocd/ to view argocd object (CD)</p>
+<p>Go into <code>manifests/argocd</code> directory to view Argo CD resources (CD).</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-15.png" alt="dh 15">
@@ -518,7 +533,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </li>
 <li>
-<p>Click on manifests/helm/app/templates to view kubernetes object for deployment (such as deployment, service, route, etc.)</p>
+<p>Go into <code>manifests/helm/app/templates</code> to view Kubernetes resources for application deployment (such as deployment, service, route, etc.)</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/devhub/dh-17.png" alt="dh 17">
@@ -530,7 +545,7 @@ Observability capability baked in. Observability (logs, traces, metrics and aler
 </div>
 </div>
 <div class="sect1">
-<h2 id="_create_project_from_software_template"><a class="anchor" href="#_create_project_from_software_template"></a>Create Project from Software Template</h2>
+<h2 id="createapp"><a class="anchor" href="#createapp"></a>Create Application from Software Template</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
