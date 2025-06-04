@@ -2,14 +2,16 @@
 include::_attributes.adoc[]
 
 [#setup]
-== Register to access the lab
+== Setup
+
+=== Register to access the lab
 
 * Get the lab registration URL and password from instructor.
 * Register with your email address and password `openshift` to access the lab.
 +
 image::setup/register-01.png[]
 
-== Log in to OpenShift web console
+=== Log in to OpenShift web console
 
 * Open the OpenShift web console URL from the registration page in a web browser.
 +
@@ -27,7 +29,37 @@ image::shipwright/shp-2.png[]
 +
 image::shipwright/shp-3.png[]
 
-== [Optional] Set theme color for console
+=== Web Terminal Check
+
+* Click on the command prompt icon at the top right corner of OpenShift web console to open the Web Terminal.
++
+image::shipwright/shp-12.png[]
+
+* If you open the web terminal first time, it'll ask for the project used to initialize the terminal. Select the `userX-shipwright` project where `userX` is your username, and then click *Start* button.
++
+image::shipwright/shp-13.png[]
+
+* Wait until the terminal is ready and command prompt is shown.
++
+image::shipwright/shp-14.png[]
+
+* Run this command to verify if terminal is working.
++
+[.console-input]
+[source,adoc]
+----
+oc whoami
+----
++
+Sample output.
++
+[.console-output]
+[source,adoc]
+----
+user1
+----
+
+=== [Optional] Set theme color for console
 
 * Click on your user name at the top right of OpenShift web console, then select *User References*.
 +
@@ -112,21 +144,9 @@ Get More information
 [#shipwrightbuidah]
 == Build and Deploy Application using Shipwright and Buildah
 
-=== Access To Git Repository
+In this lab, we are going to build application container from the code hosted on a Git repository. Follow these steps to build and deploy the applcation using OpenShift Builds in combination of Shipwright and Buildah.
 
-In this lab, our applications are hosted on a private Git repository. Follow these steps to get access to the *gitea* Git repository server.
 
-* Click on the command prompt icon at the top right corner of OpenShift web console to open the web terminal.
-+
-image::shipwright/shp-12.png[]
-
-* If you open the web terminal first time, it'll ask for the project used to initialize the terminal. Select the `userX-shipwright` project where `userX` is your username, and then click *Start* button.
-+
-image::shipwright/shp-13.png[]
-
-* Wait until the terminal is ready and command prompt is shown.
-+
-image::shipwright/shp-14.png[]
 
 * Run this command to get *gitea* URL.
 +
