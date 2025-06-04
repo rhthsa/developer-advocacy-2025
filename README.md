@@ -1,5 +1,7 @@
 # Red Hat Developer Day 2025
 
+Lab instruction: https://rhthsa.github.io/developer-advocacy-2025/
+
 ![](images/logo.png)
 
 - [Build your application containers the right way with Shipwright](./docs/shipwright.md)
