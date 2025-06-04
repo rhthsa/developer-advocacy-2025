@@ -52,7 +52,11 @@ image::tekton/tk-1.png[]
 
 NOTE: OpenShift Pipelines automatically adds and configures a `ServiceAccount` named `pipeline` that has sufficient permissions to build and push an image. This service account will be used later in the tutorial.
 
-* Open Web Terminal then run following commands to see the pipeline service account. (Change `userX` in the command to your username)
+* Click on the command prompt icon at the top right corner of OpenShift web console to open the web terminal.
++
+image::tekton/tk-23.png[]
+
+* Run following commands to see the pipeline service account. (Change `userX` in the command to your username).
 +
 [.console-input]
 [source,adoc]
