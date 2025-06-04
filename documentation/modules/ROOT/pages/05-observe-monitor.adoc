@@ -243,10 +243,12 @@ image::monitors/mon-33.png[]
 
 * Run more `curl` command in the web terminal and run the metric query again to see the result changes.
 +
+IMPORTANT: Don't forget to change `userX` in the command to match to your username.
++
 [.console-input]
 [source,adoc]
 ----
-curl http://backend:8080
+curl http://http://backend.userX-observe.svc.cluster.local:8080
 ----
 
 [#createalert]
@@ -294,10 +296,12 @@ IMPORTANT: Don't forget to update the `userX-observe` in the `namespace` field t
 
 * Run more `curl` command in the web terminal to trigger API calls.
 +
+IMPORTANT: Don't forget to change `userX` in the command to match to your username.
++
 [.console-input]
 [source,adoc]
 ----
-curl http://backend:8080
+curl http://http://backend.userX-observe.svc.cluster.local:8080
 ----
 
 * Select *Observe* menu on the left, go to *Alerts* tab, and wait until the alert shows up. (Refresh web browser if you've waited more than 1-2 minutes and don't see the alert.)
