@@ -15,8 +15,6 @@
   - [Summary](#summary)
 
 <!-- /TOC -->
-
-
 ## Red Hat Developer Hub
 
 The Red Hat® Developer Hub is a developer portal that promotes efficiency and collaboration by visually consolidating elements of the development process. It streamlines onboarding speed, developer productivity, and collaboration through a unified and open platform while reducing cognitive load and frustration for the development team. With pre-architected and supported approaches, and by centralizing technology resources, developer focus can center on delivering a competitive advantage for their organization.
@@ -182,7 +180,11 @@ Now, let’s assume that we onboard an application using a Golden Path. Here is 
 
 - Once you’ve chosen the template, you will be presented with a wizard which will guide you through the creation of your software component.  As seen in the GitLab project, the fields presented to you are configured in your golden path template and will be used to create the various artifacts of your software component.
 - The first part of the template requires you to complete the metadata required for the application.  You will be creating a software component called my-quarkus-app.
-- Leave the defaults and click Next Step
+- Change Name to `my-quarkus-userX`, change X to your username
+
+  ![](../images/devhub/dh-73.png)
+
+- Leave other defaults and click Next Step
   
   ![](../images/devhub/dh-18.png)
 
