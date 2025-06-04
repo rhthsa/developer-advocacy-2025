@@ -245,7 +245,7 @@ image::devhub/dh-24.png[]
 A description of the menu items at the top will be provided later on.
 
 [#startdevelopment]
-== Start Development with RHDH
+== Start Development with Red Hat Developer Hub
 
 * To get the build process running, we first need to open up our source code in Dev Spaces. In RHDH, from your my-quarkus-app component, click the OpenShift Dev Spaces (VS Code) link.
 +
@@ -343,7 +343,9 @@ image::devhub/dh-50.png[]
 +
 image::devhub/dh-51.png[]
 
-== Deploy to Prepod
+[#deployapp]
+== Deploy Application
+=== Deploy Application to Prepod
 
 * Image promotion to preprod occurs when you tag your source in your source code repository. Tagging your source code in the GitLab repository triggers a webhook which starts your image promotion to preprod. In overview tab, click `view source` link.
 +
@@ -373,7 +375,7 @@ image::devhub/dh-57.png[]
 +
 image::devhub/dh-58.png[]
 
-== Deploy to Production
+=== Deploy Application to Production
 
 * The next step is to promote your image to production.  Promotion to production occurs when you create a release in GitLab. Switch back to GitLab and select the development / my-quarkus-app repository.  Ensure you are in the root of the repository. Click the Tag link as you previously did.
 +
