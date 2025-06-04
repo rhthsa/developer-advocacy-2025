@@ -276,11 +276,13 @@ image::shipwright/shp-42.png[]
 +
 image::shipwright/shp-43.png[]
 
-* Select *Builds* menu on the left, then click on *Shipwright Builds* tab to view Shipwrite Build configuration.
+* Select *Builds* menu on the left, then click on *Shipwright Builds* tab to view Shipwright Build configuration.
 +
 image::shipwright/shp-44.png[]
 
 * Select *Topology* menu on the left, then select `backend-quarkus` Deployment, go to *BuildRuns* section again you'll see the build status shown as `Succeeded`.
++
+image::shipwright/shp-45.png[]
 
 === Access To Application
 
@@ -294,37 +296,14 @@ image::shipwright/shp-46.png[]
 
 === Re-Build and Re-Deploy Application when Code Changes
 
-* Go back to the *gitea* web console. In the `backend_quarkus` repository, open the `BackendResource.java` file in `code/src/main/java/com/example/quarkus` directory.
-+
-image::shipwright/shp-47.png[]
-
-* Click on the pencil icon to edit file.
-+
-image::shipwright/shp-48.png[]
-
-* Go to line number `201`, change the `+Backend version...+` to `+Backend OpenShift version...+`
-+
-image::shipwright/shp-49.png[]
-
-* Enter the commit message then click *Commit Changes* button.
-+
-image::shipwright/shp-50.png[]
-
 * Go back to OpenShift console. Select *Builds* menu on the left then click on *Shipwright Builds* tab. Click on action menu of `backend-quarkus` build configuration then select *Start*.
 +
 image::shipwright/shp-51.png[]
 
-* The build process should be started. Wait until the build status changes to `Succeeded`.
+* The build process should be started. Click on *Logs* tab to view build logs.
 +
 image::shipwright/shp-52.png[]
-+
 image::shipwright/shp-53.png[]
-+
-image::shipwright/shp-54.png[]
-
-* Open the application URL again, you should see the response message from the application change to `+Backend OpenShift version...+`
-+
-image::shipwright/shp-55.png[]
 
 [#summary]
 == Summary
