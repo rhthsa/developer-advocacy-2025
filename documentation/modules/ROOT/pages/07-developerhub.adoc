@@ -215,7 +215,7 @@ image::devhub/dh-23.png[]
 +
 image::devhub/dh-71.png[]
 
-* Select `my-quarkus-app-gitops` project to view all artifacts for applcation deployment with GitOps.
+* Select `my-quarkus-userX-gitops` project to view all artifacts for applcation deployment with GitOps.
 +
 image::devhub/dh-72.png[]
 image::devhub/dh-70.png[]
@@ -250,31 +250,31 @@ A description of the menu items at the top will be provided later on.
 [#startdevelopment]
 == Start Development with Red Hat Developer Hub
 
-* To get the build process running, we first need to open up our source code in Dev Spaces. In RHDH, from your my-quarkus-app component, click the OpenShift Dev Spaces (VS Code) link.
+* To get the build process running, we first need to open up our source code in IDE. In RHDH, from your `my-quarkus-userX` component, click the *OpenShift Dev Spaces (VS Code)* link.
 +
 image::devhub/dh-25.png[]
 
-* A new window will open where you will be asked to login to OpenShift.
+* A new window will open where you will be asked to login to OpenShift. Click *Login with OpenShift*.
 +
 image::devhub/dh-26.png[]
 
-* Click Login with OpenShift and then select rhsso on the next page:
+* Click *rhsso* button.
 +
 image::devhub/dh-27.png[]
 
-* Enter your credentials provided to you for Dev Spaces on the info page of your CI and sign in.
+* Enter your credentials provided to you for Dev Spaces on the info page of your CI then click *Sign In*.
 +
 image::devhub/dh-28.png[]
 
-* Click Allow selected permissions on the next screen.
+* Click *Allow selected permissions* button.
 +
 image::devhub/dh-29.png[]
 
-* Click Continue for `Do you trust the authors of this repository?`
+* Click *Continue* to confirm that the repository is trusted.
 +
 image::devhub/dh-30.png[]
 
-* Click Authorize devspaces for grant access to your account on GitLab Community Edition.
+* Click *Authorize devspaces* to grant Dev Spaces access to your account on GitLab Community Edition.
 +
 image::devhub/dh-31.png[]
 
@@ -282,40 +282,37 @@ image::devhub/dh-31.png[]
 +
 image::devhub/dh-33.png[]
 
-* Wait until your workspace is ready and you see the VS Code IDE with the MY-QUARKUS-APP project loaded.  Click on the button to trust the author when prompted to do so.
+* Wait until your workspace is ready and you see the VS Code IDE with the `my-quarkus-userX` project loaded.  Click on *Yes, I trust the authors* the button to trust the project author..
 +
 image::devhub/dh-34.png[]
 
-* Click Mark Done, for start use VS Code.
+* Click on *Mark Done* to start using VS Code.
 +
 image::devhub/dh-35.png[]
 
-* In your MY-QUARKUS-APP project, review code such as `BackendResource.java`
+* In your `my-quarkus-userX` project, review code such as `BackendResource.java` file.
 +
 image::devhub/dh-36.png[]
 
-* In your MY-QUARKUS-APP project expand the docs folder and click on the index.md file.  Add a new line at the end of the file that says `Developer Day 2025`.
+* In your `my-quarkus-userX` project expand the docs folder and click on the `index.md` file.  Add a new line at the end of the file that says `Developer Day 2025`.
 +
 image::devhub/dh-37.png[]
 
-* Go to Source Control, Stage your commit by clicking the '`+`' sign next to the index.md file.
+* Go to Source Control, Stage your commit by clicking the *+* sign next to the `index.md` file. Then commit your changes by entering a comment and clicking the *Commit* button.
 +
 image::devhub/dh-38.png[]
 
-* Commit your changes by entering a comment and clicking the Commit button.
+* Finally, sync your changes to the repository by clicking the *Sync Changes* button.
 +
 image::devhub/dh-39.png[]
 
-* Finally, sync your changes to the repository by clicking the Sync Changes button.
+* Click OK to comfirm push changes.
 +
 image::devhub/dh-40.png[]
 
-* Click OK.
+* Committing and syncing your changes to your source code repository automatically kicks off your build pipeline via a webhook that was configured when creating your software component. Click *CI* Tab to view Pipeline Runs.
 +
 image::devhub/dh-41.png[]
-
-* Committing and syncing your changes to your source code repository automatically kicks off your build pipeline via a webhook that was configured when creating your software component. Click CI Tab, view Pipeline Runs
-+
 image::devhub/dh-43.png[]
 
 * Click task in pipeline to view logs of process.
@@ -326,23 +323,23 @@ image::devhub/dh-45.png[]
 +
 image::devhub/dh-44.png[]
 
-* Click CD tab to view GitOps (ArgoCD) `my-quarkus-app-dev` Synced and Healthy.
+* Click *CD* tab to view GitOps (Argo CD) `my-quarkus-userX-dev` Synced and Healthy.
 +
 image::devhub/dh-47.png[]
 
-* Back to Topology tab, view `my-quarkus-app-dev` deployment
+* Click *Topology* tab to view `my-quarkus-userX-dev` deployment.
 +
 image::devhub/dh-48.png[]
 
-* try to click `Open URL` on `my-quarkus-app-dev` deployment to check application works correctly!
+* Open the application URL by click on the arrow icon on `my-quarkus-userX-dev` deployment to check application works correctly. You should see a respose from the application.
 +
 image::devhub/dh-49.png[]
 
-* Click Image Registry tab, to view Image on Quay.
+* Click *Image Registry* tab, to view application container image on Quay.
 +
 image::devhub/dh-50.png[]
 
-* Click Docs tab, to view markdown from GitLab change!
+* Click *Docs* tab, to view markdown file in the repository on GitLab.
 +
 image::devhub/dh-51.png[]
 
