@@ -322,24 +322,20 @@ In the following sections, you will go through each step to define and invoke a 
 
 A `PipelineRun` is how you can start a pipeline and tie it to the `PersistentVolumeClaim` we've created, and parameters that should be used for this specific invocation.
 
-* Go to *gitea* web console and copy Git repository URL of the `simple-rest-go` repository.
-+
-image::shipwright/shp-20.png[]
-
-* Back to OpenShift console and select *Pipelines* menu, select *Pipelines* tab, then click on action menu of `build-to-deploy` pipeline, then select *start*.
+* In OpenShift console click on *Pipelines* menu, select *Pipelines* tab, then click on action menu of `build-to-deploy` pipeline, then select *start*.
 +
 image::tekton/tk-14.png[]
 
 In the *Parameter* section, enter following parameters:
 
 * Enter `simple-rest-go` to *deployment-name* parameter.
-* Paste the `simple-rest-go` Git reposity URL you've copied to *git-url* parameter. (Don't use the URL in the screenshot!)
+* Enter `https://gitlab.com/chatapazar/simple-rest-go.git` to *git-url* parameter. (Don't use the URL in the screenshot!)
 * Enter `main` to *git revision* parameter.
 * Enter `image-registry.openshift-image-registry.svc:5000/*<project>*/simple-rest-go:latest` to *IMAGE* parameter.
 +
 [IMPORTANT]
 ====
-Change the *<project>* that matches to your username i.e. user1-tekton
+Change the *<project>* in the image registry URL to matches to your username i.e. user1-tekton
 ====
 * Leave *Timeouts* as default.
 +
