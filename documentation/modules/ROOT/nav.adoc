@@ -46,4 +46,5 @@
 ** xref:06-observe-otel.adoc#viewautoinstrumentapptraces[6.9 View Auto-Instrument Application Traces]
 
 
-* 7. Accelerating software development with Red Hat Developer Hub
+* xref:07-developerhub.adoc[7. Accelerating software development with Red Hat Developer Hub]
+** xref:07-developerhub.adoc#redhatdevhub[7.1 Red Hat Developer Hub]
