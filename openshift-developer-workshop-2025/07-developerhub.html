@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Accelerating software development with Red Hat Developer Hub :: OpenShift Developer Workshop 2025</title>
+    <link rel="canonical" href="https://rhthsa.github.io/developer-advocacy-2025/openshift-developer-workshop-2025/07-developerhub.html">
+    <link rel="prev" href="06-observe-otel.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://developers.redhat.com" target="_blank"><img src="../_/img/RHDLogo.svg" height="40px" alt="Red Hat Developer Program"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="https://rhthsa.github.io/developer-advocacy-2025">OpenShift Developer Workshop 2025</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://developers.redhat.com/ebooks/" target="_blank">Books</a>
+        <a class="navbar-item" href="https://developers.redhat.com/cheatsheets/" target="_blank">Cheat Sheets</a>
+        <a class="navbar-item" href="https://developers.redhat.com/events/" target="_blank">Upcoming Events</a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Tutorials</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/kubernetes-tutorial/" target="_blank">Kubernetes</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/istio-tutorial/" target="_blank">Istio</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/quarkus-tutorial/" target="_blank">Quarkus</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/knative-tutorial/" target="_blank">Knative</a>
+            <a class="navbar-item" href="https://redhat-developer-demos.github.io/tekton-tutorial/" target="_blank">Tekton</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="openshift-developer-workshop-2025" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html"></a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="01-shipwright.html">1. Build your application containers the right way with Shipwright</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#setup">1.1 Setup</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#deploycontainerimage">1.2 Deploy Container Image</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#accesstheapplication">1.3 Access To Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwright">1.4 OpenShift Builds</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwrightbuidah">1.5 Build and Deploy Application using Shipwright and Buildah</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#shipwrights2i">1.6 Build and Deploy Application using Shipwright and Source-to-Image (S2I)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="01-shipwright.html#summary">1.7 Summary</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="02-tekton.html">2. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; Argo CD - Part I</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#openshiftpipelines">2.1 OpenShift Pipelines</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#createtask">2.2 Create Task</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#createpipeline">2.3 Create Pipeline</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="02-tekton.html#triggerpipeline">2.4 Trigger Pipeline</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="03-argocd.html">3. Ship faster, safer, smarter. GitOps CI/CD with Tekton &amp; ArgoCD - Part II</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#openshiftgitops">3.1 OpenShift GitOps</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#gitopswithkustomize">3.2 GitOps with Kustomize</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#kustomizeresources">3.3 Kustomize Resources</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="03-argocd.html#deployappwithgitops">3.4 Deploy Application with OpenShift GitOps</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="04-observe-logging.html">4. Observability through logs: Centralized logging with Loki &amp; querying via LogQL</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#observability">4.1 OpenShift Observability</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#openshiftlogging">4.2 OpenShift Logging</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#reviewcodeandconfig">4.3 Review Application Codes and Deployment Configuraitons</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#deployapplication">4.4 Deploy Sample Applications</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#viewapplicationlogs">4.5 View Individual Application Logs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="04-observe-logging.html#logquery">4.6 Query Application Logs using OpenShift Logging</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="05-observe-monitor.html">5. Metrics-driven mastery: How to monitor, alert &amp; scale like a Pro</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="05-observe-monitor.html#openshiftmonitoring">5.1 OpenShift Monitoring</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="05-observe-monitor.html#monitoryourapp">5.2 Monitor Your Applications</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="05-observe-monitor.html#exposemetrics">5.3 Expose Metrics from Your Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="05-observe-monitor.html#monitorappcustommetric">5.4 Monitor Application with Custom Metrics</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="05-observe-monitor.html#createalert">5.5 Create Alert for Metrics</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="06-observe-otel.html">6. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="06-observe-otel.html#distributedtracing">6.1 What is Distributed Tracing?</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="06-observe-otel.html#createtempo">6.2 Create Tempo instance - Tempo Monolithic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="06-observe-otel.html#createotelcollector">6.3 Create OpenTelemetry (Otel) Collector</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="06-observe-otel.html#deploysampleapp">6.4 Deploy Sample Application</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="06-observe-otel.html#viewapptraces">6.5 View Application Traces</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="06-observe-otel.html#autoinstrumentation">6.6 OpenTelemetry Auto-Instrumentation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="06-observe-otel.html#setupinstrument">6.7 Setup OpenTelemetry Instrumentation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="06-observe-otel.html#deployappforautoinstrument">6.8 Deploy Applications for Auto-Instrumentation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="06-observe-otel.html#viewautoinstrumentapptraces">6.9 View Auto-Instrument Application Traces</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item is-current-page" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="07-developerhub.html">7. Accelerating software development with Red Hat Developer Hub</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="#redhatdevhub">7.1 Red Hat Developer Hub</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">OpenShift Developer Workshop 2025</a></li>
+    <li><a href="07-developerhub.html">7. Accelerating software development with Red Hat Developer Hub</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/rhthsa/developer-advocacy-2025/edit/master/documentation/modules/ROOT/pages/07-developerhub.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<article class="doc">
+<h1 class="page">Accelerating software development with Red Hat Developer Hub</h1>
+<div class="sect1">
+<h2 id="redhatdevhub"><a class="anchor" href="#redhatdevhub"></a>Red Hat Developer Hub</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Red Hat® Developer Hub is a developer portal that promotes efficiency and collaboration by visually consolidating elements of the development process. It streamlines onboarding speed, developer productivity, and collaboration through a unified and open platform while reducing cognitive load and frustration for the development team. With pre-architected and supported approaches, and by centralizing technology resources, developer focus can center on delivering a competitive advantage for their organization.</p>
+</div>
+<div class="paragraph">
+<p>Development teams can help make sure workflows run smoothly by providing the right tools, validated environments, and on-demand services. Confidence is gained that software will adhere to organizational best practices and standards without introducing unnecessary bureaucracy. Maintenance becomes more manageable, and future teams can easily assume control within a known, trusted environment, while also enhancing governance.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-0.png" alt="dh 0">
+</div>
+</div>
+<div class="paragraph">
+<p>Red Hat Developer Hub Benefits include:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-benefit.png" alt="dh benefit">
+</div>
+</div>
+<div class="paragraph">
+<p>More Details about <a href="https://developers.redhat.com/products/rhdh/overview">Red Hat Developer Hub</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rhdh_demo_components"><a class="anchor" href="#_rhdh_demo_components"></a>RHDH Demo Components</h2>
+<div class="sectionbody">
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-demo.png" alt="dh demo">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Red Hat Developer Hub (RHDH)</p>
+<div class="paragraph">
+<p>RHDH (i.e. Backstage) is the front end of our RHDH Demo. It gives insight into the components installed in our Clusters and how those components connect to one another.</p>
+</div>
+<div class="paragraph">
+<p>RHDH Demo also uses RHDH plugins to allow for the rapid deployment of new components. With the click of a button application teams can create a new code base including repo, pipelines, security, Kubernetes objects and everything required for development and deployment into OpenShift.</p>
+</div>
+</li>
+<li>
+<p>Developer Workspaces</p>
+<div class="paragraph">
+<p>The RHDH Demo deployment includes integration with Dev Spaces allowing development teams to have instant access to an IDE preloaded with their new code and ready for development.</p>
+</div>
+</li>
+<li>
+<p>Deployment</p>
+<div class="paragraph">
+<p>RHDH Demo deploys a pipeline using OpenShift Pipelines(Tekton) that run test and security scans on the code, as well as packaging the application and building/deploying the container image into a specified registry.</p>
+</div>
+<div class="paragraph">
+<p>OpenShift GitOps(ArgoCD) enables customers to build and integrate declarative git driven CD workflows directly into their application development platform.</p>
+</div>
+</li>
+<li>
+<p>Security</p>
+<div class="paragraph">
+<p>Red Hat SSO(Keycloak)
+Red Hat SSO(Keycloak) is an identity management platform that secures our services (such as backstage) using a range of Identity Providers</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_access_red_hat_developer_hub"><a class="anchor" href="#_access_red_hat_developer_hub"></a>Access Red Hat Developer Hub</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Open Link workshop form Instructor, login with your email and password <code>openshift</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-67.png" alt="dh 67">
+</div>
+</div>
+</li>
+<li>
+<p>After Login, Workshop will show username, password and URL for this lab.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-68.png" alt="dh 68">
+</div>
+</div>
+</li>
+<li>
+<p>Open Red Hat Developer Hub</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-69.png" alt="dh 69">
+</div>
+</div>
+</li>
+<li>
+<p>In Login Page, select sign in with GitLab.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-1.png" alt="dh 1">
+</div>
+</div>
+</li>
+<li>
+<p>Input username and password (from workshop page)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-2.png" alt="dh 2">
+</div>
+</div>
+</li>
+<li>
+<p>Give authorize keycloak to using OpenID Connect to your account on GitLab.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-3.png" alt="dh 3">
+</div>
+</div>
+</li>
+<li>
+<p>KeyCloak will redirect to the RHDH home screen.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-4.png" alt="dh 4">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_technical_storytelling_golden_path"><a class="anchor" href="#_technical_storytelling_golden_path"></a>Technical Storytelling - Golden Path</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Golden Paths are a fundamental ingredient of well architected Internal Developer Platforms (IDP). Spotify uses the term &#8220;Golden Path&#8221;, but that concept has other monikers. For example Netflix calls the same idea &#8220;Paved Road.&#8221;</p>
+</div>
+<div class="paragraph">
+<p>The general notion behind this concept is that the platform offers some form of pre-architected and supported approaches to building and deploying a particular piece of software. If a team can &#8220;stay&#8221; in the path (because the requirements of what they are building allow them to), then they get a supported road to production without having to learn all the details of the technology used to create that road.</p>
+</div>
+<div class="paragraph">
+<p>This approach accelerates typical application development use cases (onboarding of a new team member, onboarding of a new application), and at the same time, injects the best practices that have been learned in the past. The more sophisticated Golden Paths are, the more they will be adopted, providing, as a result, more uniformity of configuration and behavior across the application portfolio.</p>
+</div>
+<div class="paragraph">
+<p>So, what is in a Golden Path? It depends on what is being deployed. In the case of an internally developed application, a Golden Path will have at a minimum, the following ingredients:</p>
+</div>
+<div class="paragraph">
+<p>A repository template to get started with. This could be a simple hello world application, but with the key resources and the configurations that allows any developer to get started quickly with the company IDEs and all the settings that embodies the best practices for code development.
+A pipeline that can take the aforementioned repository, build it, and push the resulting artifacts all the way to production. The pipeline will have all of the steps that are deemed necessary for the organization to trust that code being deployed to production.</p>
+</div>
+<div class="paragraph">
+<p>A set of manifests to allow for deploying the application. These could be Helm charts or kustomize configurations in the Kubernetes world, or other forms configuration descriptions, if not using Kubernetes.
+Observability capability baked in. Observability (logs, traces, metrics and alerts) is a foundational capability that should be provided by the platform. Exactly what to observe in a specific application has to be defined as part of the deployment manifest. A Golden Path should provide reasonable defaults for observability settings.</p>
+</div>
+<div class="paragraph">
+<p>Now, let&#8217;s assume that we onboard an application using a Golden Path. Here is what it might look like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-gold.png" alt="dh gold">
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_golden_path_with_red_hat_developer_hub_software_templates_library"><a class="anchor" href="#_golden_path_with_red_hat_developer_hub_software_templates_library"></a>Golden Path with Red Hat Developer Hub Software Templates Library</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/redhat-developer/red-hat-developer-hub-software-templates">Link</a> Welcome to the Red Hat Developer Hub Software Templates Library. This repository contains a collection of software templates designed to illustrate best practices in software development and deployment. Our templates cover a wide range of technologies and frameworks, ensuring you have a suitable starting point for your project&#8217;s needs.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Software / Golden Templates</p>
+<div class="paragraph">
+<p>Software / Golden Templates are pre-configured, best practice templates that are considered the standard for certain types of applications or environments. They are maintained with the latest recommendations and practices. Using Software Templates can help ensure that your projects adhere to industry standards and organizational policies.</p>
+</div>
+<div class="paragraph">
+<p>Our software templates are crafted to provide you with a solid foundation for your projects. Each template is a blueprint that includes predefined configurations, dependencies, and deployment procedures. These templates are intended to help you quickly set up and deploy applications with industry best practices.</p>
+</div>
+</li>
+<li>
+<p><a href="https://github.com/redhat-developer/red-hat-developer-hub-software-templates#how-to-use-software-templates">Software Templates List</a></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-template.png" alt="dh template">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_review_software_template_in_this_lab"><a class="anchor" href="#_review_software_template_in_this_lab"></a>Review Software Template in this lab.</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Back to workshop page, click GitLab URL (login with your username and password if it required!)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-68.png" alt="dh 68">
+</div>
+</div>
+</li>
+<li>
+<p>Click Project <code>rhdh/software-template</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-5.png" alt="dh 5">
+</div>
+</div>
+</li>
+<li>
+<p>Review Project Structure,</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-6.png" alt="dh 6">
+</div>
+</div>
+</li>
+<li>
+<p>Review software-templates/scaffolders-templates, Now that we&#8217;ve seen what our template looks like, we will begin creating a software component based on this golden path template i.e. <code>Quarkus Service with ArgoCD and a Tekton Pipeline</code>. (<code>quarkus-web-template</code>)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-7.png" alt="dh 7">
+</div>
+</div>
+</li>
+<li>
+<p>Click on rhdh / software-templates navigate to scaffolder-templates &gt; quarkus-web-template &gt; template.yaml</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-8.png" alt="dh 8">
+</div>
+</div>
+</li>
+<li>
+<p>Click on skeleton/src/main/java/${{values.java_package_name}} to view skeleton code in this template</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-9.png" alt="dh 9">
+</div>
+</div>
+</li>
+<li>
+<p>Click on skeleton/src/main/resources to view sample properties in this template</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-10.png" alt="dh 10">
+</div>
+</div>
+</li>
+<li>
+<p>Click on skeleton/pom.xml to view skeleton maven config in this template</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-11.png" alt="dh 11">
+</div>
+</div>
+</li>
+<li>
+<p>Click on manifests/helm/build/templates/pipeline-build.yaml to view tekton pipeline (CI)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-13.png" alt="dh 13">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-14.png" alt="dh 14">
+</div>
+</div>
+</li>
+<li>
+<p>Click on manifests/argocd/ to view argocd object (CD)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-15.png" alt="dh 15">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-16.png" alt="dh 16">
+</div>
+</div>
+</li>
+<li>
+<p>Click on manifests/helm/app/templates to view kubernetes object for deployment (such as deployment, service, route, etc.)</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-17.png" alt="dh 17">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_create_project_from_software_template"><a class="anchor" href="#_create_project_from_software_template"></a>Create Project from Software Template</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Back To Developer Hub, Once you&#8217;ve chosen the template, you will be presented with a wizard which will guide you through the creation of your software component.  As seen in the GitLab project, the fields presented to you are configured in your golden path template and will be used to create the various artifacts of your software component.</p>
+</li>
+<li>
+<p>On the RHDH home screen, click <code>Create…</code>, You will be presented with a group of tiles representing all the golden path templates created for you.</p>
+</li>
+<li>
+<p>Locate the <code>Quarkus Service with ArgoCD and a Tekton Pipeline</code> and click the CHOOSE link on the bottom right of the tile.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-12.png" alt="dh 12">
+</div>
+</div>
+</li>
+<li>
+<p>Once you&#8217;ve chosen the template, you will be presented with a wizard which will guide you through the creation of your software component.  As seen in the GitLab project, the fields presented to you are configured in your golden path template and will be used to create the various artifacts of your software component.</p>
+</li>
+<li>
+<p>The first part of the template requires you to complete the metadata required for the application.  You will be creating a software component called my-quarkus-app.</p>
+</li>
+<li>
+<p>Change Name to <code>my-quarkus-userX</code>, change X to your username</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-73.png" alt="dh 73">
+</div>
+</div>
+</li>
+<li>
+<p>Leave other defaults and click Next Step</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-18.png" alt="dh 18">
+</div>
+</div>
+</li>
+<li>
+<p>You will then be asked to provide image registry information to store your container images. We will be using our self hosted Quay instance for this demonstration.  Select <code>Quay</code> for Image Registry.</p>
+</li>
+<li>
+<p>Once you&#8217;ve selected Quay, you will be shown your quay server host, the organization your container image repositories will be stored in as well as the tag to use for your base image.</p>
+</li>
+<li>
+<p>Leave the defaults and click Next Step</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-19.png" alt="dh 19">
+</div>
+</div>
+</li>
+<li>
+<p>You will now be presented with the target repository details where your generated software components will be installed.  Note that there will be two artifacts generated i.e. your source code repo for the app and a gitops repo to build and deploy your app.
+This screen will show the git server hosting your repo&#8217;s and the GitLab group that will contain these repo&#8217;s.</p>
+</li>
+<li>
+<p>Leave the defaults and click Next Step</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-20.png" alt="dh 20">
+</div>
+</div>
+</li>
+<li>
+<p>You will be presented with a summary of your template replacement values used to create your software component:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-21.png" alt="dh 21">
+</div>
+</div>
+</li>
+<li>
+<p>Click CREATE to create your software component.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-22.png" alt="dh 22">
+</div>
+</div>
+</li>
+<li>
+<p>Now that your software component is created, let&#8217;s take a look at the artifacts generated by this action. Based on your golden path, you would have generated a RHDH component as well as a skeleton source code repository and a gitops repository:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>RHDH component - Your new software component is now imported into the RHDH catalog.</p>
+</li>
+<li>
+<p>Source code repo - This is source code representing a basic quarkus application.  You may expand on this project as this is just a starting point for your development life cycle.</p>
+</li>
+<li>
+<p>Gitops Repository - This is a repository containing artifacts such as pipelines, tasks and kubernetes resources used to set up CI/CD processes for your application.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>On the RHDH screen click <code>Source Code Repository</code> to view Source Code in GitLab.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-23.png" alt="dh 23">
+</div>
+</div>
+</li>
+<li>
+<p>Click on developement link</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-71.png" alt="dh 71">
+</div>
+</div>
+</li>
+<li>
+<p>select <code>my-quarkus-app-gitops</code> project</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-72.png" alt="dh 72">
+</div>
+</div>
+</li>
+<li>
+<p>view Gitops Repository</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-70.png" alt="dh 70">
+</div>
+</div>
+</li>
+<li>
+<p>On the RHDH screen click <code>Open Component in catalog</code>.  If you have navigated away from this page, select Catalog on the left menu and select Component on the drop down.  Click on the my-quarkus-app component.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-24.png" alt="dh 24">
+</div>
+</div>
+</li>
+<li>
+<p>A new window will open displaying your new component:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Links</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>OpenShift Dev Spaces (VS Code)</code> - Will open VS Code and import your app source code for editing.</p>
+</li>
+<li>
+<p><code>OpenShift Dev Spaces (JetBrains IntelliJ)</code> - Will open JetBrains IntelliJ and import your app source code for editing.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>Merge request statistics</code> - provides information regarding your GitLab merge requests</p>
+</li>
+<li>
+<p><code>About</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>View Source</code> - Opens up your app source code in GitLab</p>
+</li>
+<li>
+<p><code>View TechDocs</code> - Display any documentation you have generated for your source code (docs directory)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><code>ArgoCD overview</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>This view shows your current status of your <code>ArgoCD</code> dev application.  It would eventually progress to a degraded state as your deployment cannot find your new quarkus app image.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>A description of the menu items at the top will be provided later on.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_start_development_with_rhdh"><a class="anchor" href="#_start_development_with_rhdh"></a>Start Development with RHDH</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>To get the build process running, we first need to open up our source code in Dev Spaces. In RHDH, from your my-quarkus-app component, click the OpenShift Dev Spaces (VS Code) link.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-25.png" alt="dh 25">
+</div>
+</div>
+</li>
+<li>
+<p>A new window will open where you will be asked to login to OpenShift.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-26.png" alt="dh 26">
+</div>
+</div>
+</li>
+<li>
+<p>Click Login with OpenShift and then select rhsso on the next page:</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-27.png" alt="dh 27">
+</div>
+</div>
+</li>
+<li>
+<p>Enter your credentials provided to you for Dev Spaces on the info page of your CI and sign in.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-28.png" alt="dh 28">
+</div>
+</div>
+</li>
+<li>
+<p>Click Allow selected permissions on the next screen.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-29.png" alt="dh 29">
+</div>
+</div>
+</li>
+<li>
+<p>Click Continue for <code>Do you trust the authors of this repository?</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-30.png" alt="dh 30">
+</div>
+</div>
+</li>
+<li>
+<p>Click Authorize devspaces for grant access to your account on GitLab Community Edition.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-31.png" alt="dh 31">
+</div>
+</div>
+</li>
+<li>
+<p>You will then be redirected back to Dev Spaces to complete the loading of your workspace.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-33.png" alt="dh 33">
+</div>
+</div>
+</li>
+<li>
+<p>Wait until your workspace is ready and you see the VS Code IDE with the MY-QUARKUS-APP project loaded.  Click on the button to trust the author when prompted to do so.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-34.png" alt="dh 34">
+</div>
+</div>
+</li>
+<li>
+<p>Click Mark Done, for start use VS Code.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-35.png" alt="dh 35">
+</div>
+</div>
+</li>
+<li>
+<p>In your MY-QUARKUS-APP project, review code such as <code>BackendResource.java</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-36.png" alt="dh 36">
+</div>
+</div>
+</li>
+<li>
+<p>In your MY-QUARKUS-APP project expand the docs folder and click on the index.md file.  Add a new line at the end of the file that says <code>Developer Day 2025</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-37.png" alt="dh 37">
+</div>
+</div>
+</li>
+<li>
+<p>Go to Source Control, Stage your commit by clicking the &#8216;+&#8217; sign next to the index.md file.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-38.png" alt="dh 38">
+</div>
+</div>
+</li>
+<li>
+<p>Commit your changes by entering a comment and clicking the Commit button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-39.png" alt="dh 39">
+</div>
+</div>
+</li>
+<li>
+<p>Finally, sync your changes to the repository by clicking the Sync Changes button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-40.png" alt="dh 40">
+</div>
+</div>
+</li>
+<li>
+<p>Click OK.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-41.png" alt="dh 41">
+</div>
+</div>
+</li>
+<li>
+<p>Committing and syncing your changes to your source code repository automatically kicks off your build pipeline via a webhook that was configured when creating your software component. Click CI Tab, view Pipeline Runs</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-43.png" alt="dh 43">
+</div>
+</div>
+</li>
+<li>
+<p>Click task in pipeline to view logs of process.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-45.png" alt="dh 45">
+</div>
+</div>
+</li>
+<li>
+<p>Wait until pipeline complete.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-44.png" alt="dh 44">
+</div>
+</div>
+</li>
+<li>
+<p>Click CD tab to view GitOps (ArgoCD) <code>my-quarkus-app-dev</code> Synced and Healthy.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-47.png" alt="dh 47">
+</div>
+</div>
+</li>
+<li>
+<p>Back to Topology tab, view <code>my-quarkus-app-dev</code> deployment</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-48.png" alt="dh 48">
+</div>
+</div>
+</li>
+<li>
+<p>try to click <code>Open URL</code> on <code>my-quarkus-app-dev</code> deployment to check application works correctly!</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-49.png" alt="dh 49">
+</div>
+</div>
+</li>
+<li>
+<p>Click Image Registry tab, to view Image on Quay.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-50.png" alt="dh 50">
+</div>
+</div>
+</li>
+<li>
+<p>Click Docs tab, to view markdown from GitLab change!</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-51.png" alt="dh 51">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_to_prepod"><a class="anchor" href="#_deploy_to_prepod"></a>Deploy to Prepod</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Image promotion to preprod occurs when you tag your source in your source code repository. Tagging your source code in the GitLab repository triggers a webhook which starts your image promotion to preprod. In overview tab, click <code>view source</code> link.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-52.png" alt="dh 52">
+</div>
+</div>
+</li>
+<li>
+<p>Click on the Tags link.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-53.png" alt="dh 53">
+</div>
+</div>
+</li>
+<li>
+<p>Click on New tag</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-54.png" alt="dh 54">
+</div>
+</div>
+</li>
+<li>
+<p>For the Tag name, enter <code>v1.0</code> and click Create tag.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-55.png" alt="dh 55">
+</div>
+</div>
+</li>
+<li>
+<p>Switch back to the pipelines page (CI tab) on your RHDH.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-56.png" alt="dh 56">
+</div>
+</div>
+</li>
+<li>
+<p>View Pipeline Logs.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-57.png" alt="dh 57">
+</div>
+</div>
+</li>
+<li>
+<p>After Complete, Back to Topology tab, test <code>my-quarkus-app-prepod</code> deployment.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-58.png" alt="dh 58">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_to_production"><a class="anchor" href="#_deploy_to_production"></a>Deploy to Production</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>The next step is to promote your image to production.  Promotion to production occurs when you create a release in GitLab. Switch back to GitLab and select the development / my-quarkus-app repository.  Ensure you are in the root of the repository. Click the Tag link as you previously did.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-59.png" alt="dh 59">
+</div>
+</div>
+</li>
+<li>
+<p>On the v1.0 tag, click the Create release button.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-60.png" alt="dh 60">
+</div>
+</div>
+</li>
+<li>
+<p>For the Release title enter <code>Prod v1.0</code>, leave all other defaults and click the Create release button at the bottom of the screen.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-61.png" alt="dh 61">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-62.png" alt="dh 62">
+</div>
+</div>
+</li>
+<li>
+<p>Your release is now created.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-66.png" alt="dh 66">
+</div>
+</div>
+</li>
+<li>
+<p>Switch back to CI tab on your RHDH. Wait until pipeline run complete.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-63.png" alt="dh 63">
+</div>
+</div>
+</li>
+<li>
+<p>Switch to Topology tab, test <code>my-quarkus-app-prod</code></p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-64.png" alt="dh 64">
+</div>
+</div>
+</li>
+<li>
+<p>Switch to CD tab, view all ArgoCD Application Synced and Healthy.</p>
+<div class="imageblock">
+<div class="content">
+<img src="_images/devhub/dh-65.png" alt="dh 65">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary"><a class="anchor" href="#_summary"></a>Summary</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Red Hat Developer Hub offers targeted benefits for developers, platform engineers, and organizations by simplifying workflows, improving productivity, and enabling efficient governance. Simplified access to tools, resources, and workflows through a centralized dashboard.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="06-observe-otel.html">6. Trace without pain: Tracing transactions with OpenTelemetry auto-instrumentation</a></span>
+</nav>
+</article>
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="rhd-logo" href="https://developers.redhat.com" target="_blank"></div>
+</footer>
+<script src="../_/js/vendor/clipboard.js"></script>
+<script src="../_/js/site.js"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
