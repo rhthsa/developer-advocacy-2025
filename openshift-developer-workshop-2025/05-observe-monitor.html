@@ -469,7 +469,7 @@ Try to select different queries in the <strong>Query</strong> dropdownlist to se
 <p>Go to <strong>Terminal</strong> tab, then run this command to see all metrics exposed from the application.</p>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">curl -s http://localhsot:8080/q/metrics</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">curl -s http://localhost:8080/q/metrics</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -639,7 +639,7 @@ Don&#8217;t forget to change <code>userX</code> in the command to match to your 
 <div class="listingblock console-input">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc project userX-observe
-curl http://backend:8080</code></pre>
+curl http://http://backend.userX-observe.svc.cluster.local:8080</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -754,7 +754,7 @@ spec:
   - name: backend
     rules:
     - alert: HighLatency
-      expr: com_example_quarkus_BackendResource_timeBackend_seconds_max&gt;0.1
+      expr: com_example_quarkus_BackendResource_timeBackend_seconds_max&gt;0.01
       labels:
         severity: 'critical'
       annotations:
