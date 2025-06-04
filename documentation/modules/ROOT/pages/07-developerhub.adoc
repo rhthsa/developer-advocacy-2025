@@ -48,7 +48,7 @@ Red Hat SSO(Keycloak) is an identity management platform that secures our servic
 +
 image::devhub/dh-67.png[]
 
-* After register, you'll get username, password, and URL for access to each component.
+* After registration, you'll get username, password, and URL for access to each component.
 +
 image::devhub/dh-68.png[]
 
@@ -123,11 +123,11 @@ image::devhub/dh-5.png[]
 +
 image::devhub/dh-6.png[]
 
-* Click on `scaffolders-templates` directory. We will begin creating a software component based on the `quarkus-web-template` - Quarkus Service with ArgoCD and a Tekton Pipeline.
+* Click on `scaffolders-templates` directory to view pre-defined templates. We will begin creating a software component based on the `quarkus-web-template` template to create a Quarkus application with a Tekton Pipeline and Argo CD for CI/CD.
 +
 image::devhub/dh-7.png[]
 
-* Click on `quarkus-web-template` diretory.
+* Click on `quarkus-web-template` diretory to see the template structure and files.
 +
 image::devhub/dh-8.png[]
 
@@ -162,80 +162,89 @@ image::devhub/dh-17.png[]
 [#createapp]
 == Create Application from Software Template
 
-* Back To Developer Hub, Once you've chosen the template, you will be presented with a wizard which will guide you through the creation of your software component.  As seen in the GitLab project, the fields presented to you are configured in your golden path template and will be used to create the various artifacts of your software component.
-* On the RHDH home screen, click `Create…`, You will be presented with a group of tiles representing all the golden path templates created for you.
-* Locate the `Quarkus Service with ArgoCD and a Tekton Pipeline` and click the CHOOSE link on the bottom right of the tile.
+* Back to Developer Hub web console, on the RHDH home screen, click on *+ Create…* menu, You will be presented with a group of tiles representing all the golden path templates created for you.
+
+* Look for the `Quarkus Service with ArgoCD and a Tekton Pipeline` and click the *Choose* button on the bottom right of the tile.
 +
 image::devhub/dh-12.png[]
 
 * Once you've chosen the template, you will be presented with a wizard which will guide you through the creation of your software component.  As seen in the GitLab project, the fields presented to you are configured in your golden path template and will be used to create the various artifacts of your software component.
-* The first part of the template requires you to complete the metadata required for the application.  You will be creating a software component called my-quarkus-app.
-* Change Name to `my-quarkus-userX`, change X to your username
+
+* The first part of the template requires you to complete the metadata required for the application.  You will be creating a software component called `my-quarkus-userX`.
+* Change Name to `my-quarkus-userX` where `userX` is your username.
 +
 image::devhub/dh-73.png[]
 
-* Leave other defaults and click Next Step
+* Leave other fields as default and click on *Next* button.
 +
 image::devhub/dh-18.png[]
 
-* You will then be asked to provide image registry information to store your container images. We will be using our self hosted Quay instance for this demonstration.  Select `Quay` for Image Registry.
-* Once you've selected Quay, you will be shown your quay server host, the organization your container image repositories will be stored in as well as the tag to use for your base image.
-* Leave the defaults and click Next Step
+* You will then be asked to provide image registry information to store your container images. We will be using our self hosted Quay instance for this demonstration.  Select `Quay` for *Image Registry*.
+
+* Once you've selected `Quay`, you will be shown your Quay server host, the organization your container image repositories will be stored in as well as the tag to use for your base image.
++
+Leave all fields as default and click on *Next* button.
 +
 image::devhub/dh-19.png[]
 
-* You will now be presented with the target repository details where your generated software components will be installed.  Note that there will be two artifacts generated i.e. your source code repo for the app and a gitops repo to build and deploy your app.
-This screen will show the git server hosting your repo's and the GitLab group that will contain these repo's.
-* Leave the defaults and click Next Step
+* You will now be presented with the target repository details where your generated software components will be installed.
++
+Note that there will be two artifacts generated i.e. your source code repository for the app and a GitOps repository to build and deploy your app.
++
+This screen will show the Git server hosting your repositories and the GitLab group that will contain these repositories.
++
+Leave all fields as default and click on *Review* button.
 +
 image::devhub/dh-20.png[]
 
-* You will be presented with a summary of your template replacement values used to create your software component:
+* You will be presented with a summary of your template replacement values used to create your software component. Click on *Create* button to create your software component.
 +
 image::devhub/dh-21.png[]
 
-* Click CREATE to create your software component.
+* Now that your software component is created, let's take a look at the artifacts generated by this action. Based on your golden path, you would have generated a RHDH component as well as a skeleton source code repository and a GitOps repository:
+ ** *RHDH component* - Your new software component is now imported into the RHDH catalog.
+ ** *Source code repository* - This is source code representing a basic quarkus application.  You may expand on this project as this is just a starting point for your development life cycle.
+ ** *Gitops Repository* - This is a repository containing artifacts such as Pipelines, Tasks and Kubernetes resources used to set up CI/CD processes for your application.
+
+* On the *Run of quarkus-web-template* wizard screen click on *Source Code Repository* link to view source code in GitLab.
 +
 image::devhub/dh-22.png[]
-
-* Now that your software component is created, let's take a look at the artifacts generated by this action. Based on your golden path, you would have generated a RHDH component as well as a skeleton source code repository and a gitops repository:
- ** RHDH component - Your new software component is now imported into the RHDH catalog.
- ** Source code repo - This is source code representing a basic quarkus application.  You may expand on this project as this is just a starting point for your development life cycle.
- ** Gitops Repository - This is a repository containing artifacts such as pipelines, tasks and kubernetes resources used to set up CI/CD processes for your application.
-* On the RHDH screen click `Source Code Repository` to view Source Code in GitLab.
-+
 image::devhub/dh-23.png[]
 
-* Click on developement link
+* Click on *developement* link to go back to top level.
 +
 image::devhub/dh-71.png[]
 
-* select `my-quarkus-app-gitops` project
+* Select `my-quarkus-app-gitops` project to view all artifacts for applcation deployment with GitOps.
 +
 image::devhub/dh-72.png[]
-
-* view Gitops Repository
-+
 image::devhub/dh-70.png[]
 
-* On the RHDH screen click `Open Component in catalog`.  If you have navigated away from this page, select Catalog on the left menu and select Component on the drop down.  Click on the my-quarkus-app component.
+* Go back to RHDH web console, nn the *Run of quarkus-web-template* wizard screen click on *SOpen Component in catalog* link.
++
+NOTE: If you have navigated away from this page, select *Catalog* on the left menu and select `my-quarkus-userX` in the  *Component* drop-down list.
 +
 image::devhub/dh-24.png[]
 
 * A new window will open displaying your new component:
- ** `Links`
+ ** *Links*
   *** `OpenShift Dev Spaces (VS Code)` - Will open VS Code and import your app source code for editing.
   *** `OpenShift Dev Spaces (JetBrains IntelliJ)` - Will open JetBrains IntelliJ and import your app source code for editing.
- ** `Merge request statistics` - provides information regarding your GitLab merge requests
- ** `About`
+
+** *About*
   *** `View Source` - Opens up your app source code in GitLab
+
   *** `View TechDocs` - Display any documentation you have generated for your source code (docs directory)
- ** `ArgoCD overview`
-  *** This view shows your current status of your `ArgoCD` dev application.  It would eventually progress to a degraded state as your deployment cannot find your new quarkus app image.
+
+ ** *Merge request statistics* - provides information regarding your GitLab merge requests
+
+ ** *ArgoCD overview*
+  *** This view shows your current status of your `Argo CD` dev application.  It would eventually progress to a degraded state as your deployment cannot find your new quarkus app image.
 
 +
 A description of the menu items at the top will be provided later on.
 
+[#startdevelopment]
 == Start Development with RHDH
 
 * To get the build process running, we first need to open up our source code in Dev Spaces. In RHDH, from your my-quarkus-app component, click the OpenShift Dev Spaces (VS Code) link.
