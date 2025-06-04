@@ -220,13 +220,16 @@ image::devhub/dh-71.png[]
 image::devhub/dh-72.png[]
 image::devhub/dh-70.png[]
 
-* Go back to RHDH web console, nn the *Run of quarkus-web-template* wizard screen click on *SOpen Component in catalog* link.
+* Go back to RHDH web console, in the *Run of quarkus-web-template* wizard screen click on *Open Component in catalog* link.
 +
 NOTE: If you have navigated away from this page, select *Catalog* on the left menu and select `my-quarkus-userX` in the  *Component* drop-down list.
 +
-image::devhub/dh-24.png[]
+image::devhub/dh-22.png[]
 
 * A new window will open displaying your new component:
++
+image::devhub/dh-24.png[]
+
  ** *Links*
   *** `OpenShift Dev Spaces (VS Code)` - Will open VS Code and import your app source code for editing.
   *** `OpenShift Dev Spaces (JetBrains IntelliJ)` - Will open JetBrains IntelliJ and import your app source code for editing.
