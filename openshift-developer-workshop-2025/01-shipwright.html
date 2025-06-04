@@ -253,10 +253,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>Get the lab registration URL and password from instructor.</p>
-</li>
-<li>
-<p>Register with your email address and password <code>openshift</code> to access the lab.</p>
+<p>Get the lab registration URL from instructor. Then register with your email address and password <code>openshift</code> to access the lab.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/setup/register-01.png" alt="register 01">
@@ -279,7 +276,7 @@
 </div>
 </li>
 <li>
-<p>Log in with username and password get from the registration page.</p>
+<p>Log in with your username and password provided in the registration page.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-1.png" alt="shp 1">
@@ -295,7 +292,7 @@
 </div>
 </li>
 <li>
-<p>Switch to <strong>Developer</strong> perspective (if it&#8217;s not) from the drop-down list near the hamburger menu. Then click on <strong>userX-shipwright</strong> project where <strong>userX</strong> is your username such as <code>user1</code>.</p>
+<p>Switch to <strong>Developer</strong> perspective (if it&#8217;s not) from the drop-down list near the hamburger menu. Then click on <strong><code>userX</code>-shipwright</strong> project where <code><strong>userX</strong></code> is your username such as <code>user1</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-3.png" alt="shp 3">
@@ -554,29 +551,14 @@
 <h2 id="shipwrightbuidah"><a class="anchor" href="#shipwrightbuidah"></a>Build and Deploy Application using Shipwright and Buildah</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In this lab, we are going to build application container from the code hosted on a Git repository. Follow these steps to build and deploy the applcation using OpenShift Builds in combination of Shipwright and Buildah.</p>
+<p>In this lab, we are going to build application container from the Go application code hosted on a Git repository. Follow these steps to build and deploy the applcation using OpenShift Builds in combination of Shipwright and Buildah.</p>
 </div>
+<div class="sect2">
+<h3 id="_review_the_container_image_build_instruction"><a class="anchor" href="#_review_the_container_image_build_instruction"></a>Review the Container Image Build Instruction</h3>
 <div class="ulist">
 <ul>
 <li>
-<p>Run this command to get <strong>gitea</strong> URL.</p>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc get route gitea -n gitea</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>sample output.</p>
-</div>
-<div class="listingblock console-output">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">NAME    HOST/PORT                                                      PATH   SERVICES   PORT    TERMINATION     WILDCARD
-gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gitea      &lt;all&gt;   edge/Redirect   None</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Copy the gitea DNS hostname and open it with a web browser.</p>
+<p>Go to <a href="https://gitlab.com/chatapazar/simple-rest-go" class="bare">https://gitlab.com/chatapazar/simple-rest-go</a> Git repository.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-15.png" alt="shp 15">
@@ -584,37 +566,18 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 </div>
 </li>
 <li>
-<p>Log in with your username, and use <code>openshift</code> as password.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-16.png" alt="shp 16">
-</div>
-</div>
-</li>
-<li>
-<p>Select <code>simple-rest-go</code> repository.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-17.png" alt="shp 17">
-</div>
-</div>
-</li>
-</ul>
-</div>
-<div class="sect2">
-<h3 id="_review_the_container_image_build_instruction"><a class="anchor" href="#_review_the_container_image_build_instruction"></a>Review the Container Image Build Instruction</h3>
-<div class="ulist">
-<ul>
-<li>
 <p>Open the <code>Dockerfile</code>, then review build steps in the <code>Dockerfile</code> file.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-18.png" alt="shp 18">
 </div>
 </div>
+</li>
+<li>
+<p>Back to the main page of repository, click on <strong>Code</strong> button then copy the repository URL labeled with <strong>Clone with HTTPS</strong>.</p>
 <div class="imageblock">
 <div class="content">
-<img src="_images/shipwright/shp-19.png" alt="shp 19">
+<img src="_images/shipwright/shp-20.png" alt="shp 20">
 </div>
 </div>
 </li>
@@ -625,14 +588,6 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 <h3 id="_build_and_deploy_container"><a class="anchor" href="#_build_and_deploy_container"></a>Build and Deploy Container</h3>
 <div class="ulist">
 <ul>
-<li>
-<p>In gitea, back to the main <code>simple-rest-go</code> repository page, click on <strong>&lt;&gt; Code</strong> button then click copy button to copy the repository URL.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-20.png" alt="shp 20">
-</div>
-</div>
-</li>
 <li>
 <p>Go to OpenShift web console then click <strong>+Add</strong> menu on the left. Select <strong>Git Repository - Import from Git</strong> tile.</p>
 <div class="imageblock">
@@ -649,7 +604,7 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 <div class="ulist">
 <ul>
 <li>
-<p>Enter the Git repository URL you&#8217;ve copied to <strong>Git Repo URL</strong> input.</p>
+<p>Paste the Git repository URL you&#8217;ve copied earlier to <strong>Git Repo URL</strong> input.</p>
 </li>
 <li>
 <p>The wizard will detect the <code>Dockerfile</code> in the repository automatically.</p>
@@ -690,7 +645,7 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 <div class="ulist">
 <ul>
 <li>
-<p>In the Topology view, select <code>simple-rest-go</code> Deployment, go to <strong>BuildRuns</strong> section, then click <strong>View logs</strong> link.</p>
+<p>In the Topology view, select <code>simple-rest-go</code> Deployment, click <strong>Resources</strong> tab in the right panel, then in <strong>BuildRuns</strong> section, click <strong>View logs</strong> link.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-24.png" alt="shp 24">
@@ -722,7 +677,7 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 </div>
 </li>
 <li>
-<p>Select <strong>Topology</strong> menu on the left, select <code>simple-rest-go</code> Deployment, go to <strong>BuildRuns</strong> section again you&#8217;ll see the build status shown as <code>Succeeded</code>.</p>
+<p>Select <strong>Topology</strong> menu on the left, click on <code>simple-rest-go</code> Deployment, click <strong>Resources</strong> tab in the right panel, in <strong>BuildRuns</strong> section you&#8217;ll see the build status shown as <code>Succeeded</code>. And in the <strong>Pods</strong> section the Pod status is <code>Running</code>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-28.png" alt="shp 28">
@@ -765,12 +720,7 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 <div class="ulist">
 <ul>
 <li>
-<p>Go to <strong>gitea</strong> web console then open the <code>backend_quarkus</code> repository.</p>
-<div class="imageblock">
-<div class="content">
-<img src="_images/shipwright/shp-31.png" alt="shp 31">
-</div>
-</div>
+<p>Go to <a href="https://gitlab.com/chatapazar/backend_quarkus" class="bare">https://gitlab.com/chatapazar/backend_quarkus</a> Git repository.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-32.png" alt="shp 32">
@@ -798,7 +748,7 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 <div class="ulist">
 <ul>
 <li>
-<p>In gitea, back to the main <code>backend_quarkus</code> repository page, click on <strong>&lt;&gt; Code</strong> button then click copy button to copy the repository URL.</p>
+<p>In GitLab, back to the main <code>backend_quarkus</code> repository page, click on <strong>Code</strong> button then copy the repository URL labeled with <strong>Clone with HTTPS</strong>.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-33.png" alt="shp 33">
@@ -821,10 +771,10 @@ gitea   gitea-gitea.apps.cluster-bnb6v.bnb6v.sandbox1016.opentlc.com          gi
 <div class="ulist">
 <ul>
 <li>
-<p>Enter the <code>backend_quarkus</code> Git repository URL you&#8217;ve copied to <strong>Git Repo URL</strong> input.</p>
+<p>Paste the <code>backend_quarkus</code> Git repository URL you&#8217;ve copied to <strong>Git Repo URL</strong> input.</p>
 </li>
 <li>
-<p>Enter <code>/code</code> in <strong>Context dir</strong> input.</p>
+<p>Enter <code>/code</code> to <strong>Context dir</strong> input.</p>
 <div class="imageblock">
 <div class="content">
 <img src="_images/shipwright/shp-36.png" alt="shp 36">
