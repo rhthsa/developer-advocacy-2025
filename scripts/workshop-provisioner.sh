@@ -172,7 +172,7 @@ echo "Red Hat Developer Workshop Provisioner"
 repeat '-'
 
 oc project default
-# web terminal, build of openshift,observability, loki logging, pipeline, gtiops, tempo, build of telemetry,
+# web terminal, build of openshift,observability, loki logging, pipeline, gtiops, tempo, build of telemetry, custom metrics auto
 
 #install_build
 #repeat '-'

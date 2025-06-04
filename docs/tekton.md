@@ -79,7 +79,19 @@ In the following sections, you will go through each of the above steps to define
 
 - OpenShift Pipelines automatically adds and configures a ServiceAccount named `pipeline` that has sufficient permissions to build and push an image. This service account will be used later in the tutorial.
 
-- Open Web Terminal, Run the following command to see the pipeline service account: (Change userX to your username)
+- Open Web Terminal, for the first time, click web terminal icon on ther top right of developer console.
+
+  ![](../images/tekton/tk-23.png)
+
+- for the first time, select project such as `userX-tekton` (change X to your username) for deploy web terminal pod, click start
+
+  ![](../images/tekton/tk-24.png)
+
+- wait until web terminal show command prompt to run command line
+
+  ![](../images/tekton/tk-25.png)
+
+- Run the following command to see the pipeline service account: (Change userX to your username)
 
   ```ssh
   oc project userX-tekton

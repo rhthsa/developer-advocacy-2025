@@ -66,9 +66,9 @@
    For example, provisioning 5 lab users:
 
    ```sh
-   export USER_PASSWORD=XVziuhmw9ivsPVIm
-   export ADMIN_PASSWORD=NPFS2vMGnhOFSzLe
-   export totalUsers=10
+   export USER_PASSWORD=hRIW1aNdqFAkTJkZ
+   export ADMIN_PASSWORD=4gSBbdhSyT3LU7Mo
+   export totalUsers=40
    ./lab-user-provisioner.sh 3
    ```
 
@@ -125,6 +125,9 @@
 - Deploy https://github.com/chatapazar/openshift-workshop.git folder sample for replace https://httpbin.org/status/200, project test, add view to all user, http://test.test.svc.cluster.local:8080/status/200
   
   
+- setup user workload monitoring
+
+- setup logging loki stack
 
 - OTEL
 
