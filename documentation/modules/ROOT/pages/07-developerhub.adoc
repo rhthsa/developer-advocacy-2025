@@ -353,7 +353,7 @@ Container image deployment to preprod occurs when you tag your source in your so
 +
 image::devhub/dh-52.png[]
 
-* Click on the *Tags*.
+* The code repository in GitLab will be opened. Click on the *Tags*.
 +
 image::devhub/dh-53.png[]
 
@@ -381,7 +381,7 @@ image::devhub/dh-58.png[]
 
 The next step is to promote your container image to production. Promotion to production occurs when you create a release in GitLab.
 
-*Switch back to GitLab console and select the `development/my-quarkus-userX` repository. Ensure you are in the root of the repository. Click the *Tag* link as you previously did.
+* Switch back to GitLab console and select the `development/my-quarkus-userX` repository. Ensure you are in the root of the repository. Click the *Tag* link as you previously did.
 +
 image::devhub/dh-59.png[]
 
