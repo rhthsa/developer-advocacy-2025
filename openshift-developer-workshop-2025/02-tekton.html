@@ -475,20 +475,36 @@ These 2 tasks you will need for creating a <code>Pipeline</code> in the next sec
 </li>
 <li>
 <p>Run these commands to create <code>Tasks</code>.</p>
-<div class="listingblock console-input">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/01_apply_manifest_task.yaml
-
-oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/02_update_deployment_task.yaml</code></pre>
-</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Don&#8217;t forget to change <code>userX</code> in the command to match your username.
+</td>
+</tr>
+</table>
 </div>
 </li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>oc project userX-tekton
+oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/01_apply_manifest_task.yaml
+
+oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/02_update_deployment_task.yaml</pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>You can take a look at the tasks you created using the Tekton CLI (change <code>userX</code> in the command to your username).</p>
 <div class="listingblock console-input">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">oc project userX-tekton
-tkn task ls</code></pre>
+<pre class="highlightjs highlight"><code class="language-adoc hljs" data-lang="adoc">tkn task ls</code></pre>
 </div>
 </div>
 <div class="paragraph">
