@@ -119,9 +119,11 @@ NOTE: These 2 tasks you will need for creating a `Pipeline` in the next section.
 
 * Run these commands to create `Tasks`.
 +
+IMPORTANT: Don't forget to change `userX` in the command to match your username.
 [.console-input]
 [source,adoc]
 ----
+oc project userX-tekton
 oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/01_apply_manifest_task.yaml
 
 oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/master/01_pipeline/02_update_deployment_task.yaml
@@ -132,7 +134,6 @@ oc create -f https://raw.githubusercontent.com/openshift/pipelines-tutorial/mast
 [.console-input]
 [source,adoc]
 ----
-oc project userX-tekton
 tkn task ls
 ----
 +
