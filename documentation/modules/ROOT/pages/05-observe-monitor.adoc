@@ -210,7 +210,7 @@ IMPORTANT: Don't forget to change `userX` in the command to match to your userna
 [source,adoc]
 ----
 oc project userX-observe
-curl http://http://backend.userX-observe.svc.cluster.local:8080
+curl http://backend.userX-observe.svc.cluster.local:8080
 ----
 +
 Sample output.
@@ -248,7 +248,7 @@ IMPORTANT: Don't forget to change `userX` in the command to match to your userna
 [.console-input]
 [source,adoc]
 ----
-curl http://http://backend.userX-observe.svc.cluster.local:8080
+curl http://backend.userX-observe.svc.cluster.local:8080
 ----
 
 [#createalert]
@@ -301,7 +301,7 @@ IMPORTANT: Don't forget to change `userX` in the command to match to your userna
 [.console-input]
 [source,adoc]
 ----
-curl http://http://backend.userX-observe.svc.cluster.local:8080
+curl http://backend.userX-observe.svc.cluster.local:8080
 ----
 
 * Select *Observe* menu on the left, go to *Alerts* tab, and wait until the alert shows up. (Refresh web browser if you've waited more than 1-2 minutes and don't see the alert.)
